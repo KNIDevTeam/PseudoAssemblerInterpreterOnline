@@ -11,6 +11,7 @@ canvas {
 
 [contenteditable]:focus { outline: 0px solid transparent; }
 
+
 /*
 	Phantom by HTML5 UP
 	html5up.net | @ajlkn
@@ -42,6 +43,8 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
+
+
 
 ol, ul {
 	list-style: none;
@@ -1866,8 +1869,8 @@ input, select, textarea {
 			}
 
 			.icon.style2:hover {
-				color: #f2849e;
-				border-color: #f2849e;
+				color: #00f4a4;
+				border-color: #00f4a4;
 			}
 
 			.icon.style2:active {
@@ -2180,8 +2183,8 @@ input, select, textarea {
 		input[type="tel"]:focus,
 		select:focus,
 		textarea:focus {
-			border-bottom-color: #f2849e;
-			box-shadow: inset 0 -1px 0 0 #f2849e;
+			border-bottom-color: #00f4a4;
+			box-shadow: inset 0 -1px 0 0 #00f4a4;
 		}
 
 	select {
@@ -2285,8 +2288,8 @@ input, select, textarea {
 
 		input[type="checkbox"]:focus + label:before,
 		input[type="radio"]:focus + label:before {
-			border-color: #f2849e;
-			box-shadow: 0 0 0 1px #f2849e;
+			border-color: #00f4a4;
+			box-shadow: 0 0 0 1px #00f4a4;
 		}
 
 	input[type="checkbox"] + label:before {
@@ -2468,7 +2471,7 @@ input, select, textarea {
 		box-shadow: inset 0 0 0 2px #585858;
 		color: #585858 !important;
 		cursor: pointer;
-		display: inline-block;
+		display: block;
 		font-size: 0.8em;
 		font-weight: 900;
 		height: 3.5em;
@@ -2481,6 +2484,10 @@ input, select, textarea {
 		text-overflow: ellipsis;
 		text-transform: uppercase;
 		white-space: nowrap;
+		
+		margin: auto auto 0 auto;
+		width: 10em;
+		height: 10%
 	}
 
 		input[type="submit"].icon:before,
@@ -2504,8 +2511,8 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			color: #f2849e !important;
-			box-shadow: inset 0 0 0 2px #f2849e;
+			color: #00f4a4 !important;
+			box-shadow: inset 0 0 0 2px #00f4a4;
 		}
 
 		input[type="submit"]:active,
@@ -2547,7 +2554,7 @@ input, select, textarea {
 			input[type="button"].primary:hover,
 			button.primary:hover,
 			.button.primary:hover {
-				background-color: #f2849e;
+				background-color: #00f4a4;
 			}
 
 			input[type="submit"].primary:active,
@@ -2916,7 +2923,7 @@ input, select, textarea {
 						}
 
 						#header nav ul li a[href="#menu"]:before {
-							background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 8px%3B stroke: %23f2849e%3B %7D%3C/style%3E%3Cline x1='0' y1='25' x2='100' y2='25' /%3E%3Cline x1='0' y1='50' x2='100' y2='50' /%3E%3Cline x1='0' y1='75' x2='100' y2='75' /%3E%3C/svg%3E");
+							background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 8px%3B stroke: %2300f4a4%3B %7D%3C/style%3E%3Cline x1='0' y1='25' x2='100' y2='25' /%3E%3Cline x1='0' y1='50' x2='100' y2='50' /%3E%3Cline x1='0' y1='75' x2='100' y2='75' /%3E%3C/svg%3E");
 							opacity: 0;
 						}
 
@@ -2958,6 +2965,9 @@ input, select, textarea {
 		-ms-transition: opacity 0.45s ease;
 		transition: opacity 0.45s ease;
 		opacity: 1;
+
+		position: relative;
+  		min-height: 100vh;
 	}
 
 	#menu {
@@ -3066,7 +3076,7 @@ input, select, textarea {
 			}
 
 			#menu > .close:before {
-				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 8px%3B stroke: %23f2849e%3B %7D%3C/style%3E%3Cline x1='15' y1='15' x2='85' y2='85' /%3E%3Cline x1='85' y1='15' x2='15' y2='85' /%3E%3C/svg%3E");
+				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 8px%3B stroke: %2300f4a4%3B %7D%3C/style%3E%3Cline x1='15' y1='15' x2='85' y2='85' /%3E%3Cline x1='85' y1='15' x2='15' y2='85' /%3E%3C/svg%3E");
 				opacity: 0;
 			}
 
@@ -3139,8 +3149,9 @@ input, select, textarea {
 /* Main */
 
 	#main {
-		padding: 0 0 0 0 ;
+		padding: 0 0 15% 0 ;
 		background-color: white;
+		
 	}
 
 		@media screen and (max-width: 736px) {
@@ -3156,6 +3167,10 @@ input, select, textarea {
 	#footer {
 		padding: 2em 0 2em 0 ;
 		background-color: #ffffff;
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		
 	}
 
 		#footer > .inner {

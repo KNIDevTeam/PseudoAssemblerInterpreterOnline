@@ -43,7 +43,8 @@ $("#input").on('keyup', function() {
     rangeSelectionSaveRestore.restoreSelection(savedSel);
     $(this).focus();
 
-    console.log(content.replace(/<br>|<div>/g, '\n').replace(/<[^>]*>|⚶/g, ''));
+    //console.log(content.replace(/<br>|<div>/g, '\n').replace(/<[^>]*>|⚶/g, ''));
+    console.log(content);
 });
 
 $("#input").on('blur', function() {
@@ -55,5 +56,6 @@ $("#input").on('blur', function() {
 
 $("#input").on('click', function() {
     var content = $(this).html();
+    console.log(content);
     if(content == 'Type something in here...') $(this).html('');
 });
