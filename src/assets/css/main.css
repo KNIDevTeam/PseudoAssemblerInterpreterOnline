@@ -9,8 +9,19 @@ canvas {
 	image-rendering: crisp-edges;
 }
 
-[contenteditable]:focus { outline: 0px solid transparent; }
+.label {
+	display: inline-block; 
+}
 
+.command-name {
+	color: #00f4a4;
+	font-weight: bold;
+	display: inline-block; 
+	width: 1.5em;
+}
+
+[contenteditable]:focus { outline: 0px solid transparent; }
+*[contenteditable="true"]{display: inline-block;}
 
 /*
 	Phantom by HTML5 UP
@@ -3149,7 +3160,7 @@ input, select, textarea {
 /* Main */
 
 	#main {
-		padding: 0 0 15% 0 ;
+		padding: 0 0 18% 0 ;
 		background-color: white;
 		
 	}
