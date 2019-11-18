@@ -25,20 +25,23 @@ $("#input").on('keyup', function() {
     //make newlines consistent
     content = content.replace(/<br>|((?!^)<div>)|<p>/g, '\n').replace(/<div>|<\/div>|<\/p>/g, '').replace(/\n{2}/g, '\n');
 
-    //highlight keywords
-    content = content.replace(keywordRegExp, function(str) {
-        var space = (str[0] == ' ');
-        str = str.substring((space ? 1 : 0), str.length - 1);
-        str = `${(space ? ' ' : '')}<span class="command-name" data-name="${str.replace(markerAndHTML, '')}">${str}</span> `
-        return str;
-    });
-    
+    //shorten whitespace
+    content = content.replace(/([^\S\r\n]|&nbsp;)+/g, ' ');
+
     //remove stray html
     content = content.replace(strayHTML, function(str) {
         var temp = str.replace(/⚶/g, '');
         if(!temp.match(new RegExp(`<span class="command-name" data-name="(${keywords})">(${keywords})<\/span>`, 'g'))) {
             str = str.replace(new RegExp(`<span class="command-name" data-name="(${keywords})">|<\/span>`, 'g'), '');
         }
+        return str;
+    });
+
+    //highlight keywords
+    content = content.replace(keywordRegExp, function(str) {
+        var space = (str[0] == ' ');
+        str = str.substring((space ? 1 : 0), str.length - 1);
+        str = `${(space ? ' ' : '')}<span class="command-name" data-name="${str.replace(markerAndHTML, '')}">${str}</span> `
         return str;
     });
     
@@ -59,9 +62,6 @@ $("#input").on('keyup', function() {
     content = content.replace(/<span class="label" style="width: ([0-9]*)px">[^>]*<\/span>/g, function(str) {
         return str.replace(HTMLRegExp, '');
     });
-
-    //shorten whitespace
-    content = content.replace(/([^\S\r\n]|&nbsp;)+/g, ' ');
 
     //insert new label formatting
     content = content.split('\n');
