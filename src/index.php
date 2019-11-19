@@ -21,7 +21,7 @@
 	<body class="is-preload">
 		<!-- Wrapper -->
 		<div id="wrapper">
-
+		<?php require "include/header.html" ?>
 			<!-- Canvas 
 			<canvas id="canvas"></canvas> -->
 
