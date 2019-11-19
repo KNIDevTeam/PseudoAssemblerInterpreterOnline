@@ -2498,7 +2498,7 @@ input, select, textarea {
 		
 		margin: auto auto 0 auto;
 		width: 10em;
-		height: 10%
+		height: 10%;
 	}
 
 		input[type="submit"].icon:before,
@@ -3358,4 +3358,39 @@ input, select, textarea {
 
 	div#line1:hover span#b {
 		display:inline;
+	}
+	
+/* Back to top */
+	#back-to-top{
+		position: fixed;
+		bottom: 40px;
+		right: 40px;
+		z-index: 9999;
+		width: 32px;
+		height: 32px;
+		text-align: center;
+		line-height: 30px;
+		background: #f5f5f5;
+		color: #444;
+		cursor: pointer;
+		border: 0;
+		border-radius: 2px;
+		text-decoration: none;
+		transition: opacity 0.2s ease-out;
+		opacity: 0;
+	}
+	#back-to-top:hover {
+		background: #e9ebec;
+	}
+	#back-to-top.show {
+		opacity: 1;
+	}
+	
+/* Run */
+	#run{
+		position: fixed;
+		bottom: 40px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 999;
 	}

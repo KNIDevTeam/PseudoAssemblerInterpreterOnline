@@ -25,7 +25,7 @@ $("#input").on('keyup', function() {
 
     //purge html tags
     content = content.replace(html_regexp, '');
-
+	
     //check length of labels
     var longest_label = content.replace(marker_and_html, '').split('\n').reduce(function(accumulator, current) {
         var words = current.split(' ').filter(function(element) {
@@ -58,7 +58,8 @@ $("#input").on('keyup', function() {
     content = content.replace(keyword_regexp, function(str) {
         var space = (str[0] == ' ' ? ' ' : '');
         str = str.substring(space.length, str.length - 1);
-        str = `${space}<span class="command-name" data-toggle="tooltip" title="Command: ${str.replace(marker_and_html, '')}. Lore ipsum dolore sit amet." data-name="${str.replace(marker_and_html, '')}">${str}</span> `
+		var cmd_doc = getShortDoc(str);
+        str = `${space}<span class="command-name" title="${cmd_doc}" data-name="${str.replace(marker_and_html, '')}">${str}</span> `
         return str;
     });
 
@@ -70,12 +71,18 @@ $("#input").on('keyup', function() {
     $(this).html(content);
 	
     rangeSelectionSaveRestore.restoreSelection(saved_sel);
+	
+	refreshTooltip();
+	$('#run').fadeIn();
 });
 
 $("#input").on('blur', function() {
     var content = $(this).html();
     content = content.replace(html_regexp, '');
-    if(content == '') $(this).html('Type something in here...');
+    if(content == '') {
+		$(this).html('Type something in here...');	
+		$('#run').fadeOut();
+	}
 });
 
 $("#input").on('click', function() {
