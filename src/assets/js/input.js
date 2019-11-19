@@ -90,8 +90,10 @@ $("#input").on('keyup', function() {
     console.log(content);
 
     $(this).html(content);
-
+	
     rangeSelectionSaveRestore.restoreSelection(savedSel);
+	
+	refreshListeners();
 });
 
 $("#input").on('blur', function() {
