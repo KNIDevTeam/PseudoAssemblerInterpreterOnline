@@ -13,7 +13,7 @@ var html_regexp = /<[^>]*>/g
 //format input text
 
 $("#input").on('keyup', function() {
-    var savedSel = rangeSelectionSaveRestore.saveSelection();
+    var saved_sel = rangeSelectionSaveRestore.saveSelection();
 
     var content = $(this).html();
 
@@ -69,7 +69,7 @@ $("#input").on('keyup', function() {
 
     $(this).html(content);
 	
-    rangeSelectionSaveRestore.restoreSelection(savedSel);
+    rangeSelectionSaveRestore.restoreSelection(saved_sel);
 	
 	refreshListeners();
 });
