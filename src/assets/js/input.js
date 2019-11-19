@@ -6,10 +6,9 @@ $('.editable').each(function() {
 
 var keywords = 'DS|DC|A|AR|S|SR|M|MR|D|DR|C|CR|L|LR|ST|LA|J|JN|JZ|JP';
 
-var keywordRegExp = new RegExp(`(^|<br>|<div>|<p>| )(${keywords}) `, 'g');
-var strayHTML = /<span class="command-name">[^>]*<\/span>/g;
-var markerAndHTML = /<[^>]*>|⚶/g;
-var HTMLRegExp = /<[^>]*>/g
+var keyword_regexp = new RegExp(`(^| )(${keywords}) `, 'gm');
+var marker_and_html = /<[^>]*>|⚶/g;
+var html_regexp = /<[^>]*>/g
 
 //format input text
 
@@ -17,51 +16,25 @@ $("#input").on('keyup', function() {
     var savedSel = rangeSelectionSaveRestore.saveSelection();
 
     var content = $(this).html();
-    console.log(content);
 
-    //replace selection marker for checking
-    content = content.replace(/<span id="selectionBoundary" style="line-height: 0; display: none;">⚶<\/span>/g, '⚶');
+    //shorten whitespace
+    content = content.replace(/(\s|&nbsp;)+/g, ' ');
 
     //make newlines consistent
     content = content.replace(/<br>|((?!^)<div>)|<p>/g, '\n').replace(/<div>|<\/div>|<\/p>/g, '').replace(/\n{2}/g, '\n');
 
-    //shorten whitespace
-    content = content.replace(/([^\S\r\n]|&nbsp;)+/g, ' ');
+    //purge html tags
+    content = content.replace(html_regexp, '');
 
-    //remove stray html
-    content = content.replace(strayHTML, function(str) {
-        var temp = str.replace(/⚶/g, '');
-        if(!temp.match(new RegExp(`<span class="command-name" data-name="(${keywords})">(${keywords})<\/span>`, 'g'))) {
-            str = str.replace(new RegExp(`<span class="command-name" data-name="(${keywords})">|<\/span>`, 'g'), '');
-        }
-        return str;
-    });
-
-    //highlight keywords
-    content = content.replace(keywordRegExp, function(str) {
-        var space = (str[0] == ' ');
-        str = str.substring((space ? 1 : 0), str.length - 1);
-        str = `${(space ? ' ' : '')}<span class="command-name" data-name="${str.replace(markerAndHTML, '')}">${str}</span> `
-        return str;
-    });
-    
     //check length of labels
-    var pure_text = content.replace(markerAndHTML, '').split('\n');
-    var longest_label = pure_text.reduce(function(accumulator, current) {
+    var longest_label = content.replace(marker_and_html, '').split('\n').reduce(function(accumulator, current) {
         var words = current.split(' ').filter(function(element) {
             return (element != null && element != "");
         });
 
         if(words[0]) return Math.max(accumulator, words[0].length);
         else return accumulator;
-    }, 0);
-
-    console.log(longest_label);
-
-    //delete old label formatting
-    content = content.replace(/<span class="label" style="width: ([0-9]*)px">[^>]*<\/span>/g, function(str) {
-        return str.replace(HTMLRegExp, '');
-    });
+    }, 0) / 2 + 1;
 
     //insert new label formatting
     content = content.split('\n');
@@ -69,25 +42,30 @@ $("#input").on('keyup', function() {
         var words = current.split(' ').filter(function(element) {
             return (element != null && element != "");
         });
-
-        var temp = current.replace(markerAndHTML, '').split(' ').filter(function(element) {
+        var temp = current.replace(marker_and_html, '').split(' ').filter(function(element) {
             return (element != null && element != "");
         });
 
         if(!temp.length) return;
         if(temp[0].length && !temp[0].match(new RegExp(`^(${keywords})$`, 'g'))) {
-            words.splice(0, 1, `<span class="label" style="width: ${longest_label*12}px">${words[0]}</span>`);
-        } else words.splice(0, 0, `<span class="label" style="width: ${longest_label*12}px"> </span>`);
+            words.splice(0, 1, `<span class="label" style="width: ${longest_label}em">${words[0]}</span>`);
+        } else words.splice(0, 0, `<span class="label" style="width: ${longest_label}em"> </span>`);
         content[index] = words.join(' ');
     });
     content = content.join('\n');
+
+    //highlight keywords
+    content = content.replace(keyword_regexp, function(str) {
+        var space = (str[0] == ' ' ? ' ' : '');
+        str = str.substring(space.length, str.length - 1);
+        str = `${space}<span class="command-name" data-name="${str.replace(marker_and_html, '')}">${str}</span> `
+        return str;
+    });
 
     //restore marker
     content = content.replace(/⚶/g, '<span id="selectionBoundary" style="line-height: 0; display: none;">⚶</span>');
     //restore newlines
     content = content.replace(/\n/g, '<br>');
-
-    console.log(content);
 
     $(this).html(content);
 	
@@ -98,7 +76,7 @@ $("#input").on('keyup', function() {
 
 $("#input").on('blur', function() {
     var content = $(this).html();
-    content = content.replace(HTMLRegExp, '');
+    content = content.replace(html_regexp, '');
     if(content == '') $(this).html('Type something in here...');
 });
 
