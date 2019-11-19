@@ -10,7 +10,9 @@ const doc =
 		"AR": {
 			"short": "Komenda dodaje do rejestru wartość zmiennej",
 		},
-	
+		"SR": {
+			"short": "Komenda odejmuje od rejestru wartość zmiennej",
+		},
 	}
 };
 
