@@ -70,8 +70,6 @@ $("#input").on('keyup', function() {
     $(this).html(content);
 	
     rangeSelectionSaveRestore.restoreSelection(saved_sel);
-	
-	refreshListeners();
 });
 
 $("#input").on('blur', function() {
