@@ -58,7 +58,7 @@ $("#input").on('keyup', function() {
     content = content.replace(keyword_regexp, function(str) {
         var space = (str[0] == ' ' ? ' ' : '');
         str = str.substring(space.length, str.length - 1);
-        str = `${space}<span class="command-name" data-name="${str.replace(marker_and_html, '')}">${str}</span> `
+        str = `${space}<span class="command-name" data-toggle="tooltip" title="Command: ${str.replace(marker_and_html, '')}. Lore ipsum dolore sit amet." data-name="${str.replace(marker_and_html, '')}">${str}</span> `
         return str;
     });
 
