@@ -7,7 +7,7 @@ $('.editable').each(function() {
 var keywords = 'DS|DC|A|AR|S|SR|M|MR|D|DR|C|CR|L|LR|ST|LA|J|JN|JZ|JP';
 
 var keyword_regexp = new RegExp(`(^| )(${keywords}) `, 'gm');
-var marker_and_html = /<[^>]*>|⚶/g;
+var marker_and_html = /<[^>]*>|⮓/g;
 var html_regexp = /<[^>]*>/g
 
 //format input text
@@ -88,7 +88,7 @@ $("#input").on('keyup', function(key) {
 
 $("#input").on('blur', function() {
     var content = $(this).html();
-    content = content.replace(html_regexp, '');
+    content = content.replace(/<[^>]*>|⭾|\s|&nbsp;/g, '');
     if(content == '') {
 		$(this).html('Type something in here...');	
 		$('#run').fadeOut();
