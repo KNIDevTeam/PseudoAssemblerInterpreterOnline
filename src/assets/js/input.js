@@ -14,7 +14,7 @@ var html_regexp = /<[^>]*>/g
 
 $("#input").on('keyup', function(key) {
     key = key.which;
-    if(!(key <= 13 || (key >= 48 && key <= 90) || (key >= 106 && key <= 111) || key >= 186)) return;
+    if(!(key <= 13 || key == 32 || (key >= 48 && key <= 90) || (key >= 106 && key <= 111) || key >= 186)) return;
 
     var saved_sel = rangeSelectionSaveRestore.saveSelection();
 
@@ -41,7 +41,7 @@ $("#input").on('keyup', function(key) {
 
         if(words[0]) return Math.max(accumulator, words[0].length);
         else return accumulator;
-    }, 0) / 2 - 0.2;
+    }, 0) * 10 + 10;
 
     //insert new label formatting
     content = content.split('\n');
@@ -55,8 +55,8 @@ $("#input").on('keyup', function(key) {
 
         if(!temp.length) return;
         if(temp[0].length && !temp[0].match(new RegExp(`^(${keywords})$`, 'g'))) {
-            words.splice(0, 1, `<span class="label" style="width: ${longest_label}em">${words[0]}</span>`);
-        } else words.splice(0, 0, `<span class="label" style="width: ${longest_label}em"> </span>`);
+            words.splice(0, 1, `<span class="label" style="width: ${longest_label}px">${words[0]}</span>`);
+        } else words.splice(0, 0, `<span class="label" style="width: ${longest_label}px"> </span>`);
         content[index] = words.join(' ');
     });
     content = content.join('\n');
@@ -79,7 +79,7 @@ $("#input").on('keyup', function(key) {
     content = content.replace(/\n/g, '<br>');
 
     $(this).html(content);
-	
+
     rangeSelectionSaveRestore.restoreSelection(saved_sel);
 	
 	refreshTooltip();

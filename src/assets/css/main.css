@@ -5,7 +5,7 @@
 canvas {
 	display: block;
 	position: absolute;
-	z-index: -1;
+	z-index: -10;
 	image-rendering: crisp-edges;
 }
 
@@ -2834,7 +2834,7 @@ input, select, textarea {
 /* Header */
 
 	#header {
-		padding: 8em 0 0.1em 0 ;
+		padding: 4em 1em 2em 0 ;
 	}
 
 		#header .logo {
@@ -2861,8 +2861,8 @@ input, select, textarea {
 
 				#header .logo .symbol img {
 					display: block;
-					width: 5em;
-					height: 5em;
+					width: 3.5em;
+					height: 3.5em;
 				}
 
 		#header nav {

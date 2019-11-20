@@ -4,10 +4,10 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-if (isIE()) {
+/*if (isIE()) {
 	console.log('IE Detected');
 	window.location.href = "errors/IE.html";
-}
+}*/
 	
 
 (function($) {
