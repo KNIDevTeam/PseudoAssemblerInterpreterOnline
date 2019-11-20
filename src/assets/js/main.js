@@ -4,6 +4,9 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+if (isIE())
+	window.location.href = "errors/IE.html";
+
 (function($) {
 
 	var	$window = $(window),
@@ -184,3 +187,11 @@
 			
 			
 })(jQuery);
+
+/* Check if is IE */
+function isIE() {
+    var ua = window.navigator.userAgent;
+    var ie = ua.search(/(MSIE|Trident|Edge)/);
+
+    return ie > -1;
+}
