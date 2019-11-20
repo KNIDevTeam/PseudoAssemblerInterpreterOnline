@@ -6,21 +6,25 @@ const doc =
 			"short": "Komenda inicjalizuje zmienną",
 			"long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod nulla dolor, viverra pulvinar turpis cursus ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam justo nunc, iaculis vel odio non, aliquam ullamcorper diam. Curabitur sit amet lectus mattis, aliquet magna in, consectetur sapien. Aenean vel bibendum tortor, vel porta massa. Sed lacus velit, semper sed dui id, aliquet faucibus ante.",
 			"params": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+			"examples": "Example ezzzz",
 		},
 		"DS": {
 			"short": "Komenda inicjalizuje zmienną",
 			"long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod nulla dolor, viverra pulvinar turpis cursus ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam justo nunc, iaculis vel odio non, aliquam ullamcorper diam. Curabitur sit amet lectus mattis, aliquet magna in, consectetur sapien. Aenean vel bibendum tortor, vel porta massa. Sed lacus velit, semper sed dui id, aliquet faucibus ante.",
 			"params": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+			"examples": "Example ezzzz",
 		},
 		"AR": {
 			"short": "Komenda dodaje do rejestru wartość zmiennej",
 			"long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod nulla dolor, viverra pulvinar turpis cursus ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam justo nunc, iaculis vel odio non, aliquam ullamcorper diam. Curabitur sit amet lectus mattis, aliquet magna in, consectetur sapien. Aenean vel bibendum tortor, vel porta massa. Sed lacus velit, semper sed dui id, aliquet faucibus ante.",
 			"params": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+			"examples": "Example ezzzz",
 		},
 		"SR": {
 			"short": "Komenda odejmuje od rejestru wartość zmiennej",
 			"long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod nulla dolor, viverra pulvinar turpis cursus ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam justo nunc, iaculis vel odio non, aliquam ullamcorper diam. Curabitur sit amet lectus mattis, aliquet magna in, consectetur sapien. Aenean vel bibendum tortor, vel porta massa. Sed lacus velit, semper sed dui id, aliquet faucibus ante.",
 			"params": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+			"examples": "Example ezzzz",
 		},
 	}
 };
@@ -48,7 +52,13 @@ function getCommandDoc(cmd_name) {
 			</h2> 
 		</div> 
 		<div id="collapse`+cmd_name+`" class="collapse" aria-labelledby="heading`+cmd_name+`" data-parent="#accordionCommands"> 
-			<div class="card-body"><p>`+doc['commands'][cmd_name]['long']+`</p><hr><p>`+doc['commands'][cmd_name]['params']+`</p></div>
+			<div class="card-body">
+				<p>`+doc['commands'][cmd_name]['long']+`</p>
+				<hr>
+				<p>`+doc['commands'][cmd_name]['params']+`</p>
+				<hr>
+				<p>`+doc['commands'][cmd_name]['examples']+`</p>
+			</div>
 		</div> 
 	</div>`;
 }
