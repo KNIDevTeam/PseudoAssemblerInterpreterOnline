@@ -12,10 +12,17 @@ var html_regexp = /<[^>]*>/g
 
 //format input text
 
-$("#input").on('keyup', function() {
+$("#input").on('keyup', function(key) {
+    key = key.which;
+    if(!(key <= 13 || (key >= 48 && key <= 90) || (key >= 106 && key <= 111) || key >= 186)) return;
+
     var saved_sel = rangeSelectionSaveRestore.saveSelection();
 
     var content = $(this).html();
+
+    //replace selection markers
+    var markers = content.match(/<span id="selectionBoundary_[0-9]+_[0-9]+" style="line-height: 0; display: none;">⭾<\/span>/g);
+    content = content.replace(/⭾/g, '⮓');
 
     //shorten whitespace
     content = content.replace(/(\s|&nbsp;)+/g, ' ');
@@ -34,7 +41,7 @@ $("#input").on('keyup', function() {
 
         if(words[0]) return Math.max(accumulator, words[0].length);
         else return accumulator;
-    }, 0) / 2 + 1;
+    }, 0) / 2 - 0.2;
 
     //insert new label formatting
     content = content.split('\n');
@@ -63,8 +70,11 @@ $("#input").on('keyup', function() {
         return str;
     });
 
-    //restore marker
-    content = content.replace(/⚶/g, '<span id="selectionBoundary" style="line-height: 0; display: none;">⚶</span>');
+    //restore markers
+    markers.forEach(function(span) {
+        content = content.replace(/⮓/, span);
+    });
+
     //restore newlines
     content = content.replace(/\n/g, '<br>');
 

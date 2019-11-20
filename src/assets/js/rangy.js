@@ -7,7 +7,7 @@
 * Use "rangeSelectionSaveRestore" instead of "rangy"
 */
 var rangeSelectionSaveRestore = (function() {
-    var markerTextChar = "⚶";
+    var markerTextChar = "⭾";
     var selectionHasExtend = (typeof window.getSelection().extend !== "undefined");
 
     function gEBI(id, doc) {
@@ -52,7 +52,7 @@ var rangeSelectionSaveRestore = (function() {
     }
 
     function insertRangeBoundaryMarker(range, atStart) {
-        var markerId = "selectionBoundary";
+        var markerId = "selectionBoundary_" + (+new Date()) + "_" + ("" + Math.random()).slice(2);
         var markerEl;
         var doc = range.startContainer.ownerDocument;
 
