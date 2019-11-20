@@ -3394,3 +3394,9 @@ input, select, textarea {
 		transform: translateX(-50%);
 		z-index: 999;
 	}
+	
+/* Accordions */
+	.accordion button {
+		width: 100%;
+		text-align: left;
+	}
