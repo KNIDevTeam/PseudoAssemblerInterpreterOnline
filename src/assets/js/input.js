@@ -97,12 +97,12 @@ $("#input").on('blur', function() {
     var content = $(this).html().replace(/<[^>]*>|⭾|\s|&nbsp;/g, '');
     if(content == '') {
         placeholder = 1;
-		$(this).html('Type something in here...');	
+		$(this).html('Type something here...');	
 		$('#run').fadeOut();
 	}
 });
 
 $("#input").on('click', function() {
     var content = $(this).html();
-    if(content == 'Type something in here...') $(this).html(''), placeholder = 0;;
+    if(content == 'Type something here...') $(this).html(''), placeholder = 0;;
 });
