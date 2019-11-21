@@ -2,6 +2,12 @@ const doc =
 {
 	"general": "Pseudoassembler is a programming language of great power. Proficient usage of this tool is an art that very few ever possessed. We hope that following documentation will allow you not only to master but also come to like pseudoassembler (it is possible – believe us)!",
 	"commands": {
+		"Extra": {
+			"short": "Memory adressing",
+			"long": "There are four ways of adressing memory in pseudoassembler. Let us present all of them: <br> <ul><li>[label]</li><li>[label]([register])</li><li>[memory adress]</li><li>[memory adress]([register])</li></ul>All these ways are, ultimately, ways of achieving the same objective - accessing memory block.",
+			"params": "[label] - Interpreter will work on memory block assigned to given label. If label is associated with array, it points to its first memory block.<br>[label]([register]) - Interpreter will work on memory block whose adress is sum of adress pointed by label and adress stored in register.<br>[memory adress]([register]) - Interpreter will work on memory block with given adress.<br>[memory adress]([register]) - Interpreter will work on memory block whose adress is given adress and adress stored in register.<br>",
+			"examples": "Suppose we declared two arrays VEC1{1, 2} and VEC2{3, 4} (both size of 2 integers).<br>Conveniently, we also prepared registers - REG1{0} and REG2{4}. (Notice that 4 is the size of integer in bytes)<br>Now let's discuss the memory adresses utilised by arrays:<br>VEC1[0] = 1 | Adress: 0<br>VEC1[1] = 2 | Adress: 4<br>VEC2[0] = 3 | Adress: 8<br>VEC2[1] = 4 | Adress: 12<br><br>Following commands once executed will compute sum of values stored in VEC1 and VEC2 and save it in REG1:<br>A   1, VEC1<br>A   1, VEC1(2)<br>A   1, 8 <br>A   1, 8(2)<br>",
+		},
 		"DC": {
 			"short": "Komenda inicjalizuje zmienną",
 			"long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod nulla dolor, viverra pulvinar turpis cursus ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam justo nunc, iaculis vel odio non, aliquam ullamcorper diam. Curabitur sit amet lectus mattis, aliquet magna in, consectetur sapien. Aenean vel bibendum tortor, vel porta massa. Sed lacus velit, semper sed dui id, aliquet faucibus ante.",
