@@ -16,8 +16,10 @@ $("#input").on('keyup', function(key) {
     key = key.which;
     if(!(key <= 13 || key == 32 || (key >= 48 && key <= 90) || (key >= 106 && key <= 111) || key >= 186)) return;
 
-    var saved_sel = rangeSelectionSaveRestore.saveSelection();
+    //check if needs to be cleared
+    if(content == 'Type something in here...') $(this).html('');	
 
+    var saved_sel = rangeSelectionSaveRestore.saveSelection();
     var content = $(this).html();
 
     //replace selection markers
@@ -79,7 +81,6 @@ $("#input").on('keyup', function(key) {
     content = content.replace(/\n/g, '<br>');
 
     $(this).html(content);
-
     rangeSelectionSaveRestore.restoreSelection(saved_sel);
 	
 	refreshTooltip();
@@ -87,8 +88,7 @@ $("#input").on('keyup', function(key) {
 });
 
 $("#input").on('blur', function() {
-    var content = $(this).html();
-    content = content.replace(/<[^>]*>|⭾|\s|&nbsp;/g, '');
+    var content = $(this).html().replace(/<[^>]*>|⭾|\s|&nbsp;/g, '');
     if(content == '') {
 		$(this).html('Type something in here...');	
 		$('#run').fadeOut();
