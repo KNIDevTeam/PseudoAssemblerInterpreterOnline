@@ -48,7 +48,7 @@ $("#input").on('keyup paste contextmenu', function(e) {
 
         if(words[0]) return Math.max(accumulator, words[0].length);
         else return accumulator;
-    }, 0) * 10 + 10;
+    }, 0) * 11 + 15;
 
     //insert new label formatting
     content = content.split('\n');

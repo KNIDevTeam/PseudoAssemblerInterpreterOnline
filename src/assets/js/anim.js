@@ -10,7 +10,7 @@ canvas.height = window.innerHeight * scale;
 
 ctx.scale(scale, scale);
 
-ctx.font = "15px Arial";
+ctx.font = "25px Arial";
 ctx.imageSmoothingEnabled = true;
 ctx.textAlign = "center"; 
 ctx.textBaseline = "middle";
@@ -34,11 +34,11 @@ var particles = [];
 
 $("#logo-id").on('mouseenter', function() {
     logo_pos = getPosCenter(document.getElementById("logo-id"));
-    for(var i = 1; i <= 20; i++)
+    for(var i = 3; i <= 20; i++)
         particles.push({
-            x: logo_pos.x,
+            x: logo_pos.x + Math.pow(-1, i) * 170,
             y: logo_pos.y,
-            speed: Math.pow(-1, i) * 0.5 / i,
+            speed: Math.pow(-1, i) / i / i,
             char: String.fromCharCode(0x2200 + Math.random() * (0x22FF - 0x2200 + 1))});
     requestAnimationFrame(draw); 
 });
@@ -52,7 +52,7 @@ function draw() {
         if(particle.x < 0 || particle.x > ctx.canvas.width) offscreen++;
         else {
             particle.x += particle.speed;
-            particle.speed *= 1.125;
+            particle.speed *= 1.2;
             if(Math.abs(particle.x - logo_pos.x) > 200) ctx.fillText(particle.char, Math.round(particle.x), Math.round(particle.y)); 
             particles[id] = particle;
         }
