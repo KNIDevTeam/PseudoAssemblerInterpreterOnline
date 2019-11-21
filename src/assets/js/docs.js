@@ -34,6 +34,10 @@ function refreshTooltip() {
 	$('.command-name').tooltip({html: true});
 }
 
+function hideTooltips() {
+	$('.command-name').tooltip('hide');	
+}
+
 function getShortDoc(cmd_name) {
 	let prefix = cmd_name + ": ";
 	

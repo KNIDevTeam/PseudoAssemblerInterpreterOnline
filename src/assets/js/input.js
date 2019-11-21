@@ -18,6 +18,8 @@ $("#input").on('keyup paste contextmenu', function(e) {
     key = e.which;
     if(key == null) $('#input').keyup({which: 13});
     if(!(key <= 13 || key == 32 || (key >= 48 && key <= 90) || (key >= 106 && key <= 111) || key >= 186)) return;
+	
+	hideTooltips();
 
     //check if needs to be cleared
     if(placeholder) $(this).html(''), placeholder = 0;
