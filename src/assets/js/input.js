@@ -10,6 +10,8 @@ var keyword_regexp = new RegExp(`(^| )(${keywords}) `, 'gm');
 var marker_and_html = /<[^>]*>|⮓/g;
 var html_regexp = /<[^>]*>/g
 
+var placeholder = 1;
+
 //format input text
 
 $("#input").on('keyup', function(key) {
@@ -17,7 +19,7 @@ $("#input").on('keyup', function(key) {
     if(!(key <= 13 || key == 32 || (key >= 48 && key <= 90) || (key >= 106 && key <= 111) || key >= 186)) return;
 
     //check if needs to be cleared
-    if(content == 'Type something in here...') $(this).html('');	
+    if(placeholder) $(this).html(''), placeholder = 0;
 
     var saved_sel = rangeSelectionSaveRestore.saveSelection();
     var content = $(this).html();
@@ -90,6 +92,7 @@ $("#input").on('keyup', function(key) {
 $("#input").on('blur', function() {
     var content = $(this).html().replace(/<[^>]*>|⭾|\s|&nbsp;/g, '');
     if(content == '') {
+        placeholder = 1;
 		$(this).html('Type something in here...');	
 		$('#run').fadeOut();
 	}
@@ -97,5 +100,5 @@ $("#input").on('blur', function() {
 
 $("#input").on('click', function() {
     var content = $(this).html();
-    if(content == 'Type something in here...') $(this).html('');
+    if(content == 'Type something in here...') $(this).html(''), placeholder = 0;;
 });
