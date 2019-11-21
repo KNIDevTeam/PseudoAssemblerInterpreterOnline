@@ -48,7 +48,7 @@ $("#input").on('keyup paste contextmenu', function(e) {
 
         if(words[0]) return Math.max(accumulator, words[0].length);
         else return accumulator;
-    }, 0) * 11 + 15;
+    }, 0) / 1.7 + 0.2;
 
     //insert new label formatting
     content = content.split('\n');
@@ -62,8 +62,8 @@ $("#input").on('keyup paste contextmenu', function(e) {
 
         if(!temp.length) return;
         if(temp[0].length && !temp[0].match(new RegExp(`^(${keywords})$`, 'g'))) {
-            words.splice(0, 1, `<span class="label" style="width: ${longest_label}px">${words[0]}</span>`);
-        } else words.splice(0, 0, `<span class="label" style="width: ${longest_label}px"> </span>`);
+            words.splice(0, 1, `<span class="label" style="width: ${longest_label}em">${words[0]}</span>`);
+        } else words.splice(0, 0, `<span class="label" style="width: ${longest_label}em"> </span>`);
         content[index] = words.join(' ');
     });
     content = content.join('\n');
