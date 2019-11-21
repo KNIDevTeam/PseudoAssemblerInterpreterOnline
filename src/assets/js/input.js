@@ -72,8 +72,9 @@ $("#input").on('keyup paste contextmenu', function(e) {
     content = content.replace(keyword_regexp, function(str) {
         var space = (str[0] == ' ' ? ' ' : '');
         str = str.substring(space.length, str.length - 1);
-		var cmd_doc = getShortDoc(str);
-        str = `${space}<span class="command-name" title="${cmd_doc}" data-name="${str.replace(marker_and_html, '')}">${str}</span> `
+        var cmd = str.replace(marker_and_html, '');
+		var cmd_doc = getShortDoc(cmd);
+        str = `${space}<span class="command-name" title="${cmd_doc}" data-name="${cmd}">${str}</span> `
         return str;
     });
 
