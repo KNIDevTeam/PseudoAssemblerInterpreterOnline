@@ -1,6 +1,6 @@
 const doc = 
 {
-	"general": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod nulla dolor, viverra pulvinar turpis cursus ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam justo nunc, iaculis vel odio non, aliquam ullamcorper diam. Curabitur sit amet lectus mattis, aliquet magna in, consectetur sapien. Aenean vel bibendum tortor, vel porta massa. Sed lacus velit, semper sed dui id, aliquet faucibus ante. Morbi commodo aliquam metus in pulvinar. Quisque ullamcorper egestas mauris, finibus eleifend tortor scelerisque at. Curabitur vehicula turpis in tellus lobortis mollis.",
+	"general": "Pseudoassembler is a programming language of great power. Proficient usage of this tool is an art that very few ever possessed. We hope that following documentation will allow you not only to master but also come to like pseudoassembler (it is possible – believe us)!",
 	"commands": {
 		"DC": {
 			"short": "Komenda inicjalizuje zmienną",
