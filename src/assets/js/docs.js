@@ -59,8 +59,8 @@ function hideTooltips() {
 function getShortDoc(cmd_name) {
 	let prefix = cmd_name + ": ";
 	
-	if (doc['commands'].hasOwnProperty(cmd_name) && doc['commands'][cmd_name].hasOwnProperty('short'))
-		return prefix + doc['commands'][cmd_name]['short'];
+	if (doc['commands']['content'].hasOwnProperty(cmd_name) && doc['commands']['content'][cmd_name].hasOwnProperty('short'))
+		return prefix + doc['commands']['content'][cmd_name]['short'];
 	else
 		return prefix + '---';
 }
