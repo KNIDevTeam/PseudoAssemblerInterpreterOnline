@@ -14,8 +14,9 @@ var placeholder = 1;
 
 //format input text
 
-$("#input").on('keyup', function(key) {
-    key = key.which;
+$("#input").on('keyup paste contextmenu', function(e) {
+    key = e.which;
+    if(key == null) $('#input').keyup({which: 13});
     if(!(key <= 13 || key == 32 || (key >= 48 && key <= 90) || (key >= 106 && key <= 111) || key >= 186)) return;
 
     //check if needs to be cleared
