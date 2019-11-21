@@ -2,7 +2,7 @@ const doc =
 {
 	"general": "Pseudoassembler is a programming language of great power. Proficient usage of this tool is an art that very few ever possessed. We hope that following documentation will allow you not only to master but also come to like pseudoassembler (it is possible – believe us)!",
 	"commands": {
-		"DR": {
+		"Extra": {
 			"short": "Memory adressing",
 			"long": "There are four ways of adressing memory in pseudoassembler. Let us present all of them: <br> <ul><li>[label]</li><li>[label]([register])</li><li>[memory adress]</li><li>[memory adress]([register])</li></ul>All these ways are, ultimately, ways of achieving the same objective - accessing memory block.",
 			"params": "[label] - Interpreter will work on memory block assigned to given label. If label is associated with array, it points to its first memory block.<br>[label]([register]) - Interpreter will work on memory block whose adress is sum of adress pointed by label and adress stored in register.<br>[memory adress]([register]) - Interpreter will work on memory block with given adress.<br>[memory adress]([register]) - Interpreter will work on memory block whose adress is given adress and adress stored in register.<br>",
