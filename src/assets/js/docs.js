@@ -47,6 +47,8 @@ const doc =
 	}
 };
 
+var lang = {};
+
 function refreshTooltip() {
 	$('.command-name').off();
 	$('.command-name').tooltip({html: true});
@@ -108,5 +110,47 @@ function getAllDoc() {
 		
 	return html;
 }
+
+function recompose(obj,string){
+    var parts = string.split('.');
+    var newObj = obj[parts[0]];
+    if (parts[1]) {
+        parts.splice(0,1);
+        var newString = parts.join('.');
+        return recompose(newObj, newString);
+    }
+    return newObj;
+}
+
+function getLang() {
+	$.ajax({
+		type: 'GET',
+		url: 'lang/eng.json',
+		async: false,
+		beforeSend: function (xhr) {
+		  if (xhr && xhr.overrideMimeType) {
+			xhr.overrideMimeType('application/json;charset=utf-8');
+		  }
+		},
+		dataType: 'json',
+		success: function (data) {
+		  lang = data;
+		}
+	});
+}
+
+function setLang() {
+	$('[data-lang]').each((i, el) => {
+		let key = $(el).attr('data-lang');
+		let text = recompose(lang, key);
+		$(el).html(text).removeAttr('data-lang');
+	})
+}
+
+getLang();
+
+console.log(lang);
+
+setLang();
 
 $('#main-doc').html(getAllDoc());
