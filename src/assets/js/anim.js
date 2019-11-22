@@ -34,6 +34,7 @@ var particles = [];
 var animating = 0;
 
 $("#logo-id").on('mouseenter', function() {
+    if(animating) return;
     logo_pos = getPosCenter(document.getElementById("logo-id"));
     for(var i = 2; i <= 10; i++) {
         particles.push({
