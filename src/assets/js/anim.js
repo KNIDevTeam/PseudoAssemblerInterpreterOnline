@@ -48,7 +48,8 @@ $("#logo-id").on('mouseenter', function() {
             speed: i * i / 5,
             char: String.fromCharCode(0x2200 + Math.random() * (0x22FF - 0x2200 + 1))});
         }
-    if(!animating) animating = 1, requestAnimationFrame(draw);
+    animating = 1;
+    requestAnimationFrame(draw);
 });
 
 
