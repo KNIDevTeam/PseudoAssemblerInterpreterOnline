@@ -14,7 +14,7 @@ const doc =
 	},
 	"statusRegister": {
 		"header": "StatusRegister",
-		"content": "Pseudoassembler is a programming language of great power. Proficient usage of this tool is an art that very few ever possessed. We hope that following documentation will allow you not only to master but also come to like pseudoassembler (it is possible – believe us)!",
+		"content": "Status register is a special register that stores current state of the program. Depending on the sign of the result of latest arithmetic operation (such as A, AR, S, SR, M, MR, D, DR, C, CR) status register can store value:<ul><li>00 – when the result is equal to 0, </li><li>01 – when the result is positive, </li><li>10 – when the result is negative, </li><li>11 – when some error has occurred (for example: division by 0).</li></ul><h4>Example</h4>Suppose we have two registers: REG1{2}, REG2{-2}, REG3{0}. Let us discuss state of status register after executing the following commands. <pre>AR	1, 2	# Status register = “00”</pre><pre>SR	1, 2	# Status register = “01” </pre><pre>MR	1, 2	# Status register = “10” </pre><pre>DR	1, 3	# Status register = “11” </pre>Should you have any doubts about these commands, don’t hesitate to check “Commands” section of the documentation.",
 	},
 	"commands": {
 		"header": "Commands",
