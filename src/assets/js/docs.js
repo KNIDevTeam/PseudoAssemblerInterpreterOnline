@@ -74,7 +74,7 @@ function getLang() {
 		  lang = data;
 		},
 		error: function (data) {
-			console.log('Probably not valid json');
+			alert('Probably not valid json');
 		}
 	});
 }
