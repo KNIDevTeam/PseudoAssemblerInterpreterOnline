@@ -48,7 +48,7 @@ $("#input").on('keyup paste contextmenu', function(e) {
 
         if(words[0]) return Math.max(accumulator, words[0].length);
         else return accumulator;
-    }, 0) / 1.7 + 0.2;
+    }, 0) / 2 + 0.5;
     longest_label = Math.round(longest_label * 100) / 100;
 
     //insert new label formatting

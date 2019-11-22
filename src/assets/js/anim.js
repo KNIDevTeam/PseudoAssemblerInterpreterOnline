@@ -39,7 +39,7 @@ $("#logo-id").on('mouseenter', function() {
         particles.push({
             x: logo_pos.x + Math.pow(-1, i) * 170,
             y: logo_pos.y,
-            speed: Math.pow(-1, i) / Math.pow(i, 2) * 10,
+            speed: Math.pow(-1, i) / Math.pow(i, 2) * 30,
             char: String.fromCharCode(0x2200 + Math.random() * (0x22FF - 0x2200 + 1))});
     if(!animating) animating = 1, requestAnimationFrame(draw);
 });
@@ -53,7 +53,8 @@ function draw() {
         if(particle.x < 0 || particle.x > ctx.canvas.width) offscreen++;
         else {
             particle.x += particle.speed;
-            particle.speed *= 1.2;
+            particle.speed *= 1.12;
+            ctx.globalAlpha = Math.min(1, Math.abs(50 / particle.speed));
             if(Math.abs(particle.x - logo_pos.x) > 200) ctx.fillText(particle.char, Math.round(particle.x), Math.round(particle.y)); 
             particles[id] = particle;
         }
