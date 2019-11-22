@@ -98,14 +98,14 @@ $("#input").on('blur', function() {
     var content = $(this).html().replace(/<[^>]*>|⭾|\s|&nbsp;/g, '');
     if(content == '') {
         placeholder = 1;
-		$(this).html('Type something here...');	
+		$(this).html(lang.index.typeSth);	
 		$('#run').fadeOut();
 	}
 });
 
 $("#input").on('click', function() {
     var content = $(this).html();
-    if(content == 'Type something here...') {
+    if(content == lang.index.typeSth) {
         $(this).html('');
         placeholder = 0;
     }
