@@ -1,28 +1,6 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,900");
 
-
-canvas {
-	display: block;
-	position: absolute;
-	z-index: -10;
-	image-rendering: crisp-edges;
-}
-
-.label {
-	display: inline-block; 
-}
-
-.command-name {
-	color: #00f4a4;
-	font-weight: bold;
-	display: inline-block; 
-	width: 1.5em;
-}
-
-[contenteditable]:focus { outline: 0px solid transparent; }
-*[contenteditable="true"]{display: inline-block;}
-
 /*
 	Phantom by HTML5 UP
 	html5up.net | @ajlkn
@@ -3401,3 +3379,30 @@ input, select, textarea {
 		width: 100%;
 		text-align: left;
 	}
+
+/* custom css */
+
+.btn {
+	box-shadow: none;
+}
+
+canvas {
+	display: block;
+	position: absolute;
+	z-index: -10;
+	image-rendering: crisp-edges;
+}
+
+.label {
+	display: inline-block; 
+}
+
+.command-name {
+	color: #00f4a4;
+	font-weight: bold;
+	display: inline-block; 
+	width: 1.5em;
+}
+
+[contenteditable]:focus { outline: 0px solid transparent; }
+*[contenteditable="true"]{display: inline-block;}

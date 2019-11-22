@@ -39,7 +39,7 @@ $("#logo-id").on('mouseenter', function() {
         particles.push({
             x: logo_pos.x + Math.pow(-1, i) * 170,
             y: logo_pos.y,
-            speed: Math.pow(-1, i) / i / i,
+            speed: Math.pow(-1, i) / Math.pow(i, 2) * 10,
             char: String.fromCharCode(0x2200 + Math.random() * (0x22FF - 0x2200 + 1))});
     if(!animating) animating = 1, requestAnimationFrame(draw);
 });
