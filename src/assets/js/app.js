@@ -9,5 +9,5 @@ requirejs.config({
 });
 
 require(["jquery", "bootstrap", "browser", "breakpoints"], () => {
-	require(["assets/js/docs.js", "assets/js/util.js", "assets/js/main.js", "assets/js/rangy.js", "assets/js/backToTop.js", "assets/js/input.js", "assets/js/anim.js"]);
+	require(["assets/js/language.js", "assets/js/util.js", "assets/js/main.js", "assets/js/rangy.js", "assets/js/backToTop.js", "assets/js/input.js", "assets/js/anim.js"]);
 });
