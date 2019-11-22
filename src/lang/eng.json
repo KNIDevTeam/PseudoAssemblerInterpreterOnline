@@ -1,17 +1,17 @@
 {
     "index": {
-        "siteTitle": "Interpreter - HOME",
+        "siteTitle": "Interpreter - Home",
         "title": "Interpreter",
         "nav": "Home",
         "run": "RUN"
     },
     "docs": {
-        "siteTitle": "Interpreter - DOCS",
+        "siteTitle": "Interpreter - Docs",
         "title": "Documentation",
         "nav": "Documentation"
     },
     "contact": {
-        "siteTitle": "Interpreter - CONTACT",
+        "siteTitle": "Interpreter - Contact",
         "title": "Contact & Credits",
         "nav": "Contact"
     }
