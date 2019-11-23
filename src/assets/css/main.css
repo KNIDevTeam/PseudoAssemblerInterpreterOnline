@@ -3404,6 +3404,11 @@ canvas {
 	width: 1.5em;
 }
 
+.keyword {
+	color: #00f4a4;
+	font-weight: bold;
+}
+
 [contenteditable]:focus { outline: 0px solid transparent; }
 *[contenteditable="true"]{display: inline-block;}
 
