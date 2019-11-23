@@ -48,7 +48,8 @@ $("#input").on('keyup paste contextmenu', function(e) {
 
         if(words[0]) return Math.max(accumulator, words[0].length);
         else return accumulator;
-    }, 0) / 1.7 + 0.2;
+    }, 0) / 2 + 0.5;
+    longest_label = Math.round(longest_label * 100) / 100;
 
     //insert new label formatting
     content = content.split('\n');
@@ -97,12 +98,15 @@ $("#input").on('blur', function() {
     var content = $(this).html().replace(/<[^>]*>|⭾|\s|&nbsp;/g, '');
     if(content == '') {
         placeholder = 1;
-		$(this).html('Type something in here...');	
+		$(this).html(lang.index.typeSth);	
 		$('#run').fadeOut();
 	}
 });
 
 $("#input").on('click', function() {
     var content = $(this).html();
-    if(content == 'Type something in here...') $(this).html(''), placeholder = 0;;
+    if(content == lang.index.typeSth) {
+        $(this).html('');
+        placeholder = 0;
+    }
 });

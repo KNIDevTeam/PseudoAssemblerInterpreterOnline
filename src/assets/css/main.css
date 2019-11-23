@@ -1,28 +1,6 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,900");
 
-
-canvas {
-	display: block;
-	position: absolute;
-	z-index: -10;
-	image-rendering: crisp-edges;
-}
-
-.label {
-	display: inline-block; 
-}
-
-.command-name {
-	color: #00f4a4;
-	font-weight: bold;
-	display: inline-block; 
-	width: 1.5em;
-}
-
-[contenteditable]:focus { outline: 0px solid transparent; }
-*[contenteditable="true"]{display: inline-block;}
-
 /*
 	Phantom by HTML5 UP
 	html5up.net | @ajlkn
@@ -2834,7 +2812,7 @@ input, select, textarea {
 /* Header */
 
 	#header {
-		padding: 4em 1em 2em 0 ;
+		padding: 5.5em 1em 2em 0 ;
 	}
 
 		#header .logo {
@@ -2861,8 +2839,8 @@ input, select, textarea {
 
 				#header .logo .symbol img {
 					display: block;
-					width: 3.5em;
-					height: 3.5em;
+					width: 6em;
+					height: 6em;
 				}
 
 		#header nav {
@@ -3400,4 +3378,60 @@ input, select, textarea {
 	.accordion button {
 		width: 100%;
 		text-align: left;
+	}
+
+/* custom css */
+
+.btn {
+	box-shadow: none;
+}
+
+canvas {
+	display: block;
+	position: absolute;
+	z-index: -10;
+	image-rendering: crisp-edges;
+}
+
+.label {
+	display: inline-block; 
+}
+
+.command-name {
+	color: #00f4a4;
+	font-weight: bold;
+	display: inline-block; 
+	width: 1.5em;
+}
+
+.keyword {
+	color: #00f4a4;
+	font-weight: bold;
+}
+
+[contenteditable]:focus { outline: 0px solid transparent; }
+*[contenteditable="true"]{display: inline-block;}
+
+/* Pace.js theme */
+	.pace {
+	  -webkit-pointer-events: none;
+	  pointer-events: none;
+
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  user-select: none;
+	}
+
+	.pace-inactive {
+	  display: none;
+	}
+
+	.pace .pace-progress {
+	  background: #0af49c;
+	  position: fixed;
+	  z-index: 2000;
+	  top: 0;
+	  right: 100%;
+	  width: 100%;
+	  height: 2px;
 	}

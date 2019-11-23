@@ -3,7 +3,7 @@
 	<head>
 		<!-- Theme - Phantom by HTML5 UP  -->
 		<!-- Title -->
-		<title>Interpreter - Docs</title>
+		<title data-lang="docs.siteTitle">Interpreter - Docs</title>
 		
 		<!-- Meta Tags -->
 		<meta charset="utf-8" />
@@ -16,7 +16,7 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		
-		<!-- <link rel="shortcut icon" href="images/favicon.ico" /> -->
+		<link rel="shortcut icon" href="assets/images/favicon.ico" />
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
@@ -30,7 +30,7 @@
 				<div class="inner">
 					<!-- Logo -->
 					<a href="/" class="logo" id="logo-id">
-						<span class="symbol" id="logo"><img src="assets/images/logo.jpg" alt="" /></span><span class="title">documentation</span>
+						<span class="symbol" id="logo"><img src="assets/images/logo.png" alt="" /></span><span class="title" data-lang="docs.title">documentation</span>
 					</a>
 				</div>
 
@@ -45,37 +45,62 @@
 			<nav id="menu">
 				<h2>Menu</h2>
 				<ul>
-					<li><a href="/">Home</a></li>
-					<li><a href="#">Documentation</a></li>
-					<li><a href="contact">Contact</a></li>
+					<li><a href="/" data-lang="index.nav">Home</a></li>
+					<li><a href="docs" data-lang="docs.nav">Documentation</a></li>
+					<li><a href="contact" data-lang="contact.nav">Contact</a></li>
 				</ul>
 			</nav>
 
 			<!-- Main -->
 			<div id="main">
 				<div id="main-doc" class="inner">
+					<section id="general-doc">
+						<h3 data-lang="docs.general.header"></h3>
+						<hr>
+						<p data-lang="docs.general.content"></p>
+					</section>
 					
+					<section id="memory-doc">
+						<h3 data-lang="docs.memory.header"></h3>
+						<hr>
+						<p data-lang="docs.memory.content"></p>
+					</section>
+					
+					<section id="rules-doc">
+						<h3 data-lang="docs.rules.header"></h3>
+						<hr>
+						<p data-lang="docs.rules.content"></p>
+					</section>
+					
+					<section id="statusRegister-doc">
+						<h3 data-lang="docs.statusRegister.header"></h3>
+						<hr>
+						<p data-lang="docs.statusRegister.content"></p>
+					</section>
+					
+					<section id="commands-doc">
+						<h3 data-lang="docs.commands.header"></h3>
+						<hr>
+						<div id="commands-content"></div>
+					</section>
+						
 				</div>	
 			</div>
 
+			<!-- Back to top -->
+			<a href="#" id="back-to-top">&uarr;</a>
+			
 			<!-- Footer -->
 			<footer id="footer">
-					<div class="inner">
-						<ul class="copyright">
-							<li>&copy; Copyright 2019</li><li><a href="contact">Contact</a></li>
-						</ul>
-					</div>
-				</footer>
+				<div class="inner">
+					<ul class="copyright">
+						<li>&copy; Copyright 2019</li><li><a href="contact" data-lang="contact.navaa">Contact</a></li>
+					</ul>
+				</div>
+			</footer>
 		</div>
 
 		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>		
-		<script src="assets/js/main.js"></script>
-		<script src="assets/js/docs.js"></script>
-		<script src="assets/js/anim.js"></script>
+		<script data-main="assets/js/app" src="assets/js/require.js"></script>
 	</body>
 </html>

@@ -1,11 +1,11 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
-canvas.style.width = window.innerWidth + "px";
+canvas.style.width = window.innerWidth * 0.9 + "px";
 canvas.style.height = window.innerHeight + "px";
 
 var scale = window.devicePixelRatio; 
-canvas.width = window.innerWidth * scale;
+canvas.width = window.innerWidth * 0.9 * scale;
 canvas.height = window.innerHeight * scale;
 
 ctx.scale(scale, scale);
@@ -31,16 +31,25 @@ function getPosCenter( el ) {
 }
 
 var particles = [];
+var animating = 0;
 
 $("#logo-id").on('mouseenter', function() {
+    if(animating) return;
     logo_pos = getPosCenter(document.getElementById("logo-id"));
-    for(var i = 3; i <= 20; i++)
+    for(var i = 3; i <= 10; i++) {
         particles.push({
-            x: logo_pos.x + Math.pow(-1, i) * 170,
+            x: logo_pos.x - 170,
             y: logo_pos.y,
-            speed: Math.pow(-1, i) / i / i,
+            speed: -1 * i * i / 5,
             char: String.fromCharCode(0x2200 + Math.random() * (0x22FF - 0x2200 + 1))});
-    requestAnimationFrame(draw); 
+        particles.push({
+            x: logo_pos.x + 170,
+            y: logo_pos.y,
+            speed: i * i / 5,
+            char: String.fromCharCode(0x2200 + Math.random() * (0x22FF - 0x2200 + 1))});
+        }
+    animating = 1;
+    requestAnimationFrame(draw);
 });
 
 
@@ -52,12 +61,13 @@ function draw() {
         if(particle.x < 0 || particle.x > ctx.canvas.width) offscreen++;
         else {
             particle.x += particle.speed;
-            particle.speed *= 1.2;
+            particle.speed *= 1.05;
+            ctx.globalAlpha = Math.min(1, Math.abs(50 / particle.speed));
             if(Math.abs(particle.x - logo_pos.x) > 200) ctx.fillText(particle.char, Math.round(particle.x), Math.round(particle.y)); 
             particles[id] = particle;
         }
     });
     
     if(offscreen < particles.length) requestAnimationFrame(draw);
-    else particles = [];
+    else particles = [], animating = 0;
 }
