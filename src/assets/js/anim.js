@@ -13,9 +13,9 @@ var particles = [];
 var animating_logo, animating_button = 0;
 
 function prepareCanvas() {
-    canvas.style.width = window.innerWidth * 0.9 + "px";
+    canvas.style.width = window.innerWidth * 0.98 + "px";
     canvas.style.height = window.innerHeight + "px";
-    canvas.width = window.innerWidth * 0.9 * scale;
+    canvas.width = window.innerWidth * 0.98 * scale;
     canvas.height = window.innerHeight * scale;
     ctx.scale(scale, scale);
     ctx.font = "25px Arial";
