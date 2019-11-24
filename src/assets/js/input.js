@@ -112,6 +112,7 @@ function formatInput(content) {
 //place example program
 $("#input").html(formatInput(lang.index.exampleProgram));
 refreshTooltip();
+$('#run').fadeIn();
 
 $("#input").on('blur', function() {
     var content = $(this).html().replace(/<[^>]*>|⭾|\s|&nbsp;/g, '');
