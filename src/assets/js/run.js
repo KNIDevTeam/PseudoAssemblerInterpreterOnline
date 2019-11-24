@@ -2,7 +2,7 @@ $('#run').on('click', function() {
     $('#run').css('display', 'none');
     $('#input').css('display', 'none');
 
-    var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '');
+    var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '');
     var results = emulate(pure_text);
 
     var registry_html = `<h3>Registry</h3>

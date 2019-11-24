@@ -10,7 +10,7 @@ var keyword_regexp = new RegExp(`(^| )(${keywords}) `, 'gm');
 var marker_and_html = /<[^>]*>|⮓/g;
 var html_regexp = /<[^>]*>/g
 
-var placeholder = 1;
+var placeholder = 0;
 
 //format input text
 
@@ -25,14 +25,20 @@ $("#input").on('keyup paste contextmenu', function(e) {
     if(placeholder) $(this).html(''), placeholder = 0;
 
     var saved_sel = rangeSelectionSaveRestore.saveSelection();
-    var content = $(this).html();
+    $(this).html(formatInput($(this).html()));
+    rangeSelectionSaveRestore.restoreSelection(saved_sel);
+	
+	refreshTooltip();
+	$('#run').fadeIn();
+});
 
+function formatInput(content) {
     //replace selection markers
     var markers = content.match(/<span id="selectionBoundary_[0-9]+_[0-9]+" style="line-height: 0; display: none;">⭾<\/span>/g);
     content = content.replace(/⭾/g, '⮓');
 
     //shorten whitespace
-    content = content.replace(/(\s|&nbsp;)+/g, ' ');
+    content = content.replace(/([^\S\n]|&nbsp;)+/g, ' ');
 
     //make newlines consistent
     content = content.replace(/<br>|((?!^)<div>)|<p>/g, '\n').replace(/<div>|<\/div>|<\/p>/g, '').replace(/\n{2}/g, '\n');
@@ -46,7 +52,8 @@ $("#input").on('keyup paste contextmenu', function(e) {
             return (element != null && element != "");
         });
 
-        if(words[0]) return Math.max(accumulator, words[0].length);
+        //ignore comments
+        if(words[0] && words[0][0] != '#') return Math.max(accumulator, words[0].length);
         else return accumulator;
     }, 0) / 2 + 0.5;
     longest_label = Math.round(longest_label * 100) / 100;
@@ -61,7 +68,11 @@ $("#input").on('keyup paste contextmenu', function(e) {
             return (element != null && element != "");
         });
 
-        if(!temp.length) return;
+        if(!temp.length ) return;
+
+        //ignore comments
+        if(temp[0].length >= 1 && temp[0][0] == '#') return;
+
         if(temp[0].length && !temp[0].match(new RegExp(`^(${keywords})$`, 'g'))) {
             words.splice(0, 1, `<span class="label" style="width: ${longest_label}em">${words[0]}</span>`);
         } else words.splice(0, 0, `<span class="label" style="width: ${longest_label}em"> </span>`);
@@ -79,20 +90,27 @@ $("#input").on('keyup paste contextmenu', function(e) {
         return str;
     });
 
+    //find comments
+    var comments = content.match(/^#.*$/gm);
+    //purge html and insert new formatting
+    if(comments) comments.forEach(function(comment) {
+        var formatted = `<span class="comment">${comment.replace(html_regexp, '')}</span>`;
+        content = content.replace(new RegExp(comment), formatted);
+    });
+
     //restore markers
-    markers.forEach(function(span) {
+    if(markers) markers.forEach(function(span) {
         content = content.replace(/⮓/, span);
     });
 
     //restore newlines
     content = content.replace(/\n/g, '<br>');
+    
+    return content;
+}
 
-    $(this).html(content);
-    rangeSelectionSaveRestore.restoreSelection(saved_sel);
-	
-	refreshTooltip();
-	$('#run').fadeIn();
-});
+//place example program
+$("#input").html(formatInput(lang.index.exampleProgram));
 
 $("#input").on('blur', function() {
     var content = $(this).html().replace(/<[^>]*>|⭾|\s|&nbsp;/g, '');

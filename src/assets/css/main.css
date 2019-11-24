@@ -3409,6 +3409,10 @@ canvas {
 	font-weight: bold;
 }
 
+.comment {
+	color: #999999;
+}
+
 [contenteditable]:focus { outline: 0px solid transparent; }
 *[contenteditable="true"]{display: inline-block;}
 

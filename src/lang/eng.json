@@ -4,7 +4,8 @@
         "title": "Interpreter",
         "nav": "Home",
         "run": "RUN",
-		"typeSth": "Type something here..."
+		"typeSth": "Type something here...",
+		"exampleProgram": "#This is an example program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Clear the first register\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
     },
     "docs": {
         "siteTitle": "Interpreter - Docs",
