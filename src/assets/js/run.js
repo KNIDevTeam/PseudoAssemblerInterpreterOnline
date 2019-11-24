@@ -18,7 +18,7 @@ $('#run').on('click', function() {
             ${results.registry.reduce(function(accumulator, val, ind) {
                 return accumulator +
                 `<tr>
-                    <td>${ind}</td>
+                    <td><span class="number">${ind}</span></td>
                     <td>${val ? `<b>${val}</b>` : 'undefined'}</td>
                 </tr>`
             }, '') + 
@@ -44,7 +44,7 @@ $('#run').on('click', function() {
             ${results.memory.reduce(function(accumulator, val, ind) {
                 return accumulator +
                 `<tr>
-                    <td>${ind*4}</td>
+                    <td><span class="number">${ind*4}</span></td>
                     <td>${results.variables[ind] ? `<span class="keyword">${results.variables[ind]}</span>` : 'undefined'}</td>
                     <td>${val ? `<b>${val}</b>` : 'undefined'}</td>
                 </tr>`

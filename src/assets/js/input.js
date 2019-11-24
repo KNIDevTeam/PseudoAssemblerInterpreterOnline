@@ -6,7 +6,7 @@ $('.editable').each(function() {
 
 var keywords = 'DS|DC|A|AR|S|SR|M|MR|D|DR|C|CR|L|LR|ST|LA|J|JN|JZ|JP';
 
-var keyword_regexp = new RegExp(`(^| )(${keywords}) `, 'gm');
+var keyword_regexp = new RegExp(`(^| |⮓)(${keywords}) `, 'gm');
 var marker_and_html = /<[^>]*>|⮓/g;
 var html_regexp = /<[^>]*>/g
 
