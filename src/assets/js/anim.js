@@ -45,14 +45,18 @@ function spawnCharacters(el) {
     var el_pos = getPos(document.getElementById(el));
     for(var i = 3; i <= 10; i++) {
         particles.push({
+            spawner: el,
             origin: el_pos,
+            initScroll: window.scrollY,
             targetDist: el_pos.w * 1.2,
             x: el_pos.x - el_pos.w * 0.9,
             y: el_pos.y,
             speed: -1 * i * i / 5,
             char: String.fromCharCode(0x2200 + Math.random() * (0x22FF - 0x2200 + 1))});
         particles.push({
+            spawner: el,
             origin: el_pos,
+            initScroll: window.scrollY,
             targetDist: el_pos.w * 1.2,
             x: el_pos.x + el_pos.w * 0.9,
             y: el_pos.y,
@@ -71,7 +75,8 @@ function draw() {
             particle.x += particle.speed;
             particle.speed *= 1.05;
             ctx.globalAlpha = Math.min(1, Math.abs(50 / particle.speed));
-            if(Math.abs(particle.x - particle.origin.x) > particle.targetDist) ctx.fillText(particle.char, Math.round(particle.x), Math.round(particle.y)); 
+            if(Math.abs(particle.x - particle.origin.x) > particle.targetDist) 
+                ctx.fillText(particle.char, Math.round(particle.x), Math.round(particle.y - (particle.spawner == "logo-id" ? window.scrollY - particle.initScroll : 0))); 
             particles[id] = particle;
         }
     });

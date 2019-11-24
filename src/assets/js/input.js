@@ -32,6 +32,10 @@ $("#input").on('keyup paste contextmenu', function(e) {
 	$('#run').fadeIn();
 });
 
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function formatInput(content) {
     //replace selection markers
     var markers = content.match(/<span id="selectionBoundary_[0-9]+_[0-9]+" style="line-height: 0; display: none;">⭾<\/span>/g);
@@ -45,6 +49,9 @@ function formatInput(content) {
 
     //purge html tags
     content = content.replace(html_regexp, '');
+
+    //remove whitespace from beginning of lines
+    content = content.replace(/^ +/gm, '');
 	
     //check length of labels
     var longest_label = content.replace(marker_and_html, '').split('\n').reduce(function(accumulator, current) {
@@ -101,7 +108,7 @@ function formatInput(content) {
     //purge html and insert new formatting
     if(comments) comments.forEach(function(comment) {
         var formatted = `<span class="comment">${comment.replace(html_regexp, '')}</span>`;
-        content = content.replace(new RegExp(`^${comment}$`, 'm'), formatted);
+        content = content.replace(new RegExp(`^${escapeRegExp(comment)}$`, 'm'), formatted);
     });
 
     //restore markers
