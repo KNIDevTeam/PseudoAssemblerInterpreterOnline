@@ -90,12 +90,18 @@ function formatInput(content) {
         return str;
     });
 
+    //highlight values
+    content = content.replace(/\([0-9]*⮓?[0-9]*\)/g, function(str) {
+        str = str.substring(1, str.length - 1);
+        return `(<span class="number">${str}</span>)`;
+    });
+
     //find comments
     var comments = content.match(/^#.*$/gm);
     //purge html and insert new formatting
     if(comments) comments.forEach(function(comment) {
         var formatted = `<span class="comment">${comment.replace(html_regexp, '')}</span>`;
-        content = content.replace(new RegExp(comment), formatted);
+        content = content.replace(new RegExp(`^${comment}$`, 'm'), formatted);
     });
 
     //restore markers

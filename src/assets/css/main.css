@@ -3388,10 +3388,13 @@ input, select, textarea {
 
 canvas {
 	display: block;
-	position: absolute;
-	z-index: -10;
+	position: fixed;
+	z-index: 10;
 	image-rendering: crisp-edges;
+	pointer-events:none;
 }
+
+/* formatting */
 
 .label {
 	display: inline-block; 
@@ -3412,6 +3415,11 @@ canvas {
 .comment {
 	color: #999999;
 }
+
+.number {
+	text-shadow: 1px 1px 2px #00f4a4
+}
+
 
 [contenteditable]:focus { outline: 0px solid transparent; }
 *[contenteditable="true"]{display: inline-block;}
