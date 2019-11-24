@@ -3439,3 +3439,10 @@ canvas {
 	  width: 100%;
 	  height: 2px;
 	}
+	
+/* commands-doc fix with accordion */
+	@media only screen and (max-width: 1280px) {
+	  #commands-content {
+		padding-bottom: 150px;
+	  }
+	}
