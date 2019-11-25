@@ -3425,6 +3425,13 @@ canvas {
 *[contenteditable="true"]{display: inline-block;}
 
 /* Pace.js theme */
+	body {
+		display: none;
+	}
+	.pace-running, .pace-done {
+		display: block;
+	}
+
 	.pace {
 	  -webkit-pointer-events: none;
 	  pointer-events: none;
