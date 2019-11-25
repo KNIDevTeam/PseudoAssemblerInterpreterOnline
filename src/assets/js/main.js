@@ -9,6 +9,25 @@
 	window.location.href = "errors/IE.html";
 }*/
 	
+	
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#000"
+    },
+    "button": {
+      "background": "#f1d600"
+    }
+  },
+  "theme": "classic",
+  "position": "bottom-right",
+  "content": {
+    "message": "Ta strona używa ciasteczek w celu polepszenia odczuć związanych z jej użytkowaniem",
+    "dismiss": "OK!",
+    "link": "Czytaj więcej",
+    "href": "https://wszystkoociasteczkach.pl/polityka-cookies/"
+  }
+});
 
 (function($) {
 
