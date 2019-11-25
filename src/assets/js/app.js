@@ -10,10 +10,11 @@ requirejs.config({
 	},
 });
 
-require(["pace", "jquery", "bootstrap"], (pace, $) => {
+require(["pace"], (pace) => {
 	pace.start();
-	window.$ = $;
-	require(["browser", "rangy"], () => {
-		require(["assets/js/language.js",  "assets/js/main.js", "assets/js/backToTop.js", "assets/js/anim.js", "assets/js/input.js", "assets/js/run.js"]);
+	require(["jquery", "bootstrap"], () => {
+		require(["browser", "rangy", "assets/js/language.js", "assets/js/backToTop.js"], () => {
+			require(["assets/js/main.js", "assets/js/anim.js", "assets/js/input.js", "assets/js/run.js"]);
+		});
 	});
 });
