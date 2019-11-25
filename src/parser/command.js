@@ -1,10 +1,10 @@
 function Command()
 {
-	function execute(state)
+	this.execute = function(state)
 	{
 		throw "FunctionNotImplemented";
 	}
-	function translate_address(labels_map_memory, labels_map_program, registers)
+	this.translate_address = function(labels_map_memory, labels_map_program, registers)
 	{
 
 	}
@@ -13,11 +13,11 @@ function Command()
 function Command_Arthmetic()
 {
 	Command.call(this)
-	function make_calculation(a, b)
+	this.make_calculation = function(a, b)
 	{
 		throw "FunctionNotImplemented";
 	}
-	function execute(state)
+	this.execute = function(state)
 	{
 		if(type = "memory") state.registers[this.register_left] = this.make_calculation(state.registers[this.register_left], state.memory[this.address]);
 		if(type = "register") state.registers[this.register_left] = this.make_calculation(state.registers[this.register_left], state.registers[this.register_right]);
@@ -40,7 +40,7 @@ function Command_Memory(register_left, shift, base_register)
 	this.register_left = register_left;
 	this.shift = shift;
 	this.base_register = base_register;
-	function translate_address(labels_map_memory, labels_map_program, registers)
+	this.translate_address = function(labels_map_memory, labels_map_program, registers)
 	{
 		var base = 0;
 		if(this.base_register == -1) base += registers[14];
