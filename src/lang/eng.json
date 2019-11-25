@@ -60,6 +60,9 @@
     "contact": {
         "siteTitle": "Interpreter - Contact",
         "title": "Contact & Credits",
-        "nav": "Contact"
+        "nav": "Contact",
+		"contact": "Contact",
+		"authors": "Authors",
+		"repo": "GitHub Repository"
     }
 }
