@@ -3527,3 +3527,10 @@ canvas {
 		padding-bottom: 150px;
 	  }
 	}
+	
+/* authors fix  */
+	@media only screen and (max-width: 1280px) {
+	  #authors {
+		padding-bottom: 150px;
+	  }
+	}
