@@ -1,5 +1,5 @@
 # Pseudo Assembler Interpeter Online
-Online interpreter for pseudo assembler language.
+[Online interpreter and emulator for a pseudo assembler language.](https://pseudoassembler.online/)
 Made by students from Warsaw University of Technology - Faculty of Mathematics and Information Science.
 
 ## Status
