@@ -100,6 +100,8 @@ getLang();
 
 console.log(lang);
 
+//sleep(1000);
+
 setLang();
 
 $('#commands-content').html(getCommandsDoc());

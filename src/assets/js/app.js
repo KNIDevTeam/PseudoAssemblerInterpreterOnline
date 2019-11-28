@@ -6,7 +6,7 @@ requirejs.config({
 		'bootstrap': 'bootstrap.bundle.min',
 		'browser': 'browser.min',
 		'breakpoints': 'breakpoints.min',
-		'rangy': 'rangy',
+		'rangy': 'rangy.min',
 		'cookies': 'cookies.min'
 	},
 });

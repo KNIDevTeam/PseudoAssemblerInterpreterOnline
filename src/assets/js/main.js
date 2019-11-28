@@ -9,6 +9,10 @@
 	window.location.href = "errors/IE.html";
 }*/
 	
+window.Pace.on('done', () => {
+	$('#wrapper').addClass('animated fadeIn');
+});
+	
 window.cookieconsent.initialise({
   "palette": {
     "popup": {
