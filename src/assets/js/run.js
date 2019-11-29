@@ -1,23 +1,31 @@
 var current_state = 0;
+var states;
+var temp = {
+    registry: [0, 1, 2, 4, "🤔", -5, undefined, 00, 123, -0, 1, 1, undefined, 130, 140000000, 15],
+    status: "11",
+    memory: [0, 1, 2, 3, 4, 5, 2137, undefined, undefined, undefined, 1500, 100, 900, undefined, "hmm", "¯\\_(ツ)_/¯"],
+    variables: ["LOREM", "IPSUM", '', "DOLOR", "SIT", "AMET", '', '', '', "jp2"]
+};
 
 $('#prev').on('click', function() {
     current_state--;
     current_state = Math.min(states.length-1, Math.max(0, current_state));
     $('#results').html(formatData(states[current_state]));
+	checkVisibility();
 });
 
 $('#next').on('click', function() {
     current_state++;
     current_state = Math.min(states.length-1, Math.max(0, current_state));
     $('#results').html(formatData(states[current_state]));
+	checkVisibility();
 });
-
-var states;
 
 $('#run').on('click', function() {
     $('#run').css('display', 'none');
     $('#input').css('display', 'none');
-    $('#prev-next').css('display', 'block')
+    $('#prev-next').css('display', 'block');
+    $('#prev').css('display', 'none');
 
     var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '');
     states = emulate(pure_text);
@@ -87,6 +95,19 @@ function rnd(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function checkVisibility() {
+	if (current_state == 0) {
+		$('#prev').fadeOut(100);
+		$('#next').fadeIn(100);
+	} else if (current_state == states.length-1) {
+		$('#prev').fadeIn(100);
+		$('#next').fadeOut(100);
+	} else {
+		$('#prev').fadeIn(100);
+		$('#next').fadeIn(100);
+	}
+}
+
 //placeholder for generating states
 function emulate(text) {
     /* ... */
@@ -108,12 +129,4 @@ function emulate(text) {
     }
     console.log(temp);
     return states;
-    
 }
-
-var temp = {
-    registry: [0, 1, 2, 4, "🤔", -5, undefined, 00, 123, -0, 1, 1, undefined, 130, 140000000, 15],
-    status: "11",
-    memory: [0, 1, 2, 3, 4, 5, 2137, undefined, undefined, undefined, 1500, 100, 900, undefined, "hmm", "¯\\_(ツ)_/¯"],
-    variables: ["LOREM", "IPSUM", '', "DOLOR", "SIT", "AMET", '', '', '', "jp2"]
-};
