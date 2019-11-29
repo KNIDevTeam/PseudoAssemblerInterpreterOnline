@@ -52,7 +52,9 @@ function formatInput(content) {
 
     //remove whitespace from beginning of lines
     content = content.replace(/^ +/gm, '');
-	
+    
+    setCookie('input', content.replace(/⮓/g, ''), 5);
+
     //check length of labels
     var longest_label = content.replace(marker_and_html, '').split('\n').reduce(function(accumulator, current) {
         var words = current.split(' ').filter(function(element) {
@@ -122,8 +124,16 @@ function formatInput(content) {
     return content;
 }
 
+(() => {
+    cookie = getCookie('input');
+    if (cookie != '' && cookie != '\n' && cookie != ' ')
+        $("#input").html(formatInput(cookie));
+    else
+        $("#input").html(formatInput(lang.index.exampleProgram));
+})();
+
 //place example program
-$("#input").html(formatInput(lang.index.exampleProgram));
+//$("#input").html(formatInput(lang.index.exampleProgram));
 refreshTooltip();
 $('#run').fadeIn();
 
