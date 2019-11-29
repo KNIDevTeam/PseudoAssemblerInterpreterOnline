@@ -3364,8 +3364,8 @@ input, select, textarea {
 		opacity: 1;
 	}
 	
-/* Run */
-	#run{
+/* Buttons */
+	#run, #prev-next {
 		position: fixed;
 		bottom: 40px;
 		left: 50%;

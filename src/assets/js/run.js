@@ -1,10 +1,32 @@
+var current_state = 0;
+
+$('#prev').on('click', function() {
+    current_state--;
+    current_state = Math.min(states.length-1, Math.max(0, current_state));
+    $('#results').html(formatData(states[current_state]));
+});
+
+$('#next').on('click', function() {
+    current_state++;
+    current_state = Math.min(states.length-1, Math.max(0, current_state));
+    $('#results').html(formatData(states[current_state]));
+});
+
+var states;
+
 $('#run').on('click', function() {
     $('#run').css('display', 'none');
     $('#input').css('display', 'none');
+    $('#prev-next').css('display', 'block')
 
     var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '');
-    var results = emulate(pure_text);
+    states = emulate(pure_text);
 
+    current_state = Math.min(states.length-1, Math.max(0, current_state));
+    $('#results').html(formatData(states[current_state]));
+});
+
+function formatData(data) {
     var registry_html = `<h3>Registry</h3>
     <div class="table-wrapper">
         <table class="default">
@@ -15,7 +37,7 @@ $('#run').on('click', function() {
                 </tr>
             </thead>
             <tfoot>
-            ${results.registry.reduce(function(accumulator, val, ind) {
+            ${data.registry.reduce(function(accumulator, val, ind) {
                 return accumulator +
                 `<tr>
                     <td><span class="number">${ind}</span></td>
@@ -24,7 +46,7 @@ $('#run').on('click', function() {
             }, '') + 
             `<tr>
                 <td>STATUS</td>
-                <td><span class="keyword">${results.status}</span></td>
+                <td><span class="keyword">${data.status}</span></td>
             </tr>`}
             </tfoot>
         </table>
@@ -41,28 +63,52 @@ $('#run').on('click', function() {
                 </tr>
             </thead>
             <tfoot>
-            ${results.memory.reduce(function(accumulator, val, ind) {
+            ${data.memory.reduce(function(accumulator, val, ind) {
                 return accumulator +
                 `<tr>
                     <td><span class="number">${ind*4}</span></td>
-                    <td>${results.variables[ind] ? `<span class="keyword">${results.variables[ind]}</span>` : 'undefined'}</td>
+                    <td>${data.variables[ind] ? `<span class="keyword">${data.variables[ind]}</span>` : 'undefined'}</td>
                     <td>${val ? `<b>${val}</b>` : 'undefined'}</td>
                 </tr>`
             }, '')}
             </tfoot>
         </table>
     </div>`;
-    $('#results').html(
-        `<div class="row gtr-uniform">
-            <div class="col-3 col-12-small">${registry_html}</div>
-            <div class="col-9 col-12-small">${memory_html}</div>
-        </div>`
-    );
-});
 
+    return `<div class="row gtr-uniform">
+    <div class="col-3 col-12-small">${registry_html}</div>
+    <div class="col-9 col-12-small">${memory_html}</div>
+    </div>`;
+}
+
+function rnd(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+//placeholder for generating states
 function emulate(text) {
     /* ... */
-    return temp;
+    let states = [];
+    console.log(temp);
+    for(let s = 0; s < 10; s++) {
+        let random_temp = JSON.parse(JSON.stringify(temp));
+        let reg_edits = rnd(1, 10);
+        for(let i = 0; i < reg_edits; i++) {
+            let j = rnd(0, 15);
+            random_temp.registry[j] = rnd(0, 100);
+        }
+        let mem_edits = rnd(1, 10);
+        for(let i = 0; i < mem_edits; i++) {
+            let j = rnd(0, random_temp.memory.length-1);
+            random_temp.memory[j] = rnd(0, 100);
+        }
+        states.push(random_temp);
+    }
+    console.log(temp);
+    return states;
+    
 }
 
 var temp = {
