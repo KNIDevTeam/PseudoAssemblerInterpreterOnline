@@ -13,47 +13,59 @@
         "nav": "Documentation",
 		"general": {
 			"header": "General info",
-			"content": "Pseudo-assembler is a programming language of great power. Proficient usage of this tool is an art that very few ever possessed. We hope that the following documentation will allow you not only to master but also come to like pseudo-assembler. (it's possible – believe us!)"
+			"content": "Pseudoassembler is a programming language of great power. Proficient usage of this tool is an art that very few ever possessed. We hope that the following documentation will allow you not only to master but also come to like pseudoassembler (it's possible – believe us)!"
 		},
 		"memory": {
 			"header": "Memory addressing",
-			"content": "There are four ways of addressing memory in pseudo-assembler. Let us present all of them: <p></p> <ul><li><b>[label]</b> - The interpreter will work on the memory block assigned to the given label. If the label is associated with an array, it points to its first memory block.</li><li><b>[label]([register])</b> - The interpreter will work on the memory block whose address is equal to the sum of the address pointed at by the label and the address stored in the given register.</li><li><b>[memory address]</b> - The interpreter will work on the memory block with the given address. </li><li><b>[memory address]([register])</b> - The interpreter will work on the memory block whose address is equal to the sum of the given address and the address stored in the given register.</li></ul><p>All these ways are, ultimately, ways of achieving the same objective - accessing a memory block.</p><h4>Example</h4><p>Suppose we declared two arrays VEC1{1, 2} and VEC2{3, 4} (both size of 2 integers).<br>Conveniently, we also prepared registers - REG1{0} and REG2{4}. (Notice that 4 is the size of integer in bytes)<br>Now let's analyze the memory addresses utilised by our arrays:<pre>VEC1[0] = 1 | address: 0<br>VEC1[1] = 2 | address: 4<br>VEC2[0] = 3 | address: 8<br>VEC2[1] = 4 | address: 12</pre>The Following commands once executed will compute the sum of values stored in VEC1 and VEC2 and save it in REG1:<p></p><pre>A   1, VEC1<br>A   1, VEC1(2)<br>A   1, 8 <br>A   1, 8(2)</pre></p>"
+			"content": "There are four ways of addressing memory in pseudoassembler. Let us present all of them: <p></p> <ul><li><b>[label]</b> - The interpreter will work on the memory block assigned to the given label. If the label is associated with an array, it points to its first memory block.</li><li><b>[label]([register])</b> - The interpreter will work on the memory block whose address is equal to the sum of the address pointed at by the label and the address stored in the given register.</li><li><b>[memory address]</b> - The interpreter will work on the memory block with the given address. </li><li><b>[memory address]([register])</b> - The interpreter will work on the memory block whose address is equal to the sum of the given address and the address stored in the given register.</li></ul><p>All these ways are, ultimately, ways of achieving the same objective - accessing a memory block.</p><h4>Example</h4><p>Suppose we declared two arrays VEC1{1, 2} and VEC2{3, 4} (both size of 2 integers).<br>Conveniently, we also prepared registers - REG1{0} and REG2{4}. (Notice that 4 is the size of integer in bytes)<br>Now let's analyse the memory addresses utilised by our arrays:<pre>VEC1[0] = 1 | address: 0<br>VEC1[1] = 2 | address: 4<br>VEC2[0] = 3 | address: 8<br>VEC2[1] = 4 | address: 12</pre>The Following commands once executed will compute the sum of values stored in VEC1 and VEC2 and save it in REG1:<p></p><pre>A   1, VEC1<br>A   1, VEC1(2)<br>A   1, 8 <br>A   1, 8(2)</pre></p>"
 		},
 		"rules": {
-			"header": "P-ASM Rules",
-			"content": "Despite being the most powerful programming language on the planet Earth, pseudo-assembler has some minor limitations. You should be aware of them while writing your programs.<ul><li>It is forbidden to use any of the command words as a label.</li></ul>"
+			"header": "Pseudoassembler rules",
+			"content": "Despite being the most powerful programming language on the planet Earth, pseudoassembler has some minor limitations. You should be aware of them while writing your programs.<ul><li>It is forbidden to use any of the command words as a label.</li></ul>"
 		},
 		"statusRegister": {
 			"header": "Status Register",
-			"content": "The status register is a special register that stores the current state of the program. Depending on the sign of the result of the latest arithmetic operation (such as A, AR, S, SR, M, MR, D, DR, C, CR), the status register can store different values:<p></p><ul><li>00 \u2013 when the result is equal to 0, <\/li><li>01 \u2013 when the result is positive, <\/li><li>10 \u2013 when the result is negative, <\/li><li>11 \u2013 when some error has occurred (for example: division by 0).<\/li><\/ul><h4>Example<\/h4>Suppose we have three registers: REG1{2}, REG2{-2}, REG3{0}. Let us analyze the state of the status register after executing the following commands: <p></p><pre>AR\t1, 2\t# Status register = '00'<\/pre><pre>SR\t1, 2\t# Status register = '01' <\/pre><pre>MR\t1, 2\t# Status register = '10' <\/pre><pre>DR\t1, 3\t# Status register = '11' <\/pre>Should you have any doubts about these commands, don\u2019t hesitate to check the 'Commands' section of the documentation."
+			"content": "The status register is a special register that stores the current state of the program. Depending on the sign of the result of the latest arithmetic operation (such as A, AR, S, SR, M, MR, D, DR, C, CR), the status register can store different values:<p></p><ul><li>00 \u2013 when the result is equal to 0, <\/li><li>01 \u2013 when the result is positive, <\/li><li>10 \u2013 when the result is negative, <\/li><li>11 \u2013 when some error has occurred (for example: division by 0).<\/li><\/ul><h4>Example<\/h4>Suppose we have three registers: REG1{2}, REG2{-2}, REG3{0}. Let us analyse the state of the status register after executing the following commands: <p></p><pre>AR\t1, 2\t# Status register = '00'<\/pre><pre>SR\t1, 2\t# Status register = '01' <\/pre><pre>MR\t1, 2\t# Status register = '10' <\/pre><pre>DR\t1, 3\t# Status register = '11' <\/pre>Should you have any doubts about these commands, don\u2019t hesitate to check the 'Commands' section of the documentation."
 		},
 		"commands": {
 			"header": "Commands",
 			"content": {
-				"DC": {
-					"short": "Komenda inicjalizuje zmienną",
-					"long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod nulla dolor, viverra pulvinar turpis cursus ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam justo nunc, iaculis vel odio non, aliquam ullamcorper diam. Curabitur sit amet lectus mattis, aliquet magna in, consectetur sapien. Aenean vel bibendum tortor, vel porta massa. Sed lacus velit, semper sed dui id, aliquet faucibus ante.",
-					"params": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-					"examples": "Example ezzzz"
-				},
 				"DS": {
-					"short": "Komenda inicjalizuje zmienną",
-					"long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod nulla dolor, viverra pulvinar turpis cursus ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam justo nunc, iaculis vel odio non, aliquam ullamcorper diam. Curabitur sit amet lectus mattis, aliquet magna in, consectetur sapien. Aenean vel bibendum tortor, vel porta massa. Sed lacus velit, semper sed dui id, aliquet faucibus ante.",
-					"params": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-					"examples": "Example ezzzz"
+					"short": "Command declares new variable or array without initial value.",
+					"long": "“DS” command reserves required memory space for new variable or array and links provided label to that area of memory.",
+					"params": "<pre>[label] DS [variable type]\t\t# Declaring variable</pre><pre>[label] DS [size]*[variable type]\t# Declaring array</pre>Currently the only supported type of the variable is INTEGER.",
+					"examples": "Let's analyse a short example: <pre>VARIABLE1\tDC\tINTEGER</pre><pre>ARRAY1\t\tDC\t3*INTEGER</pre>After executing these commands, following objects will be created:<pre>VARIABLE1 = ?,  ARRAY1 = {?, ?, ?}. </pre><b>Note that all initial values of variables declared using “DS” are unknown (most likely random)! Under no circumstances should you work on them before assigning your own values.</b>"
+				},
+				"DC": {
+					"short": "Command declares new variable or array with initial value.",
+					"long": "“DC” command reserves required memory space for new variable or array and links provided label to that area of memory. Unlike “DS” command, declared variable has initial value which should specified within the code line.",
+					"params": "<pre>[label] DC [variable type]([value])\t\t# Declaring variable</pre><pre>[label] DC [size]*[variable type]([value])\t# Declaring array</pre>Currently the only supported type of the variable is INTEGER.",
+					"examples": "Let's analyse a short example: <pre>VARIABLE1\tDC\tINTEGER(7)</pre><pre>ARRAY1\t\tDC\t3*INTEGER(12)</pre>After executing these commands, following objects will be created:<pre>VARIABLE1 = 7,</pre><pre>ARRAY1 = {12, 12, 12}.</pre>"
 				},
 				"AR": {
-					"short": "Komenda dodaje do rejestru wartość zmiennej",
-					"long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod nulla dolor, viverra pulvinar turpis cursus ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam justo nunc, iaculis vel odio non, aliquam ullamcorper diam. Curabitur sit amet lectus mattis, aliquet magna in, consectetur sapien. Aenean vel bibendum tortor, vel porta massa. Sed lacus velit, semper sed dui id, aliquet faucibus ante.",
-					"params": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-					"examples": "Example ezzzz"
+					"short": "Command adds contents of registers.",
+					"long": "“AR” command adds content of two registers and store the result of this operation in target register.",
+					"params": "[label] AR [target register], [source register]",
+					"examples": "Suppose we have already prepared registers – REG1{2} and REG2{3}. Let's analyse the result of the following operation: <pre>\tAR\t1, 2\t# REG1 = 5 (REG1 := REG1 + REG2), REG2 = 3</pre>"
 				},
 				"SR": {
-					"short": "Komenda odejmuje od rejestru wartość zmiennej",
-					"long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod nulla dolor, viverra pulvinar turpis cursus ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam justo nunc, iaculis vel odio non, aliquam ullamcorper diam. Curabitur sit amet lectus mattis, aliquet magna in, consectetur sapien. Aenean vel bibendum tortor, vel porta massa. Sed lacus velit, semper sed dui id, aliquet faucibus ante.",
-					"params": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-					"examples": "Example ezzzz"
-				}
+					"short": "Command subtracts contents of registers.",
+					"long": "“SR” command subtracts content of two registers and store the result of this operation in target register.",
+					"params": "[label] SR [target register], [source register]",
+					"examples": "Suppose we have already prepared registers – REG1{-12} and REG2{4}. Let's analyse the result of the following operation: <pre>\tSR\t1, 2\t# REG1 = -16 (REG1 := REG1 - REG2), REG2 = 4</pre>"
+				},
+				"MR": {
+					"short": "Command multiplies contents of registers.",
+					"long": "“MR” command multiplies content of two registers and store the result of this operation in target register.",
+					"params": "[label] MR [target register], [source register]",
+					"examples": "Suppose we have already prepared registers – REG1{4} and REG2{6}. Let's analyse the result of the following operation: <pre>\tMR\t1, 2\t# REG1 = 24 (REG1 := REG1 * REG2), REG2 = 6</pre>"
+				},
+				"DR": {
+					"short": "Command divides contents of registers.",
+					"long": "“DR” command divides content of two registers and store the result of this operation in target register.",
+					"params": "[label] DR [target register], [source register]",
+					"examples": "Suppose we have already prepared registers – REG1{8} and REG2{2}. Let's analyse the result of the following operation: <pre>\tDR\t1, 2\t# REG1 = 4 (REG1 := REG1 / REG2), REG2 = 2</pre> <p>Let's analyse another example: REG3{2} and REG4{0}. The result of the following operation is: <pre>\tDR\t3, 4\t# REG3 = 2, REG4 = 0, Status register = '11'</pre></p>"
+				},
 			}
 		}
     },
