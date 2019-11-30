@@ -65,7 +65,7 @@
 					"long": "“DR” command divides content of two registers and store the result of this operation in target register.",
 					"params": "[label] DR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{8} and REG2{2}. Let's analyse the result of the following operation: <pre>\tDR\t1, 2\t# REG1 = 4 (REG1 := REG1 / REG2), REG2 = 2</pre> <p>Let's analyse another example: REG3{2} and REG4{0}. The result of the following operation is: <pre>\tDR\t3, 4\t# REG3 = 2, REG4 = 0, Status register = '11'</pre></p>"
-				},
+				}
 			}
 		}
     },
