@@ -43,52 +43,64 @@
 					"examples": "Let's analyse a short example: <pre>VARIABLE1\tDC\tINTEGER(7)</pre><pre>ARRAY1\t\tDC\t3*INTEGER(12)</pre>After executing these commands, following objects will be created:<pre>VARIABLE1 = 7,</pre><pre>ARRAY1 = {12, 12, 12}.</pre>"
 				},
 				"AR": {
-					"short": "Command adds contents of registers.",
+					"short": "Command adds content of registers.",
 					"long": "“AR” command adds content of two registers and store the result of this operation in target register.",
 					"params": "[label] AR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{2} and REG2{3}. Let's analyse the result of the following operation: <pre>\tAR\t1, 2\t# REG1 = 5 (REG1 := REG1 + REG2), REG2 = 3</pre>"
 				},
 				"A": {
-					"short": "Command adds contents of register and memory block.",
-					"long": "“A” command adds contents of register and memory block and store the result of this operation in target register.",
+					"short": "Command adds content of register and memory block.",
+					"long": "“A” command adds content of register and memory block and store the result of this operation in target register.",
 					"params": "[label] A [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{-1}. Now let's analyse the result of executing the following code: <pre>\tA\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"SR": {
-					"short": "Command subtracts contents of registers.",
+					"short": "Command subtracts content of registers.",
 					"long": "“SR” command subtracts content of two registers and store the result of this operation in target register.",
 					"params": "[label] SR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{-12} and REG2{4}. Let's analyse the result of the following operation: <pre>\tSR\t1, 2\t# REG1 = -16 (REG1 := REG1 - REG2), REG2 = 4</pre>"
 				},
 				"S": {
-					"short": "Command subtracts contents of register and memory block.",
-					"long": "“S” command subtracts contents of register and memory block and store the result of this operation in target register.",
+					"short": "Command subtracts content of register and memory block.",
+					"long": "“S” command subtracts content of register and memory block and store the result of this operation in target register.",
 					"params": "[label] S [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{14} and prepared register REG1{3}. Now let's analyse the result of executing the following code: <pre>\tS\t1, VAR\t# REG1 = 11</pre>"
 				},
 				"MR": {
-					"short": "Command multiplies contents of registers.",
+					"short": "Command multiplies content of registers.",
 					"long": "“MR” command multiplies content of two registers and store the result of this operation in target register.",
 					"params": "[label] MR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{4} and REG2{6}. Let's analyse the result of the following operation: <pre>\tMR\t1, 2\t# REG1 = 24 (REG1 := REG1 * REG2), REG2 = 6</pre>"
 				},
 				"M": {
-					"short": "Command multiplies contents of register and memory block.",
-					"long": "“M” command multiplies contents of register and memory block and store the result of this operation in target register.",
+					"short": "Command multiplies content of register and memory block.",
+					"long": "“M” command multiplies content of register and memory block and store the result of this operation in target register.",
 					"params": "[label] M [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{8}. Now let's analyse the result of executing the following code: <pre>\tM\t1, VAR\t# REG1 = 16</pre>"
 				},
 				"DR": {
-					"short": "Command divides contents of registers.",
+					"short": "Command divides content of registers.",
 					"long": "“DR” command divides content of two registers and store the result of this operation in target register.",
 					"params": "[label] DR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{8} and REG2{2}. Let's analyse the result of the following operation: <pre>\tDR\t1, 2\t# REG1 = 4 (REG1 := REG1 / REG2), REG2 = 2</pre> <p>Let's analyse another example: REG3{2} and REG4{0}. The result of the following operation is: <pre>\tDR\t3, 4\t# REG3 = 2, REG4 = 0, Status register = '11'</pre></p>"
 				},
 				"D": {
-					"short": "Command divides contents of register and memory block.",
-					"long": "“D” command divides contents of register and memory block and store the result of this operation in target register.",
+					"short": "Command divides content of register and memory block.",
+					"long": "“D” command divides content of register and memory block and store the result of this operation in target register.",
 					"params": "[label] D [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{3}. Now let's analyse the result of executing the following code: <pre>\tD\t1, VAR\t# REG1 = 1</pre>"
+				},
+				"C": {
+					"short": "Command compares content of register and memory block.",
+					"long": "“C” command compares content of register and memory block by subtracting content of register and content of memory block. Depending on the sign of the result of this subtraction, status register is changed. content of register and memory block won’t change.",
+					"params": "[label] C [register], [memory block] <p> Note that you can choose from four different ways of addressing using [memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{-2}. Now let's analyse the result of executing the following code: <pre>\tC\t1, VAR\t# Status register = '00'</pre>"
+				},
+				"CR": {
+					"short": "Command compares content of two registers.",
+					"long": "“CR” command compares content of two registers by subtracting content of first register and content of second register. Depending on the sign of the result of this subtraction, status register is changed. content of both registers won’t change.",
+					"params": "[label] CR [first register], [second register]",
+					"examples": "Suppose we have already prepared registers – REG1{2} and REG2{3}. Let’s analyse the result of following operation: <pre>\tCR\t1, 2\t# Status register = '10'</pre>"
 				}
 			}
 		}
