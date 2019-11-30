@@ -84,8 +84,8 @@ function formatData(data) {
     </div>`;
 
     return `<div class="row gtr-uniform">
-    <div class="col-3 col-12-small">${registry_html}</div>
-    <div class="col-9 col-12-small">${memory_html}</div>
+    <div class="col-md-4" id="registers">${registry_html}</div>
+    <div class="col-md-8" id="memory">${memory_html}</div>
     </div>`;
 }
 

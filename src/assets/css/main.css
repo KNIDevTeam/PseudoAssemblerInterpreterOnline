@@ -3544,3 +3544,10 @@ canvas {
 		padding-bottom: 150px;
 	  }
 	}
+	
+/* result fix  */
+	@media only screen and (max-width: 1280px) {
+	  #memory {
+		padding-bottom: 150px;
+	  }
+	}
