@@ -3,65 +3,42 @@ function Command()
 	this.execute = function(state)
 	{
 		throw "FunctionNotImplemented";
-	}
-	this.translate_address = function(labels_map_memory, labels_map_program, registers)
+	};
+	this.translate_address = function(state)
 	{
 
-	}
-}
-
-function Command_Arthmetic()
-{
-	Command.call(this)
-	this.make_calculation = function(a, b)
-	{
-		throw "FunctionNotImplemented";
-	}
-	this.execute = function(state)
-	{
-		if(type = "memory") state.registers[this.register_left] = this.make_calculation(state.registers[this.register_left], state.memory[this.address]);
-		if(type = "register") state.registers[this.register_left] = this.make_calculation(state.registers[this.register_left], state.registers[this.register_right]);
-		state.sign = Math.sign(state.registers[this.register_left]);
-		return state;
-	}
-}
-
-
-
-function Command_Arthmetic_Memory(register_left, shift, base_register)
-{
-	Command_Arthmetic.call(this);
-	Command_Memory.call(this, register_left, shift, base_register)
-	this.type = "memory";
+	};
 }
 
 function Command_Memory(register_left, shift, base_register)
 {
-	this.register_left = register_left;
+	this.register_left = parseInt(register_left);
 	this.shift = shift;
-	this.base_register = base_register;
-	this.translate_address = function(labels_map_memory, labels_map_program, registers)
+	this.base_register = parseInt(base_register);
+	this.translate_address = function(state)
 	{
-		var base = 0;
-		if(this.base_register == -1) base += registers[14];
-		if(registers[base_register] !== undefined) base += registers[base_register];
-		var pattern = /[0-9]*/;
-		if(pattern.test(shift)) this.address = parseInt(shift);
-		else if(registers[shift] !== undefined) this.address = parseInt(shift);
+		let base = 0;
+		if(this.base_register === -1) base += state.registers[14];
+		if(state.registers[this.base_register] !== undefined) base += state.registers[this.base_register];
+		let pattern = /^[0-9]*$/;
+		if(pattern.test(this.shift))
+		{
+			base += parseInt(this.shift);
+		}
+		else if(state.memory_labels[this.shift] !== undefined)
+		{
+			base += state.memory_labels[this.shift];
+			console.log("state.mem_lbls[this.shift]: ", state.memory_labels[this.shift]);
+		}
 		else throw "WrongShiftException";
-	}
-}
-
-function Command_Arthmetic_Registers(register_left, register_right)
-{
-	Command_Arthmetic.call(this);
-	Command_Register.call(this, register_left, register_right);
-	this.type = "register";
+		this.address = base;
+		console.log("this.address: ", this.address, "this.shift: ", this.shift);
+	};
 }
 
 function Command_Register(register_left, register_right)
 {
-	this.register_left = register_left;
-	this.register_right = register_right;
+	this.register_left = parseInt(register_left);
+	this.register_right = parseInt(register_right);
 }
 

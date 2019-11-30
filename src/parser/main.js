@@ -1,38 +1,71 @@
-var add_register_command_factory = new Factory_Registers("AR", Command_Add_Registers);
-var subtract_register_command_factory = new Factory_Registers("SR", Command_Subtract_Registers);
-var multiply_register_command_factory = new Factory_Registers("MR", Command_Multiply_Registers);
-var divide_register_command_factory = new Factory_Registers("DR", Command_Divide_Registers);
-var add_memory_command_factory = new Factory_Memory("A", Command_Add_Memory);
-var subtract_memory_command_factory = new Factory_Memory("S", Command_Subtract_Memory);
-var multiply_memory_command_factory = new Factory_Memory("M", Command_Multiply_Memory);
-var divide_memory_command_factory = new Factory_Memory("D", Command_Divide_Memory);
-var store_command_factory = new Factory_Memory("ST", Command_Store);
-var load_command_factory = new Factory_Memory("L", Command_Load);
-var load_address_command_factory = new Factory_Memory("LA", Command_Load_Address);
-var load_register_command_factory = new Factory_Registers("DR", Command_Load_Register);
-var jump_positive_command_factory = new Factory_Jump("JP", Command_Jump_Positive);
-var jump_command_factory = new Factory_Jump("J", Command_Jump);
-var jump_zero_command_factory = new Factory_Jump("JZ", Command_Jump_Zero);
-var jump_negative_command_factory = new Factory_Jump("JN", Command_Jump_Negative);
-var compare_registers_command_factory = new Factory_Registers("CR", Command_Compare_Register);
-var compare_memory_command_factory = new Factory_Memory("C", Command_Compare_Memory);
-var end = new End_Factory();
-compare_memory_command_factory.set_next(end);
-compare_registers_command_factory.set_next(compare_memory_command_factory);
-jump_negative_command_factory.set_next(compare_registers_command_factory);
-jump_zero_command_factory.set_next(jump_negative_command_factory);
-jump_command_factory.set_next(jump_zero_command_factory);
-jump_positive_command_factory.set_next(jump_command_factory);
-load_register_command_factory.set_next(jump_positive_command_factory);
-load_address_command_factory.set_next(load_register_command_factory);
-load_command_factory.set_next(load_address_command_factory);
-store_command_factory.set_next(load_command_factory);
-divide_memory_command_factory.set_next(store_command_factory);
-multiply_memory_command_factory.set_next(divide_memory_command_factory);
-subtract_memory_command_factory.set_next(multiply_memory_command_factory);
-add_memory_command_factory.set_next(subtract_memory_command_factory);
-divide_register_command_factory.set_next(add_memory_command_factory);
-multiply_register_command_factory.set_next(divide_register_command_factory);
-subtract_register_command_factory.set_next(multiply_register_command_factory);
-add_register_command_factory.set_next(subtract_register_command_factory);
-
+function main_parse(lines)
+{
+	function State()
+	{
+		this.registers = [];
+		for(let i = 0; i < 16; i++) this.registers[i] = 0;
+		this.memory = [];
+		this.state = 0;
+		this.line = 0;
+		this.memory_labels = Object();
+		this.lbls = Object();
+	}
+	let program = [];
+	let factories = [];
+	let stat = new State();
+	factories.push(new Factory_Allocation("DC", Command_Allocate_Value));
+	factories.push(new Factory_Allocation("DS", Command_Allocate_No_Value));
+	factories.push(new Factory_Registers("AR", Command_Add_Registers));
+	factories.push(new Factory_Registers("SR", Command_Subtract_Registers));
+	factories.push(new Factory_Registers("MR", Command_Multiply_Registers));
+	factories.push(new Factory_Registers("DR", Command_Divide_Registers));
+	factories.push(new Factory_Memory("A", Command_Add_Memory));
+	factories.push(new Factory_Memory("S", Command_Subtract_Memory));
+	factories.push(new Factory_Memory("M", Command_Multiply_Memory));
+	factories.push(new Factory_Memory("D", Command_Divide_Memory));
+	factories.push(new Factory_Memory("ST", Command_Store));
+	factories.push(new Factory_Memory("L", Command_Load));
+	factories.push(new Factory_Memory("LA", Command_Load_Address));
+	factories.push(new Factory_Registers("DR", Command_Load_Register));
+	factories.push(new Factory_Jump("JP", Command_Jump_Positive));
+	factories.push(new Factory_Jump("J", Command_Jump_Always));
+	factories.push(new Factory_Jump("JZ", Command_Jump_Zero));
+	factories.push(new Factory_Jump("JN", Command_Jump_Negative));
+	factories.push(new Factory_Registers("CR", Command_Compare_Register));
+	factories.push(new Factory_Memory("C", Command_Compare_Memory));
+	factories.push(new End_Factory());
+	for(let i = factories.length - 2; i >= 0; i--)
+	{
+		factories[i].set_next(factories[i+1]);
+	}
+	let skipped = 0;
+	for(let i = 0; i < lines.length; i++)
+	{
+		if(lines[i] === "")
+		{
+			skipped++;
+			continue;
+		}
+		else
+		{
+			let res = factories[0].build(lines[i]);
+			program.push(res[0]);
+			if(res[1] !== "")
+			{
+				stat.lbls[res[1]] = i - skipped;
+				stat.lbls[i-skipped] = res[1];
+			}
+		}
+	}
+	console.log(program);
+	let states = [];
+	states.push(stat);
+	for(stat.line = 0; stat.line < program.length; stat.line++)
+	{
+		program[stat.line].translate_address(stat);
+		stat = program[stat.line].execute(stat);
+		states.push(stat);
+		console.log("memory: ", stat.memory,"command: ", program[stat.line].constructor.name, "mem labels:", stat.memory_labels, "registers: ", stat.registers);
+	}
+	return states;
+}

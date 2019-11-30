@@ -1,7 +1,7 @@
 var current_state = 0;
 var states;
 var temp = {
-    registry: [0, 1, 2, 4, "🤔", -5, undefined, 00, 123, -0, 1, 1, undefined, 130, 140000000, 15],
+    registry: [0, 1, 2, 4, "🤔", -5, undefined, 0, 123, -0, 1, 1, undefined, 130, 140000000, 15],
     status: "11",
     memory: [0, 1, 2, 3, 4, 5, 2137, undefined, undefined, undefined, 1500, 100, 900, undefined, "hmm", "¯\\_(ツ)_/¯"],
     variables: ["LOREM", "IPSUM", '', "DOLOR", "SIT", "AMET", '', '', '', "jp2"]
@@ -113,20 +113,34 @@ function emulate(text) {
     /* ... */
     let states = [];
     console.log(temp);
-    for(let s = 0; s < 10; s++) {
-        let random_temp = JSON.parse(JSON.stringify(temp));
-        let reg_edits = rnd(1, 10);
-        for(let i = 0; i < reg_edits; i++) {
-            let j = rnd(0, 15);
-            random_temp.registry[j] = rnd(0, 100);
-        }
-        let mem_edits = rnd(1, 10);
-        for(let i = 0; i < mem_edits; i++) {
-            let j = rnd(0, random_temp.memory.length-1);
-            random_temp.memory[j] = rnd(0, 100);
-        }
-        states.push(random_temp);
+    let res = main_parse(text.split('\n'));
+    for(let i = 0; i < res.length; i++)
+    {
+        states.push(translate(res));
     }
-    console.log(temp);
+    // for(let s = 0; s < 10; s++) {
+    //     let random_temp = JSON.parse(JSON.stringify(temp));
+    //     let reg_edits = rnd(1, 10);
+    //     for(let i = 0; i < reg_edits; i++) {
+    //         let j = rnd(0, 15);
+    //         random_temp.registry[j] = rnd(0, 100);
+    //     }
+    //     let mem_edits = rnd(1, 10);
+    //     for(let i = 0; i < mem_edits; i++) {
+    //         let j = rnd(0, random_temp.memory.length-1);
+    //         random_temp.memory[j] = rnd(0, 100);
+    //     }
+    //     states.push(random_temp);
+    // }
+    // console.log(temp);
     return states;
+}
+
+function translate(state) {
+    let res = {};
+    res.registry = state.registers;
+    res.status = state.state;
+    res.memory = state.memory;
+    res.variables = Object.keys(state.memory_labels);
+    return res;
 }
