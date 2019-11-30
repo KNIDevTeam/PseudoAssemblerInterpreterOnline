@@ -59,13 +59,12 @@ function main_parse(lines)
 	}
 	console.log(program);
 	let states = [];
-	states.push(stat);
+	states.push(JSON.parse(JSON.stringify(stat)));
 	for(stat.line = 0; stat.line < program.length; stat.line++)
 	{
 		program[stat.line].translate_address(stat);
 		stat = program[stat.line].execute(stat);
-		states.push(stat);
-		console.log("memory: ", stat.memory,"command: ", program[stat.line].constructor.name, "mem labels:", stat.memory_labels, "registers: ", stat.registers);
+		states.push(JSON.parse(JSON.stringify(stat)));
 	}
 	return states;
 }

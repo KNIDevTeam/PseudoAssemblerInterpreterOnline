@@ -8,13 +8,14 @@ function Factory(name, command_constructor) {
 
     this.build = function (line) {
         let args = line.split(/ +|,|\(|\)|\t+|\*/);
-        console.log(args);
-        if (this.is_it_me(args)) {
+        if (this.is_it_me(args))
+        {
             let lbl = this.get_label(args);
             this.generate_args(args.slice(lbl === "" ? 0 : 1));
             console.log("its me", this.name);
             return [this.fabricate(), lbl];
-        } else return this.next.build(line);
+        }
+        else return this.next.build(line);
     };
     this.is_it_me = function (args) {
         return (args[0] === this.name || args[1] === this.name);
@@ -36,7 +37,7 @@ function Factory_Registers(name, command_constructor) {
     };
 
     this.generate_args = function (args) {
-        this.check_coherency(args);
+        //this.check_coherency(args);
         this.register_left = args[1];
         this.register_right = args[2];
     };
@@ -58,7 +59,7 @@ function Factory_Memory(name, command_constructor) {
     };
     this.generate_args = function (args) {
         //todo show different error codes forr different errors
-        this.check_coherency(args);
+        //this.check_coherency(args);
         this.register_left = args[1];
         this.shift = args[2];
         if (args.length === 4) this.base_register = args[3];
@@ -83,7 +84,7 @@ function Factory_Jump(name, command_constructor) {
     };
 
     this.generate_args = function (args) {
-        this.check_coherency(args);
+        //this.check_coherency(args);
         this.target = args[1];
     };
 }

@@ -114,9 +114,10 @@ function emulate(text) {
     let states = [];
     console.log(temp);
     let res = main_parse(text.split('\n'));
+    console.log(res);
     for(let i = 0; i < res.length; i++)
     {
-        states.push(translate(res));
+        states.push(translate(res[i]));
     }
     // for(let s = 0; s < 10; s++) {
     //     let random_temp = JSON.parse(JSON.stringify(temp));
@@ -141,6 +142,7 @@ function translate(state) {
     res.registry = state.registers;
     res.status = state.state;
     res.memory = state.memory;
+
     res.variables = Object.keys(state.memory_labels);
     return res;
 }
