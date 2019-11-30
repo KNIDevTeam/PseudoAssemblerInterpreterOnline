@@ -1,6 +1,6 @@
 function Command_Jump(target)
 {
-	Commad.call(this);
+	Command.call(this);
 	this.target = target;
 	this.execute = function(state)
 	{
@@ -10,7 +10,7 @@ function Command_Jump(target)
 	this.translate_address = function(state)
 	{
 		if(state.lbls[this.target] !== undefined) this.address = state.lbls[this.target];
-		else throw "WrongLablelException";
+		else throw "WrongLabelException";
 	};
 }
 
