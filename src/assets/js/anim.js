@@ -31,14 +31,14 @@ $("#logo-id").on('mouseenter', function() {
     if(animating_logo) return;
     spawnCharacters("logo-id", getPos(document.getElementById("logo-id")));
     animating_logo = 1;
-    if(!animating) requestAnimationFrame(draw);
+    if(!animating) animating = 1, requestAnimationFrame(draw);
 });
 
 $("#run").on('mouseenter', function() {
     if(animating_button) return;
     spawnCharacters("run", getPos(document.getElementById("run")));
     animating_button = 1;
-    if(!animating) requestAnimationFrame(draw);
+    if(!animating) animating = 1, requestAnimationFrame(draw);
 });
 
 function spawnCharacters(el, el_pos) {

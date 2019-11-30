@@ -46,13 +46,14 @@ window.Pace.on('done', () => {
 window.cookieconsent.initialise({
   "palette": {
     "popup": {
-      "background": "#000"
+	  "background": "#fff",
     },
     "button": {
-      "background": "#f1d600"
+	  "background": "#00f4a4",
+	  "text": "#fff"
     }
   },
-  "theme": "classic",
+  "theme": "block",
   "position": "bottom-right",
   "content": {
     "message": "Ta strona używa ciasteczek w celu polepszenia odczuć związanych z jej użytkowaniem",

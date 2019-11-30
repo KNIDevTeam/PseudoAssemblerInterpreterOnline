@@ -3,11 +3,12 @@ var states;
 var program;
 
 //update tables
-function show() {
+function show(direction) {
     //animate
     if(!animating) {
         let logo_y = getPos(document.getElementById("logo-id")).y;
         let button_y = getPos(document.getElementById("prev-next")).y;
+        if(direction == "next") [logo_y, button_y] = [button_y, logo_y];
         spawnCharacters("run1", {x: 0, y: logo_y, w: canvas.width*0.01});
         spawnCharacters("run2", {x: canvas.width, y: button_y, w: 0});
         animating = 1, requestAnimationFrame(draw);
@@ -32,7 +33,7 @@ $('#prev').on('click', function() {
 
 $('#next').on('click', function() {
     cur_state++;
-    show();
+    show("next");
 });
 
 //initialise
