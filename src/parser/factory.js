@@ -12,7 +12,6 @@ function Factory(name, command_constructor) {
         {
             let lbl = this.get_label(args);
             this.generate_args(args.slice(lbl === "" ? 0 : 1));
-            console.log("its me", this.name);
             return [this.fabricate(), lbl];
         }
         else return this.next.build(line);
@@ -93,14 +92,12 @@ function Factory_Allocation(name, command_constructor) {
     Factory.call(this, name, command_constructor);
     let types = ["INTEGER"];
     this.fabricate = function () {
-        console.log(this.size, this.rand, this.value)
         return new this.comm(this.size, this.rand, this.value)
     };
 
     this.generate_args = function (args) {
         if (types.includes(args[1])) {
             this.size = 1;
-            console.log(args);
             if (args.length === 4) {
                 this.rand = false;
                 this.value = parseInt(args[2]);

@@ -28,11 +28,12 @@ function Command_Memory(register_left, shift, base_register)
 		else if(state.memory_labels[this.shift] !== undefined)
 		{
 			base += state.memory_labels[this.shift];
-			console.log("state.mem_lbls[this.shift]: ", state.memory_labels[this.shift]);
 		}
-		else throw "WrongShiftException";
+		else
+		{
+			throw "WrongShiftException";
+		}
 		this.address = base;
-		console.log("this.address: ", this.address, "this.shift: ", this.shift);
 	};
 }
 
