@@ -48,11 +48,23 @@
 					"params": "[label] AR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{2} and REG2{3}. Let's analyse the result of the following operation: <pre>\tAR\t1, 2\t# REG1 = 5 (REG1 := REG1 + REG2), REG2 = 3</pre>"
 				},
+				"A": {
+					"short": "Command adds contents of register and memory block.",
+					"long": "“A” command adds contents of register and memory block and store the result of this operation in target register.",
+					"params": "[label] A [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{-1}. Now let's analyse the result of executing the following code: <pre>\tA\t1, VAR\t# REG1 = 1</pre>"
+				},
 				"SR": {
 					"short": "Command subtracts contents of registers.",
 					"long": "“SR” command subtracts content of two registers and store the result of this operation in target register.",
 					"params": "[label] SR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{-12} and REG2{4}. Let's analyse the result of the following operation: <pre>\tSR\t1, 2\t# REG1 = -16 (REG1 := REG1 - REG2), REG2 = 4</pre>"
+				},
+				"S": {
+					"short": "Command subtracts contents of register and memory block.",
+					"long": "“S” command subtracts contents of register and memory block and store the result of this operation in target register.",
+					"params": "[label] S [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"examples": " Suppose we declared variable VAR{14} and prepared register REG1{3}. Now let's analyse the result of executing the following code: <pre>\tS\t1, VAR\t# REG1 = 11</pre>"
 				},
 				"MR": {
 					"short": "Command multiplies contents of registers.",
@@ -60,11 +72,23 @@
 					"params": "[label] MR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{4} and REG2{6}. Let's analyse the result of the following operation: <pre>\tMR\t1, 2\t# REG1 = 24 (REG1 := REG1 * REG2), REG2 = 6</pre>"
 				},
+				"M": {
+					"short": "Command multiplies contents of register and memory block.",
+					"long": "“M” command multiplies contents of register and memory block and store the result of this operation in target register.",
+					"params": "[label] M [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{8}. Now let's analyse the result of executing the following code: <pre>\tM\t1, VAR\t# REG1 = 16</pre>"
+				},
 				"DR": {
 					"short": "Command divides contents of registers.",
 					"long": "“DR” command divides content of two registers and store the result of this operation in target register.",
 					"params": "[label] DR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{8} and REG2{2}. Let's analyse the result of the following operation: <pre>\tDR\t1, 2\t# REG1 = 4 (REG1 := REG1 / REG2), REG2 = 2</pre> <p>Let's analyse another example: REG3{2} and REG4{0}. The result of the following operation is: <pre>\tDR\t3, 4\t# REG3 = 2, REG4 = 0, Status register = '11'</pre></p>"
+				},
+				"D": {
+					"short": "Command divides contents of register and memory block.",
+					"long": "“D” command divides contents of register and memory block and store the result of this operation in target register.",
+					"params": "[label] D [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{3}. Now let's analyse the result of executing the following code: <pre>\tD\t1, VAR\t# REG1 = 1</pre>"
 				}
 			}
 		}
