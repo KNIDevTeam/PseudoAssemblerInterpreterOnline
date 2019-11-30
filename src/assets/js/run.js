@@ -1,37 +1,54 @@
-var current_state = 0;
+var cur_state = 1;
 var states;
-var temp = {
-    registry: [0, 1, 2, 4, "🤔", -5, undefined, 0, 123, -0, 1, 1, undefined, 130, 140000000, 15],
-    status: "11",
-    memory: [0, 1, 2, 3, 4, 5, 2137, undefined, undefined, undefined, 1500, 100, 900, undefined, "hmm", "¯\\_(ツ)_/¯"],
-    variables: ["LOREM", "IPSUM", '', "DOLOR", "SIT", "AMET", '', '', '', "jp2"]
-};
+var program;
+
+//update tables
+function show() {
+    //animate
+    if(!animating) {
+        let logo_y = getPos(document.getElementById("logo-id")).y;
+        let button_y = getPos(document.getElementById("prev-next")).y;
+        spawnCharacters("run1", {x: 0, y: logo_y, w: canvas.width*0.01});
+        spawnCharacters("run2", {x: canvas.width, y: button_y, w: 0});
+        animating = 1, requestAnimationFrame(draw);
+    }
+
+    cur_state = Math.min(states.length-1, Math.max(1, cur_state));
+
+    let cur_program = JSON.parse(JSON.stringify(program));
+    cur_program[states[cur_state].line] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state].line] + "</div>";
+    $('#program').html('<h2>Program</h2>' + cur_program.join('<br>'));
+    $('#results').html(formatData(states[cur_state]));
+    
+    $('#cur-line').addClass('animated flash');
+    //$('#cursor').addClass('animated flash');
+	checkVisibility();
+}
 
 $('#prev').on('click', function() {
-    current_state--;
-    current_state = Math.min(states.length-1, Math.max(0, current_state));
-    $('#results').html(formatData(states[current_state]));
-	checkVisibility();
+    cur_state--;
+    show();
 });
 
 $('#next').on('click', function() {
-    current_state++;
-    current_state = Math.min(states.length-1, Math.max(0, current_state));
-    $('#results').html(formatData(states[current_state]));
-	checkVisibility();
+    cur_state++;
+    show();
 });
 
+//initialise
 $('#run').on('click', function() {
     $('#run').css('display', 'none');
     $('#input').css('display', 'none');
     $('#prev-next').css('display', 'block');
+    $('#program').css('display', 'block');
     $('#prev').css('display', 'none');
 
-    var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '');
+    program = $('#input').html().replace(/<span class="comment">[^<]*<\/span><br>/gm, '').split('<br>');
+    var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '').replace(/^\n/gm, '');
     states = emulate(pure_text);
-
-    current_state = Math.min(states.length-1, Math.max(0, current_state));
-    $('#results').html(formatData(states[current_state]));
+    show();
+    $('#results').addClass('animated fadeIn');
+    $('#program').addClass('animated fadeIn');
 });
 
 function formatData(data) {
@@ -49,7 +66,7 @@ function formatData(data) {
                 return accumulator +
                 `<tr>
                     <td><span class="number">${ind}</span></td>
-                    <td>${val ? `<b>${val}</b>` : 'undefined'}</td>
+                    <td>${val != undefined ? `<b>${val}</b>` : 'undefined'}</td>
                 </tr>`
             }, '') + 
             `<tr>
@@ -75,31 +92,25 @@ function formatData(data) {
                 return accumulator +
                 `<tr>
                     <td><span class="number">${ind*4}</span></td>
-                    <td>${data.variables[ind] ? `<span class="keyword">${data.variables[ind]}</span>` : 'undefined'}</td>
-                    <td>${val ? `<b>${val}</b>` : 'undefined'}</td>
+                    <td>${data.variables[ind] != undefined ? `<span class="keyword">${data.variables[ind]}</span>` : 'undefined'}</td>
+                    <td>${val != undefined ? `<b>${val}</b>` : 'undefined'}</td>
                 </tr>`
             }, '')}
             </tfoot>
         </table>
     </div>`;
 
-    return `<div class="row gtr-uniform">
-    <div class="col-3 col-12-small">${registry_html}</div>
-    <div class="col-9 col-12-small">${memory_html}</div>
+    return `<div class="row">
+    <div class="col-3 col-12-xlarge">${registry_html}</div>
+    <div class="col-9 col-12-xlarge">${memory_html}</div>
     </div>`;
 }
 
-function rnd(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function checkVisibility() {
-	if (current_state == 0) {
+	if (cur_state == 1) {
 		$('#prev').fadeOut(100);
 		$('#next').fadeIn(100);
-	} else if (current_state == states.length-1) {
+	} else if (cur_state == states.length-1) {
 		$('#prev').fadeIn(100);
 		$('#next').fadeOut(100);
 	} else {
@@ -108,40 +119,24 @@ function checkVisibility() {
 	}
 }
 
-//placeholder for generating states
+//state generation
 function emulate(text) {
-    /* ... */
     let states = [];
-    console.log(temp);
     let res = main_parse(text.split('\n'));
-    console.log(res);
-    for(let i = 0; i < res.length; i++)
-    {
+    for(let i = 0; i < res.length; i++) {
         states.push(translate(res[i]));
     }
-    // for(let s = 0; s < 10; s++) {
-    //     let random_temp = JSON.parse(JSON.stringify(temp));
-    //     let reg_edits = rnd(1, 10);
-    //     for(let i = 0; i < reg_edits; i++) {
-    //         let j = rnd(0, 15);
-    //         random_temp.registry[j] = rnd(0, 100);
-    //     }
-    //     let mem_edits = rnd(1, 10);
-    //     for(let i = 0; i < mem_edits; i++) {
-    //         let j = rnd(0, random_temp.memory.length-1);
-    //         random_temp.memory[j] = rnd(0, 100);
-    //     }
-    //     states.push(random_temp);
-    // }
-    // console.log(temp);
+    console.log(states);
     return states;
 }
 
 function translate(state) {
     let res = {};
+
     res.registry = state.registers;
     res.status = state.state;
     res.memory = state.memory;
+    res.line = state.line;
 
     res.variables = Object.keys(state.memory_labels);
     return res;

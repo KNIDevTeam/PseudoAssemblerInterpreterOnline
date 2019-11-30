@@ -64,7 +64,7 @@ function formatInput(content) {
         //ignore comments
         if(words[0] && words[0][0] != '#') return Math.max(accumulator, words[0].length+1);
         else return accumulator;
-    }, 0) / 2 + 0.5;
+    }, 0) / 2.1 + 0.5;
     longest_label = Math.round(longest_label * 100) / 100;
 
     //insert new label formatting

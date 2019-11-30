@@ -2813,9 +2813,12 @@ input, select, textarea {
 
 	#header {
 		padding: 5.5em 1em 2em 0 ;
+		z-index: 2;
+		position: relative;
 	}
 
 		#header .logo {
+			
 			display: block;
 			border-bottom: 0;
 			color: inherit;
@@ -3392,7 +3395,7 @@ input, select, textarea {
 canvas {
 	display: block;
 	position: fixed;
-	z-index: 10;
+	z-index: 1;
 	image-rendering: crisp-edges;
 	pointer-events:none;
 }
@@ -3423,6 +3426,11 @@ canvas {
 	text-shadow: 1px 1px 2px #00f4a4
 }
 
+#program {
+	
+	padding-bottom: 20em;
+	
+}
 
 [contenteditable]:focus { outline: 0px solid transparent; }
 *[contenteditable="true"]{display: inline-block;}

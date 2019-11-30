@@ -10,7 +10,7 @@ function getPos( el ) {
 }
 
 var particles = [];
-var animating_logo, animating_button = 0;
+var animating = 0, animating_logo = 0, animating_button = 0;
 
 function prepareCanvas() {
     canvas.style.width = window.innerWidth * 0.98 + "px";
@@ -29,20 +29,19 @@ $(window).resize(prepareCanvas());
 
 $("#logo-id").on('mouseenter', function() {
     if(animating_logo) return;
-    spawnCharacters("logo-id");
+    spawnCharacters("logo-id", getPos(document.getElementById("logo-id")));
     animating_logo = 1;
-    if(!animating_button) requestAnimationFrame(draw);
+    if(!animating) requestAnimationFrame(draw);
 });
 
 $("#run").on('mouseenter', function() {
     if(animating_button) return;
-    spawnCharacters("run");
+    spawnCharacters("run", getPos(document.getElementById("run")));
     animating_button = 1;
-    if(!animating_logo) requestAnimationFrame(draw);
+    if(!animating) requestAnimationFrame(draw);
 });
 
-function spawnCharacters(el) {
-    var el_pos = getPos(document.getElementById(el));
+function spawnCharacters(el, el_pos) {
     for(var i = 3; i <= 10; i++) {
         particles.push({
             spawner: el,
@@ -76,11 +75,12 @@ function draw() {
             particle.speed *= 1.05;
             ctx.globalAlpha = Math.min(1, Math.abs(50 / particle.speed));
             if(Math.abs(particle.x - particle.origin.x) > particle.targetDist) 
-                ctx.fillText(particle.char, Math.round(particle.x), Math.round(particle.y - (particle.spawner == "logo-id" ? window.scrollY - particle.initScroll : 0))); 
+                ctx.fillText(particle.char, Math.round(particle.x), 
+                Math.round(particle.y - (particle.spawner == "logo-id" || particle.spawner == "run1" ? window.scrollY - particle.initScroll : 0))); 
             particles[id] = particle;
         }
     });
     
     if(offscreen < particles.length) requestAnimationFrame(draw);
-    else particles = [], animating_logo = animating_button = 0;
+    else particles = [], animating = animating_logo = animating_button = 0;
 }
