@@ -94,7 +94,7 @@
 					"short": "Command compares content of register and memory block.",
 					"long": "“C” command compares content of register and memory block by subtracting content of register and content of memory block. Depending on the sign of the result of this subtraction, status register is changed. content of register and memory block won’t change.",
 					"params": "[label] C [register], [memory block] <p> Note that you can choose from four different ways of addressing using [memory block]. Look at “Memory addressing” section for further assistance.</p>",
-					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{-2}. Now let's analyse the result of executing the following code: <pre>\tC\t1, VAR\t# Status register = '00'</pre>"
+					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{2}. Now let's analyse the result of executing the following code: <pre>\tC\t1, VAR\t# Status register = '00'</pre>"
 				},
 				"CR": {
 					"short": "Command compares content of two registers.",
