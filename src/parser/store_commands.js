@@ -1,7 +1,7 @@
 function Command_Store(register_left, shift, base_register)
 {
 	Command_Memory.call(this, register_left, shift, base_register);
-
+	Command.call(this);
 	this.execute = function(state)
 	{
 		state.memory[this.address] = state.registers[this.register_left];
@@ -12,7 +12,7 @@ function Command_Store(register_left, shift, base_register)
 function Command_Load(register_left, shift, base_register)
 {
 	Command_Memory.call(this, register_left, shift, base_register);
-
+	Command.call(this);
 	this.execute = function(state)
 	{
 		state.registers[register_left] = state.memory[this.address];
@@ -22,8 +22,8 @@ function Command_Load(register_left, shift, base_register)
 
 function Command_Load_Register(register_left, register_right)
 {
+	Command.call(this);
 	Command_Register.call(this, register_left, register_right);
-
 	this.execute = function(state)
 	{
 		state.registers[this.register_left] = state.registers[this.register_right];
@@ -34,7 +34,7 @@ function Command_Load_Register(register_left, register_right)
 function Command_Load_Address(register_left, shift, base_register)
 {
 	Command_Memory.call(this, register_left, shift, base_register);
-
+	Command.call(this);
 	this.execute = function(state)
 	{
 		state.registers[this.register_left] = this.address;
