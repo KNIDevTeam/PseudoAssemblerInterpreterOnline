@@ -1,4 +1,4 @@
-var cur_state = 0;
+var cur_state = 1;
 var states;
 var program;
 
@@ -14,10 +14,10 @@ function show(direction) {
         animating = 1, requestAnimationFrame(draw);
     }
 
-    cur_state = Math.min(states.length-1, Math.max(0, cur_state));
+    cur_state = Math.min(states.length-1, Math.max(1, cur_state));
     console.log(cur_state);
     let cur_program = JSON.parse(JSON.stringify(program));
-    cur_program[states[cur_state].line] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state].line] + "</div>";
+    cur_program[states[cur_state - 1].line] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state - 1].line] + "</div>";
     $('#program').html('<h2>Program</h2>' + cur_program.join('<br>'));
     $('#results').html(formatData(states[cur_state]));
     
@@ -111,7 +111,7 @@ function formatData(data) {
 }
 
 function checkVisibility() {
-	if (cur_state == 0) {
+	if (cur_state == 1) {
 		$('#prev').fadeOut(100);
 		$('#next').fadeIn(100);
 	} else if (cur_state == states.length-1) {
