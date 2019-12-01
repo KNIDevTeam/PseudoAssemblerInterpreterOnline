@@ -17,12 +17,10 @@ function Command_Memory(register_left, shift, base_register)
 	this.base_register = parseInt(base_register);
 	this.translate_address = function(state)
 	{
-		console.log(this.shift, this.base_register)
 		let base = 0;
 		if(this.base_register === -1) base += state.registers[14];
 		if(state.registers[this.base_register] !== undefined) base += state.registers[this.base_register];
 		let pattern = /^[0-9]*$/;
-		console.log(base);
 		if(pattern.test(this.shift))
 		{
 			base += parseInt(this.shift);
@@ -35,7 +33,6 @@ function Command_Memory(register_left, shift, base_register)
 		{
 			throw "No such Label";
 		}
-		console.log(base, this.constructor.name);
 		this.address = base;
 	};
 }

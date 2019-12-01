@@ -22,6 +22,8 @@ function Factory(name, command_constructor) {
     this.get_label = function (args) {
         args = this.clear_args(args);
         if(/^\d/.exec(args[0])) throw "Label can't start with number";
+        if(/,/.exec(args[0])) throw "Label can't contain commas";
+        if(/\./.exec(args[0])) throw "Label can't contain periods";
 		return (args[0] === this.name ? "" : args[0]);
     };
     this.clear_args = function (args) {
@@ -71,7 +73,6 @@ function Factory_Memory(name, command_constructor) {
     this.generate_args = function (args) {
         args = this.clear_args(args);
         this.check_coherency(args);
-        console.log(args, this.constructor.name);
         this.register_left = args[1];
         this.shift = args[2];
         if (args.length === 4) this.base_register = args[3];

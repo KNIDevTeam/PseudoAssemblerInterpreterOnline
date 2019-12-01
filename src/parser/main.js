@@ -30,7 +30,7 @@ function main_parse(lines)
 	factories.push(new Factory_Memory("ST", Command_Store));
 	factories.push(new Factory_Memory("L", Command_Load));
 	factories.push(new Factory_Memory("LA", Command_Load_Address));
-	factories.push(new Factory_Registers("DR", Command_Load_Register));
+	factories.push(new Factory_Registers("LR", Command_Load_Register));
 	factories.push(new Factory_Jump("JP", Command_Jump_Positive));
 	factories.push(new Factory_Jump("J", Command_Jump_Always));
 	factories.push(new Factory_Jump("JZ", Command_Jump_Zero));
@@ -52,7 +52,6 @@ function main_parse(lines)
 		}
 		else
 		{
-			console.log(lines[i]);
 			let res = [];
 			try
 			{
@@ -69,7 +68,6 @@ function main_parse(lines)
 			}
 		}
 	}
-	console.log(program);
 	return [program, errors, stat];
 }
 
@@ -81,10 +79,13 @@ function main_execute(program, initial_state) {
 		if(stat.line_execution_count[stat.line] === undefined) stat.line_execution_count[stat.line] = 0;
 		else stat.line_execution_count[stat.line]++;
 		if(stat.line_execution_count[stat.line] > timeout_threshold) throw "Infinity Loop Error";
+		console.log(program[stat.line].constructor.name);
 		states.push(JSON.parse(JSON.stringify(stat)));
 		program[stat.line].translate_address(stat);
 		stat = program[stat.line].execute(stat);
 	}
+	stat.line = stat.line-1;
 	states.push(JSON.parse(JSON.stringify(stat)));
+	console.log(states);
 	return states;
 }
