@@ -4,6 +4,8 @@
         "title": "Interpreter",
         "nav": "Home",
         "run": "RUN",
+		"prev": "&larr; Prev",
+		"next": "Next &rarr;",
 		"typeSth": "Type something here...",
 		"exampleProgram": "#This is an example program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Clear the first register\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
     },
@@ -163,5 +165,20 @@
 		"credits": "Credits",
 		"credits-long": "We would like to thank all people whose actions and idea have helped us creating our project:<ul><li><a href=\"http:\/\/www.mini.pw.edu.pl/~homenda/\" target=\"_BLANK\"> prof. dr hab. inż. Władysław Homenda</a> - author of an original pseudoassembler language, coordinator of an interpreter project (written in C) at Faculty of Mathematics and Information Science at Warsaw University of Technology - </li><li><a href=\"https:\/\/html5up.net\" target=\"_BLANK\">HTML5UP</a> - a source of site’s template</li></ul>",
 		"repo": "GitHub Repository"
-    }
+    },
+	"run": {
+		"program": "Program",
+		"registers": {
+			"header": "Registers",
+			"address": "Address",
+			"value": "Value",
+			"state": "STATE"
+		},
+		"memory": {
+			"header": "Memory",
+			"address": "Address",
+			"var": "Variable",
+			"value": "Value"
+		}
+	}
 }

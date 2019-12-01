@@ -4,6 +4,8 @@
         "title": "Interpreter",
         "nav": "Strona główna",
         "run": "START",
+		"prev": "&larr; Wstecz",
+		"next": "Dalej &rarr;",
 		"typeSth": "Wpisz coś tutaj...",
 		"exampleProgram": "#To przykładowy program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Wyczyść pierwszy rejestr\nSR 1,1\n#Oblicz sumę\nA 1,VAR1\nA 1,VAR2\n#Zapisz wynik w pamięci\nST 1,RES"
     },
@@ -163,5 +165,20 @@
 		"credits": "Podziękowania",
 		"credits-long": "Chcielibyśmy podziękować wszystkim osobom, których działania i pomysły pomogły nam w stworzeniu tego projektu. Szczególne podziękowania należą się: <ul><li><a href=\"http:\/\/www.mini.pw.edu.pl/~homenda/\" target=\"_BLANK\"> prof. dr hab. inż. Władysławowi Homendzie</a> - autorowi języka pseudoassemblera, koordynatorowi projektu interpretera (napisanego w języku C) na Wydziale Matematyki i Nauk Informacyjnych Politechniki Warszawskiej - </li><li><a href=\"https:\/\/html5up.net\" target=\"_BLANK\">HTML5UP</a> - autorowi szablonu strony</li></ul>",
 		"repo": "Repozytorium projektu w serwisie GitHub"
-    }
+    },
+	"run": {
+		"program": "Program",
+		"registers": {
+			"header": "Registers",
+			"address": "Address",
+			"value": "Value",
+			"state": "STATE"
+		},
+		"memory": {
+			"header": "Memory",
+			"address": "Address",
+			"var": "Variable",
+			"value": "Value"
+		}
+	}
 }
