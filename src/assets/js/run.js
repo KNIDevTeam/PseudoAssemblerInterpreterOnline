@@ -21,7 +21,6 @@ function show(direction) {
     $('#results').html(formatData(states[cur_state]));
     
     $('#cur-line').addClass('animated flash');
-    //$('#cursor').addClass('animated flash');
 	checkVisibility();
 }
 
@@ -67,10 +66,11 @@ function formatData(data) {
             </thead>
             <tfoot>
             ${data.registry.reduce(function(accumulator, val, ind) {
+                if(!data.reg_init[ind]) return accumulator;
                 return accumulator +
                 `<tr>
                     <td><span class="number">${ind}</span></td>
-                    <td>${val != undefined ? `<b>${val}</b>` : 'undefined'}</td>
+                    <td><b>${val}</b></td>
                 </tr>`
             }, '') + 
             `<tr>
@@ -93,11 +93,12 @@ function formatData(data) {
             </thead>
             <tfoot>
             ${data.memory.reduce(function(accumulator, val, ind) {
+                if(!data.mem_init[ind]) return accumulator;
                 return accumulator +
                 `<tr>
                     <td><span class="number">${ind*4}</span></td>
-                    <td>${data.variables[ind] != undefined ? `<span class="keyword">${data.variables[ind]}</span>` : 'undefined'}</td>
-                    <td>${val != undefined ? `<b>${val}</b>` : 'undefined'}</td>
+                    <td><span class="keyword">${data.variables[ind]}</span></td>
+                    <td><b>${val}</b></td>
                 </tr>`
             }, '')}
             </tfoot>
@@ -133,16 +134,13 @@ function checkVisibility() {
 function emulate(text) {
     let states = [];
     let res = main_parse(text.split('\n'));
-    console.log(res[1]);
-    if(res[1].length === 0)
-    {
+
+    if(res[1].length === 0) {
         let states_parser = main_execute(res[0], res[2]);
         for(let i = 0; i < states_parser.length; i++) {
             states.push(translate(states_parser[i]));
         }
-    }
-    else
-    {
+    } else {
         let state = {};
         state.registry = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         res.reg_init = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
