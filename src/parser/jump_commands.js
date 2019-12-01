@@ -4,7 +4,7 @@ function Command_Jump(target)
 	this.target = target;
 	this.execute = function(state)
 	{
-		if(this.condition(state.sign)) state.line = this.address;
+		if(this.condition(state.sign_flag)) state.line = this.address - 1;
 		return state;
 	};
 	this.translate_address = function(state)

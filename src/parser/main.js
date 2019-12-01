@@ -1,14 +1,16 @@
 function main_parse(lines)
 {
+	let timeout_treshold = 1000;
 	function State()
 	{
 		this.registers = [];
 		for(let i = 0; i < 16; i++) this.registers[i] = 0;
 		this.memory = [];
-		this.state = 0;
+		this.sign_flag = 0;
 		this.line = 0;
 		this.memory_labels = Object();
 		this.lbls = Object();
+		this.line_execution_count = {};
 	}
 	let program = [];
 	let factories = [];
@@ -48,6 +50,7 @@ function main_parse(lines)
 		}
 		else
 		{
+			console.log(lines[i]);
 			let res = factories[0].build(lines[i]);
 			program.push(res[0]);
 			if(res[1] !== "")
@@ -62,6 +65,9 @@ function main_parse(lines)
 	states.push(JSON.parse(JSON.stringify(stat)));
 	for(stat.line = 0; stat.line < program.length; stat.line++)
 	{
+		if(stat.line_execution_count[stat.line] === undefined) stat.line_execution_count[stat.line] = 0;
+		else stat.line_execution_count[stat.line]++;
+		if(stat.line_execution_count[stat.line] > timeout_treshold) throw "Infinity Loop Error";
 		program[stat.line].translate_address(stat);
 		stat = program[stat.line].execute(stat);
 		states.push(JSON.parse(JSON.stringify(stat)));

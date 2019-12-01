@@ -138,7 +138,7 @@ function translate(state) {
     let res = {};
 
     res.registry = state.registers;
-    res.status = state.state;
+    res.status = state.sign_flag;
     res.memory = state.memory;
     res.line = state.line;
 
