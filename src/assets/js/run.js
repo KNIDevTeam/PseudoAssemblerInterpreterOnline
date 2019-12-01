@@ -136,7 +136,7 @@ function emulate(text) {
     let res = main_parse(text.split('\n'));
 
     if(res[1].length === 0) {
-        let states_parser = main_execute(res[0], res[2]);
+        let states_parser = main_execute(res[0], res[2])[0];
         for(let i = 0; i < states_parser.length; i++) {
             states.push(translate(states_parser[i]));
         }

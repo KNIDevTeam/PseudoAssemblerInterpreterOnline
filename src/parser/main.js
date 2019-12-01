@@ -83,17 +83,22 @@ function main_execute(program, initial_state) {
 		if(stat.line_execution_count[stat.line] === undefined) stat.line_execution_count[stat.line] = 0;
 		else stat.line_execution_count[stat.line]++;
 		if(stat.line_execution_count[stat.line] > timeout_threshold) throw "Infinity Loop Error";
-		console.log(program[stat.line].constructor.name);
 		states.push(JSON.parse(JSON.stringify(stat)));
 		for(let i = 0; i < stat.value_defined_registers.length; i++)
 			if(stat.value_defined_registers[i] === 2) stat.value_defined_registers[i] = 1;
 		for(let i = 0; i < stat.value_defined_memory.length; i++)
 			if(stat.value_defined_memory[i] === 2) stat.value_defined_memory[i] = 1;
-		program[stat.line].translate_address(stat);
+		try
+		{
+			program[stat.line].translate_address(stat);
+		}
+		catch (error) {
+			return [states, error, stat.line];
+		}
 		stat = program[stat.line].execute(stat);
 	}
 	stat.line = stat.line-1;
 	states.push(JSON.parse(JSON.stringify(stat)));
 	console.log(states);
-	return states;
+	return [states, null, null];
 }
