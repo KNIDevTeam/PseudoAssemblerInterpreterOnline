@@ -5,12 +5,12 @@
         "nav": "Strona główna",
         "run": "START",
 		"typeSth": "Wpisz coś tutaj...",
-		"exampleProgram": "#To przykładowy program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Wyczyść pierwszy rejestr\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
+		"exampleProgram": "#To przykładowy program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Wyczyść pierwszy rejestr\nSR 1,1\n#Oblicz sumę\nA 1,VAR1\nA 1,VAR2\n#Zapisz wynik w pamięci\nST 1,RES"
     },
     "docs": {
         "siteTitle": "Interpreter - Docs",
-        "title": "Documentation",
-        "nav": "Documentation",
+        "title": "Dokumentacja",
+        "nav": "Dokumentacja",
 		"general": {
 			"header": "General info",
 			"content": "Pseudoassembler is a programming language of great power. Proficient usage of this tool is an art that very few ever possessed. We hope that the following documentation will allow you not only to master but also come to like pseudoassembler (it's possible – believe us)!"
@@ -154,14 +154,14 @@
 		}
     },
     "contact": {
-        "siteTitle": "Interpreter - Contact",
-        "title": "Contact & Credits",
-        "nav": "Contact",
-		"contact": "Contact",
-		"authors": "Authors",
-		"authors-long": "<ul><li><a href=\"http:\/\/razormeister.pl/site/\" target=\"_BLANK\"> Tymoteusz Bartnik</a> (Frontend and engine - project’s “Jack of all trades”)</li><li><a href=\"https:\/\/github.com/lavar3l\" target=\"_BLANK\"> Przemysław Dominikowski</a> (Web infrastructure – domains, hosting; Creating documentation)</li><li><a href=\"https:\/\/dvalim.github.io/\" target=\"_BLANK\"> Dawid Alimowski</a> (Frontend - site layout, text editor, displaying results)</li><li><a href=\"https:\/\/github.com/witek0509x\" target=\"_BLANK\"> Wojciech Drochomirecki</a> (Interpreter’s engine – parser, execution module)</li></ul>",
-		"credits": "Credits",
-		"credits-long": "We would like to thank all people whose actions and idea have helped us creating our project:<ul><li><a href=\"http:\/\/www.mini.pw.edu.pl/~homenda/\" target=\"_BLANK\"> prof. dr hab. inż. Władysław Homenda</a> - author of an original pseudoassembler language, coordinator of an interpreter project (written in C) at Faculty of Mathematics and Information Science at Warsaw University of Technology - </li><li><a href=\"https:\/\/html5up.net\" target=\"_BLANK\">HTML5UP</a> - a source of site’s template</li></ul>",
-		"repo": "GitHub Repository"
+        "siteTitle": "Interpreter - Kontakt",
+        "title": "Kontakt",
+        "nav": "Kontakt",
+		"contact": "Kontakt",
+		"authors": "Autorzy",
+		"authors-long": "<ul><li><a href=\"http:\/\/razormeister.pl/site/\" target=\"_BLANK\"> Tymoteusz Bartnik</a> (Frontend oraz silnik - „dobry duch” projektu )</li><li><a href=\"https:\/\/github.com/lavar3l\" target=\"_BLANK\"> Przemysław Dominikowski</a> (Infrastruktura sieciowa – domeny, hosting; Stworzenie dokumentacji)</li><li><a href=\"https:\/\/dvalim.github.io/\" target=\"_BLANK\"> Dawid Alimowski</a> (Frontend - wygląd i układ strony, edytor, wyświetlanie wyniku działania interpretera)</li><li><a href=\"https:\/\/github.com/witek0509x\" target=\"_BLANK\"> Wojciech Drochomirecki</a> (Stworzenie silnika interpretera – parser, moduł wykonawczy)</li></ul>",
+		"credits": "Podziękowania",
+		"credits-long": "Chcielibyśmy podziękować wszystkim osobom, których działania i pomysły pomogły nam w stworzeniu tego projektu. Szczególne podziękowania należą się: <ul><li><a href=\"http:\/\/www.mini.pw.edu.pl/~homenda/\" target=\"_BLANK\"> prof. dr hab. inż. Władysławowi Homendzie</a> - autorowi języka pseudoassemblera, koordynatorowi projektu interpretera (napisanego w języku C) na Wydziale Matematyki i Nauk Informacyjnych Politechniki Warszawskiej - </li><li><a href=\"https:\/\/html5up.net\" target=\"_BLANK\">HTML5UP</a> - autorowi szablonu strony</li></ul>",
+		"repo": "Repozytorium projektu w serwisie GitHub"
     }
 }
