@@ -42,8 +42,8 @@ function Factory_Registers(name, command_constructor) {
 
 
     this.check_coherency = function (args) {
-        if (!/^\d*$/.exec(args[1])) throw "left register must be an int";
-        if (!/^\d*$/.exec(args[2])) throw "right register must be an int";
+        if (!/^\d*$/.exec(args[1])) throw "left register must be positive int";
+        if (!/^\d*$/.exec(args[2])) throw "right register must be positive int";
         if (!(args.length === 3)) throw "wrong number of arguments";
 
     };
@@ -65,9 +65,9 @@ function Factory_Memory(name, command_constructor) {
         return new this.comm(this.register_left, this.shift, this.base_register);
     };
     this.check_coherency = function (args) {
-        if (!/^\d*$/.exec(args[1])) throw "register number must be an int";
-        if (!/^\d*$/.exec(args[2]) && !/^\D/.exec(args[2])) throw "Label can't start with number";
-        if (args.length === 4 && !/^\d*$/.exec(args[3])) throw "register number must be an int";
+        if (!/^\d*$/.exec(args[1])) throw "register number must be positive int";
+        if (!/^-*\d*$/.exec(args[2]) && !/^\D/.exec(args[2])) throw "Label can't start with number";
+        if (args.length === 4 && !/^\d*$/.exec(args[3])) throw "register number must be positive int";
         if (args.length !== 4 && args.length !== 3) throw "wrong number of args";
     };
     this.generate_args = function (args) {
@@ -140,9 +140,9 @@ function Factory_Allocation(name, command_constructor) {
             throw "wrong number of arguments: " + args.length;
         if(types.includes(args[2]) && (args.length !== 3 && args.length !== 4)) throw "wrong number of arguments: " + args.length;
         if(!types.includes(args[1]) && !types.includes(args[2])) throw "No such type of variable";
-        if(types.includes(args[2]) && !/^\d*$/.exec(args[1])) throw "size of array must be an integer";
-        if((types.includes(args[1]) && !/^\d*$/.exec(args[2])  && args.length === 3) ||
-            (types.includes(args[2]) && !/^\d*$/.exec(args[3]) && args.length === 4))
+        if(types.includes(args[2]) && !/^\d*$/.exec(args[1])) throw "size of array must be positive integer";
+        if((types.includes(args[1]) && !/^-*\d*$/.exec(args[2])  && args.length === 3) ||
+            (types.includes(args[2]) && !/^-*\d*$/.exec(args[3]) && args.length === 4))
             throw "value must be an integer";
 
     };
