@@ -12,6 +12,9 @@ function main_parse(lines)
 		this.memory_labels = Object();
 		this.lbls = Object();
 		this.line_execution_count = {};
+		this.value_defined_registers = [];
+		for(let i = 0; i < 16; i++) this.value_defined_registers[i] = false;
+		this.value_defined_memory = [];
 	}
 	let program = [];
 	let factories = [];
