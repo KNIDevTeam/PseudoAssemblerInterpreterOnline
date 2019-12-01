@@ -101,6 +101,30 @@
 					"long": "“CR” command compares content of two registers by subtracting content of first register and content of second register. Depending on the sign of the result of this subtraction, status register is changed. content of both registers won’t change.",
 					"params": "[label] CR [first register], [second register]",
 					"examples": "Suppose we have already prepared registers – REG1{2} and REG2{3}. Let’s analyse the result of following operation: <pre>\tCR\t1, 2\t# Status register = '10'</pre>"
+				},
+				"J": {
+					"short": "Command unconditionally jumps to program line with provided label",
+					"long": "“J” command unconditionally jumps to program line with provided label. It’s useful for designing loops or default actions in if-like conditions.",
+					"params": "[label] J [target label]",
+					"examples": " Suppose we declared variable VAR{1} and prepared register REG1{0}. Now let's analyse the result of executing the following code: <pre>START\tA\t1, VAR\t# REG1 = 1 </pre><pre>\tA\t1, VAR\t# REG1 = 2 </pre><pre>JUMP\tJ\tEND\t</pre><pre>\tA\t1, VAR\t</pre><pre>\tA\t1, VAR\t</pre><pre>END\tST\t1, VAR\t# VAR1 = 2</pre>"
+				},
+				"JZ": {
+				"short": "Command jumps to program line with provided label if the result of last operation is equal to 0.",
+				"long": "“JZ” command jumps to program line with provided label depending upon the condition. If the result of last operation is equal to 0 (status register = “00”) a jump to target line would be performed. It’s useful for designing loops or if-like conditions.",
+				"params": "[label] JZ [target label]",
+				"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{3}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tS\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJZ\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = 6</pre>"
+				},
+				"JP": {
+				"short": "Command jumps to program line with provided label if the result of last operation is positive.",
+				"long": "“JP” command jumps to program line with provided label depending upon the condition. If the result of last operation is positive (status register = “01”) a jump to target line would be performed. It’s useful for designing loops or if-like conditions.",
+				"params": "[label] JP [target label]",
+				"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{-4}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tA\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJP\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = -10</pre>"
+				},
+				"JN": {
+				"short": "Command jumps to program line with provided label if the result of last operation is negative.",
+				"long": "“JN” command jumps to program line with provided label depending upon the condition. If the result of last operation is negative (status register = “10”) a jump to target line would be performed. It’s useful for designing loops or if-like conditions.",
+				"params": "[label] JN [target label]",
+				"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{2}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tS\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJN\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = 2 (2 + 1 + (-1))</pre>"
 				}
 			}
 		}
