@@ -157,8 +157,10 @@
         "siteTitle": "Interpreter - Contact",
         "title": "Contact & Credits",
         "nav": "Contact",
-		"contact": "Credits",
+		"contact": "Contact",
 		"authors": "Authors",
+		"credits": "Credits",
+		"credits-long": "We would like to thank all people whose actions and idea have helped us creating our project:<ul><li><a href=\"http:\/\/www.mini.pw.edu.pl/~homenda/\" target=\"_BLANK\"> prof. dr hab. inż. Władysław Homenda</a> - author of an original pseudoassembler language, coordinator of an interpreter project (written in C) at Faculty of Mathematics and Information Science at Warsaw University of Technology - </li><li><a href=\"https:\/\/html5up.net\" target=\"_BLANK\">HTML5UP</a> - a source of site’s template</li></ul>",
 		"repo": "GitHub Repository"
     }
 }
