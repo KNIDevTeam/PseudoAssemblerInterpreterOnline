@@ -1,4 +1,4 @@
-var cur_state = 1;
+var cur_state = 0;
 var states;
 var program;
 
@@ -14,8 +14,8 @@ function show(direction) {
         animating = 1, requestAnimationFrame(draw);
     }
 
-    cur_state = Math.min(states.length-1, Math.max(1, cur_state));
-
+    cur_state = Math.min(states.length-1, Math.max(0, cur_state));
+    console.log(cur_state);
     let cur_program = JSON.parse(JSON.stringify(program));
     cur_program[states[cur_state].line] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state].line] + "</div>";
     $('#program').html('<h2>Program</h2>' + cur_program.join('<br>'));
@@ -42,8 +42,7 @@ $('#run').on('click', function() {
     $('#input').css('display', 'none');
     $('#prev-next').css('display', 'block');
     $('#program').css('display', 'block');
-    $('#prev').css('opacity', '0');
-    $('#prev').css('visibility', 'hidden');
+    $('#prev').css('display', 'none');
 
     program = $('#input').html().replace(/<span class="comment">[^<]*<\/span><br>/gm, '').split('<br>');
     var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '').replace(/^\n/gm, '');
@@ -112,21 +111,15 @@ function formatData(data) {
 }
 
 function checkVisibility() {
-	if (cur_state == 1) {
-		$('#prev').css('opacity', '0');
-		$('#next').css('opacity', '1');
-		$('#prev').css('visibility', 'hidden');
-		$('#next').css('visibility', 'visible');
+	if (cur_state == 0) {
+		$('#prev').fadeOut(100);
+		$('#next').fadeIn(100);
 	} else if (cur_state == states.length-1) {
-		$('#prev').css('opacity', '1');
-		$('#next').css('opacity', '0');
-		$('#prev').css('visibility', 'visible');
-		$('#next').css('visibility', 'hidden');
+		$('#prev').fadeIn(100);
+		$('#next').fadeOut(100);
 	} else {
-		$('#prev').css('opacity', '1');
-		$('#next').css('opacity', '1');
-		$('#prev').css('visibility', 'visible');
-		$('#next').css('visibility', 'visible');
+		$('#prev').fadeIn(100);
+		$('#next').fadeIn(100);
 	}
 }
 
@@ -152,6 +145,7 @@ function emulate(text) {
         state.variables = [];
         states.push(state);
     }
+    console.log(states);
     return states;
 }
 

@@ -3376,14 +3376,6 @@ input, select, textarea {
 		z-index: 999;
 	}
 	
-	#prev, #next {
-		transition:visibility .3s linear,opacity .3s linear;
-	}
-	
-	#prev-next .col-md-6 {
-		padding: 3px 0;
-	}
-	
 	#run .button, #prev-next .button {
 		background-color: #fff;
 	}
