@@ -3444,6 +3444,11 @@ canvas {
 	padding-bottom: 20em;
 }
 
+.error {
+	font-weight: bold;
+	color: #ff446c;
+}
+
 [contenteditable]:focus { outline: 0px solid transparent; }
 *[contenteditable="true"]{ display: inline-block; }
 

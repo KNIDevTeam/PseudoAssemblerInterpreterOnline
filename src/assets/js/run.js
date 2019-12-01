@@ -9,8 +9,8 @@ function show(direction) {
         let logo_y = getPos(document.getElementById("logo-id")).y;
         let button_y = getPos(document.getElementById("prev-next")).y;
         if(direction == "next") [logo_y, button_y] = [button_y, logo_y];
-        spawnCharacters("run1", {x: 0, y: logo_y, w: canvas.width*0.01});
-        spawnCharacters("run2", {x: canvas.width, y: button_y, w: 0});
+        spawnCharacters("run1", {x: 0, y: logo_y, w: canvas.width*0.01}, '#00f4a4');
+        spawnCharacters("run2", {x: canvas.width, y: button_y, w: 0}, '#00f4a4');
         animating = 1, requestAnimationFrame(draw);
     }
 
@@ -36,6 +36,30 @@ $('#next').on('click', function() {
 
 //initialise
 $('#run').on('click', function() {
+    //check for errors
+    var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '').replace(/^\n/gm, '');
+    try {
+        states = emulate(pure_text);
+    } catch(err) {
+        //animate
+        $('#errors').html(`<span class="error">${err}</span>`);
+        spawnCharacters("errors", getPos(document.getElementById("errors")), '#ff446c');
+        if(!animating) animating = 1, requestAnimationFrame(draw);
+
+        $('#errors').addClass('animated shake');
+        var node = document.querySelector('#errors');
+        node.addEventListener('animationend', function() {
+            $('#errors').removeClass('animated shake');
+            node.removeEventListener('animationend', this);
+            if (typeof callback === 'function') callback()
+        });
+        return;
+    }
+
+    program = $('#input').html().replace(/<span class="comment">[^<]*<\/span><br>/gm, '').split('<br>');
+
+    //change visibility of elements
+    $('#errors').css('display', 'none');
     $('#run').css('display', 'none');
     $('#input').css('display', 'none');
     $('#prev-next').css('display', 'block');
@@ -43,12 +67,7 @@ $('#run').on('click', function() {
     $('#prev').css('opacity', '0');
     $('#prev').css('visibility', 'hidden');
 
-    program = $('#input').html().replace(/<span class="comment">[^<]*<\/span><br>/gm, '').split('<br>');
-    var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '').replace(/^\n/gm, '');
-
-    //emulate program
-    states = emulate(pure_text);
-
+    //show results
     show();
     $('#results').addClass('animated fadeIn');
     $('#program').addClass('animated fadeIn');
@@ -132,13 +151,13 @@ function checkVisibility() {
 
 //state generation
 function emulate(text) {
-    let states = [];
+    let temp_states = [];
     let res = main_parse(text.split('\n'));
 
     if(res[1].length === 0) {
         let states_parser = main_execute(res[0], res[2])[0];
         for(let i = 0; i < states_parser.length; i++) {
-            states.push(translate(states_parser[i]));
+            temp_states.push(translate(states_parser[i]));
         }
     } else {
         let state = {};
@@ -149,10 +168,10 @@ function emulate(text) {
         state.memory = [];
         state.line = 0;
         state.variables = [];
-        states.push(state);
-        states.push(state);
+        temp_states.push(state);
+        temp_states.push(state);
     }
-    return states;
+    return temp_states;
 }
 
 function translate(state) {
