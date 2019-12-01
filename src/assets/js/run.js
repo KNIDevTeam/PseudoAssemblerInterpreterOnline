@@ -42,7 +42,8 @@ $('#run').on('click', function() {
     $('#input').css('display', 'none');
     $('#prev-next').css('display', 'block');
     $('#program').css('display', 'block');
-    $('#prev').css('display', 'none');
+    $('#prev').css('opacity', '0');
+    $('#prev').css('visibility', 'hidden');
 
     program = $('#input').html().replace(/<span class="comment">[^<]*<\/span><br>/gm, '').split('<br>');
     var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '').replace(/^\n/gm, '');
@@ -112,14 +113,20 @@ function formatData(data) {
 
 function checkVisibility() {
 	if (cur_state == 1) {
-		$('#prev').fadeOut(100);
-		$('#next').fadeIn(100);
+		$('#prev').css('opacity', '0');
+		$('#next').css('opacity', '1');
+		$('#prev').css('visibility', 'hidden');
+		$('#next').css('visibility', 'visible');
 	} else if (cur_state == states.length-1) {
-		$('#prev').fadeIn(100);
-		$('#next').fadeOut(100);
+		$('#prev').css('opacity', '1');
+		$('#next').css('opacity', '0');
+		$('#prev').css('visibility', 'visible');
+		$('#next').css('visibility', 'hidden');
 	} else {
-		$('#prev').fadeIn(100);
-		$('#next').fadeIn(100);
+		$('#prev').css('opacity', '1');
+		$('#next').css('opacity', '1');
+		$('#prev').css('visibility', 'visible');
+		$('#next').css('visibility', 'visible');
 	}
 }
 
