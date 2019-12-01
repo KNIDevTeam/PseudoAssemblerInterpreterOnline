@@ -146,7 +146,7 @@
 				},
 				"ST": {
 				"short": "Command loads content of source register to target memory block",
-				"long": "“ST” (Store) command content of source register to target memory block. Note that it is possible to load value of an undefined register – resulting value would probably be random. <p><b>“ST” command is the only command of pseudoassembler in which second argument is a target location (ARG1 → ARH2). For all commands except “ST” we have: ARG1 ← ARG2. </b></p>",
+				"long": "“ST” (Store) command content of source register to target memory block. Note that it is possible to load value of an undefined register – resulting value would probably be random. <p><b>“ST” command is the only command of pseudoassembler in which second argument is a target location (ARG1 → ARG2). For all commands except “ST” we have: ARG1 ← ARG2. </b></p>",
 				"params": "[label] ST [source register], [target memory block] <p> Note that you can choose from four different ways of addressing using [target memory block]. Look at “Memory addressing” section for further assistance.</p>",
 				"examples": " Suppose we prepared variable RESULT and register REG1{1}. Now let's analyse the result of executing the following code: <pre>ST\t1, RESULT\t# RESULT = 1</pre>"
 				}
