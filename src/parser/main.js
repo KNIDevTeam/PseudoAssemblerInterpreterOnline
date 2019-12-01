@@ -76,7 +76,6 @@ function main_parse(lines)
 function main_execute(program, initial_state) {
 	let states = [];
 	let stat = initial_state;
-	states.push(JSON.parse(JSON.stringify(stat)));
 	for(stat.line = 0; stat.line < program.length; stat.line++)
 	{
 		if(stat.line_execution_count[stat.line] === undefined) stat.line_execution_count[stat.line] = 0;
@@ -85,7 +84,7 @@ function main_execute(program, initial_state) {
 		states.push(JSON.parse(JSON.stringify(stat)));
 		program[stat.line].translate_address(stat);
 		stat = program[stat.line].execute(stat);
-
 	}
+	states.push(JSON.parse(JSON.stringify(stat)));
 	return states;
 }
