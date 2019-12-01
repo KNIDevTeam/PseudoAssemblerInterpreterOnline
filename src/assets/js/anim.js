@@ -22,28 +22,28 @@ function prepareCanvas() {
     ctx.imageSmoothingEnabled = true;
     ctx.textAlign = "center"; 
     ctx.textBaseline = "middle";
-    ctx.fillStyle = "#00f4a4";
 }
 
 $(window).resize(prepareCanvas());
 
 $("#logo-id").on('mouseenter', function() {
     if(animating_logo) return;
-    spawnCharacters("logo-id", getPos(document.getElementById("logo-id")));
+    spawnCharacters("logo-id", getPos(document.getElementById("logo-id")), '#00f4a4');
     animating_logo = 1;
     if(!animating) animating = 1, requestAnimationFrame(draw);
 });
 
 $("#run").on('mouseenter', function() {
     if(animating_button) return;
-    spawnCharacters("run", getPos(document.getElementById("run")));
+    spawnCharacters("run", getPos(document.getElementById("run")), '#00f4a4');
     animating_button = 1;
     if(!animating) animating = 1, requestAnimationFrame(draw);
 });
 
-function spawnCharacters(el, el_pos) {
+function spawnCharacters(el, el_pos, color) {
     for(var i = 3; i <= 10; i++) {
         particles.push({
+            color: color,
             spawner: el,
             origin: el_pos,
             initScroll: window.scrollY,
@@ -53,6 +53,7 @@ function spawnCharacters(el, el_pos) {
             speed: -1 * i * i / 5,
             char: String.fromCharCode(0x2200 + Math.random() * (0x22FF - 0x2200 + 1))});
         particles.push({
+            color: color,
             spawner: el,
             origin: el_pos,
             initScroll: window.scrollY,
@@ -73,10 +74,15 @@ function draw() {
         else {
             particle.x += particle.speed;
             particle.speed *= 1.05;
-            ctx.globalAlpha = Math.min(1, Math.abs(50 / particle.speed));
-            if(Math.abs(particle.x - particle.origin.x) > particle.targetDist) 
-                ctx.fillText(particle.char, Math.round(particle.x), 
-                Math.round(particle.y - (particle.spawner == "logo-id" || particle.spawner == "run1" ? window.scrollY - particle.initScroll : 0))); 
+            if(Math.abs(particle.x - particle.origin.x) > particle.targetDist) {
+                ctx.fillStyle = particle.color;
+                ctx.globalAlpha = Math.min(1, Math.abs(20 / particle.speed));
+                ctx.fillText(
+                    particle.char, 
+                    Math.round(particle.x), 
+                    Math.round(particle.y - (particle.spawner == "logo-id" || particle.spawner == "run1" ? window.scrollY - particle.initScroll : 0))
+                );
+            }
             particles[id] = particle;
         }
     });
