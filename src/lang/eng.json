@@ -125,6 +125,30 @@
 					"long": "“JN” command jumps to program line with provided label depending upon the condition. If the result of last operation is negative (status register = “10”) a jump to target line would be performed. It’s useful for designing loops or if-like conditions.",
 					"params": "[label] JN [target label]",
 					"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{2}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tS\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJN\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = 2 (2 + 1 + (-1))</pre>"
+				},
+				"L": {
+				"short": "Command loads content of memory block to target register.",
+				"long": "“L” command loads content of memory block to target register. Note that it is possible to load value of an undefined variable (created using DS command) – resulting value would probably be random.",
+				"params": "[label] L [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+				"examples": " Suppose we declared variable VAR{1} and prepared register REG1. Now let's analyse the result of executing the following code: <pre>L\t1, VAR\t# REG1 = 1</pre>"
+				},
+				"LR": {
+				"short": "Command loads content of source register to target register.",
+				"long": "“LR” command loads content of of source register to target register. Note that it is possible to load value of an undefined register – resulting value would probably be random.",
+				"params": "[label] LR [target register], [source register]",
+				"examples": " Suppose prepared registers REG1{3}, REG2{4}. Now let's analyse the result of executing the following code: <pre>LR\t2, 1\t# REG2 = 3, REG1 = 3</pre>"
+				},
+				"LA": {
+				"short": "Command loads an address of memory block to target register",
+				"long": "“LA” command an address of memory block to target register. It’s useful for iterating over arrays using loops.",
+				"params": "[label] LA [target register], [memory block] <p> Note that you can choose from four different ways of addressing using [memory block]. Look at “Memory addressing” section for further assistance.</p>",
+				"examples": " Suppose we declared variables and array: VAR1, VAR2, ARR1[3] and prepared register REG1. Now let's analyse the result of executing the following code: <pre>LA\t1, ARR1\t# REG1 = 8</pre>"
+				},
+				"ST": {
+				"short": "Command loads content of source register to target memory block",
+				"long": "“ST” command content of source register to target memory block. Note that it is possible to load value of an undefined register – resulting value would probably be random. <p><b>“ST” command is the only command of pseudoassembler in which second argument is a target location (ARG1 → ARH2). For all commands except “ST” we have: ARG1 ← ARG2. </b></p>",
+				"params": "[label] ST [source register], [target memory block] <p> Note that you can choose from four different ways of addressing using [target memory block]. Look at “Memory addressing” section for further assistance.</p>",
+				"examples": " Suppose we prepared variable RESULT and register REG1{1}. Now let's analyse the result of executing the following code: <pre>ST\t1, RESULT\t# RESULT = 1</pre>"
 				}
 			}
 		}
