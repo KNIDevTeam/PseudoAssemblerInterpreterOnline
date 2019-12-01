@@ -11,7 +11,7 @@ function Factory(name, command_constructor) {
         if (this.is_it_me(args))
         {
             let lbl = this.get_label(args);
-            this.generate_args(args.slice(lbl === "" ? 0 : 1));
+            this.generate_args(args.slice(lbl === "" ? 0 : 1), lbl);
             return [this.fabricate(), lbl];
         }
         else return this.next.build(line);
@@ -111,9 +111,9 @@ function Factory_Allocation(name, command_constructor) {
         return new this.comm(this.size, this.rand, this.value)
     };
 
-    this.generate_args = function (args) {
+    this.generate_args = function (args, label) {
         args = this.clear_args(args);
-        this.check_coherency(args);
+        this.check_coherency(args, label);
         if (types.includes(args[1])) {
             this.size = 1;
             if (args.length === 3) {
@@ -135,7 +135,8 @@ function Factory_Allocation(name, command_constructor) {
         }
     };
 
-    this.check_coherency = function (args) {
+    this.check_coherency = function (args, label) {
+        if(label === "") throw "declaration has to have a label";
         if(args.length < 2 || ((types.includes(args[1]) && (args.length !== 2 && args.length !== 3))))
             throw "wrong number of arguments: " + args.length;
         if(types.includes(args[2]) && (args.length !== 3 && args.length !== 4)) throw "wrong number of arguments: " + args.length;
