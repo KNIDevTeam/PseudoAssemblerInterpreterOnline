@@ -1,6 +1,7 @@
+var timeout_threshold = 1000;
+
 function main_parse(lines)
 {
-	let timeout_treshold = 1000;
 	function State()
 	{
 		this.registers = [];
@@ -15,6 +16,7 @@ function main_parse(lines)
 	let program = [];
 	let factories = [];
 	let stat = new State();
+	let errors = [];
 	factories.push(new Factory_Allocation("DC", Command_Allocate_Value));
 	factories.push(new Factory_Allocation("DS", Command_Allocate_No_Value));
 	factories.push(new Factory_Registers("AR", Command_Add_Registers));
@@ -51,7 +53,14 @@ function main_parse(lines)
 		else
 		{
 			console.log(lines[i]);
-			let res = factories[0].build(lines[i]);
+			let res = [];
+			try
+			{
+				res = factories[0].build(lines[i]);
+			}
+			catch (error) {
+				errors.push([error, i - skipped]);
+			}
 			program.push(res[0]);
 			if(res[1] !== "")
 			{
@@ -61,16 +70,22 @@ function main_parse(lines)
 		}
 	}
 	console.log(program);
+	return [program, errors, stat];
+}
+
+function main_execute(program, initial_state) {
 	let states = [];
+	let stat = initial_state;
 	states.push(JSON.parse(JSON.stringify(stat)));
 	for(stat.line = 0; stat.line < program.length; stat.line++)
 	{
 		if(stat.line_execution_count[stat.line] === undefined) stat.line_execution_count[stat.line] = 0;
 		else stat.line_execution_count[stat.line]++;
-		if(stat.line_execution_count[stat.line] > timeout_treshold) throw "Infinity Loop Error";
+		if(stat.line_execution_count[stat.line] > timeout_threshold) throw "Infinity Loop Error";
+		states.push(JSON.parse(JSON.stringify(stat)));
 		program[stat.line].translate_address(stat);
 		stat = program[stat.line].execute(stat);
-		states.push(JSON.parse(JSON.stringify(stat)));
+
 	}
 	return states;
 }

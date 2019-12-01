@@ -33,7 +33,7 @@ function Command_Memory(register_left, shift, base_register)
 		}
 		else
 		{
-			throw "WrongShiftException";
+			throw "No such Label";
 		}
 		console.log(base, this.constructor.name);
 		this.address = base;

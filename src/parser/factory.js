@@ -20,6 +20,8 @@ function Factory(name, command_constructor) {
         return (args[0] === this.name || args[1] === this.name);
     };
     this.get_label = function (args) {
+        args = this.clear_args(args);
+        if(/^\d/.exec(args[0])) throw "Label can't start with number";
 		return (args[0] === this.name ? "" : args[0]);
     };
     this.clear_args = function (args) {

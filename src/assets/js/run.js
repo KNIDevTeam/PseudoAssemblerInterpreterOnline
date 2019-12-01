@@ -127,10 +127,24 @@ function checkVisibility() {
 function emulate(text) {
     let states = [];
     let res = main_parse(text.split('\n'));
-    for(let i = 0; i < res.length; i++) {
-        states.push(translate(res[i]));
+    console.log(res[1]);
+    if(res[1].length === 0)
+    {
+        let states_parser = main_execute(res[0], res[2]);
+        for(let i = 0; i < states_parser.length; i++) {
+            states.push(translate(states_parser[i]));
+        }
     }
-    console.log(states);
+    else
+    {
+        let state = {};
+        state.registry = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        state.status = 0;
+        state.memory = [];
+        state.line = 0;
+        state.variables = [];
+        states.push(state);
+    }
     return states;
 }
 
