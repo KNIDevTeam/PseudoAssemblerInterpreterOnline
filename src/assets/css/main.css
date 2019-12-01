@@ -3447,7 +3447,6 @@ canvas {
 .error {
 	font-weight: bold;
 	color: #ff446c;
-	
 }
 
 [contenteditable]:focus { outline: 0px solid transparent; }
