@@ -20,10 +20,11 @@ function Command_Memory(register_left, shift, base_register)
 		let base = 0;
 		if(this.base_register === -1) base += state.registers[14] / 4;
 		if(state.registers[this.base_register] !== undefined) base += state.registers[this.base_register] / 4;
-		let pattern = /^-[0-9]*$/;
+		let pattern = /^-*[0-9]*$/;
 		if(pattern.test(this.shift)) base += parseInt(this.shift) / 4;
 		else if(state.memory_labels[this.shift] !== undefined) base += state.memory_labels[this.shift];
 		else throw "No such Label " + this.shift;
+		console.log(this.shift);
 		console.log(base);
 		this.address = base;
 	};
