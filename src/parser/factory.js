@@ -42,8 +42,8 @@ function Factory_Registers(name, command_constructor) {
 
 
     this.check_coherency = function (args) {
-        if (!/^\d*$/.exec(args[1])) throw "left register must be positive int";
-        if (!/^\d*$/.exec(args[2])) throw "right register must be positive int";
+        if (!/^\d*$/.exec(args[1]) || parseInt(args[1]) > 15) throw "left register must be positive int lower than 15";
+        if (!/^\d*$/.exec(args[2]) || parseInt(args[1]) > 15) throw "right register must be positive int lower than 15";
         if (!(args.length === 3)) throw "wrong number of arguments";
 
     };
@@ -65,7 +65,7 @@ function Factory_Memory(name, command_constructor) {
         return new this.comm(this.register_left, this.shift, this.base_register);
     };
     this.check_coherency = function (args) {
-        if (!/^\d*$/.exec(args[1])) throw "register number must be positive int";
+        if (!/^\d*$/.exec(args[1]) || parseInt(args[1]) > 15) throw "register number must be positive int lower than 15";
         if (!/^-*\d*$/.exec(args[2]) && !/^\D/.exec(args[2])) throw "Label can't start with number";
         if (args.length === 4 && !/^\d*$/.exec(args[3])) throw "register number must be positive int";
         if (args.length !== 4 && args.length !== 3) throw "wrong number of args";
