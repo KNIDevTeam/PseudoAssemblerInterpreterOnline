@@ -151,6 +151,7 @@ function emulate(text) {
         state.line = 0;
         state.variables = [];
         states.push(state);
+        states.push(state);
     }
     console.log(states);
     return states;

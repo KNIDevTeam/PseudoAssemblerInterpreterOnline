@@ -13,7 +13,8 @@ function main_parse(lines)
 		this.lbls = Object();
 		this.line_execution_count = {};
 		this.value_defined_registers = [];
-		for(let i = 0; i < 16; i++) this.value_defined_registers[i] = false;
+		for(let i = 0; i < 16; i++) this.value_defined_registers[i] = 0;
+		this.value_defined_registers[14] = 1;
 		this.value_defined_memory = [];
 	}
 	let program = [];
@@ -84,6 +85,10 @@ function main_execute(program, initial_state) {
 		if(stat.line_execution_count[stat.line] > timeout_threshold) throw "Infinity Loop Error";
 		console.log(program[stat.line].constructor.name);
 		states.push(JSON.parse(JSON.stringify(stat)));
+		for(let i = 0; i < stat.value_defined_registers.length; i++)
+			if(stat.value_defined_registers[i] === 2) stat.value_defined_registers[i] = 1;
+		for(let i = 0; i < stat.value_defined_memory.length; i++)
+			if(stat.value_defined_memory[i] === 2) stat.value_defined_memory[i] = 1;
 		program[stat.line].translate_address(stat);
 		stat = program[stat.line].execute(stat);
 	}
