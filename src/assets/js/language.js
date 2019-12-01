@@ -1,3 +1,5 @@
+var lang = {};
+
 function sleep(milliseconds) {
   var start = new Date().getTime();
   for (var i = 0; i < 1e7; i++) {
@@ -7,7 +9,34 @@ function sleep(milliseconds) {
   }
 }
 
-var lang = {};
+function eraseCookie(cname) {
+	document.cookie = cname + "= ;-1;path=/";
+}
+
+function setCookie(cname, cvalue, exdays) {
+	eraseCookie(cname);
+	cvalue = cvalue.replace(/(\r\n|\n|\r)/gm, "|n|");
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires="+ d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+	var name = cname + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	for(var i = 0; i <ca.length; i++) {
+	  var c = ca[i];
+	  while (c.charAt(0) == ' ') {
+		c = c.substring(1);
+	  }
+	  if (c.indexOf(name) == 0) {
+		return c.substring(name.length, c.length).replace(/\|n\|/g, "\n");
+	  }
+	}
+	return "";
+}
 
 function refreshTooltip() {
 	$('.command-name').off();
@@ -68,10 +97,29 @@ function recompose(obj,string){
     return newObj;
 }
 
+function setFlags(lang) {
+	if (lang == 'pl') {
+		$('#pl-flag').addClass('active');
+		$('#uk-flag').addClass('inactive');
+	} else {
+		$('#pl-flag').addClass('inactive');
+		$('#uk-flag').addClass('active');
+	}	
+}
+
 function getLang() {
+	let current_lang = getCookie('lang');
+	
+	if (current_lang != 'pl') {
+		current_lang = 'eng';
+		setCookie('lang', 'eng', 15);
+	}
+	
+	setFlags(current_lang);
+	
 	$.ajax({
 		type: 'GET',
-		url: 'lang/eng.json',
+		url: 'lang/' + current_lang + '.json',
 		async: false,
 		beforeSend: function (xhr) {
 		  if (xhr && xhr.overrideMimeType) {
@@ -105,3 +153,9 @@ console.log(lang);
 setLang();
 
 $('#commands-content').html(getCommandsDoc());
+
+$('.inactive').click(() => {
+	let new_lang = $('.inactive').attr('data-lang-type');
+	setCookie('lang', new_lang, 15);
+	location.reload();
+});
