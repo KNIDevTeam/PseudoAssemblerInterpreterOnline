@@ -6,6 +6,7 @@ function Command_Arthmetic()
 		if(this.type === "memory") state.registers[this.register_left] = this.make_calculation(state.registers[this.register_left], state.memory[this.address]);
 		if(this.type === "register") state.registers[this.register_left] = this.make_calculation(state.registers[this.register_left], state.registers[this.register_right]);
 		state.sign_flag = Math.sign(state.registers[this.register_left]);
+		state.value_defined_registers[this.register_left] = true;
 		return state;
 	};
 }

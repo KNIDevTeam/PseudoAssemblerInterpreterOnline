@@ -163,7 +163,8 @@ function translate(state) {
     res.status = state.sign_flag;
     res.memory = state.memory;
     res.line = state.line;
-
+    res.reg_init = state.value_defined_registers;
+    res.mem_init = state.value_defined_memory;
     res.variables = Object.keys(state.memory_labels);
     return res;
 }
