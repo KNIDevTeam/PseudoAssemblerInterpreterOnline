@@ -40,7 +40,7 @@ function Command_Load_Address(register_left, shift, base_register)
 	Command_Memory.call(this, register_left, shift, base_register);
 	this.execute = function(state)
 	{
-		state.registers[this.register_left] = this.address;
+		state.registers[this.register_left] = this.address * 4;
 		state.value_defined_registers[this.register_left] = 2;
 		return state;
 	}

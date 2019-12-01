@@ -15,7 +15,6 @@ function show(direction) {
     }
 
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
-    console.log(cur_state);
     let cur_program = JSON.parse(JSON.stringify(program));
     cur_program[states[cur_state - 1].line] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state - 1].line] + "</div>";
     $('#program').html('<h2>Program</h2>' + cur_program.join('<br>'));
@@ -146,6 +145,8 @@ function emulate(text) {
     {
         let state = {};
         state.registry = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        res.reg_init = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        res.mem_init = [];
         state.status = 0;
         state.memory = [];
         state.line = 0;
@@ -153,13 +154,11 @@ function emulate(text) {
         states.push(state);
         states.push(state);
     }
-    console.log(states);
     return states;
 }
 
 function translate(state) {
     let res = {};
-
     res.registry = state.registers;
     res.status = state.sign_flag;
     res.memory = state.memory;

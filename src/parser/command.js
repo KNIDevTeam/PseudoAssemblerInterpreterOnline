@@ -18,21 +18,12 @@ function Command_Memory(register_left, shift, base_register)
 	this.translate_address = function(state)
 	{
 		let base = 0;
-		if(this.base_register === -1) base += state.registers[14];
-		if(state.registers[this.base_register] !== undefined) base += state.registers[this.base_register];
+		if(this.base_register === -1) base += state.registers[14] / 4;
+		if(state.registers[this.base_register] !== undefined) base += state.registers[this.base_register] / 4;
 		let pattern = /^[0-9]*$/;
-		if(pattern.test(this.shift))
-		{
-			base += parseInt(this.shift);
-		}
-		else if(state.memory_labels[this.shift] !== undefined)
-		{
-			base += state.memory_labels[this.shift];
-		}
-		else
-		{
-			throw "No such Label";
-		}
+		if(pattern.test(this.shift)) base += parseInt(this.shift);
+		else if(state.memory_labels[this.shift] !== undefined) base += state.memory_labels[this.shift];
+		else throw "No such Label";
 		this.address = base;
 	};
 }
