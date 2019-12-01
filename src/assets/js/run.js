@@ -46,7 +46,10 @@ $('#run').on('click', function() {
 
     program = $('#input').html().replace(/<span class="comment">[^<]*<\/span><br>/gm, '').split('<br>');
     var pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '').replace(/^\n/gm, '');
+
+    //emulate program
     states = emulate(pure_text);
+
     show();
     $('#results').addClass('animated fadeIn');
     $('#program').addClass('animated fadeIn');

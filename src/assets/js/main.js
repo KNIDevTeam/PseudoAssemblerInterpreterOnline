@@ -47,6 +47,7 @@ window.cookieconsent.initialise({
   "palette": {
     "popup": {
 	  "background": "#fff",
+	  "text": "#585858"
     },
     "button": {
 	  "background": "#00f4a4",

@@ -3390,7 +3390,8 @@ input, select, textarea {
 
 .cc-window {
 	border-style: solid;
-  	border-width: 1px;
+	border-width: 1px;
+	border-color: #585858;
 }
 
 .btn {
