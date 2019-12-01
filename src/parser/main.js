@@ -84,6 +84,7 @@ function main_execute(program, initial_state) {
 		program[stat.line].translate_address(stat);
 		stat = program[stat.line].execute(stat);
 	}
+	stat.line = stat.line-1;
 	states.push(JSON.parse(JSON.stringify(stat)));
 	console.log(states);
 	return states;
