@@ -33,121 +33,121 @@
 			"header": "Komendy",
 			"content": {
 				"DS": {
-					"short": "Command declares new variable or array without initial value.",
+					"short": "Deklaracja zmiennej lub tablicy bez wartości początkowej.",
 					"long": "“DS” command reserves required memory space for new variable or array and links provided label to that area of memory.",
 					"params": "<pre>[label] DS [variable type]\t\t# Declaring variable</pre><pre>[label] DS [size]*[variable type]\t# Declaring array</pre>Currently the only supported type of the variable is INTEGER.",
 					"examples": "Let's analyse a short example: <pre>VARIABLE1\tDC\tINTEGER</pre><pre>ARRAY1\t\tDC\t3*INTEGER</pre>After executing these commands, following objects will be created:<pre>VARIABLE1 = ?,  ARRAY1 = {?, ?, ?}. </pre><b>Note that all initial values of variables declared using “DS” are unknown (most likely random)! Under no circumstances should you work on them before assigning your own values.</b>"
 				},
 				"DC": {
-					"short": "Command declares new variable or array with initial value.",
+					"short": "Deklaracja zmiennej lub tablicy z wartością początkową.",
 					"long": "“DC” command reserves required memory space for new variable or array and links provided label to that area of memory. Unlike “DS” command, declared variable has initial value which should specified within the code line.",
 					"params": "<pre>[label] DC [variable type]([value])\t\t# Declaring variable</pre><pre>[label] DC [size]*[variable type]([value])\t# Declaring array</pre>Currently the only supported type of the variable is INTEGER.",
 					"examples": "Let's analyse a short example: <pre>VARIABLE1\tDC\tINTEGER(7)</pre><pre>ARRAY1\t\tDC\t3*INTEGER(12)</pre>After executing these commands, following objects will be created:<pre>VARIABLE1 = 7,</pre><pre>ARRAY1 = {12, 12, 12}.</pre>"
 				},
 				"AR": {
-					"short": "Command adds content of registers.",
+					"short": "Dodawanie zawartości rejestrów.",
 					"long": "“AR” command adds content of two registers and store the result of this operation in target register.",
 					"params": "[label] AR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{2} and REG2{3}. Let's analyse the result of the following operation: <pre>\tAR\t1, 2\t# REG1 = 5 (REG1 := REG1 + REG2), REG2 = 3</pre>"
 				},
 				"A": {
-					"short": "Command adds content of register and memory block.",
+					"short": "Dodawanie zawartości rejestru i komórki pamięci.",
 					"long": "“A” command adds content of register and memory block and store the result of this operation in target register.",
 					"params": "[label] A [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{-1}. Now let's analyse the result of executing the following code: <pre>\tA\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"SR": {
-					"short": "Command subtracts content of registers.",
+					"short": "Odejmowanie zawartości rejestrów.",
 					"long": "“SR” command subtracts content of two registers and store the result of this operation in target register.",
 					"params": "[label] SR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{-12} and REG2{4}. Let's analyse the result of the following operation: <pre>\tSR\t1, 2\t# REG1 = -16 (REG1 := REG1 - REG2), REG2 = 4</pre>"
 				},
 				"S": {
-					"short": "Command subtracts content of register and memory block.",
+					"short": "Odejmowanie zawartości rejestru i komórki pamięci.",
 					"long": "“S” command subtracts content of register and memory block and store the result of this operation in target register.",
 					"params": "[label] S [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{14} and prepared register REG1{3}. Now let's analyse the result of executing the following code: <pre>\tS\t1, VAR\t# REG1 = 11</pre>"
 				},
 				"MR": {
-					"short": "Command multiplies content of registers.",
+					"short": "Mnożenie zawartości rejestrów.",
 					"long": "“MR” command multiplies content of two registers and store the result of this operation in target register.",
 					"params": "[label] MR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{4} and REG2{6}. Let's analyse the result of the following operation: <pre>\tMR\t1, 2\t# REG1 = 24 (REG1 := REG1 * REG2), REG2 = 6</pre>"
 				},
 				"M": {
-					"short": "Command multiplies content of register and memory block.",
+					"short": "Mnożenie zawartości rejestru i komórki pamięci.",
 					"long": "“M” command multiplies content of register and memory block and store the result of this operation in target register.",
 					"params": "[label] M [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{8}. Now let's analyse the result of executing the following code: <pre>\tM\t1, VAR\t# REG1 = 16</pre>"
 				},
 				"DR": {
-					"short": "Command divides content of registers.",
+					"short": "Dzielenie zawartości rejestrów.",
 					"long": "“DR” command divides content of two registers and store the result of this operation in target register.",
 					"params": "[label] DR [target register], [source register]",
 					"examples": "Suppose we have already prepared registers – REG1{8} and REG2{2}. Let's analyse the result of the following operation: <pre>\tDR\t1, 2\t# REG1 = 4 (REG1 := REG1 / REG2), REG2 = 2</pre> <p>Let's analyse another example: REG3{2} and REG4{0}. The result of the following operation is: <pre>\tDR\t3, 4\t# REG3 = 2, REG4 = 0, Status register = '11'</pre></p>"
 				},
 				"D": {
-					"short": "Command divides content of register and memory block.",
+					"short": "Dzielenie zawartości rejestru i komórki pamięci.",
 					"long": "“D” command divides content of register and memory block and store the result of this operation in target register.",
 					"params": "[label] D [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{3}. Now let's analyse the result of executing the following code: <pre>\tD\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"C": {
-					"short": "Command compares content of register and memory block.",
+					"short": "Porównanie zawartości rejestru i komórki pamięci",
 					"long": "“C” command compares content of register and memory block by subtracting content of register and content of memory block. Depending on the sign of the result of this subtraction, status register is changed. content of register and memory block won’t change.",
 					"params": "[label] C [register], [memory block] <p> Note that you can choose from four different ways of addressing using [memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{2}. Now let's analyse the result of executing the following code: <pre>\tC\t1, VAR\t# Status register = '00'</pre>"
 				},
 				"CR": {
-					"short": "Command compares content of two registers.",
+					"short": "Porównanie zawartości rejestrów.",
 					"long": "“CR” command compares content of two registers by subtracting content of first register and content of second register. Depending on the sign of the result of this subtraction, status register is changed. content of both registers won’t change.",
 					"params": "[label] CR [first register], [second register]",
 					"examples": "Suppose we have already prepared registers – REG1{2} and REG2{3}. Let’s analyse the result of following operation: <pre>\tCR\t1, 2\t# Status register = '10'</pre>"
 				},
 				"J": {
-					"short": "Command unconditionally jumps to program line with provided label",
+					"short": "Bezwarunkowy skok do linii programu opatrzonej etykietą.",
 					"long": "“J” command unconditionally jumps to program line with provided label. It’s useful for designing loops or default actions in if-like conditions.",
 					"params": "[label] J [target label]",
 					"examples": " Suppose we declared variable VAR{1} and prepared register REG1{0}. Now let's analyse the result of executing the following code: <pre>START\tA\t1, VAR\t# REG1 = 1 </pre><pre>\tA\t1, VAR\t# REG1 = 2 </pre><pre>JUMP\tJ\tEND\t</pre><pre>\tA\t1, VAR\t</pre><pre>\tA\t1, VAR\t</pre><pre>END\tST\t1, VAR\t# VAR1 = 2</pre>"
 				},
 				"JZ": {
-					"short": "Command jumps to program line with provided label if the result of last operation is equal to 0.",
+					"short": "Skok do linii programu opatrzonej etykietą jeśli wynik poprzedniej operacji jest równy 0.",
 					"long": "“JZ” command jumps to program line with provided label depending upon the condition. If the result of last operation is equal to 0 (status register = “00”) a jump to target line would be performed. It’s useful for designing loops or if-like conditions.",
 					"params": "[label] JZ [target label]",
 					"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{3}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tS\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJZ\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = 6</pre>"
 				},
 				"JP": {
-					"short": "Command jumps to program line with provided label if the result of last operation is positive.",
+					"short": "Skok do linii programu opatrzonej etykietą jeśli wynik poprzedniej operacji jest dodatni.",
 					"long": "“JP” command jumps to program line with provided label depending upon the condition. If the result of last operation is positive (status register = “01”) a jump to target line would be performed. It’s useful for designing loops or if-like conditions.",
 					"params": "[label] JP [target label]",
 					"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{-4}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tA\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJP\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = -10</pre>"
 				},
 				"JN": {
-					"short": "Command jumps to program line with provided label if the result of last operation is negative.",
+					"short": "Skok do linii programu opatrzonej etykietą jeśli wynik poprzedniej operacji jest ujemny.",
 					"long": "“JN” command jumps to program line with provided label depending upon the condition. If the result of last operation is negative (status register = “10”) a jump to target line would be performed. It’s useful for designing loops or if-like conditions.",
 					"params": "[label] JN [target label]",
 					"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{2}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tS\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJN\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = 2 (2 + 1 + (-1))</pre>"
 				},
 				"L": {
-				"short": "Command loads content of memory block to target register.",
+				"short": "Wczytanie zawartości komórki pamięci do rejestru.",
 				"long": "“L” command loads content of memory block to target register. Note that it is possible to load value of an undefined variable (created using DS command) – resulting value would probably be random.",
 				"params": "[label] L [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 				"examples": " Suppose we declared variable VAR{1} and prepared register REG1. Now let's analyse the result of executing the following code: <pre>L\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"LR": {
-				"short": "Command loads content of source register to target register.",
+				"short": "Wczytanie zawartości źródłowego rejestru do docelowego rejestru.",
 				"long": "“LR” command loads content of of source register to target register. Note that it is possible to load value of an undefined register – resulting value would probably be random.",
 				"params": "[label] LR [target register], [source register]",
 				"examples": " Suppose prepared registers REG1{3}, REG2{4}. Now let's analyse the result of executing the following code: <pre>LR\t2, 1\t# REG2 = 3, REG1 = 3</pre>"
 				},
 				"LA": {
-				"short": "Komenda wczytuje adres komórki pamięci do docelowego rejestrur",
+				"short": "Wczytanie adresu komórki pamięci do docelowego rejestru.",
 				"long": "Komenda “LA” wczytuje adres komórki pamięci do docelowego rejestru. Jest używana głónie do iterowania po tablicy w pętli.",
 				"params": "[etykieta] LA [docelowy rejestr], [komórka pamięci] <p> Należy zauważyć że użytkownik może korzystać z różnych sposobów adresowania. Więcej na ten temat można znaleźć w sekcji “Adresacja pamięci”.</p>",
 				"examples": " Załóżmy że mamy przygotowane komórki pamięci oraz tablicę: VAR1, VAR2, ARR1[3] a także rejestr REG1. Przeanalizujmy wynik wykonania następującej lini kodu: <pre>LA\t1, ARR1\t# REG1 = 8</pre>"
 				},
 				"ST": {
-				"short": "Komenda wczytuje zawartość źródłowego rejestru do docelowej komórki pamięci",
+				"short": "Wczytanie zawartości źródłowego rejestru do docelowej komórki pamięci",
 				"long": "“ST” Komenda wczytuje zawartość źródłowego rejestru do docelowej komórki pamięci. Należy pamiętać że możliwym jest wczytanie wartości z niezdefiniowanego rejestru – w rezultacie wartość ta będzie prawdopodobnie przypadkowa. <p><b>Komenda “ST” jest jedyną komendą w psseudoassemblerze której drugi argument jest argumentem docelowym (ARG1 → ARG2). Dla wszystkich komend poza “ST” mamy: ARG1 ← ARG2. </b></p>",
 				"params": "[etykieta] ST [źródłowy rejestr], [docelowa komórka pamięci] <p> Należy zauważyć że użytkownik może korzystać z różnych sposobów adresowania. Więcej na ten temat można znaleźć w sekcji “Adresacja pamięci”.</p>",
 				"examples": " Załóżmy że mamy przygotowaną komórkę RESULT oraz rejestr REG1{1}. Przeanalizujmy wynik wykonania następującej lini kodu: <pre>ST\t1, RESULT\t# RESULT = 1</pre>"
