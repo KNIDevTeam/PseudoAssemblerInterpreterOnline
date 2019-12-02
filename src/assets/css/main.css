@@ -3411,7 +3411,7 @@ canvas {
 	position: fixed;
 	z-index: 1;
 	image-rendering: crisp-edges;
-	pointer-events:none;
+	pointer-events: none;
 }
 
 /* formatting */

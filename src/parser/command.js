@@ -23,8 +23,8 @@ function Command_Memory(register_left, shift, base_register)
 		let pattern = /^-*[0-9]*$/;
 		if(pattern.test(this.shift)) base += parseInt(this.shift) / 4;
 		else if(state.memory_labels[this.shift] !== undefined) base += state.memory_labels[this.shift];
-		else throw "No such label " + this.shift;
-		if(base >= state.memory.length) throw "No such address in memory " + base;
+		else throw `Missing label: '${this.shift}'`;
+		if(base >= state.memory.length) throw `Invalid address: '${base * 4}'`;
 		this.address = base;
 	};
 }
