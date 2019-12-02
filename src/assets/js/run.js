@@ -44,38 +44,40 @@ $('#run').on('click', function() {
     try {
         states = emulate(pure_text);
     } catch(err) {
-        let message = (err.message ? err.message : err);
-        let line = (err.line ? err.line : -1);
+        if(typeof(err) === 'string') err = [{message: err, line: -1}];
 
-        let hidden_lines = 0;
-        if(line != -1) {
-            //handle comment spaghetti
-            let sans_html = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '').split('\n');
-            for(let i = 0; i < sans_html.length; i++) {
-                if(sans_html[i][0] == '#') hidden_lines++;
-                else if(sans_html[i] == pure_text[line]) break;
+        //add error messages
+        err.forEach(function(err, ind) {
+            let hidden_lines = 0;
+            if(err.line != -1) {
+                //handle comment spaghetti
+                let sans_html = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '').split('\n');
+                for(let i = 0; i < sans_html.length; i++) {
+                    if(sans_html[i][0] == '#') hidden_lines++;
+                    else if(sans_html[i] == pure_text[err.line]) break;
+                }
             }
-        }
 
-        //add error message
-        let temp = $('#input').html().split('<br>');
-        if(line == -1) temp.splice(0, 0, ''), line = 0;
+            let temp = $('#input').html().split('<br>');
+            if(err.line == -1) temp.splice(0, 0, ''), err.line = 0;
+            
+            temp[err.line + hidden_lines] = `<div id="error-${ind}" style="float: left">${temp[err.line + hidden_lines]}&nbsp; <span class="error">${err.message}</span></div>`;
+            temp = temp.join('<br>');
+            $('#input').html(temp);
 
-        temp[line + hidden_lines] = `<div id="errors" style="float: left">${temp[line + hidden_lines]}&nbsp; <span class="error">${message}</span></div>`;
-        temp = temp.join('<br>');
-        $('#input').html(temp);
+            //animate
+            spawnCharacters("error", getPos(document.getElementById(`error-${ind}`)), '#ff446c');
+            if(!animating) animating = 1, requestAnimationFrame(draw);
 
-        //animate
-        spawnCharacters("errors", getPos(document.getElementById("errors")), '#ff446c');
-        if(!animating) animating = 1, requestAnimationFrame(draw);
-
-        $('#errors').addClass('animated shake');
-        let node = document.querySelector('#errors');
-        node.addEventListener('animationend', function() {
-            $('#errors').removeClass('animated shake');
-            node.removeEventListener('animationend', this);
-            if (typeof callback === 'function') callback()
+            $(`#error-${ind}`).addClass('animated shake');
+            let node = document.querySelector(`#error-${ind}`);
+            node.addEventListener('animationend', function() {
+                $(`#error-${ind}`).removeClass('animated shake');
+                node.removeEventListener('animationend', this);
+                if (typeof callback === 'function') callback()
+            });
         });
+        
         return;
     }
 
@@ -105,23 +107,17 @@ function emulate(text) {
         let output = main_execute(res[0], res[2]);
         console.log(output);
         //throw errors if found
-        if(output[1]) throw {message: output[1], line: output[2]};
+        if(output[1]) throw [{ message: output[1], line: output[2] }];
 
         let states_parser = output[0];
         for(let i = 0; i < states_parser.length; i++) {
             temp_states.push(translate(states_parser[i]));
         }
     } else {
-        let state = {};
-        state.registry = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        res.reg_init = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        res.mem_init = [];
-        state.status = 0;
-        state.memory = [];
-        state.line = 0;
-        state.variables = [];
-        temp_states.push(state);
-        temp_states.push(state);
+        res[1].forEach(function(el, ind) {
+            res[1][ind] = {message: el[0], line: el[1]};
+        });
+        throw res[1];
     }
     return temp_states;
 }
