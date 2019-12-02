@@ -31,6 +31,7 @@ function show(direction) {
     
     $('#cur-line').addClass('animated flash');
 	checkVisibility();
+	refreshTooltip();
 }
 
 $('#prev').on('click', function() {
@@ -88,6 +89,7 @@ $('#run').on('click', function() {
             });
         });
 
+		refreshTooltip();
         return;
     }
 
