@@ -15,7 +15,7 @@ require(["pace"], (pace) => {
 	pace.start();
 	require(["jquery", "bootstrap", "cookies"], () => {
 		require(["browser", "rangy", "assets/js/language.js", "assets/js/backToTop.js", "parser/command.js"], () => {
-			require(["parser/arthmetic_commands.js", "parser/store_commands.js", "parser/jump_commands.js", "parser/compare_commands.js", "parser/declaration_commands.js"], () => {
+			require(["parser/arithmetic_commands.js", "parser/store_commands.js", "parser/jump_commands.js", "parser/compare_commands.js", "parser/declaration_commands.js"], () => {
 				require(["parser/factory.js"], () => {
 					require(["parser/main.js"], () => {
 						require(["assets/js/main.js"], () => {
