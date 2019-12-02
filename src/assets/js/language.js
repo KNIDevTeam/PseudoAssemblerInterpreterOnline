@@ -156,6 +156,12 @@ $('#commands-content').html(getCommandsDoc());
 
 $('.inactive').click(() => {
 	let new_lang = $('.inactive').attr('data-lang-type');
+	let input_cookie = getCookie('input');
+	
 	setCookie('lang', new_lang, 15);
+	
+	if (input_cookie === lang.index.exampleProgram)
+		eraseCookie('input');
+	
 	location.reload();
 });
