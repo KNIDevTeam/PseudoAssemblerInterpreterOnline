@@ -39,13 +39,19 @@ function escapeRegExp(string) {
 function formatInput(content) {
     //replace selection markers
     var markers = content.match(/<span id="selectionBoundary_[0-9]+_[0-9]+" style="line-height: 0; display: none;">⭾<\/span>/g);
-    content = content.replace(/⭾/g, '⮓');
+    if(markers) markers.forEach(function(marker) {
+        content = content.replace(marker, '⮓');
+    });
+
+    //remove error messages
+    content = content.replace(/<span class="error">[^>]*<\/span>/g, '');
 
     //shorten whitespace
     content = content.replace(/([^\S\n]|&nbsp;)+/g, ' ');
 
     //make newlines consistent
     content = content.replace(/<br>|((?!^)<div>)|<p>/g, '\n').replace(/<div>|<\/div>|<\/p>/g, '').replace(/\n{2}/g, '\n');
+    content = content.replace(/^\n/, '');
 
     //purge html tags
     content = content.replace(html_regexp, '');
