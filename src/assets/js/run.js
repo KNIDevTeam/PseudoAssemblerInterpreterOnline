@@ -60,10 +60,7 @@ $('#run').on('click', function() {
         //add error message
         let temp = $('#input').html().split('<br>');
         if(line == -1) temp.splice(0, 0, ''), line = 0;
-        console.log(line);
-        console.log(hidden_lines);
-        console.log(temp);
-        console.log(pure_text[line]);
+
         temp[line + hidden_lines] = `<div id="errors" style="float: left">${temp[line + hidden_lines]}&nbsp; <span class="error">${message}</span></div>`;
         temp = temp.join('<br>');
         $('#input').html(temp);
