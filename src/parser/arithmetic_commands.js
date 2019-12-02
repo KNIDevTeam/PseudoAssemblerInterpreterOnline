@@ -57,7 +57,7 @@ function Command_Divide_Registers(register_left, register_right)
 	Command_Arthmetic_Registers.call(this, register_left, register_right);
 	this.make_calculation = function(a, b)
 	{
-		if(b == 0) throw "Division by 0 exception";
+		if(b === 0) throw "Division by 0 exception";
 		return a / b;
 	}
 }
@@ -94,6 +94,7 @@ function Command_Divide_Memory(register_left, shift, base_register)
 	Command_Arthmetic_Memory.call(this, register_left, shift, base_register);
 	this.make_calculation = function(a, b)
 	{
+		if(b === 0) throw "Division by 0 exception";
 		return a / b;
 	}
 }
