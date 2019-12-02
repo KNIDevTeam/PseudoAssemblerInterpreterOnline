@@ -10,7 +10,7 @@
 		"exampleProgram": "#Przykładowy program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Wyczyść pierwszy rejestr\nSR 1,1\n#Oblicz sumę\nA 1,VAR1\nA 1,VAR2\n#Zapisz wynik w pamięci\nST 1,RES"
     },
     "docs": {
-        "siteTitle": "Interpreter - Docs",
+        "siteTitle": "Interpreter - Dokumentacja",
         "title": "Dokumentacja",
         "nav": "Dokumentacja",
 		"general": {
@@ -129,28 +129,28 @@
 					"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{2}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tS\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJN\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = 2 (2 + 1 + (-1))</pre>"
 				},
 				"L": {
-				"short": "Wczytanie zawartości komórki pamięci do rejestru.",
-				"long": "“L” command loads content of memory block to target register. Note that it is possible to load value of an undefined variable (created using DS command) – resulting value would probably be random.",
-				"params": "[label] L [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
-				"examples": " Suppose we declared variable VAR{1} and prepared register REG1. Now let's analyse the result of executing the following code: <pre>L\t1, VAR\t# REG1 = 1</pre>"
+					"short": "Wczytanie zawartości komórki pamięci do rejestru.",
+					"long": "“L” command loads content of memory block to target register. Note that it is possible to load value of an undefined variable (created using DS command) – resulting value would probably be random.",
+					"params": "[label] L [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"examples": " Suppose we declared variable VAR{1} and prepared register REG1. Now let's analyse the result of executing the following code: <pre>L\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"LR": {
-				"short": "Wczytanie zawartości źródłowego rejestru do docelowego rejestru.",
-				"long": "“LR” command loads content of of source register to target register. Note that it is possible to load value of an undefined register – resulting value would probably be random.",
-				"params": "[label] LR [target register], [source register]",
-				"examples": " Suppose prepared registers REG1{3}, REG2{4}. Now let's analyse the result of executing the following code: <pre>LR\t2, 1\t# REG2 = 3, REG1 = 3</pre>"
+					"short": "Wczytanie zawartości źródłowego rejestru do docelowego rejestru.",
+					"long": "“LR” command loads content of of source register to target register. Note that it is possible to load value of an undefined register – resulting value would probably be random.",
+					"params": "[label] LR [target register], [source register]",
+					"examples": " Suppose prepared registers REG1{3}, REG2{4}. Now let's analyse the result of executing the following code: <pre>LR\t2, 1\t# REG2 = 3, REG1 = 3</pre>"
 				},
 				"LA": {
-				"short": "Wczytanie adresu komórki pamięci do docelowego rejestru.",
-				"long": "Komenda “LA” wczytuje adres komórki pamięci do docelowego rejestru. Jest używana głónie do iterowania po tablicy w pętli.",
-				"params": "[etykieta] LA [docelowy rejestr], [komórka pamięci] <p> Należy zauważyć że użytkownik może korzystać z różnych sposobów adresowania. Więcej na ten temat można znaleźć w sekcji “Adresacja pamięci”.</p>",
-				"examples": " Załóżmy że mamy przygotowane komórki pamięci oraz tablicę: VAR1, VAR2, ARR1[3] a także rejestr REG1. Przeanalizujmy wynik wykonania następującej lini kodu: <pre>LA\t1, ARR1\t# REG1 = 8</pre>"
+					"short": "Wczytanie adresu komórki pamięci do docelowego rejestru.",
+					"long": "Komenda “LA” wczytuje adres komórki pamięci do docelowego rejestru. Jest używana głónie do iterowania po tablicy w pętli.",
+					"params": "[etykieta] LA [docelowy rejestr], [komórka pamięci] <p> Należy zauważyć że użytkownik może korzystać z różnych sposobów adresowania. Więcej na ten temat można znaleźć w sekcji “Adresacja pamięci”.</p>",
+					"examples": " Załóżmy że mamy przygotowane komórki pamięci oraz tablicę: VAR1, VAR2, ARR1[3] a także rejestr REG1. Przeanalizujmy wynik wykonania następującej lini kodu: <pre>LA\t1, ARR1\t# REG1 = 8</pre>"
 				},
 				"ST": {
-				"short": "Wczytanie zawartości źródłowego rejestru do docelowej komórki pamięci",
-				"long": "“ST” Komenda wczytuje zawartość źródłowego rejestru do docelowej komórki pamięci. Należy pamiętać że możliwym jest wczytanie wartości z niezdefiniowanego rejestru – w rezultacie wartość ta będzie prawdopodobnie przypadkowa. <p><b>Komenda “ST” jest jedyną komendą w psseudoassemblerze której drugi argument jest argumentem docelowym (ARG1 → ARG2). Dla wszystkich komend poza “ST” mamy: ARG1 ← ARG2. </b></p>",
-				"params": "[etykieta] ST [źródłowy rejestr], [docelowa komórka pamięci] <p> Należy zauważyć że użytkownik może korzystać z różnych sposobów adresowania. Więcej na ten temat można znaleźć w sekcji “Adresacja pamięci”.</p>",
-				"examples": " Załóżmy że mamy przygotowaną komórkę RESULT oraz rejestr REG1{1}. Przeanalizujmy wynik wykonania następującej lini kodu: <pre>ST\t1, RESULT\t# RESULT = 1</pre>"
+					"short": "Wczytanie zawartości źródłowego rejestru do docelowej komórki pamięci",
+					"long": "“ST” Komenda wczytuje zawartość źródłowego rejestru do docelowej komórki pamięci. Należy pamiętać że możliwym jest wczytanie wartości z niezdefiniowanego rejestru – w rezultacie wartość ta będzie prawdopodobnie przypadkowa. <p><b>Komenda “ST” jest jedyną komendą w psseudoassemblerze której drugi argument jest argumentem docelowym (ARG1 → ARG2). Dla wszystkich komend poza “ST” mamy: ARG1 ← ARG2. </b></p>",
+					"params": "[etykieta] ST [źródłowy rejestr], [docelowa komórka pamięci] <p> Należy zauważyć że użytkownik może korzystać z różnych sposobów adresowania. Więcej na ten temat można znaleźć w sekcji “Adresacja pamięci”.</p>",
+					"examples": " Załóżmy że mamy przygotowaną komórkę RESULT oraz rejestr REG1{1}. Przeanalizujmy wynik wykonania następującej lini kodu: <pre>ST\t1, RESULT\t# RESULT = 1</pre>"
 				}
 			}
 		}
@@ -168,6 +168,7 @@
     },
 	"run": {
 		"program": "Program",
+		"backToEditor": "Powrót",
 		"registers": {
 			"header": "Rejestry",
 			"address": "Adres",

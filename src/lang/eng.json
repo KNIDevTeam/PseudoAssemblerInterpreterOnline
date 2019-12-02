@@ -168,6 +168,7 @@
     },
 	"run": {
 		"program": "Program",
+		"backToEditor": "Back",
 		"registers": {
 			"header": "Registers",
 			"address": "Address",
