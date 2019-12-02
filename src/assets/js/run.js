@@ -1,6 +1,7 @@
 var cur_state = 1;
 var states;
 var program;
+var pure_text, sans_html;
 
 //update tables
 function show(direction) {
@@ -16,7 +17,15 @@ function show(direction) {
 
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
     let cur_program = JSON.parse(JSON.stringify(program));
-    cur_program[states[cur_state - 1].line] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state - 1].line] + "</div>";
+    
+    //handle comment spaghetti
+    let hidden_lines = 0;
+    for(let i = 0; i < sans_html.length; i++) {
+        if(sans_html[i][0] == '#') hidden_lines++;
+        else if(sans_html[i] == pure_text[states[cur_state - 1].line]) break;
+    }
+
+    cur_program[states[cur_state - 1].line + hidden_lines] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state - 1].line + hidden_lines] + "</div>";
     $('#program').html('<h2>' + lang.run.program + '</h2>' + cur_program.join('<br>'));
     $('#results').html(formatData(states[cur_state]));
     
@@ -40,7 +49,9 @@ $('#run').on('click', function() {
     $('#input').html(formatInput($('#input').html()));
 
     //check for errors
-    let pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '').replace(/^\n/gm, '').split('\n');
+    pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '').replace(/^\n/gm, '').split('\n');
+    sans_html = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '').split('\n');
+
     try {
         states = emulate(pure_text);
     } catch(err) {
@@ -51,7 +62,6 @@ $('#run').on('click', function() {
             let hidden_lines = 0;
             if(err.line != -1) {
                 //handle comment spaghetti
-                let sans_html = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '').split('\n');
                 for(let i = 0; i < sans_html.length; i++) {
                     if(sans_html[i][0] == '#') hidden_lines++;
                     else if(sans_html[i] == pure_text[err.line]) break;
@@ -81,7 +91,7 @@ $('#run').on('click', function() {
         return;
     }
 
-    program = $('#input').html().replace(/<span class="comment">[^<]*<\/span><br>/gm, '').split('<br>');
+    program = $('#input').html().split('<br>');
 
     //change visibility of elements
     $('#errors').css('display', 'none');
