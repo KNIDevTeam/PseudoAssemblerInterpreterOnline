@@ -55,7 +55,7 @@ $('#run').on('click', function() {
                 if(sans_html[i][0] == '#') hidden_lines++;
                 else if(sans_html[i] == pure_text[line]) break;
             }
-        }   
+        }
 
         //add error message
         let temp = $('#input').html().split('<br>');
@@ -215,4 +215,41 @@ function checkVisibility() {
 		$('#prev').css('visibility', 'visible');
 		$('#next').css('visibility', 'visible');
 	}
+}
+
+//state generation
+function emulate(text) {
+    let temp_states = [];
+    let res = main_parse(text.split('\n'));
+    console.log(res[1]);
+    if(res[1].length === 0) {
+        let states_parser = main_execute(res[0], res[2])[0];
+        for(let i = 0; i < states_parser.length; i++) {
+            temp_states.push(translate(states_parser[i]));
+        }
+    } else {
+        let state = {};
+        state.registry = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        res.reg_init = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        res.mem_init = [];
+        state.status = 0;
+        state.memory = [];
+        state.line = 0;
+        state.variables = [];
+        temp_states.push(state);
+        temp_states.push(state);
+    }
+    return temp_states;
+}
+
+function translate(state) {
+    let res = {};
+    res.registry = state.registers;
+    res.status = state.sign_flag;
+    res.memory = state.memory;
+    res.line = state.line;
+    res.reg_init = state.value_defined_registers;
+    res.mem_init = state.value_defined_memory;
+    res.variables = Object.keys(state.memory_labels);
+    return res;
 }
