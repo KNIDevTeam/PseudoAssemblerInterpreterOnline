@@ -77,7 +77,7 @@ $('#run').on('click', function() {
                 if (typeof callback === 'function') callback()
             });
         });
-        
+
         return;
     }
 
@@ -105,7 +105,6 @@ function emulate(text) {
 
     if(res[1].length === 0) {
         let output = main_execute(res[0], res[2]);
-        console.log(output);
         //throw errors if found
         if(output[1]) throw [{ message: output[1], line: output[2] }];
 
