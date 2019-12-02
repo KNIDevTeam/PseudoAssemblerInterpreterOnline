@@ -181,5 +181,10 @@
 			"var": "Zmienna",
 			"value": "Wartość"
 		}
+	},	
+	"examples": {
+		"siteTitle": "Intepreter - Przykłady",
+		"title": "Przykłady",
+		"nav": "Przykłady"
 	}
 }
