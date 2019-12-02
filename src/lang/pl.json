@@ -141,16 +141,16 @@
 				"examples": " Suppose prepared registers REG1{3}, REG2{4}. Now let's analyse the result of executing the following code: <pre>LR\t2, 1\t# REG2 = 3, REG1 = 3</pre>"
 				},
 				"LA": {
-				"short": "Command loads an address of memory block to target register",
-				"long": "“LA” command an address of memory block to target register. It’s useful for iterating over arrays using loops.",
-				"params": "[label] LA [target register], [memory block] <p> Note that you can choose from four different ways of addressing using [memory block]. Look at “Memory addressing” section for further assistance.</p>",
-				"examples": " Suppose we declared variables and array: VAR1, VAR2, ARR1[3] and prepared register REG1. Now let's analyse the result of executing the following code: <pre>LA\t1, ARR1\t# REG1 = 8</pre>"
+				"short": "Komenda wczytuje adres komórki pamięci do docelowego rejestrur",
+				"long": "Komenda “LA” wczytuje adres komórki pamięci do docelowego rejestru. Jest używana głónie do iterowania po tablicy w pętli.",
+				"params": "[etykieta] LA [docelowy rejestr], [komórka pamięci] <p> Należy zauważyć że użytkownik może korzystać z różnych sposobów adresowania. Więcej na ten temat można znaleźć w sekcji “Adresacja pamięci”.</p>",
+				"examples": " Załóżmy że mamy przygotowane komórki pamięci oraz tablicę: VAR1, VAR2, ARR1[3] a także rejestr REG1. Przeanalizujmy wynik wykonania następującej lini kodu: <pre>LA\t1, ARR1\t# REG1 = 8</pre>"
 				},
 				"ST": {
-				"short": "Command loads content of source register to target memory block",
-				"long": "“ST” command content of source register to target memory block. Note that it is possible to load value of an undefined register – resulting value would probably be random. <p><b>“ST” command is the only command of pseudoassembler in which second argument is a target location (ARG1 → ARG2). For all commands except “ST” we have: ARG1 ← ARG2. </b></p>",
-				"params": "[label] ST [source register], [target memory block] <p> Note that you can choose from four different ways of addressing using [target memory block]. Look at “Memory addressing” section for further assistance.</p>",
-				"examples": " Suppose we prepared variable RESULT and register REG1{1}. Now let's analyse the result of executing the following code: <pre>ST\t1, RESULT\t# RESULT = 1</pre>"
+				"short": "Komenda wczytuje zawartość źródłowego rejestru do docelowej komórki pamięci",
+				"long": "“ST” Komenda wczytuje zawartość źródłowego rejestru do docelowej komórki pamięci. Należy pamiętać że możliwym jest wczytanie wartości z niezdefiniowanego rejestru – w rezultacie wartość ta będzie prawdopodobnie przypadkowa. <p><b>Komenda “ST” jest jedyną komendą w psseudoassemblerze której drugi argument jest argumentem docelowym (ARG1 → ARG2). Dla wszystkich komend poza “ST” mamy: ARG1 ← ARG2. </b></p>",
+				"params": "[etykieta] ST [źródłowy rejestr], [docelowa komórka pamięci] <p> Należy zauważyć że użytkownik może korzystać z różnych sposobów adresowania. Więcej na ten temat można znaleźć w sekcji “Adresacja pamięci”.</p>",
+				"examples": " Załóżmy że mamy przygotowaną komórkę RESULT oraz rejestr REG1{1}. Przeanalizujmy wynik wykonania następującej lini kodu: <pre>ST\t1, RESULT\t# RESULT = 1</pre>"
 				}
 			}
 		}
@@ -169,16 +169,16 @@
 	"run": {
 		"program": "Program",
 		"registers": {
-			"header": "Registers",
-			"address": "Address",
-			"value": "Value",
-			"state": "STATE"
+			"header": "Rejestry",
+			"address": "Adres",
+			"value": "Wartość",
+			"state": "STAN"
 		},
 		"memory": {
-			"header": "Memory",
-			"address": "Address",
-			"var": "Variable",
-			"value": "Value"
+			"header": "Pamięć",
+			"address": "Adres",
+			"var": "Zmienna",
+			"value": "Wartość"
 		}
 	}
 }
