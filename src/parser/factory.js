@@ -93,13 +93,13 @@ function Factory_Jump(name, command_constructor) {
     };
 
     this.check_coherency = function (args) {
-        if (args.length !== 2) throw "to many args";
+        if (args.length !== 2) throw "wrong number of arguments";
         if (/^\d/.exec(args[1])) throw "label can't start with number";
     };
 
     this.generate_args = function (args) {
-        //this.check_coherency(args);
         args = this.clear_args(args);
+        this.check_coherency(args);
         this.target = args[1];
     };
 }
