@@ -4,6 +4,8 @@
         "title": "Interpreter",
         "nav": "Strona główna",
         "run": "START",
+		"prev": "&larr; Wstecz",
+		"next": "Dalej &rarr;",
 		"typeSth": "Wpisz coś tutaj...",
 		"exampleProgram": "#To przykładowy program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Wyczyść pierwszy rejestr\nSR 1,1\n#Oblicz sumę\nA 1,VAR1\nA 1,VAR2\n#Zapisz wynik w pamięci\nST 1,RES"
     },
@@ -12,23 +14,23 @@
         "title": "Dokumentacja",
         "nav": "Dokumentacja",
 		"general": {
-			"header": "General info",
-			"content": "Pseudoassembler is a programming language of great power. Proficient usage of this tool is an art that very few ever possessed. We hope that the following documentation will allow you not only to master but also come to like pseudoassembler (it's possible – believe us)!"
+			"header": "Wstęp",
+			"content": "Pseudoassembler jest językiem niezwykle potężnym. Biegłe posługiwanie się nim w swoich programach jest sztuką, którą posiadło niewielu. Mamy nadzieję, że poniższa dokumentacja pozwoli Ci nie tylko docenić niezwykły kunszt programowania w językach niskopoziomowych, ale również polubić pseudoassemblera (na naszym przykładzie - to możliwe)!"
 		},
 		"memory": {
-			"header": "Memory addressing",
+			"header": "Adresacja pamięci",
 			"content": "There are four ways of addressing memory in pseudoassembler. Let us present all of them: <p></p> <ul><li><b>[label]</b> - The interpreter will work on the memory block assigned to the given label. If the label is associated with an array, it points to its first memory block.</li><li><b>[label]([register])</b> - The interpreter will work on the memory block whose address is equal to the sum of the address pointed at by the label and the address stored in the given register.</li><li><b>[memory address]</b> - The interpreter will work on the memory block with the given address. </li><li><b>[memory address]([register])</b> - The interpreter will work on the memory block whose address is equal to the sum of the given address and the address stored in the given register.</li></ul><p>All these ways are, ultimately, ways of achieving the same objective - accessing a memory block.</p><h4>Example</h4><p>Suppose we declared two arrays VEC1{1, 2} and VEC2{3, 4} (both size of 2 integers).<br>Conveniently, we also prepared registers - REG1{0} and REG2{4}. (Notice that 4 is the size of integer in bytes)<br>Now let's analyse the memory addresses utilised by our arrays:<pre>VEC1[0] = 1 | address: 0<br>VEC1[1] = 2 | address: 4<br>VEC2[0] = 3 | address: 8<br>VEC2[1] = 4 | address: 12</pre>The Following commands once executed will compute the sum of values stored in VEC1 and VEC2 and save it in REG1:<p></p><pre>A   1, VEC1<br>A   1, VEC1(2)<br>A   1, 8 <br>A   1, 8(2)</pre></p>"
 		},
 		"rules": {
-			"header": "Labeling rules",
+			"header": "Zasady tworzenia etykiet",
 			"content": "Despite being one of the most powerful programming languages on the planet Earth, pseudoassembler has some minor limitations. You should be aware of some restrictions while writing your programs.<ul><li>Labels should only consist of alphanumeric characters (letters A-Z, a-z and digits 0-9).</li><li>It is forbidden to use any of the command words as a label.</li><li>It is forbidden to use digit as a first character of label.</li></ul>"
 		},
 		"statusRegister": {
-			"header": "Status Register",
+			"header": "Rejestr stanu programu",
 			"content": "The status register is a special register that stores the current state of the program. Depending on the sign of the result of the latest arithmetic operation (such as A, AR, S, SR, M, MR, D, DR, C, CR), the status register can store different values:<p></p><ul><li>00 \u2013 when the result is equal to 0, <\/li><li>01 \u2013 when the result is positive, <\/li><li>10 \u2013 when the result is negative, <\/li><li>11 \u2013 when some error has occurred (for example: division by 0).<\/li><\/ul><h4>Example<\/h4>Suppose we have three registers: REG1{2}, REG2{-2}, REG3{0}. Let us analyse the state of the status register after executing the following commands: <p></p><pre>AR\t1, 2\t# Status register = '00'<\/pre><pre>SR\t1, 2\t# Status register = '01' <\/pre><pre>MR\t1, 2\t# Status register = '10' <\/pre><pre>DR\t1, 3\t# Status register = '11' <\/pre>Should you have any doubts about these commands, don\u2019t hesitate to check the 'Commands' section of the documentation."
 		},
 		"commands": {
-			"header": "Commands",
+			"header": "Komendy",
 			"content": {
 				"DS": {
 					"short": "Command declares new variable or array without initial value.",
@@ -139,16 +141,16 @@
 				"examples": " Suppose prepared registers REG1{3}, REG2{4}. Now let's analyse the result of executing the following code: <pre>LR\t2, 1\t# REG2 = 3, REG1 = 3</pre>"
 				},
 				"LA": {
-				"short": "Command loads an address of memory block to target register",
-				"long": "“LA” command an address of memory block to target register. It’s useful for iterating over arrays using loops.",
-				"params": "[label] LA [target register], [memory block] <p> Note that you can choose from four different ways of addressing using [memory block]. Look at “Memory addressing” section for further assistance.</p>",
-				"examples": " Suppose we declared variables and array: VAR1, VAR2, ARR1[3] and prepared register REG1. Now let's analyse the result of executing the following code: <pre>LA\t1, ARR1\t# REG1 = 8</pre>"
+				"short": "Komenda wczytuje adres komórki pamięci do docelowego rejestrur",
+				"long": "Komenda “LA” wczytuje adres komórki pamięci do docelowego rejestru. Jest używana głónie do iterowania po tablicy w pętli.",
+				"params": "[etykieta] LA [docelowy rejestr], [komórka pamięci] <p> Należy zauważyć że użytkownik może korzystać z różnych sposobów adresowania. Więcej na ten temat można znaleźć w sekcji “Adresacja pamięci”.</p>",
+				"examples": " Załóżmy że mamy przygotowane komórki pamięci oraz tablicę: VAR1, VAR2, ARR1[3] a także rejestr REG1. Przeanalizujmy wynik wykonania następującej lini kodu: <pre>LA\t1, ARR1\t# REG1 = 8</pre>"
 				},
 				"ST": {
-				"short": "Command loads content of source register to target memory block",
-				"long": "“ST” command content of source register to target memory block. Note that it is possible to load value of an undefined register – resulting value would probably be random. <p><b>“ST” command is the only command of pseudoassembler in which second argument is a target location (ARG1 → ARG2). For all commands except “ST” we have: ARG1 ← ARG2. </b></p>",
-				"params": "[label] ST [source register], [target memory block] <p> Note that you can choose from four different ways of addressing using [target memory block]. Look at “Memory addressing” section for further assistance.</p>",
-				"examples": " Suppose we prepared variable RESULT and register REG1{1}. Now let's analyse the result of executing the following code: <pre>ST\t1, RESULT\t# RESULT = 1</pre>"
+				"short": "Komenda wczytuje zawartość źródłowego rejestru do docelowej komórki pamięci",
+				"long": "“ST” Komenda wczytuje zawartość źródłowego rejestru do docelowej komórki pamięci. Należy pamiętać że możliwym jest wczytanie wartości z niezdefiniowanego rejestru – w rezultacie wartość ta będzie prawdopodobnie przypadkowa. <p><b>Komenda “ST” jest jedyną komendą w psseudoassemblerze której drugi argument jest argumentem docelowym (ARG1 → ARG2). Dla wszystkich komend poza “ST” mamy: ARG1 ← ARG2. </b></p>",
+				"params": "[etykieta] ST [źródłowy rejestr], [docelowa komórka pamięci] <p> Należy zauważyć że użytkownik może korzystać z różnych sposobów adresowania. Więcej na ten temat można znaleźć w sekcji “Adresacja pamięci”.</p>",
+				"examples": " Załóżmy że mamy przygotowaną komórkę RESULT oraz rejestr REG1{1}. Przeanalizujmy wynik wykonania następującej lini kodu: <pre>ST\t1, RESULT\t# RESULT = 1</pre>"
 				}
 			}
 		}
@@ -163,5 +165,20 @@
 		"credits": "Podziękowania",
 		"credits-long": "Chcielibyśmy podziękować wszystkim osobom, których działania i pomysły pomogły nam w stworzeniu tego projektu. Szczególne podziękowania należą się: <ul><li><a href=\"http:\/\/www.mini.pw.edu.pl/~homenda/\" target=\"_BLANK\"> prof. dr hab. inż. Władysławowi Homendzie</a> - autorowi języka pseudoassemblera, koordynatorowi projektu interpretera (napisanego w języku C) na Wydziale Matematyki i Nauk Informacyjnych Politechniki Warszawskiej - </li><li><a href=\"https:\/\/html5up.net\" target=\"_BLANK\">HTML5UP</a> - autorowi szablonu strony</li></ul>",
 		"repo": "Repozytorium projektu w serwisie GitHub"
-    }
+    },
+	"run": {
+		"program": "Program",
+		"registers": {
+			"header": "Rejestry",
+			"address": "Adres",
+			"value": "Wartość",
+			"state": "STAN"
+		},
+		"memory": {
+			"header": "Pamięć",
+			"address": "Adres",
+			"var": "Zmienna",
+			"value": "Wartość"
+		}
+	}
 }

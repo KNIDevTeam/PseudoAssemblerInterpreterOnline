@@ -17,7 +17,7 @@ function show(direction) {
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
     let cur_program = JSON.parse(JSON.stringify(program));
     cur_program[states[cur_state - 1].line] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state - 1].line] + "</div>";
-    $('#program').html('<h2>Program</h2>' + cur_program.join('<br>'));
+    $('#program').html('<h2>' + lang.run.program + '</h2>' + cur_program.join('<br>'));
     $('#results').html(formatData(states[cur_state]));
     
     $('#cur-line').addClass('animated flash');
@@ -142,13 +142,13 @@ function translate(state) {
 }
 
 function formatData(data) {
-    var registry_html = `<h3>Registry</h3>
+    var registry_html = `<h3>` + lang.run.registers.header + `</h3>
     <div class="table-wrapper">
         <table class="default">
             <thead>
                 <tr>
-                    <th>Address</th>
-                    <th>Value</th>
+                    <th>` + lang.run.registers.address + `</th>
+                    <th>` + lang.run.registers.value + `</th>
                 </tr>
             </thead>
             <tfoot>
@@ -161,21 +161,21 @@ function formatData(data) {
                 </tr>`
             }, '') + 
             `<tr>
-                <td>STATUS</td>
+                <td>` + lang.run.registers.state + `</td>
                 <td><span class="keyword">${data.status}</span></td>
             </tr>`}
             </tfoot>
         </table>
     </div>`;
 
-    var memory_html = `<h3>Memory</h3>
+    var memory_html = `<h3>` + lang.run.memory.header + `</h3>
     <div class="table-wrapper">
         <table class="default">
             <thead>
                 <tr>
-                    <th>Address</th>
-                    <th>Variable</th>
-                    <th>Value</th>
+                    <th>` + lang.run.memory.address + `</th>
+                    <th>` + lang.run.memory.var + `</th>
+                    <th>` + lang.run.memory.value + `</th>
                 </tr>
             </thead>
             <tfoot>

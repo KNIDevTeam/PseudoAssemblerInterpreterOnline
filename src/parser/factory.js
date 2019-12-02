@@ -98,8 +98,8 @@ function Factory_Jump(name, command_constructor) {
     };
 
     this.generate_args = function (args) {
-        //this.check_coherency(args);
         args = this.clear_args(args);
+        this.check_coherency(args);
         this.target = args[1];
     };
 }

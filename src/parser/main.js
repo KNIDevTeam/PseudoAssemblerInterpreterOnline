@@ -93,6 +93,7 @@ function main_execute(program, initial_state) {
 			program[stat.line].translate_address(stat);
 		}
 		catch (error) {
+			console.log(error);
 			return [states, error, stat.line];
 		}
 		stat = program[stat.line].execute(stat);
