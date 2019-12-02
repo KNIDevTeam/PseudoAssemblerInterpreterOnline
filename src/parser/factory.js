@@ -68,6 +68,7 @@ function Factory_Memory(name, command_constructor) {
         if (!/^\d*$/.exec(args[1]) || parseInt(args[1]) > 15) throw "register number must be positive int lower than 15";
         if (!/^-*\d*$/.exec(args[2]) && !/^\D/.exec(args[2])) throw "Label can't start with number";
         if (args.length === 4 && !/^\d*$/.exec(args[3])) throw "register number must be positive int";
+        if (/^-*\d*$/.exec(args[2]) && parseInt(args[2]) % 4 !== 0) throw "Shift must be multiple of 4";
         if (args.length !== 4 && args.length !== 3) throw "wrong number of args";
     };
     this.generate_args = function (args) {
