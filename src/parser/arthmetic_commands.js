@@ -57,6 +57,7 @@ function Command_Divide_Registers(register_left, register_right)
 	Command_Arthmetic_Registers.call(this, register_left, register_right);
 	this.make_calculation = function(a, b)
 	{
+		if(b == 0) throw "Division by 0 exception";
 		return a / b;
 	}
 }

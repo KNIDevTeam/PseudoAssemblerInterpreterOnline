@@ -91,12 +91,12 @@ function main_execute(program, initial_state) {
 		try
 		{
 			program[stat.line].translate_address(stat);
+			stat = program[stat.line].execute(stat);
 		}
 		catch (error) {
 			console.log(error);
 			return [states, error, stat.line];
 		}
-		stat = program[stat.line].execute(stat);
 	}
 	stat.line = stat.line-1;
 	states.push(JSON.parse(JSON.stringify(stat)));
