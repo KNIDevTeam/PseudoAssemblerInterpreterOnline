@@ -186,5 +186,27 @@
 		"siteTitle": "Intepreter - Przykłady",
 		"title": "Przykłady",
 		"nav": "Przykłady"
+	},
+	"examples": {
+		"siteTitle": "Intepreter - Examples",
+		"title": "Examples",
+		"nav": "Examples",
+		"programs": {
+			"test": {
+				"title": "This is a test program",
+				"desc": "This is a description for our test program ;D",
+				"code": "#And this is a code\nMaslo DS INTEGER(3)\nCebula DC INTEGER\n#Do sth\nL 1, Maslo\n#This is the end [*]"
+			},
+			"test2": {
+				"title": "This is a test program",
+				"desc": "This is a description for our test program ;D",
+				"code": "#And this is a code\nMaslo DS INTEGER(3)\nCebula DC INTEGER\n#Do sth\nL 1, Maslo\n#This is the end [*]"
+			},
+			"test3": {
+				"title": "This is a test program",
+				"desc": "This is a description for our test program ;D",
+				"code": "#And this is a code\nMaslo DS INTEGER(3)\nCebula DC INTEGER\n#Do sth\nL 1, Maslo\n#This is the end [*]"
+			}
+		}
 	}
 }

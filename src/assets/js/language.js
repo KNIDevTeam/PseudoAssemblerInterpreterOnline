@@ -144,6 +144,34 @@ function setLang() {
 	})
 }
 
+function getExamples() {
+	let html = "";
+	
+	for (let example_key in lang['examples']['programs']) {
+		console.log(example_key);
+		let example = lang['examples']['programs'][example_key];
+		html += `
+		<div class="col-md-6">
+			<div class="card single-example"> 
+				<div class="card-header">
+					<h3>`+example['title']+`</h3>
+				</div>
+				<div class="card-body">
+					<p>`+example['desc']+`</p>
+					<div class="code">
+						<pre><code>`+example['code'].replace(/(\r\n|\n|\r)/gm, "<br>")+`</code></pre>
+					</div>
+					<a href="#" class="example-button button" data-example="`+example_key+`"> Run </a>
+				</div>
+			</div>
+		</div>`;
+	}
+		
+	html += '</div>';
+	
+	return html;
+}
+
 getLang();
 
 console.log(lang);
@@ -153,6 +181,7 @@ console.log(lang);
 setLang();
 
 $('#commands-content').html(getCommandsDoc());
+$('#examples-content').html(getExamples());
 
 $('.inactive').click(() => {
 	let new_lang = $('.inactive').attr('data-lang-type');
@@ -164,4 +193,10 @@ $('.inactive').click(() => {
 		eraseCookie('input');
 	
 	location.reload();
+});
+
+$('.example-button').click(function() {
+	let key = $(this).attr('data-example');
+	setCookie('input', lang['examples']['programs'][key]['code'], 15);
+	window.location = "/";
 });

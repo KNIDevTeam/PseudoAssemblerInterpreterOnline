@@ -3604,3 +3604,24 @@ canvas {
 	.inactive:hover {
 		opacity: 1;
 	}
+	
+/* Examples */
+	#examples-content {
+		padding-bottom: 40px;
+	}
+
+	#examples-content .col-md-6 {
+		padding-bottom: 20px;
+	}
+	
+	@media only screen and (max-width: 1280px) {
+	  #examples-content {
+		padding-bottom: 150px;
+	  }
+	}
+	
+	@media screen and (max-width: 480px) {
+		#examples-content > * {
+			padding: 0;
+		}
+	}
