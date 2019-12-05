@@ -60,7 +60,8 @@ function refreshTooltip() {
  * Hide tooltips
  */
 function hideTooltips() {
-	$('.command-name').tooltip('hide');	
+	$('.command-name').tooltip('hide');
+	$('.tooltip').hide();
 }
 
 
