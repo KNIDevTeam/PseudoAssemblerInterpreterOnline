@@ -189,8 +189,8 @@
 	},
 	"examples": {
 		"siteTitle": "Intepreter - Examples",
-		"title": "Examples",
-		"nav": "Examples",
+		"title": "Przykłady",
+		"nav": "Przykłady",
 		"programs": {
 			"test": {
 				"title": "This is a test program",
