@@ -1,33 +1,43 @@
-var lang = {};
+let lang = {};
 
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
-
+/**
+ * Erase cookie.
+ *
+ * @param cname
+ */
 function eraseCookie(cname) {
 	document.cookie = cname + "= ;-1;path=/";
 }
 
+/**
+ * Set cookie.
+ *
+ * @param cname
+ * @param cvalue
+ * @param exdays
+ */
 function setCookie(cname, cvalue, exdays) {
 	eraseCookie(cname);
 	cvalue = cvalue.replace(/(\r\n|\n|\r)/gm, "|n|");
-	var d = new Date();
+	let d = new Date();
 	d.setTime(d.getTime() + (exdays*24*60*60*1000));
-	var expires = "expires="+ d.toUTCString();
+	let expires = "expires=" + d.toUTCString();
 	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+/**
+ *  Get cookie.
+ *
+ * @param cname
+ *
+ * @returns {string}cookie_value
+ */
 function getCookie(cname) {
-	var name = cname + "=";
-	var decodedCookie = decodeURIComponent(document.cookie);
-	var ca = decodedCookie.split(';');
-	for(var i = 0; i <ca.length; i++) {
-	  var c = ca[i];
+	let name = cname + "=";
+	let decodedCookie = decodeURIComponent(document.cookie);
+	let ca = decodedCookie.split(';');
+	for(let i = 0; i <ca.length; i++) {
+	  let c = ca[i];
 	  while (c.charAt(0) == ' ') {
 		c = c.substring(1);
 	  }
@@ -38,15 +48,29 @@ function getCookie(cname) {
 	return "";
 }
 
+/**
+ *  Refresh tooltips.
+ */
 function refreshTooltip() {
 	$('.command-name').off();
 	$('.command-name').tooltip({html: true});
 }
 
+/**
+ * Hide tooltips
+ */
 function hideTooltips() {
 	$('.command-name').tooltip('hide');	
 }
 
+
+/**
+ * Get short documentation for command.
+ *
+ * @param cmd_name
+ *
+ * @returns {string}cmd_doc
+ */
 function getShortDoc(cmd_name) {
 	let prefix = cmd_name + ": ";
 	
@@ -56,6 +80,11 @@ function getShortDoc(cmd_name) {
 		return prefix + '---';
 }
 
+/**
+ *  Get documentation for commands.
+ *
+ * @returns {string}doc_html
+ */
 function getCommandsDoc() {
 	let html = '<div class="accordion" id="accordionCommands">';
 
@@ -85,18 +114,31 @@ function getCommandsDoc() {
 	return html;
 }
 
+/**
+ * Return class property from string.
+ *
+ * @param obj
+ * @param string
+ *
+ * @returns {string|string|*}class_property
+ */
 function recompose(obj,string){
-    var parts = string.split('.');
+	let parts = string.split('.');
 	if (!obj.hasOwnProperty(parts[0])) return '';
-    var newObj = obj[parts[0]];
-    if (parts[1]) {
+	let newObj = obj[parts[0]];
+	if (parts[1]) {
         parts.splice(0,1);
-        var newString = parts.join('.');
+        let newString = parts.join('.');
         return recompose(newObj, newString);
     }
     return newObj;
 }
 
+/**
+ * Set active and inactive classes to language flags.
+ *
+ * @param lang
+ */
 function setFlags(lang) {
 	if (lang == 'pl') {
 		$('#pl-flag').addClass('active');
@@ -107,6 +149,9 @@ function setFlags(lang) {
 	}	
 }
 
+/**
+ * Get lang from json via AJAX.
+ */
 function getLang() {
 	let current_lang = getCookie('lang');
 	
@@ -136,6 +181,9 @@ function getLang() {
 	});
 }
 
+/**
+ * Set lang in html element with data-lang attribute.
+ */
 function setLang() {
 	$('[data-lang]').each((i, el) => {
 		let key = $(el).attr('data-lang');
@@ -144,11 +192,15 @@ function setLang() {
 	})
 }
 
+/**
+ * Get examples html from lang object.
+ *
+ * @returns {string}examples_html
+ */
 function getExamples() {
 	let html = "";
 	
 	for (let example_key in lang['examples']['programs']) {
-		console.log(example_key);
 		let example = lang['examples']['programs'][example_key];
 		html += `
 		<div class="col-md-6">
@@ -173,16 +225,14 @@ function getExamples() {
 }
 
 getLang();
-
-console.log(lang);
-
-//sleep(1000);
-
 setLang();
 
 $('#commands-content').html(getCommandsDoc());
 $('#examples-content').html(getExamples());
 
+/**
+ * Change language.
+ */
 $('.inactive').click(() => {
 	let new_lang = $('.inactive').attr('data-lang-type');
 	let input_cookie = getCookie('input');
@@ -195,6 +245,9 @@ $('.inactive').click(() => {
 	location.reload();
 });
 
+/**
+ * Run example button.
+ */
 $('.example-button').click(function() {
 	let key = $(this).attr('data-example');
 	setCookie('input', lang['examples']['programs'][key]['code'], 15);
