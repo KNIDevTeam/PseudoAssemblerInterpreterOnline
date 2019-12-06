@@ -46,50 +46,50 @@
 				},
 				"AR": {
 					"short": "Dodawanie zawartości rejestrów.",
-					"long": "“AR” command adds content of two registers and store the result of this operation in target register.",
-					"params": "[etykieta] AR [target register], [source register]",
-					"examples": "Suppose we have already prepared registers – REG1{2} and REG2{3}. Let's analyse the result of the following operation: <pre>\tAR\t1, 2\t# REG1 = 5 (REG1 := REG1 + REG2), REG2 = 3</pre>"
+					"long": "Komenda „AR” dodaje zawartość dwóch rejestrów i zapisuje wynik tej operacji w docelowym rejestrze.",
+					"params": "[etykieta] AR [rejestr docelowy], [rejestr źródłowy]",
+					"examples": "Załóżmy, że mamy przygotowane rejestry: REG1{2} oraz REG2{3}. Przeanalizujmy wynik wykonania poniższej instrukcji:<pre>\tAR\t1, 2\t# REG1 = 5 (REG1 := REG1 + REG2), REG2 = 3</pre>"
 				},
 				"A": {
 					"short": "Dodawanie zawartości rejestru i komórki pamięci.",
 					"long": "“A” command adds content of register and memory block and store the result of this operation in target register.",
-					"params": "[etykieta] A [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
-					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{-1}. Now let's analyse the result of executing the following code: <pre>\tA\t1, VAR\t# REG1 = 1</pre>"
+					"params": "[etykieta] A [rejestr docelowy], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"examples": "Suppose we declared variable VAR{2} and prepared register REG1{-1}. Now let's analyse the result of executing the following code: <pre>\tA\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"SR": {
 					"short": "Odejmowanie zawartości rejestrów.",
-					"long": "“SR” command subtracts content of two registers and store the result of this operation in target register.",
-					"params": "[etykieta] SR [target register], [source register]",
-					"examples": "Suppose we have already prepared registers – REG1{-12} and REG2{4}. Let's analyse the result of the following operation: <pre>\tSR\t1, 2\t# REG1 = -16 (REG1 := REG1 - REG2), REG2 = 4</pre>"
+					"long": "Komenda „SR” odejmuje zawartość drugiego rejestru od zawartości pierwszego rejestru i zapisuje wynik tej operacji w docelowym rejestrze.",
+					"params": "[etykieta] SR [rejestr docelowy], [rejestr źródłowy]",
+					"examples": "Załóżmy, że mamy przygotowane rejestry: REG1{-12} oraz REG2{4}. Przeanalizujmy wynik wykonania poniższej instrukcji:<pre>\tSR\t1, 2\t# REG1 = -16 (REG1 := REG1 - REG2), REG2 = 4</pre>"
 				},
 				"S": {
 					"short": "Odejmowanie zawartości rejestru i komórki pamięci.",
 					"long": "“S” command subtracts content of register and memory block and store the result of this operation in target register.",
-					"params": "[etykieta] S [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"params": "[etykieta] S [rejestr docelowy], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{14} and prepared register REG1{3}. Now let's analyse the result of executing the following code: <pre>\tS\t1, VAR\t# REG1 = 11</pre>"
 				},
 				"MR": {
 					"short": "Mnożenie zawartości rejestrów.",
-					"long": "“MR” command multiplies content of two registers and store the result of this operation in target register.",
-					"params": "[etykieta] MR [target register], [source register]",
-					"examples": "Suppose we have already prepared registers – REG1{4} and REG2{6}. Let's analyse the result of the following operation: <pre>\tMR\t1, 2\t# REG1 = 24 (REG1 := REG1 * REG2), REG2 = 6</pre>"
+					"long": "Komenda „MR” mnoży zawartość dwóch rejestrów i zapisuje wynik tej operacji w docelowym rejestrze.",
+					"params": "[etykieta] MR [rejestr docelowy], [rejestr źródłowy]",
+					"examples": "Załóżmy, że mamy przygotowane rejestry: REG1{4} oraz REG2{6}. Przeanalizujmy wynik wykonania poniższej instrukcji:<pre>\tMR\t1, 2\t# REG1 = 24 (REG1 := REG1 * REG2), REG2 = 6</pre>"
 				},
 				"M": {
 					"short": "Mnożenie zawartości rejestru i komórki pamięci.",
 					"long": "“M” command multiplies content of register and memory block and store the result of this operation in target register.",
-					"params": "[etykieta] M [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"params": "[etykieta] M [rejestr docelowy], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{8}. Now let's analyse the result of executing the following code: <pre>\tM\t1, VAR\t# REG1 = 16</pre>"
 				},
 				"DR": {
 					"short": "Dzielenie zawartości rejestrów.",
-					"long": "“DR” command divides content of two registers and store the result of this operation in target register.",
-					"params": "[etykieta] DR [target register], [source register]",
-					"examples": "Suppose we have already prepared registers – REG1{8} and REG2{2}. Let's analyse the result of the following operation: <pre>\tDR\t1, 2\t# REG1 = 4 (REG1 := REG1 / REG2), REG2 = 2</pre> <p>Let's analyse another example: REG3{2} and REG4{0}. The result of the following operation is: <pre>\tDR\t3, 4\t# REG3 = 2, REG4 = 0, Status register = '11'</pre></p>"
+					"long": "Komenda „DR” dzieli zawartość pierwszego rejestru przez zawartość drugiego rejestru i zapisuje wynik tej operacji w docelowym rejestrze.",
+					"params": "[etykieta] DR [rejestr docelowy], [rejestr źródłowy]",
+					"examples": "Załóżmy, że mamy przygotowane rejestry: REG1{8} oraz REG2{2}. Przeanalizujmy wynik wykonania poniższej instrukcji:<pre>\tDR\t1, 2\t# REG1 = 4 (REG1 := REG1 / REG2), REG2 = 2</pre> <p>Przeanalizujmy teraz inny przykład: REG3{2}, REG4{0}. Wynik wykonania poniższej instrukcji to:<pre>\tDR\t3, 4\t# REG3 = 2, REG4 = 0, Rejestr stanu programu = '11'</pre></p>"
 				},
 				"D": {
 					"short": "Dzielenie zawartości rejestru i komórki pamięci.",
 					"long": "“D” command divides content of register and memory block and store the result of this operation in target register.",
-					"params": "[etykieta] D [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"params": "[etykieta] D [rejestr docelowy], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{3}. Now let's analyse the result of executing the following code: <pre>\tD\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"C": {
@@ -131,13 +131,13 @@
 				"L": {
 					"short": "Wczytanie zawartości komórki pamięci do rejestru.",
 					"long": "“L” command loads content of memory block to target register. Note that it is possible to load value of an undefined variable (created using DS command) – resulting value would probably be random.",
-					"params": "[etykieta] L [target register], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"params": "[etykieta] L [rejestr docelowy], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{1} and prepared register REG1. Now let's analyse the result of executing the following code: <pre>L\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"LR": {
 					"short": "Wczytanie zawartości źródłowego rejestru do docelowego rejestru.",
 					"long": "“LR” command loads content of of source register to target register. Note that it is possible to load value of an undefined register – resulting value would probably be random.",
-					"params": "[etykieta] LR [target register], [source register]",
+					"params": "[etykieta] LR [rejestr docelowy], [rejestr źródłowy]",
 					"examples": " Suppose prepared registers REG1{3}, REG2{4}. Now let's analyse the result of executing the following code: <pre>LR\t2, 1\t# REG2 = 3, REG1 = 3</pre>"
 				},
 				"LA": {
