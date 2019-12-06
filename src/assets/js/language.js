@@ -203,18 +203,24 @@ function getExamples() {
 	
 	for (let example_key in lang['examples']['programs']) {
 		let example = lang['examples']['programs'][example_key];
+		let code = example['code'].split('\n');
+		if(code.length > 16) {
+			code = code.slice(0, 16);
+			code[code.length-1] = `${code[code.length-1]} ...`;
+		}
+		code = code.join('\n').replace(/(\r\n|\n|\r)/gm, "<br>");
 		html += `
 		<div class="col-md-6">
-			<div class="card single-example"> 
-				<div class="card-header">
-					<h3>`+example['title']+`</h3>
+			<div class="card single-example card-example"> 
+				<div class="card-header card-header-example" style="height: 10%">
+					<h1 style="margin: 0">${example['title']}</h1>
 				</div>
 				<div class="card-body">
-					<p>`+example['desc']+`</p>
+					<p>${example['desc']}</p>
 					<div class="code">
-						<pre><code>`+example['code'].replace(/(\r\n|\n|\r)/gm, "<br>")+`</code></pre>
+						<pre><code>${code}</code></pre>
 					</div>
-					<a href="#" class="example-button button" data-example="`+example_key+`"> Run </a>
+					<a href="#" class="example-button button" data-example="${example_key}"> Run </a>
 				</div>
 			</div>
 		</div>`;
