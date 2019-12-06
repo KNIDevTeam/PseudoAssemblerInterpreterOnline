@@ -52,9 +52,9 @@
 				},
 				"A": {
 					"short": "Dodawanie zawartości rejestru i komórki pamięci.",
-					"long": "“A” command adds content of register and memory block and store the result of this operation in target register.",
-					"params": "[etykieta] A [rejestr docelowy], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
-					"examples": "Suppose we declared variable VAR{2} and prepared register REG1{-1}. Now let's analyse the result of executing the following code: <pre>\tA\t1, VAR\t# REG1 = 1</pre>"
+					"long": "Komenda „A” dodaje zawartość rejestru i komórki pamięci, po czym zapisuje wynik tej operacji w docelowym rejestrze.",
+					"params": "[etykieta] A [rejestr docelowy], [źródłowa komórka pamięci] <p> Zauważ, że możliwe jest wykorzystanie czterech różnych sposobów adresacji pamięci jako [źródłowa komórka pamięci]. W razie wątpliwości sprawdź rozdział „Adresacja pamięci”.</p>",
+					"examples": "Załóżmy, że zadeklarowaliśmy zmienną VAR{2} i przygotowaliśmy rejestr REG1{-1}. Przeanalizujmy wynik działania poniższej instrukcji:<pre>\tA\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"SR": {
 					"short": "Odejmowanie zawartości rejestrów.",
@@ -64,9 +64,9 @@
 				},
 				"S": {
 					"short": "Odejmowanie zawartości rejestru i komórki pamięci.",
-					"long": "“S” command subtracts content of register and memory block and store the result of this operation in target register.",
-					"params": "[etykieta] S [rejestr docelowy], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
-					"examples": " Suppose we declared variable VAR{14} and prepared register REG1{3}. Now let's analyse the result of executing the following code: <pre>\tS\t1, VAR\t# REG1 = 11</pre>"
+					"long": "Komenda „S” odejmuje zawartość komórki pamięci od zawartości rejestru, po czym zapisuje wynik tej operacji w docelowym rejestrze.",
+					"params": "[etykieta] S [rejestr docelowy], [źródłowa komórka pamięci] <p> Zauważ, że możliwe jest wykorzystanie czterech różnych sposobów adresacji pamięci jako [źródłowa komórka pamięci]. W razie wątpliwości sprawdź rozdział „Adresacja pamięci”.</p>",
+					"examples": "Załóżmy, że zadeklarowaliśmy zmienną VAR{14} i przygotowaliśmy rejestr REG1{3}. Przeanalizujmy wynik działania poniższej instrukcji:<pre>\tS\t1, VAR\t# REG1 = 11</pre>"
 				},
 				"MR": {
 					"short": "Mnożenie zawartości rejestrów.",
@@ -76,9 +76,9 @@
 				},
 				"M": {
 					"short": "Mnożenie zawartości rejestru i komórki pamięci.",
-					"long": "“M” command multiplies content of register and memory block and store the result of this operation in target register.",
-					"params": "[etykieta] M [rejestr docelowy], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
-					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{8}. Now let's analyse the result of executing the following code: <pre>\tM\t1, VAR\t# REG1 = 16</pre>"
+					"long": "Komenda „M” mnoży zawartość rejestru i komórki pamięci, po czym zapisuje wynik tej operacji w docelowym rejestrze.",
+					"params": "[etykieta] M [rejestr docelowy], [źródłowa komórka pamięci] <p> Zauważ, że możliwe jest wykorzystanie czterech różnych sposobów adresacji pamięci jako [źródłowa komórka pamięci]. W razie wątpliwości sprawdź rozdział „Adresacja pamięci”.</p>",
+					"examples": "Załóżmy, że zadeklarowaliśmy zmienną VAR{2} i przygotowaliśmy rejestr REG1{8}. Przeanalizujmy wynik działania poniższej instrukcji:<pre>\tM\t1, VAR\t# REG1 = 16</pre>"
 				},
 				"DR": {
 					"short": "Dzielenie zawartości rejestrów.",
@@ -88,9 +88,9 @@
 				},
 				"D": {
 					"short": "Dzielenie zawartości rejestru i komórki pamięci.",
-					"long": "“D” command divides content of register and memory block and store the result of this operation in target register.",
-					"params": "[etykieta] D [rejestr docelowy], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
-					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{3}. Now let's analyse the result of executing the following code: <pre>\tD\t1, VAR\t# REG1 = 1</pre>"
+					"long": "Komenda „D” dzieli zawartość rejestru przez zawartość komórki pamięci, po czym zapisuje wynik tej operacji w docelowym rejestrze.",
+					"params": "[etykieta] D [rejestr docelowy], [źródłowa komórka pamięci] <p> Zauważ, że możliwe jest wykorzystanie czterech różnych sposobów adresacji pamięci jako [źródłowa komórka pamięci]. W razie wątpliwości sprawdź rozdział „Adresacja pamięci”.</p>",
+					"examples": "Załóżmy, że zadeklarowaliśmy zmienną VAR{2} i przygotowaliśmy rejestr REG1{3}. Przeanalizujmy wynik działania poniższej instrukcji:<pre>\tD\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"C": {
 					"short": "Porównanie zawartości rejestru i komórki pamięci",
@@ -131,7 +131,7 @@
 				"L": {
 					"short": "Wczytanie zawartości komórki pamięci do rejestru.",
 					"long": "“L” command loads content of memory block to target register. Note that it is possible to load value of an undefined variable (created using DS command) – resulting value would probably be random.",
-					"params": "[etykieta] L [rejestr docelowy], [source memory block] <p> Note that you can choose from four different ways of addressing using [source memory block]. Look at “Memory addressing” section for further assistance.</p>",
+					"params": "[etykieta] L [rejestr docelowy], [źródłowa komórka pamięci] <p> Note that you can choose from four different ways of addressing using [źródłowa komórka pamięci]. Look at “Memory addressing” section for further assistance.</p>",
 					"examples": " Suppose we declared variable VAR{1} and prepared register REG1. Now let's analyse the result of executing the following code: <pre>L\t1, VAR\t# REG1 = 1</pre>"
 				},
 				"LR": {
