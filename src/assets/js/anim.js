@@ -1,7 +1,7 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
-var scale = window.devicePixelRatio;
+var pixel_ratio = window.devicePixelRatio;
 prepareCanvas()
 
 function getPos( el ) {
@@ -15,9 +15,9 @@ var animating = 0, animating_logo = 0, animating_button = 0;
 function prepareCanvas() {
     canvas.style.width = window.innerWidth * 0.98 + "px";
     canvas.style.height = window.innerHeight + "px";
-    canvas.width = window.innerWidth * 0.98 * scale;
-    canvas.height = window.innerHeight * scale;
-    ctx.scale(scale, scale);
+    canvas.width = window.innerWidth * 0.98 * pixel_ratio;
+    canvas.height = window.innerHeight * pixel_ratio;
+    ctx.scale(pixel_ratio, pixel_ratio);
     ctx.font = "25px Arial";
     ctx.imageSmoothingEnabled = true;
     ctx.textAlign = "center"; 
