@@ -193,19 +193,19 @@
 		"nav": "Przykłady",
 		"programs": {
 			"test": {
-				"title": "This is a test program",
-				"desc": "This is a description for our test program ;D",
-				"code": "#I to jest testowy kod\nMaslo DS INTEGER(3)\nCebula DC INTEGER\n#Zrób coś\nL 1, Maslo\n#Jesteśmy zgubieni [*]"
+				"title": "Lorem Ipsum",
+				"desc": "Phasellus tristique lectus urna, in posuere quam mattis et.",
+				"code": "#This is an example program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Clear the first register\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
 			},
 			"test2": {
-				"title": "This is a test program",
-				"desc": "This is a description for our test program ;D",
-				"code": "#And this is a code\nMaslo DS INTEGER(3)\nCebula DC INTEGER\n#Do sth\nL 1, Maslo\n#This is the end [*]"
+				"title": "Dolor sit amet",
+				"desc": "In hac habitasse platea dictumst. Etiam varius aliquet eros, vitae porta risus fringilla ac.",
+				"code": "#This is an example program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Clear the first register\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
 			},
 			"test3": {
-				"title": "This is a test program",
-				"desc": "This is a description for our test program ;D",
-				"code": "#And this is a code\nMaslo DS INTEGER(3)\nCebula DC INTEGER\n#Do sth\nL 1, Maslo\n#This is the end [*]"
+				"title": "In tempuscam vitrioli",
+				"desc": "Duis eu nisl dolor. Nam posuere accumsan nisl euismod dapibus.",
+				"code": "#This is an example program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Clear the first register\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
 			}
 		}
 	}
