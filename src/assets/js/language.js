@@ -213,7 +213,7 @@ function getExamples() {
 		<div class="col-md-6">
 			<div class="card single-example card-example"> 
 				<div class="card-header card-header-example" style="height: 10%">
-					<h1 style="margin: 0">${example['title']}</h1>
+					<h11 style="margin: 0">${example['title']}</h11>
 				</div>
 				<div class="card-body">
 					<p>${example['desc']}</p>
