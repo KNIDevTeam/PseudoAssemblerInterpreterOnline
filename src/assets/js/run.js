@@ -27,7 +27,11 @@ function show(direction) {
     }
 
     cur_program[states[cur_state - 1].line + hidden_lines] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state - 1].line + hidden_lines] + "</div>";
-    $('#program').html('<h2>' + lang.run.program + '</h2>' + cur_program.join('<br>'));
+    $('#program').html(`<div class="row">
+    <div class="col-md-1" style="padding-right: 0"><a href="/" id="go-back">&larr;</a></div>
+    <div class="col-md-1" style="padding-left: 0"><h2>${lang.run.program}</h2></div>
+    </div>
+    ${cur_program.join('<br>')}`);
     $('#results').html(formatData(states[cur_state]));
     
     $('#cur-line').addClass('animated flash');

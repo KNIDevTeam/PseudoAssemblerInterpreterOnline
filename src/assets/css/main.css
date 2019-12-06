@@ -3342,7 +3342,8 @@ input, select, textarea {
 	}
 	
 /* Back to top */
-	#back-to-top{
+
+	#back-to-top, #go-back {
 		position: fixed;
 		bottom: 40px;
 		right: 40px;
@@ -3360,14 +3361,24 @@ input, select, textarea {
 		transition: opacity 0.2s ease-out;
 		opacity: 0;
 	}
-	#back-to-top:hover {
+	#back-to-top:hover, #go-back:hover {
 		background: #e9ebec;
 	}
+
 	#back-to-top.show {
 		opacity: 1;
 	}
+
+/* Go back */
+
+	#go-back {
+		position: static;
+		opacity: 1;
+		display: inline-block;
+	}
 	
 /* Buttons */
+
 	#run, #prev-next {
 		position: fixed;
 		bottom: 40px;
@@ -3405,8 +3416,6 @@ input, select, textarea {
 .btn {
 	box-shadow: none;
 }
-
-
 
 canvas {
 	display: block;
