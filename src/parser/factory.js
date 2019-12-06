@@ -7,6 +7,14 @@ function Factory(name, command_constructor) {
     };
 
     this.build = function (line) {
+        let opened = false;
+        for(let i = 0; i < line.length; i++)
+        {
+            if(line[i] === "(") opened = true;
+            if(line[i] === ")") opened = false;
+        }
+        if(opened) throw "Braces aren't closed";
+
         let args = line.split(/ +|,|\(|\)|\t+|\*/);
         if (this.is_it_me(args))
         {
