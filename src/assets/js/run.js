@@ -27,9 +27,9 @@ function show(direction) {
     }
 
     cur_program[states[cur_state - 1].line + hidden_lines] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state - 1].line + hidden_lines] + "</div>";
-    $('#program').html(`<div class="row">
-    <div class="col-md-1" style="padding-right: 0"><a href="/" id="go-back">&larr;</a></div>
-    <div class="col-md-1" style="padding-left: 0"><h2>${lang.run.program}</h2></div>
+    $('#program').html(`<div class="row" style="padding-bottom: 1em">
+    <div class="col-1 col-12-xsmall ${mobileBrowser? '' : 'style="padding-right: 0"'} ><a href="/" id="go-back" style="">&larr;</a></div>
+    <div class="col-11 col-12-xsmall" ${mobileBrowser? '' : 'style="padding-left: 0"'}><h11 style="line-height: 0.7">${lang.run.program}</h11></div>
     </div>
     ${cur_program.join('<br>')}`);
     $('#results').html(formatData(states[cur_state]));
@@ -151,7 +151,7 @@ function translate(state) {
 }
 
 function formatData(data) {
-    var registry_html = `<h3>` + lang.run.registers.header + `</h3>
+    var registry_html = `<div style="padding-bottom: 1em"><h11>` + lang.run.registers.header + `</h11></div>
     <div class="table-wrapper">
         <table class="default">
             <thead>
@@ -177,7 +177,7 @@ function formatData(data) {
         </table>
     </div>`;
 
-    var memory_html = `<h3>` + lang.run.memory.header + `</h3>
+    var memory_html = `<div style="padding-bottom: 1em"><h11>` + lang.run.memory.header + `</h11></div>
     <div class="table-wrapper">
         <table class="default">
             <thead>
