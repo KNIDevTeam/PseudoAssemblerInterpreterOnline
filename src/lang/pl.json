@@ -106,27 +106,27 @@
 				},
 				"J": {
 					"short": "Bezwarunkowy skok do linii programu opatrzonej etykietą.",
-					"long": "“J” command unconditionally jumps to program line with provided label. It’s useful for designing loops or default actions in if-like conditions.",
-					"params": "[etykieta] J [target label]",
-					"examples": " Suppose we declared variable VAR{1} and prepared register REG1{0}. Now let's analyse the result of executing the following code: <pre>START\tA\t1, VAR\t# REG1 = 1 </pre><pre>\tA\t1, VAR\t# REG1 = 2 </pre><pre>JUMP\tJ\tEND\t</pre><pre>\tA\t1, VAR\t</pre><pre>\tA\t1, VAR\t</pre><pre>END\tST\t1, VAR\t# VAR1 = 2</pre>"
+					"long": "Komenda „J” wykonuje bezwarunkowy skok do linii programu opatrzonej wprowadzoną etykietą. Jest przydatna głównie w tworzeniu pętli i domyślnych akcji w wyrażeniach warunkowych.",
+					"params": "[etykieta] J [docelowa etykieta]",
+					"examples": "Załóżmy, że zadeklarowaliśmy zmienną VAR{1} i przygotowaliśmy rejestr REG1{0}. Przeanalizujmy wynik działania poniższego programu: <pre>START\tA\t1, VAR\t# REG1 = 1 </pre><pre>\tA\t1, VAR\t# REG1 = 2 </pre><pre>JUMP\tJ\tEND\t</pre><pre>\tA\t1, VAR\t</pre><pre>\tA\t1, VAR\t</pre><pre>END\tST\t1, VAR\t# VAR1 = 2</pre>"
 				},
 				"JZ": {
 					"short": "Skok do linii programu opatrzonej etykietą jeśli wynik poprzedniej operacji jest równy 0.",
-					"long": "“JZ” command jumps to program line with provided label depending upon the condition. If the result of last operation is equal to 0 (status register = “00”) a jump to target line would be performed. It’s useful for designing loops or if-like conditions.",
-					"params": "[etykieta] JZ [target label]",
-					"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{3}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tS\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJZ\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = 6</pre>"
+					"long": "Komenda „JZ” wykonuje skok do linii programu opatrzonej wprowadzoną etykietą jeżeli wynik ostatniej operacji arytmetycznej był równy 0 (tzn. rejestr stanu programu = “00”). Komenda jest przydatna w tworzeniu pętli oraz wyrażeń warunkowych.",
+					"params": "[etykieta] JZ [docelowa etykieta]",
+					"examples": "Załóżmy, że zadeklarowaliśmy zmienną VAR{1} oraz przygotowaliśmy rejestry REG1{0} i REG2{3}. Przeanalizujmy teraz wynik działania poniższego programu: <pre>START\tAR\t1, 2</pre><pre>\tS\t2, VAR\t# Zwróć uwagę, że rejestr stanu programu może zmienić swoją wartość.</pre><pre>JUMP\tJZ\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = 6</pre>"
 				},
 				"JP": {
 					"short": "Skok do linii programu opatrzonej etykietą jeśli wynik poprzedniej operacji jest dodatni.",
-					"long": "“JP” command jumps to program line with provided label depending upon the condition. If the result of last operation is positive (status register = “01”) a jump to target line would be performed. It’s useful for designing loops or if-like conditions.",
-					"params": "[etykieta] JP [target label]",
-					"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{-4}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tA\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJP\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = -10</pre>"
+					"long": "Komenda „JP” wykonuje skok do linii programu opatrzonej wprowadzoną etykietą jeżeli wynik ostatniej operacji arytmetycznej był dodatni (tzn. rejestr stanu programu = “01”). Komenda jest przydatna w tworzeniu pętli oraz wyrażeń warunkowych.",
+					"params": "[etykieta] JP [docelowa etykieta]",
+					"examples": "Załóżmy, że zadeklarowaliśmy zmienną VAR{1} oraz przygotowaliśmy rejestry REG1{0} i REG2{-4}. Przeanalizujmy teraz wynik działania poniższego programu: <pre>START\tAR\t1, 2</pre><pre>\tA\t2, VAR\t# Zwróć uwagę, że rejestr stanu programu może zmienić swoją wartość.</pre><pre>JUMP\tJP\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = -10</pre>"
 				},
 				"JN": {
 					"short": "Skok do linii programu opatrzonej etykietą jeśli wynik poprzedniej operacji jest ujemny.",
-					"long": "“JN” command jumps to program line with provided label depending upon the condition. If the result of last operation is negative (status register = “10”) a jump to target line would be performed. It’s useful for designing loops or if-like conditions.",
-					"params": "[etykieta] JN [target label]",
-					"examples": " Suppose we declared variable VAR{1} and prepared registers REG1{0} and REG2{2}. Now let's analyse the result of executing the following code: <pre>START\tAR\t1, 2</pre><pre>\tS\t2, VAR\t# Note that status register value may change.</pre><pre>JUMP\tJN\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = 2 (2 + 1 + (-1))</pre>"
+					"long": "Komenda „JN” wykonuje skok do linii programu opatrzonej wprowadzoną etykietą jeżeli wynik ostatniej operacji arytmetycznej był ujemny (tzn. rejestr stanu programu = “10”). Komenda jest przydatna w tworzeniu pętli oraz wyrażeń warunkowych.",
+					"params": "[etykieta] JN [docelowa etykieta]",
+					"examples": "Załóżmy, że zadeklarowaliśmy zmienną VAR{1} oraz przygotowaliśmy rejestry REG1{0} i REG2{2}. Przeanalizujmy teraz wynik działania poniższego programu: <pre>START\tAR\t1, 2</pre><pre>\tS\t2, VAR\t# Zwróć uwagę, że rejestr stanu programu może zmienić swoją wartość.</pre><pre>JUMP\tJN\tEND\t</pre><pre>\tJ\tSTART</pre><pre>END\tST\t1, VAR\t# VAR1 = 2 (2 + 1 + (-1))</pre>"
 				},
 				"L": {
 					"short": "Wczytanie zawartości komórki pamięci do rejestru.",
