@@ -27,10 +27,16 @@ function show(direction) {
     }
 
     cur_program[states[cur_state - 1].line + hidden_lines] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state - 1].line + hidden_lines] + "</div>";
-    $('#program').html(`<div class="row" style="padding-bottom: 1em">
-    <div class="col-1 col-12-xsmall ${mobileBrowser? '' : 'style="padding-right: 0"'} ><a href="/" id="go-back" style="">&larr;</a></div>
-    <div class="col-11 col-12-xsmall" ${mobileBrowser? '' : 'style="padding-left: 0"'}><h11 style="line-height: 0.7">${lang.run.program}</h11></div>
-    </div>
+    $('#program').html(
+        //handle strange mobile display
+        `${mobileBrowser ? 
+            `<a href="/" id="go-back" style="">&larr;</a><h11 style="line-height: 0.7">${lang.run.program}</h11>` :
+            
+            `<div class="row" style="padding-bottom: 1em">
+            <div class="col-1 col-12-xsmall style="padding-right: 0" ><a href="/" id="go-back" style="">&larr;</a></div>
+            <div class="col-11 col-12-xsmall" style="padding-left: 0"><h11 style="line-height: 0.7">${lang.run.program}</h11></div>
+            </div>`
+        }
     ${cur_program.join('<br>')}`);
     $('#results').html(formatData(states[cur_state]));
     
@@ -50,7 +56,7 @@ $('#next').on('click', function() {
 });
 
 //initialise
-$('#run').on('click', function() {
+$('#run-button').on('click', function() {
     //format just in case
     $('#input').html(formatInput($('#input').html()));
 
@@ -98,6 +104,9 @@ $('#run').on('click', function() {
         return;
     }
 
+    //skip to end if fastforwarded
+    if(document.getElementById('fast-forward').checked) cur_state = states.length - 1;
+    
     program = $('#input').html().split('<br>');
 
     //change visibility of elements
