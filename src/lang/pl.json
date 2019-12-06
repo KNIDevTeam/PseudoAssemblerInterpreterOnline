@@ -94,15 +94,15 @@
 				},
 				"C": {
 					"short": "Porównanie zawartości rejestru i komórki pamięci",
-					"long": "“C” command compares content of register and memory block by subtracting content of register and content of memory block. Depending on the sign of the result of this subtraction, status register is changed. content of register and memory block won’t change.",
-					"params": "[etykieta] C [register], [memory block] <p> Note that you can choose from four different ways of addressing using [memory block]. Look at “Memory addressing” section for further assistance.</p>",
-					"examples": " Suppose we declared variable VAR{2} and prepared register REG1{2}. Now let's analyse the result of executing the following code: <pre>\tC\t1, VAR\t# Status register = '00'</pre>"
+					"long": "Komenda „C” porównuje zawartość rejestru i komórki pamięci poprzez odjęcie zawartości komórki pamięci od zawartości rejestru. W zależności od wyniku odejmowania, zmieniana jest wartość rejestru stanu programu. Zawartość rejestru i komórki pamięci nie ulega zmianie.",
+					"params": "[etykieta] C [rejestr], [komórka pamięci] <p>Zauważ, że możliwe jest wykorzystanie czterech różnych sposobów adresacji pamięci jako [komórka pamięci]. W razie wątpliwości sprawdź rozdział „Adresacja pamięci”.</p>",
+					"examples": "Załóżmy, że zadeklarowaliśmy zmienną VAR{2} i przygotowaliśmy rejestr REG1{2}. Przeanalizujmy wynik wykonania poniższej instrukcji:<pre>\tC\t1, VAR\t# Rejestr stanu programu = '00'</pre>"
 				},
 				"CR": {
 					"short": "Porównanie zawartości rejestrów.",
-					"long": "“CR” command compares content of two registers by subtracting content of first register and content of second register. Depending on the sign of the result of this subtraction, status register is changed. content of both registers won’t change.",
-					"params": "[etykieta] CR [first register], [second register]",
-					"examples": "Suppose we have already prepared registers – REG1{2} and REG2{3}. Let’s analyse the result of following operation: <pre>\tCR\t1, 2\t# Status register = '10'</pre>"
+					"long": "Komenda „CR” porównuje zawartość dwóch rejestrów poprzez odjęcie zawartości drugiego rejestru od zawartości pierwszego rejestru. W zależności od wyniku odejmowania, zmieniana jest wartość rejestru stanu programu. Zawartość rejestrów nie ulega zmianie.",
+"params": "[etykieta] CR [pierwszy rejestr], [drugi rejestr]",
+					"examples": "Załóżmy, że przygotowaliśmy rejestry REG1{2} i REG2{3}. Przeanalizujmy wynik wykonania poniższej instrukcji:<pre>\tCR\t1, 2\t# Rejestr stanu programu = '10'</pre>"
 				},
 				"J": {
 					"short": "Bezwarunkowy skok do linii programu opatrzonej etykietą.",
