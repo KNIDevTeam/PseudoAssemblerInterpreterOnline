@@ -3407,6 +3407,19 @@ input, select, textarea {
 
 /* custom css */
 
+.card {
+	border-radius: 1px;
+}
+
+.card-example {
+	border-color: white;
+}
+
+.card-header-example {
+	text-align: center;
+	background-color: white;
+}
+
 .cc-window {
 	border-style: solid;
 	border-width: 1px;
@@ -3615,6 +3628,7 @@ canvas {
 	}
 	
 /* Examples */
+
 	#examples-content {
 		padding-bottom: 40px;
 	}
