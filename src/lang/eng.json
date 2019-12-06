@@ -193,9 +193,9 @@
 				"code": "#This is an example program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Clear the first register\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
 			},
 			"test2": {
-				"title": "Dolor sit amet",
-				"desc": "In hac habitasse platea dictumst. Etiam varius aliquet eros, vitae porta risus fringilla ac.",
-				"code": "#This is an example program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Clear the first register\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
+				"title": "Bubble sort",
+				"desc": "Program that sorts array of 5 random numbers with bubble sort alghoritm",
+				"code": "#TAB DC 5*INTEGER\\nSIZE DC INTEGER(5)\\nSTEP DC INTEGER(1)\\nMEM_STEP DC INTEGER(4)\\nZERO DC INTEGER(0)\\nONE DC INTEGER(1)\\n#Loading upper boundary for inside loop (size of array lowered by one)\\n L 1, SIZE\\n S 1, ONE\\n#Setting inside loop iterator to zero\\nOUT L 2, ZERO\\n#Calculating current address\\nIN LR 10, 2\\n M 10, MEM_STEP\\n#Comparing current element with next\\n L 3, 0(10)\\n C 3, 4(10)\\n JP SWAP\\n J NEXT_STEP_IN\\n#Swaping elements\\nSWAP L 4, 4(10)\\n ST 4, 0(10)\\n ST 3, 4(10)\\n#Incrementing inside loop iterator\\nNEXT_STEP_IN A 2, STEP\\n CR 2, 1\\n JN IN\\n#Decrementing upper boundary for inside loop\\nNEXT_STEP_OUT S 1, STEP\\n C 1, ONE\\n JP OUT\\n#Finishing program\\nEND CR 1,1"
 			},
 			"test3": {
 				"title": "In tempuscam vitrioli",
