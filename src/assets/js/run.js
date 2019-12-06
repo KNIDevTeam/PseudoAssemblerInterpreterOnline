@@ -11,7 +11,7 @@ function show(direction) {
         let button_y = getPos(document.getElementById("prev-next")).y;
         if(direction == "next") [logo_y, button_y] = [button_y, logo_y];
         spawnCharacters("run1", {x: 0, y: logo_y, w: canvas.width*0.01}, '#00f4a4');
-        spawnCharacters("run2", {x: canvas.width, y: button_y, w: 0}, '#00f4a4');
+        spawnCharacters("run2", {x: canvas.width / scale, y: button_y, w: 0}, '#00f4a4');
         animating = 1, requestAnimationFrame(draw);
     }
 
