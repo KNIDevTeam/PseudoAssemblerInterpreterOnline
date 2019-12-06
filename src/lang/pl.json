@@ -1,4 +1,4 @@
-{
+﻿{
     "index": {
         "siteTitle": "Interpreter - Strona główna",
         "title": "Interpreter",
@@ -23,11 +23,11 @@
 		},
 		"rules": {
 			"header": "Zasady tworzenia etykiet",
-			"content": "Despite being one of the most powerful programming languages on the planet Earth, pseudoassembler has some minor limitations. You should be aware of some restrictions while writing your programs.<ul><li>Labels should only consist of alphanumeric characters (letters A-Z, a-z and digits 0-9).</li><li>It is forbidden to use any of the command words as a label.</li><li>It is forbidden to use digit as a first character of label.</li></ul>"
+			"content": "Pseudoassembler, pomimo swojej potęgi, ma pewne, niewielkie ograniczenia. Tworząc programy należy mieć na uwadze poniższe zasady: <ul><li>Etykiety mogą składać się wyłącznie ze znaków alfanumerycznych (liter A-Z, a-z oraz cyfr 0-9).</li><li>Zabronione jest wykorzystywanie poleceń pseudoassemblera jako etykiet.</li><li>Zabronione jest rozpoczynanie etykiety od cyfry.</li></ul>"
 		},
 		"statusRegister": {
 			"header": "Rejestr stanu programu",
-			"content": "Rejestr stanu programu to specjalny rejestr, który przechowuje rezultat działania programu. W zależności od znaku ostatniej operacji arytmetycznej (takiej jak: A, AR, S, SR, M, MR, D, DR, C, CR), rejestr stanu programu może przyjmować wartości:<p></p><ul><li>00 \u2013 gdy wynik jest równy 0, <\/li><li>01 \u2013 gdy wynik jest dodatni, <\/li><li>10 \u2013 gdy wynik jest ujemny, <\/li><li>11 \u2013 gdy nastąpił błąd (przykładowo usiłowano podzielić przez 0).<\/li><\/ul><h4>Example<\/h4>Suppose we have three registers: REG1{2}, REG2{-2}, REG3{0}. Let us analyse the state of the status register after executing the following commands: <p></p><pre>AR\t1, 2\t# Status register = '00'<\/pre><pre>SR\t1, 2\t# Status register = '01' <\/pre><pre>MR\t1, 2\t# Status register = '10' <\/pre><pre>DR\t1, 3\t# Status register = '11' <\/pre>Should you have any doubts about these commands, don\u2019t hesitate to check the 'Commands' section of the documentation."
+			"content": "Rejestr stanu programu to specjalny rejestr, który przechowuje rezultat działania programu. W zależności od znaku ostatniej operacji arytmetycznej (takiej jak: A, AR, S, SR, M, MR, D, DR, C, CR), rejestr stanu programu może przyjmować wartości:<p></p><ul><li>00 \u2013 gdy wynik jest równy 0, <\/li><li>01 \u2013 gdy wynik jest dodatni, <\/li><li>10 \u2013 gdy wynik jest ujemny, <\/li><li>11 \u2013 gdy nastąpił błąd (przykładowo usiłowano podzielić przez 0).<\/li><\/ul><h4>Przykład<\/h4>Załóżmy, że mamy przygotowane trzy rejestry: REG1{2}, REG2{-2}, REG3{0}. Przeanalizujmy stan rejestrów po wykonaniu poniższych instrukcji: <p></p><pre>AR\t1, 2\t# Rejestr stanu programu = '00'<\/pre><pre>SR\t1, 2\t# Rejestr stanu programu = '01' <\/pre><pre>MR\t1, 2\t# Rejestr stanu programu = '10' <\/pre><pre>DR\t1, 3\t# Rejestr stanu programu = '11' <\/pre>W razie wątpliwości dotyczących wykorzystanych w przykładzie komend, sprawdź rozdział poświęcony komendom pseudoassemblera."
 		},
 		"commands": {
 			"header": "Komendy",
