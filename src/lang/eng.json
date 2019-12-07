@@ -196,7 +196,7 @@
 			"test2": {
 				"title": "Quadratic equation",
 				"desc": "Program computes number of solutions in quadratic equation (ax<sup>2</sup> + bx + c = 0)",
-				"code": "COE_A\t\t\tDS\tINTEGER\nCOE_B\t\t\tDS\tINTEGER\nCOE_C\t\t\tDS\tINTEGER\nRESULT\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nONE\t\t\tDC\tINTEGER(1)\nFOUR\t\t\tDC\tINTEGER(4)\n\t\t\tL\t1, COE_B\n\t\t\tMR\t1, 1\n\t\t\tL\t2, FOUR\n\t\t\tM\t2, COE_A\n\t\t\tM\t2, COE_C\n\t\t\tSR\t1, 2\n\t\t\tJP\tTWO_SOLUTIONS\n\t\t\tJZ\tONE_SOLUTION\n\t\t\t\tJN ZERO_SOLUTIONS\nTWO_SOLUTIONS\t\tL\t3, ONE\n\t\t\tAR\t3, 3\n\t\t\tST\t3, RESULT\n\t\t\t\tJ END\nONE_SOLUTION\tL\t3, ONE\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\nZERO_SOLUTIONS\t\tL\t3, ZERO\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\nEND\t\tC\t1, 1\n"
+				"code": "COE_A\t\t\tDS\tINTEGER\nCOE_B\t\t\tDS\tINTEGER\nCOE_C\t\t\tDS\tINTEGER\nRESULT\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nONE\t\t\tDC\tINTEGER(1)\nFOUR\t\t\tDC\tINTEGER(4)\n#Preparing registers\n\t\t\tL\t1, COE_B\n#Computing discriminant\n\t\t\tMR\t1, 1\n\t\t\tL\t2, FOUR\n\t\t\tM\t2, COE_A\n\t\t\tM\t2, COE_C\n\t\t\tSR\t1, 2\n#Determining number of solutions\n\t\t\tJP\tTWO_SOLUTIONS\n\t\t\tJZ\tONE_SOLUTION\n\t\t\t\tJN ZERO_SOLUTIONS\nTWO_SOLUTIONS\t\tL\t3, ONE\n\t\t\tAR\t3, 3\n\t\t\tST\t3, RESULT\n\t\t\t\tJ END\nONE_SOLUTION\tL\t3, ONE\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\nZERO_SOLUTIONS\t\tL\t3, ZERO\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\n#End of program\nEND\t\tC\t1, 1\n"
 				},
 			"test3": {
 				"title": "Bubble sort",
