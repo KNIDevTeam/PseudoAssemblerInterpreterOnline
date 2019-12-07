@@ -1,4 +1,4 @@
-{
+﻿{
     "index": {
         "siteTitle": "Interpreter - Home",
         "title": "Interpreter",
@@ -41,7 +41,7 @@
 				},
 				"DC": {
 					"short": "Declare a new variable or array with an initial value.",
-					"long": "“DC” (Declare Constant) command reserves required memory space for a new variable or array and links the provided label to that area of memory. Unlike the “DS” command, the declared variable has an initial value which should be specified within the code line.",
+					"long": "“DC” (Declare Constant) command reserves required memory space for a new variable or array and links the provided label to that area of memory. Unlike the “DS” command, the declared variable has an initial value which should be specified within the code line. <b>You should be aware that unlike canonical pseudoassembler (which can be found at our university), this implementation of the language permits using “DC” command without initial value. In this case, random value will be assigned. It can be considered useful as it allows you to test your programs without hard coding any values.</b>",
 					"params": "<pre>[label] DC [variable type]([value])\t\t# Declaring variable</pre><pre>[label] DC [size]*[variable type]([value])\t# Declaring array</pre>Currently the only supported type of the variable is INTEGER.",
 					"examples": "Let's analyse a short example: <pre>VARIABLE1\tDC\tINTEGER(7)</pre><pre>ARRAY1\t\tDC\t3*INTEGER(12)</pre>After executing these commands, the following objects will be created:<pre>VARIABLE1 = 7,</pre><pre>ARRAY1 = {12, 12, 12}.</pre>"
 				},

@@ -41,7 +41,7 @@
 				},
 				"DC": {
 					"short": "Deklaracja zmiennej lub tablicy z wartością początkową.",
-					"long": " Komenda „DC” (Declare Constant) rezerwuje wymagane miejsce w pamięci dla nowej zmiennej lub tablicy i przypisuje do niego podaną etykietę. W przeciwieństwie do komendy „DS” deklarowana zmienna posiada początkową wartość umieszczoną jako argument komendy.",
+					"long": " Komenda „DC” (Declare Constant) rezerwuje wymagane miejsce w pamięci dla nowej zmiennej lub tablicy i przypisuje do niego podaną etykietę. W przeciwieństwie do komendy „DS” deklarowana zmienna posiada początkową wartość umieszczoną jako argument komendy. <b>Zwróć uwagę, że w przeciwieństwie do kanonicznego pseudoassemblera (wykorzystywanego na naszej uczelni), wykorzystywana w interpreterze implementacja pozwala na wykorzystanie komendy „DC” bez sprecyzowania wartości początkowej. W takim przypadku, zmiennej zostanie przypisana losowa wartość. Jest to zachowanie pożądane - pozwala na testowanie programów bez konieczności sztywnego zapisywania w kodzie wartości zmiennych.</b>",
 					"params": "<pre>[etykieta] DC [typ zmiennej]([wartość początkowa])\t\t# Deklarowanie zmiennej</pre><pre>[etykieta] DC [rozmiar]*[typ zmiennej]([wartość początkowa])\t# Deklarowanie tablicy</pre> Obecnie jedynym obsługiwanym typem zmiennej jest INTEGER.",
 					"examples": "Przeanalizujmy krótki przykład: <pre>ZMIENNA1\tDC\tINTEGER(7)</pre><pre>TABLICA1\t\tDC\t3*INTEGER(12)</pre> Po wykonaniu poniższych instrukcji, stworzone zostaną następujące obiekty:<pre>ZMIENNA1 = 7,</pre><pre>TABLICA1 = {12, 12, 12}.</pre>"
 				},
