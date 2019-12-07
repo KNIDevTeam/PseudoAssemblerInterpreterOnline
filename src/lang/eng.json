@@ -23,7 +23,7 @@
 		},
 		"rules": {
 			"header": "Labeling rules",
-			"content": "Despite being one of the most powerful programming languages on the planet Earth, pseudoassembler has some minor limitations. You should be aware of some restrictions while writing your programs.<ul><li>Labels should only consist of alphanumeric characters (letters A-Z, a-z and digits 0-9).</li><li>It is forbidden to use any of the command words as a label.</li><li>It is forbidden to use digit as a first character of label.</li></ul>"
+			"content": "Despite being one of the most powerful programming languages on the planet Earth, pseudoassembler has some minor limitations. You should be aware of some restrictions while writing your programs.<ul><li>Labels should only consist of alphanumeric characters (letters A-Z, a-z and digits 0-9).</li><li>It is forbidden to use any of the command words as a label.</li><li>It is forbidden to use a digit as the first character of label.</li></ul>"
 		},
 		"statusRegister": {
 			"header": "Status Register",
