@@ -26,7 +26,8 @@ function show(direction) {
         else if(sans_html[i] == pure_text[states[cur_state - 1].line]) break;
     }
 
-    cur_program[states[cur_state - 1].line + hidden_lines] = '<div id="cur-line" style="display: inline">&rarr; ' + cur_program[states[cur_state - 1].line + hidden_lines] + "</div>";
+    cur_program[states[cur_state - 1].line + hidden_lines] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line + hidden_lines]}</div>`;
+    //<div style="display: block; float: right;">test</div></div>`;
     $('#program').html(
         //handle strange mobile display
         `${mobileBrowser ? 
@@ -40,6 +41,7 @@ function show(direction) {
     ${cur_program.join('<br>')}`);
     $('#results').html(formatData(states[cur_state]));
     
+    $('#changed').addClass('animated shake');
     $('#cur-line').addClass('animated flash');
 	checkVisibility();
 	refreshTooltip();
@@ -177,9 +179,9 @@ function formatData(data) {
             ${data.registry.reduce(function(accumulator, val, ind) {
                 if(!data.reg_init[ind]) return accumulator;
                 return accumulator +
-                `<tr>
-                    <td><span class="number">${ind}</span></td>
-                    <td><b>${val}</b></td>
+                `<tr${data.reg_init[ind] == 2 ? ' id="changed"' : ''}>
+                    <td><span class="highlight">${ind}</span></td>
+                    <td><b>${data.reg_init[ind] == 2 ? `<span class="highlight">${val}</span>` : `${val}`}</b></td>
                 </tr>`
             }, '') + 
             `<tr>
@@ -204,10 +206,10 @@ function formatData(data) {
             ${data.memory.reduce(function(accumulator, val, ind) {
                 if(!data.mem_init[ind]) return accumulator;
                 return accumulator +
-                `<tr>
-                    <td><span class="number">${ind*4}</span></td>
+                `<tr${data.mem_init[ind] == 2 ? ' id="changed"' : ''}>
+                    <td><span class="highlight">${ind*4}</span></td>
                     <td><span class="keyword">${data.variables[ind]}</span></td>
-                    <td><b>${val}</b></td>
+                    <td><b>${data.mem_init[ind] == 2 ? `<span class="highlight">${val}</span>` : `${val}`}</b></td>
                 </tr>`
             }, '')}
             </tfoot>

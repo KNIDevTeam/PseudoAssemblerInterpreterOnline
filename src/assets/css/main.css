@@ -462,7 +462,6 @@ input, select, textarea {
 		.row > .col-12 {
 			width: 100%;
 		}
-
 		.row > .off-12 {
 			margin-left: 100%;
 		}
@@ -3472,7 +3471,7 @@ canvas {
 	color: #999999;
 }
 
-.number {
+.highlight {
 	text-shadow: 1px 1px 2px #00f4a4
 }
 
