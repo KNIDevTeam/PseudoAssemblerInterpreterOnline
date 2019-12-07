@@ -190,22 +190,22 @@
 		"programs": {
 			"test": {
 				"title": "Sum",
-				"desc": "This program computes the sum of elements in a random array (of size 10).",
+				"desc": "Program computes the sum of elements in a random array (of size 10).",
 				"code": "SIZE\tDC\tINTEGER(10)\nONE\tDC\tINTEGER(1)\nZERO\tDC\tINTEGER(0)\nFOUR\tDC\tINTEGER(4)\nARRAY\tDC\t10*INTEGER\nSUM\tDS\tINTEGER\n#Initializing iterator, temporary register, loading adress of the array\n\tLA\t1, ARRAY\n\tL\t3, ZERO\n\tL\t4, ZERO\n#Main loop\nLOOP\tC\t3, SIZE\n\tJZ\tEND\n\tL\t2, 0(1)\n\tAR\t4, 2\n\tA\t1, FOUR\n\tA\t3, ONE\n\tJ\tLOOP\n#Storing results in variable SUM\nEND\tST\t4, SUM\n"
 			},
 			"test2": {
 				"title": "Quadratic equation",
-				"desc": "This program computes the number of solutions in a quadratic equation (ax<sup>2</sup> + bx + c = 0)",
-				"code": "COE_A\t\t\tDS\tINTEGER\nCOE_B\t\t\tDS\tINTEGER\nCOE_C\t\t\tDS\tINTEGER\nRESULT\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nONE\t\t\tDC\tINTEGER(1)\nFOUR\t\t\tDC\tINTEGER(4)\n#Preparing registers\n\t\t\tL\t1, COE_B\n#Computing discriminant\n\t\t\tMR\t1, 1\n\t\t\tL\t2, FOUR\n\t\t\tM\t2, COE_A\n\t\t\tM\t2, COE_C\n\t\t\tSR\t1, 2\n#Determining number of solutions\n\t\t\tJP\tTWO_SOLUTIONS\n\t\t\tJZ\tONE_SOLUTION\n\t\t\t\tJN ZERO_SOLUTIONS\nTWO_SOLUTIONS\t\tL\t3, ONE\n\t\t\tAR\t3, 3\n\t\t\tST\t3, RESULT\n\t\t\t\tJ END\nONE_SOLUTION\tL\t3, ONE\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\nZERO_SOLUTIONS\t\tL\t3, ZERO\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\n#End of program\nEND\t\tCR\t1, 1\n"
+				"desc": "Program computes number of solutions in quadratic equation (ax<sup>2</sup> + bx + c = 0)",
+				"code": "COE_A\t\t\tDC\tINTEGER\nCOE_B\t\t\tDC\tINTEGER\nCOE_C\t\t\tDC\tINTEGER\nRESULT\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nONE\t\t\tDC\tINTEGER(1)\nFOUR\t\t\tDC\tINTEGER(4)\n#Preparing registers\n\t\t\tL\t1, COE_B\n#Computing discriminant\n\t\t\tMR\t1, 1\n\t\t\tL\t2, FOUR\n\t\t\tM\t2, COE_A\n\t\t\tM\t2, COE_C\n\t\t\tSR\t1, 2\n#Determining number of solutions\n\t\t\tJP\tTWO_SOLUTIONS\n\t\t\tJZ\tONE_SOLUTION\n\t\t\t\tJN ZERO_SOLUTIONS\nTWO_SOLUTIONS\t\tL\t3, ONE\n\t\t\tAR\t3, 3\n\t\t\tST\t3, RESULT\n\t\t\t\tJ END\nONE_SOLUTION\tL\t3, ONE\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\nZERO_SOLUTIONS\t\tL\t3, ZERO\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\n#End of program\nEND\t\tC\t1, 1\n"
 				},
 			"test3": {
 				"title": "Bubble sort",
-				"desc": "This program sorts an array of 5 random numbers with the bubble sort algorithm",
+				"desc": "Program sorts an array of 5 random numbers with the bubble sort algorithm",
 				"code": "TAB\t\tDC\t5*INTEGER\nSIZE\t\tDC\tINTEGER(5)\nSTEP\t\tDC\tINTEGER(1)\nMEM_STEP\tDC\tINTEGER(4)\nZERO\t\tDC\tINTEGER(0)\nONE\t\tDC\tINTEGER(1)\n#Loading upper boundary for inside loop (size of array lowered by one)\n\t\tL\t1, SIZE\n\t\tS\t1, ONE\n#Setting inner loop iterator to zero\nOUT\t\tL\t2, ZERO\n#Calculating current address\nIN\t\tLR\t10, 2\n\t\tM\t10, MEM_STEP\n#Comparing current element with next\n\t\tL\t3, 0(10)\n\t\tC\t3, 4(10)\n\t\tJP\tSWAP\n\t\tJ\tNEXT_STEP_IN\n#Swapping elements\nSWAP\t\tL\t4, 4(10)\n\t\tST\t4, 0(10)\n\t\tST\t3, 4(10)\n#Incrementing inner loop iterator\nNEXT_STEP_IN\tA\t2, STEP\n\t\tCR\t2, 1\n\t\tJN\tIN\n#Decrementing upper boundary for inside loop\nNEXT_STEP_OUT\tS\t1, STEP\n\t\tC\t1, ONE\n\t\tJP\tOUT\n#Finishing program\n\t\tEND\tCR 1,1"
 			},
 			"test4": {
-				"title": "Fibonacci",
-				"desc": "This program calculates the first 10 Fibonacci numbers",
+				"title": "Fibonacci numbers",
+				"desc": "Program calculates the first 10 Fibonacci numbers",
 				"code": "RES\t\tDS\t10*INTEGER\nN\t\tDC\tINTEGER(10)\nSTEP\t\tDC\tINTEGER(1)\nMEM_STEP\tDC\tINTEGER(4)\nZERO\t\tDC\tINTEGER(0)\nONE\t\tDC\tINTEGER(1)\n#Initializing the first two elements and saving them to array\n\t\tL\t1, ONE\n\t\tL\t2, ONE\n\t\tLA\t10, RES\n\t\tST\t1, 0(10)\n\t\tA\t10, MEM_STEP\n\t\tST\t2, 0(10)\n\t\tA\t10, MEM_STEP\n\t\tL\t3, ONE\n\t\tA\t3, STEP\n#Calculating the next element in register 4 \nLOOP\t\tSR\t4, 4\n\t\tAR\t4, 1\n\t\tAR\t4, 2\n\t\tLR\t1, 2\n\t\tLR\t2, 4\n#Saving result to array\n\t\tST\t2, 0(10)\n\t\tA\t10, MEM_STEP\n\t\tA\t3, STEP\n C 3, N\n\t\tJN\tLOOP\n#Finishing the program\nEND\t\tCR\t1, 1"
 			}
 		}
