@@ -28,10 +28,10 @@ window.cookieconsent.initialise({
   "theme": "block",
   "position": "bottom-right",
   "content": {
-    "message": "Ta strona używa ciasteczek w celu polepszenia odczuć związanych z jej użytkowaniem",
-    "dismiss": "OK!",
-    "link": "Czytaj więcej",
-    "href": "https://wszystkoociasteczkach.pl/polityka-cookies/"
+    "message": lang.cookieConsent.message,
+    "dismiss": lang.cookieConsent.dimiss,
+    "link": lang.cookieConsent.link,
+    "href": lang.cookieConsent.href
   }
 });
 

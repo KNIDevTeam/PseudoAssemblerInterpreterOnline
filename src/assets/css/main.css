@@ -300,8 +300,6 @@ input, select, textarea {
 		pre code {
 			display: block;
 			line-height: 1.75;
-			padding: 1em 1.5em;
-			overflow-x: auto;
 		}
 
 	hr {
@@ -3390,6 +3388,18 @@ input, select, textarea {
 	
 /* Buttons */
 
+	@media screen and (max-width: 1021px) {
+		#run {
+			width: 90%;
+		}	
+	}
+
+	@media screen and (min-width: 1022px) {
+		#run {
+			width: 50%;
+		}	
+	}
+	
 	#run, #prev-next {
 		position: fixed;
 		bottom: 40px;
@@ -3682,4 +3692,40 @@ canvas {
 			display: flex;
 			justify-content: center;
 		}
+	}
+	
+/* Copy button */
+	pre {
+		overflow: hidden;
+	}
+	code { 
+		position: relative;
+		overflow: hidden;
+		padding: 0px;
+	}
+	.code-inner {
+		overflow-x: auto;
+		padding: 1em 1.5em;
+	}
+	.copy {
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		top: 10px;
+		right: 10px;
+		border-radius: 3px;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(120, 120, 120, 0.4);
+		cursor: pointer;
+		display: none;
+		transition: all .2s ease-in-out;
+	}
+	
+	.copy:hover {
+		background-color: rgba(120, 120, 120, 0.6	);
+	}
+	
+	.code:hover .copy {
+		display: flex;
 	}

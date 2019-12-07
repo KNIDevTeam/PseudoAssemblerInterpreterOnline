@@ -212,14 +212,16 @@ function getExamples() {
 		code = code.join('\n').replace(/(\r\n|\n|\r)/gm, "<br>");
 		html += `
 		<div class="col-md-6">
-			<div class="card single-example card-example"> 
+			<div class="card single-example card-example" id="${example_key}"> 
 				<div class="card-header card-header-example" style="height: 10%">
 					<h11 style="margin: 0">${example['title']}</h11>
 				</div>
 				<div class="card-body">
 					<p>${example['desc']}</p>
 					<div class="code">
-						<pre><code>${code}</code></pre>
+						<pre>
+							<code><div class="code-inner">${code}</div> <div class="copy" data-example="${example_key}"><i class="fa fa-copy"></i> </div></code>
+						</pre>
 					</div>
 					<a href="#" class="example-button button" data-example="${example_key}"> Run </a>
 				</div>

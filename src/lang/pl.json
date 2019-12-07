@@ -7,7 +7,7 @@
 		"prev": "&larr; Wstecz",
 		"next": "Dalej &rarr;",
 		"typeSth": "Wpisz coś tutaj...",
-		"fastforward": "Szybko",
+		"fastforward": "Tylko końcowy wynik",
 		"exampleProgram": "#Przykładowy program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Wyczyść pierwszy rejestr\nSR 1,1\n#Oblicz sumę\nA 1,VAR1\nA 1,VAR2\n#Zapisz wynik w pamięci\nST 1,RES"
     },
     "docs": {
@@ -201,7 +201,7 @@
 			"test2": {
 				"title": "Równanie kwadratowe",
 				"desc": "Program oblicza liczbę rozwiązań równania kwadratowego (ax<sup>2</sup> + bx + c = 0)",
-				"code": "WSP_A\t\t\tDS\tINTEGER\nWSP_B\t\t\tDS\tINTEGER\nWSP_C\t\t\tDS\tINTEGER\nWYNIK\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nJEDEN\t\t\tDC\tINTEGER(1)\nCZTERY\t\t\tDC\tINTEGER(4)\n\t\t\tL\t1, WSP_B\n\t\t\tMR\t1, 1\n\t\t\tL\t2, CZTERY\n\t\t\tM\t2, WSP_A\n\t\t\tM\t2, WSP_C\n\t\t\tSR\t1, 2\n\t\t\tJP\tDWA_ROZWIAZANIA\n\t\t\tJZ\tJEDNO_ROZWIAZANIE\n\t\t\t\tJN ZERO_ROZWIAZAN\nDWA_ROZWIAZANIA\t\tL\t3, JEDEN\n\t\t\tAR\t3, 3\n\t\t\tST\t3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nJEDNO_ROZWIAZANIE\tL\t3, JEDEN\n\t\t\t\tST 3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nZERO_ROZWIAZAN\t\tL\t3, ZERO\n\t\t\t\tST 3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nKONIEC_PROGRAMU\t\tC\t1, 1\n"
+				"code": "WSP_A\t\t\tDS\tINTEGER\nWSP_B\t\t\tDS\tINTEGER\nWSP_C\t\t\tDS\tINTEGER\nWYNIK\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nJEDEN\t\t\tDC\tINTEGER(1)\nCZTERY\t\t\tDC\tINTEGER(4)\n#Przygotowanie rejestrów\n\t\t\tL\t1, WSP_B\n#Obliczenie wyróżnika\n\t\t\tMR\t1, 1\n\t\t\tL\t2, CZTERY\n\t\t\tM\t2, WSP_A\n\t\t\tM\t2, WSP_C\n\t\t\tSR\t1, 2\n#Ustalenie liczby rozwiązań\n\t\t\tJP\tDWA_ROZWIAZANIA\n\t\t\tJZ\tJEDNO_ROZWIAZANIE\n\t\t\t\tJN ZERO_ROZWIAZAN\nDWA_ROZWIAZANIA\t\tL\t3, JEDEN\n\t\t\tAR\t3, 3\n\t\t\tST\t3, WYNIK\n#Koniec programu\n\t\t\t\tJ KONIEC_PROGRAMU\nJEDNO_ROZWIAZANIE\tL\t3, JEDEN\n\t\t\t\tST 3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nZERO_ROZWIAZAN\t\tL\t3, ZERO\n\t\t\t\tST 3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nKONIEC_PROGRAMU\t\tC\t1, 1\n"
 				},
 			"test3": {
 				"title": "Sortowanie bąbelkowe",
@@ -214,5 +214,11 @@
 				"code": "WYNIK\t\tDS\t10*INTEGER\nN\t\tDC\tINTEGER(10)\nKROK\t\tDC\tINTEGER(1)\nCZTERY\t\tDC\tINTEGER(4)\nZERO\t\tDC\tINTEGER(0)\nJEDEN\t\tDC\tINTEGER(1)\n#Inicjalizacja dwóch pierwszych elementów i zapisywanie ich w tablicy\n\t\tL\t1, JEDEN\n\t\tL\t2, JEDEN\n\t\tLA\t10, WYNIK\n\t\tST\t1, 0(10)\n\t\tA\t10, CZTERY\n\t\tST\t2, 0(10)\n\t\tA\t10, CZTERY\n\t\tL\t3, JEDEN\n\t\tA\t3, KROK\n#Obliczenie następnego elementu w rejestrze 4. \nLOOP\t\tSR\t4, 4\n\t\tAR\t4, 1\n\t\tAR\t4, 2\n\t\tLR\t1, 2\n\t\tLR\t2, 4\n#Zapisywanie wyniku w tablicy\n\t\tST\t2, 0(10)\n\t\tA\t10, CZTERY\n\t\tA\t3, KROK\n C 3, N\n\t\tJN\tLOOP\n#Koniec programu\nEND\t\tCR\t1, 1"			
 			}
 		}
+	},
+	"cookieConsent": {
+		"message": "Ta strona używa ciasteczek w celu polepszenia odczuć związanych z jej użytkowaniem",
+		"dimiss": "OK!",
+		"link": "Czytaj więcej",
+		"href": "https://wszystkoociasteczkach.pl/polityka-cookies/"
 	}
 }

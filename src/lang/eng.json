@@ -7,7 +7,7 @@
 		"prev": "&larr; Prev",
 		"next": "Next &rarr;",
 		"typeSth": "Type something here...",
-		"fastforward": "Fastforward",
+		"fastforward": "Fast-forward",
 		"exampleProgram": "#This is an example program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Clear the first register\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
     },
     "docs": {
@@ -196,7 +196,7 @@
 			"test2": {
 				"title": "Quadratic equation",
 				"desc": "Program computes number of solutions in quadratic equation (ax<sup>2</sup> + bx + c = 0)",
-				"code": "COE_A\t\t\tDS\tINTEGER\nCOE_B\t\t\tDS\tINTEGER\nCOE_C\t\t\tDS\tINTEGER\nRESULT\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nONE\t\t\tDC\tINTEGER(1)\nFOUR\t\t\tDC\tINTEGER(4)\n\t\t\tL\t1, COE_B\n\t\t\tMR\t1, 1\n\t\t\tL\t2, FOUR\n\t\t\tM\t2, COE_A\n\t\t\tM\t2, COE_C\n\t\t\tSR\t1, 2\n\t\t\tJP\tTWO_SOLUTIONS\n\t\t\tJZ\tONE_SOLUTION\n\t\t\t\tJN ZERO_SOLUTIONS\nTWO_SOLUTIONS\t\tL\t3, ONE\n\t\t\tAR\t3, 3\n\t\t\tST\t3, RESULT\n\t\t\t\tJ END\nONE_SOLUTION\tL\t3, ONE\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\nZERO_SOLUTIONS\t\tL\t3, ZERO\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\nEND\t\tC\t1, 1\n"
+				"code": "COE_A\t\t\tDS\tINTEGER\nCOE_B\t\t\tDS\tINTEGER\nCOE_C\t\t\tDS\tINTEGER\nRESULT\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nONE\t\t\tDC\tINTEGER(1)\nFOUR\t\t\tDC\tINTEGER(4)\n#Preparing registers\n\t\t\tL\t1, COE_B\n#Computing discriminant\n\t\t\tMR\t1, 1\n\t\t\tL\t2, FOUR\n\t\t\tM\t2, COE_A\n\t\t\tM\t2, COE_C\n\t\t\tSR\t1, 2\n#Determining number of solutions\n\t\t\tJP\tTWO_SOLUTIONS\n\t\t\tJZ\tONE_SOLUTION\n\t\t\t\tJN ZERO_SOLUTIONS\nTWO_SOLUTIONS\t\tL\t3, ONE\n\t\t\tAR\t3, 3\n\t\t\tST\t3, RESULT\n\t\t\t\tJ END\nONE_SOLUTION\tL\t3, ONE\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\nZERO_SOLUTIONS\t\tL\t3, ZERO\n\t\t\t\tST 3, RESULT\n\t\t\t\tJ END\n#End of program\nEND\t\tC\t1, 1\n"
 				},
 			"test3": {
 				"title": "Bubble sort",
@@ -209,5 +209,11 @@
 				"code": "RES\t\tDS\t10*INTEGER\nN\t\tDC\tINTEGER(10)\nSTEP\t\tDC\tINTEGER(1)\nMEM_STEP\tDC\tINTEGER(4)\nZERO\t\tDC\tINTEGER(0)\nONE\t\tDC\tINTEGER(1)\n#Initializing the first two elements and saving them to array\n\t\tL\t1, ONE\n\t\tL\t2, ONE\n\t\tLA\t10, RES\n\t\tST\t1, 0(10)\n\t\tA\t10, MEM_STEP\n\t\tST\t2, 0(10)\n\t\tA\t10, MEM_STEP\n\t\tL\t3, ONE\n\t\tA\t3, STEP\n#Calculating the next element in register 4 \nLOOP\t\tSR\t4, 4\n\t\tAR\t4, 1\n\t\tAR\t4, 2\n\t\tLR\t1, 2\n\t\tLR\t2, 4\n#Saving result to array\n\t\tST\t2, 0(10)\n\t\tA\t10, MEM_STEP\n\t\tA\t3, STEP\n C 3, N\n\t\tJN\tLOOP\n#Finishing the program\nEND\t\tCR\t1, 1"
 			}
 		}
+	},
+	"cookieConsent": {
+		"message": "This site uses cookies to improve the user experience",
+		"dimiss": "OK!",
+		"link": "Read more",
+		"href": "https://wszystkoociasteczkach.pl/polityka-cookies/"
 	}
 }
