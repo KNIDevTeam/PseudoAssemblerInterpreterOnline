@@ -3390,6 +3390,18 @@ input, select, textarea {
 	
 /* Buttons */
 
+	@media screen and (max-width: 1021px) {
+		#run {
+			width: 90%;
+		}	
+	}
+
+	@media screen and (min-width: 1022px) {
+		#run {
+			width: 50%;
+		}	
+	}
+	
 	#run, #prev-next {
 		position: fixed;
 		bottom: 40px;
