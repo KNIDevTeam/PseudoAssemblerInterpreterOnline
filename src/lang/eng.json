@@ -194,12 +194,12 @@
 			},
 			"test2": {
 				"title": "Bubble sort",
-				"desc": "Sorts an array of 5 random numbers with the bubble sort alghorithm",
+				"desc": "Program sorts an array of 5 random numbers with the bubble sort alghorithm",
 				"code": "TAB DC 5*INTEGER\nSIZE DC INTEGER(5)\nSTEP DC INTEGER(1)\nMEM_STEP DC INTEGER(4)\nZERO DC INTEGER(0)\nONE DC INTEGER(1)\n#Loading upper boundary for inside loop (size of array lowered by one)\n L 1, SIZE\n S 1, ONE\n#Setting inner loop iterator to zero\nOUT L 2, ZERO\n#Calculating current address\nIN LR 10, 2\n M 10, MEM_STEP\n#Comparing current element with next\n L 3, 0(10)\n C 3, 4(10)\n JP SWAP\n J NEXT_STEP_IN\n#Swapping elements\nSWAP L 4, 4(10)\n ST 4, 0(10)\n ST 3, 4(10)\n#Incrementing inner loop iterator\nNEXT_STEP_IN A 2, STEP\n CR 2, 1\n JN IN\n#Decrementing upper boundary for inside loop\nNEXT_STEP_OUT S 1, STEP\n C 1, ONE\n JP OUT\n#Finishing program\nEND CR 1,1"
 			},
 			"test3": {
 				"title": "Fibbonacci numbers",
-				"desc": "Calculates the first 10 Fibbonacci numbers",
+				"desc": "Program calculates the first 10 Fibbonacci numbers",
 				"code": "RES DS 10*INTEGER\nN DC INTEGER(10)\nSTEP DC INTEGER(1)\nMEM_STEP DC INTEGER(4)\nZERO DC INTEGER(0)\nONE DC INTEGER(1)\n#Initializing the first two elements and saving them to array\n L 1, ONE\n L 2, ONE\n LA 10, RES\n ST 1, 0(10)\n A 10, MEM_STEP\n ST 2, 0(10)\n A 10, MEM_STEP\n L 3, ONE\n A 3, STEP\n#Calculating the next element in register 4 \nLOOP SR 4, 4\n AR 4, 1\n AR 4, 2\n LR 1, 2\n LR 2, 4\n#Saving result to array\n ST 2, 0(10)\n A 10, MEM_STEP\n A 3, STEP\n C 3, N\n JN LOOP\n#Finishing the program\nEND CR 1, 1"
 			}
 		}
