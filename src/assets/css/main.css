@@ -2487,7 +2487,7 @@ input, select, textarea {
 		
 		margin: auto auto 0 auto;
 		width: 10em;
-		height: 10%;
+		height: 100%;
 	}
 
 		input[type="submit"].icon:before,
@@ -3657,5 +3657,14 @@ canvas {
 	@media screen and (max-width: 480px) {
 		#examples-content > * {
 			padding: 0;
+		}
+	}
+	
+/* Fast forward styling */	
+	@media screen and (max-width: 575px) {
+		#fast-forward-col {
+			margin-top: 15px;
+			display: flex;
+			justify-content: center;
 		}
 	}
