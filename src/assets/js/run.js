@@ -19,15 +19,19 @@ function show(direction) {
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
     let cur_program = JSON.parse(JSON.stringify(program));
     
-    //handle comment spaghetti
     let hidden_lines = 0;
+    //handle comment spaghetti
+    let duplicate_lines = 0;
+    for(let i = 0; i <= states[cur_state - 1].line; i++)
+        if(pure_text[i] == pure_text[states[cur_state - 1].line]) duplicate_lines++;
     for(let i = 0; i < sans_html.length; i++) {
         if(sans_html[i][0] == '#') hidden_lines++;
-        else if(sans_html[i] == pure_text[states[cur_state - 1].line]) break;
+        else if(sans_html[i] == pure_text[states[cur_state - 1].line]) duplicate_lines--;
+        if(!duplicate_lines) break;
     }
 
-    cur_program[states[cur_state - 1].line + hidden_lines] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line + hidden_lines]}</div>`;
-    //<div style="display: block; float: right;">test</div></div>`;
+    cur_program[states[cur_state - 1].line + hidden_lines] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line + hidden_lines]}
+    <div style="display: block; float: right;">${expandCommand(states[cur_state])}</div></div>`;
     $('#program').html(
         //handle strange mobile display
         `${mobileBrowser ? 
@@ -42,6 +46,7 @@ function show(direction) {
     $('#results').html(formatData(states[cur_state]));
     
     $('#changed').addClass('animated shake');
+    $('#changed-state').addClass('animated shake');
     $('#cur-line').addClass('animated flash');
 	checkVisibility();
 	refreshTooltip();
@@ -76,9 +81,12 @@ $('#run-button').on('click', function() {
             let hidden_lines = 0;
             if(err.line != -1) {
                 //handle comment spaghetti
+                for(let i = 0; i <= err.line; i++)
+                    if(pure_text[i] == pure_text[err.line]) duplicate_lines++;
                 for(let i = 0; i < sans_html.length; i++) {
                     if(sans_html[i][0] == '#') hidden_lines++;
-                    else if(sans_html[i] == pure_text[err.line]) break;
+                    else if(sans_html[i] == pure_text[err.line]) duplicate_lines--;
+                    if(!duplicate_lines) break;
                 }
             }
 
@@ -125,6 +133,65 @@ $('#run-button').on('click', function() {
     $('#results').addClass('animated fadeIn');
     $('#program').addClass('animated fadeIn');
 });
+
+function expandCommand(state) {
+    let res = "";
+    let source = state.command_source;
+    let target = state.command_target;
+    let result = state.command_result;
+    
+    //get labels
+    let command = pure_text[states[cur_state - 1].line].split(/ |,|\(|\)/);
+    if(!command[0].match(new RegExp(`^(${keywords})$`))) command.splice(0, 1);
+    let t_label = command[1], s_label = command[2];
+    if(t_label.match(/^[0-9]+$/)) t_label = `REG[ ${t_label} ]`;
+    if(command[0].match(/R/) && s_label.match(/^[0-9]+$/)) s_label = `REG[ ${s_label} ]`;
+
+    switch(state.command) {
+        case 'Command_Allocate_Value':
+        case 'Command_Allocate_No_Value':
+            res = `${source} := ${result}`;
+            break;
+        case 'Command_Add_Memory':
+        case 'Command_Add_Registers':
+            res = `${t_label} := ${result} (${target} + ${source}) [${t_label} + ${s_label}]`;
+            break;
+        case 'Command_Subtract_Memory':
+        case 'Command_Subtract_Registers':
+            res = `${t_label} := ${result} (${target} - ${source}) [${t_label} - ${s_label}]`;
+            break;
+        case 'Command_Multiply_Registers':
+        case 'Command_Multiply_Memory':
+            res = `${t_label} := ${result} (${target} * ${source}) [${t_label} * ${s_label}]`;
+            break;
+        case 'Command_Divide_Memory':
+        case 'Command_Divide_Registers':
+            res = `${t_label} := ${result} (${target} / ${source}) [${t_label} / ${s_label}]`;
+            break;
+        case 'Command_Store':
+            target = state.variables[target];
+            res = `${target} := ${result} [${t_label}]`;
+            break;
+        case 'Command_Load':
+        case 'Command_Load_Register':
+            res = `${t_label} := ${result} [${s_label}]`;
+            break;
+        case 'Command_Load_Address':
+            res = `${t_label} := ${source} (${source})`;
+            break;
+        case 'Command_Jump_Positive':
+        case 'Command_Jump_Always':
+        case 'Command_Jump_Zero':
+        case 'Command_Jump_Negative':
+            res = `${source} &rarr; ${target} (${t_label})`;
+            break;
+        case 'Command_Compare_Memory':
+        case 'Command_Compare_Register':
+            res = `STATE = ${result} (${target} - ${source}) [${t_label} - ${s_label}]`;
+            break;
+    }
+    return res;
+}
 
 //state generation
 function emulate(text) {
@@ -185,7 +252,7 @@ function formatData(data) {
                     <td><b>${data.reg_init[ind] == 2 ? `<span class="highlight">${val}</span>` : `${val}`}</b></td>
                 </tr>`
             }, '') + 
-            `<tr>
+            `<tr${data.state_changed ? ' id="changed-state"' : ''}>
                 <td>` + lang.run.registers.state + `</td>
                 <td><span class="keyword">${data.status}</span></td>
             </tr>`}
