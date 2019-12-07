@@ -211,7 +211,8 @@
 			"test4": {
 				"title": "Ciąg Fibonacciego",
 				"desc": "Program oblicza 10 pierwszych wyrazów ciągu Fibonacciego.",
-				"code": "WYNIK\t\tDS\t10*INTEGER\nN\t\tDC\tINTEGER(10)\nKROK\t\tDC\tINTEGER(1)\nCZTERY\t\tDC\tINTEGER(4)\nZERO\t\tDC\tINTEGER(0)\nJEDEN\t\tDC\tINTEGER(1)\n#Inicjalizacja dwóch pierwszych elementów i zapisywanie ich w tablicy\n\t\tL\t1, JEDEN\n\t\tL\t2, JEDEN\n\t\tLA\t10, WYNIK\n\t\tST\t1, 0(10)\n\t\tA\t10, CZTERY\n\t\tST\t2, 0(10)\n\t\tA\t10, CZTERY\n\t\tL\t3, JEDEN\n\t\tA\t3, KROK\n#Obliczenie następnego elementu w rejestrze 4. \nLOOP\t\tSR\t4, 4\n\t\tAR\t4, 1\n\t\tAR\t4, 2\n\t\tLR\t1, 2\n\t\tLR\t2, 4\n#Zapisywanie wyniku w tablicy\n\t\tST\t2, 0(10)\n\t\tA\t10, CZTERY\n\t\tA\t3, KROK\n C 3, N\n\t\tJN\tLOOP\n#Koniec programu\nEND\t\tCR\t1, 1"			}
+				"code": "WYNIK\t\tDS\t10*INTEGER\nN\t\tDC\tINTEGER(10)\nKROK\t\tDC\tINTEGER(1)\nCZTERY\t\tDC\tINTEGER(4)\nZERO\t\tDC\tINTEGER(0)\nJEDEN\t\tDC\tINTEGER(1)\n#Inicjalizacja dwóch pierwszych elementów i zapisywanie ich w tablicy\n\t\tL\t1, JEDEN\n\t\tL\t2, JEDEN\n\t\tLA\t10, WYNIK\n\t\tST\t1, 0(10)\n\t\tA\t10, CZTERY\n\t\tST\t2, 0(10)\n\t\tA\t10, CZTERY\n\t\tL\t3, JEDEN\n\t\tA\t3, KROK\n#Obliczenie następnego elementu w rejestrze 4. \nLOOP\t\tSR\t4, 4\n\t\tAR\t4, 1\n\t\tAR\t4, 2\n\t\tLR\t1, 2\n\t\tLR\t2, 4\n#Zapisywanie wyniku w tablicy\n\t\tST\t2, 0(10)\n\t\tA\t10, CZTERY\n\t\tA\t3, KROK\n C 3, N\n\t\tJN\tLOOP\n#Koniec programu\nEND\t\tCR\t1, 1"			
+			}
 		}
 	}
 }

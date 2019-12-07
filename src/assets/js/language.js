@@ -19,6 +19,7 @@ function eraseCookie(cname) {
 function setCookie(cname, cvalue, exdays) {
 	eraseCookie(cname);
 	cvalue = cvalue.replace(/(\r\n|\n|\r)/gm, "|n|");
+	cvalue = cvalue.replace(/(\t)/gm, " 	");
 	let d = new Date();
 	d.setTime(d.getTime() + (exdays*24*60*60*1000));
 	let expires = "expires=" + d.toUTCString();
