@@ -7,7 +7,7 @@
 		"prev": "&larr; Wstecz",
 		"next": "Dalej &rarr;",
 		"typeSth": "Wpisz coś tutaj...",
-		"fastforward": "Szybko bardziej",
+		"fastforward": "Tylko końcowy wynik",
 		"exampleProgram": "#Przykładowy program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Wyczyść pierwszy rejestr\nSR 1,1\n#Oblicz sumę\nA 1,VAR1\nA 1,VAR2\n#Zapisz wynik w pamięci\nST 1,RES"
     },
     "docs": {
