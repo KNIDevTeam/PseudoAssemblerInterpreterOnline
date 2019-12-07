@@ -120,14 +120,14 @@ function formatInput(content) {
     });
 
     //add line numbers
-    content = content.split('\n').filter(function(element) {
+    let temp = content.split('\n').filter(function(element) {
         return (element != null && element != "");
-    });
+    });;
     let line_numbers = "";
-    content.forEach(function(line, ind) {
+    temp.forEach(function(line, ind) {
         line_numbers = line_numbers + `<span class="line-number" contenteditable="false">${ind}</span><br>`;
     });
-    content = content.join('\n');
+
     //fix positions of elements
     $('#line-number-container').html(line_numbers);
     let rect = document.getElementById('line-number-container').getBoundingClientRect();
@@ -141,7 +141,6 @@ function formatInput(content) {
 
     //restore newlines
     content = content.replace(/\n/g, '<br>');
-    console.log(content);
     return content;
 }
 
