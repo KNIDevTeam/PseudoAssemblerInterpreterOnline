@@ -13,9 +13,14 @@ function main_parse(lines)
 		this.lbls = Object();
 		this.line_execution_count = {};
 		this.value_defined_registers = [];
+		this.source = 0;
+		this.tar = 0;
+		this.command = "NO";
+		this.result = 0;
 		for(let i = 0; i < 16; i++) this.value_defined_registers[i] = 0;
 		this.value_defined_registers[14] = 1;
 		this.value_defined_memory = [];
+
 	}
 	let program = [];
 	let factories = [];

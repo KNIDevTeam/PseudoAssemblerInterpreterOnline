@@ -156,6 +156,10 @@ function translate(state) {
     res.reg_init = state.value_defined_registers;
     res.mem_init = state.value_defined_memory;
     res.variables = Object.keys(state.memory_labels);
+    res.command = state.command;
+    res.command_result = state.result;
+    res.command_target = state.tar;
+    res.command_source = state.source;
     return res;
 }
 
