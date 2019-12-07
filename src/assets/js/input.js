@@ -90,7 +90,7 @@ function formatInput(content) {
 
         if(temp[0].length && !temp[0].match(new RegExp(`^(${keywords})$`, 'g'))) {
             words.splice(0, 1, `<span class="label" style="width: ${longest_label}em">${words[0]}</span>`);
-        } else words.splice(0, 0, `<span class="label" style="width: ${longest_label}em"> </span>`);
+        } else words.splice(0, 0, `<span class="label" style="width: ${longest_label}em"></span>`);
         content[index] = words.join(' ');
     });
     content = content.join('\n');
@@ -119,7 +119,20 @@ function formatInput(content) {
         content = content.replace(new RegExp(`^${escapeRegExp(comment)}$`, 'm'), formatted);
     });
 
-    //
+    //add line numbers
+    content = content.split('\n').filter(function(element) {
+        return (element != null && element != "");
+    });
+    let line_numbers = "";
+    content.forEach(function(line, ind) {
+        line_numbers = line_numbers + `<span class="line-number" contenteditable="false">${ind}</span><br>`;
+    });
+    content = content.join('\n');
+    //fix positions of elements
+    $('#line-number-container').html(line_numbers);
+    let rect = document.getElementById('line-number-container').getBoundingClientRect();
+    $('#input').css('top', `${-rect.height}px`);
+    $('#program').css('top', `${-rect.height}px`);
 
     //restore markers
     if(markers) markers.forEach(function(span) {
@@ -128,7 +141,7 @@ function formatInput(content) {
 
     //restore newlines
     content = content.replace(/\n/g, '<br>');
-    
+    console.log(content);
     return content;
 }
 

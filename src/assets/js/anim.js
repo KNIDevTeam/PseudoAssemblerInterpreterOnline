@@ -6,7 +6,7 @@ prepareCanvas()
 
 function getPos( el ) {
     var rect = el.getBoundingClientRect();
-    return {x: (rect.left + rect.right)/2 , y: (rect.top + rect.bottom)/2, w: (rect.right-rect.left)/2};
+    return {x: (rect.left + rect.right)/2 , y: (rect.top + rect.bottom)/2, w: rect.width};
 }
 
 var particles = [];
