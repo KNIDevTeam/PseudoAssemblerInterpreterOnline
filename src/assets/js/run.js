@@ -73,7 +73,7 @@ $('#run-button').on('click', function() {
 
         //add error messages
         err.forEach(function(err, ind) {
-            let hidden_lines = 0;
+            let hidden_lines = 0, duplicate_lines = 0;
             if(err.line != -1) {
                 //handle comment spaghetti
                 for(let i = 0; i <= err.line; i++)
