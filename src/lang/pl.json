@@ -193,9 +193,9 @@
 		"nav": "Przykłady",
 		"programs": {
 			"test": {
-				"title": "Lorem Ipsum",
-				"desc": "Phasellus tristique lectus urna, in posuere quam mattis et.",
-				"code": "#This is an example program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Clear the first register\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
+				"title": "Suma",
+				"desc": "Program oblicza sumę elementów losowej tablicy (o rozmiarze 10).",
+				"code": "ROZMIAR\tDC\tINTEGER(10)\nJEDEN\tDC\tINTEGER(1)\nZERO\tDC\tINTEGER(0)\nCZTERY\tDC\tINTEGER(4)\nTABLICA\tDC\t10*INTEGER\nSUMA\tDS\tINTEGER\n#Inicjalizacja iteratora i pomocniczego rejestru, ładowanie adresu tablicy\n\tLA\t1, TABLICA\n\tL\t3, ZERO\n\tL\t4, ZERO\n#Główna pętla\nPETLA\tC\t3, ROZMIAR\n\tJZ\tKONIEC\n\tL\t2, 0(1)\n\tAR\t4, 2\n\tA\t1, CZTERY\n\tA\t3, JEDEN\n\tJ\tPETLA\n#Zapisanie wyniku w zmiennej SUMA\nKONIEC\tST\t4, SUMA\n"
 			},
 			"test2": {
 				"title": "Bubble sort",

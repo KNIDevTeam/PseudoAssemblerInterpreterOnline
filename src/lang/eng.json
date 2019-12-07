@@ -188,9 +188,9 @@
 		"nav": "Examples",
 		"programs": {
 			"test": {
-				"title": "Lorem Ipsum",
-				"desc": "Phasellus tristique lectus urna, in posuere quam mattis et.",
-				"code": "#This is an example program\nVAR1 DC INTEGER(1)\nVAR2 DC INTEGER(2)\nRES DS INTEGER\n#Clear the first register\nSR 1,1\n#Compute sum\nA 1,VAR1\nA 1,VAR2\n#Store in memory\nST 1,RES"
+				"title": "Sum",
+				"desc": "Program computes sum of the elements of random array (size of 10).",
+				"code": "SIZE\tDC\tINTEGER(10)\nONE\tDC\tINTEGER(1)\nZERO\tDC\tINTEGER(0)\nFOUR\tDC\tINTEGER(4)\nARRAY\tDC\t10*INTEGER\nSUM\tDS\tINTEGER\n#Initializing iterator, temporary register, loading adress of the array\n\tLA\t1, ARRAY\n\tL\t3, ZERO\n\tL\t4, ZERO\n#Main loop\nLOOP\tC\t3, SIZE\n\tJZ\tEND\n\tL\t2, 0(1)\n\tAR\t4, 2\n\tA\t1, FOUR\n\tA\t3, ONE\n\tJ\tLOOP\n#Storing results in variable SUM\nEND\tST\t4, SUM\n"
 			},
 			"test2": {
 				"title": "Bubble sort",
