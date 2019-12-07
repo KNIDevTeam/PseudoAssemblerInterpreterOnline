@@ -33,7 +33,7 @@ function show(direction) {
     cur_program[states[cur_state - 1].line + hidden_lines] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line + hidden_lines]}
     <div style="display: block; float: right;">${expandCommand(states[cur_state])}</div></div>`;
 	$('#program').html(`
-        <div class="row" style="padding-bottom: 1em">
+        <div class="row" id="program-title-row" style="padding-bottom: 1em">
             <div class="col-md-1 col-3" style="padding-right: 0" ><a href="/" id="go-back" style="">&larr;</a></div>
             <div class="col-md-11 col-9" style="padding-left: 0"><h11 style="line-height: 0.7">${lang.run.program}</h11></div>
             </div>
@@ -63,8 +63,9 @@ $('#run-button').on('click', function() {
     $('#input').html(formatInput($('#input').html()));
 
     //check for errors
-    pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^#.*$/gm, '').replace(/^ +/gm, '').replace(/^\n/gm, '').split('\n');
-    sans_html = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '').split('\n');
+    let preformat = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '');
+    pure_text = preformat.replace(/^#.*$/gm, '').replace(/^\n/gm, '').split('\n');
+    sans_html = preformat.split('\n');
 
     try {
         states = emulate(pure_text);
@@ -125,6 +126,9 @@ $('#run-button').on('click', function() {
 
     //show results
     show();
+    let rect = document.getElementById('program-title-row').getBoundingClientRect();
+    $('#line-number-container').css('top', `${rect.height}px`);
+
     $('#results').addClass('animated fadeIn');
     $('#program').addClass('animated fadeIn');
 });

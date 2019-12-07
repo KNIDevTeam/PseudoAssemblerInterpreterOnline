@@ -3494,6 +3494,21 @@ canvas {
 	color: #ff446c;
 }
 
+.line-number {
+	color: #dddddd;
+	display: inline-block; 
+	text-align: right;
+	width: 2em;
+	left: -3em;
+	position: relative;
+}
+
+#line-number-container {
+	z-index: 10;
+	pointer-events: none;
+	position: relative;
+}
+
 [contenteditable]:focus { outline: 0px solid transparent; }
 *[contenteditable="true"]{ display: inline-block; }
 
