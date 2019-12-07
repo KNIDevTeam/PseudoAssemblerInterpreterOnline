@@ -95,6 +95,7 @@ function main_execute(program, initial_state) {
 			if(stat.value_defined_memory[i] === 2) stat.value_defined_memory[i] = 1;
 		try
 		{
+			stat.command = program[stat.line].constructor.name;
 			program[stat.line].translate_address(stat);
 			stat = program[stat.line].execute(stat);
 		}
