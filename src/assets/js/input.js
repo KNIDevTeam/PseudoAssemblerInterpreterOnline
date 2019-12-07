@@ -125,7 +125,7 @@ function formatInput(content) {
     });;
     let line_numbers = "";
     temp.forEach(function(line, ind) {
-        line_numbers = line_numbers + `<span class="line-number" contenteditable="false">${ind}</span><br>`;
+        line_numbers = line_numbers + `<span class="line-number" contenteditable="false">${ind + 1}</span><br>`;
     });
 
     //fix positions of elements
