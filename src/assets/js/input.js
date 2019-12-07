@@ -119,6 +119,8 @@ function formatInput(content) {
         content = content.replace(new RegExp(`^${escapeRegExp(comment)}$`, 'm'), formatted);
     });
 
+    //
+
     //restore markers
     if(markers) markers.forEach(function(span) {
         content = content.replace(/⮓/, span);

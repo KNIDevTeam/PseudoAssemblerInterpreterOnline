@@ -149,30 +149,30 @@ function expandCommand(state) {
             break;
         case 'Command_Add_Memory':
         case 'Command_Add_Registers':
-            res = `${t_label} := ${result} (${target} + ${source}) [${t_label} + ${s_label}]`;
+            res = `${t_label} &larr; ${result} (${target} + ${source}) [${t_label} + ${s_label}]`;
             break;
         case 'Command_Subtract_Memory':
         case 'Command_Subtract_Registers':
-            res = `${t_label} := ${result} (${target} - ${source}) [${t_label} - ${s_label}]`;
+            res = `${t_label} &larr; ${result} (${target} - ${source}) [${t_label} - ${s_label}]`;
             break;
         case 'Command_Multiply_Registers':
         case 'Command_Multiply_Memory':
-            res = `${t_label} := ${result} (${target} * ${source}) [${t_label} * ${s_label}]`;
+            res = `${t_label} &larr; ${result} (${target} * ${source}) [${t_label} * ${s_label}]`;
             break;
         case 'Command_Divide_Memory':
         case 'Command_Divide_Registers':
-            res = `${t_label} := ${result} (${target} / ${source}) [${t_label} / ${s_label}]`;
+            res = `${t_label} &larr; ${result} (${target} / ${source}) [${t_label} / ${s_label}]`;
             break;
         case 'Command_Store':
             target = state.variables[target];
-            res = `${target} := ${result} [${t_label}]`;
+            res = `${target} &larr; ${result} [${t_label}]`;
             break;
         case 'Command_Load':
         case 'Command_Load_Register':
-            res = `${t_label} := ${result} [${s_label}]`;
+            res = `${t_label} &larr; ${result} [${s_label}]`;
             break;
         case 'Command_Load_Address':
-            res = `${t_label} := ${source} (${source})`;
+            res = `${t_label} &larr; ${result} (${s_label})`;
             break;
         case 'Command_Jump_Positive':
         case 'Command_Jump_Always':
@@ -182,7 +182,7 @@ function expandCommand(state) {
             break;
         case 'Command_Compare_Memory':
         case 'Command_Compare_Register':
-            res = `STATE = ${result} (${target} - ${source}) [${t_label} - ${s_label}]`;
+            res = `STATUS &larr; ${result} (${target} - ${source}) [${t_label} - ${s_label}]`;
             break;
     }
     return res;
