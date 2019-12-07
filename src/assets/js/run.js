@@ -31,7 +31,7 @@ function show(direction) {
     }
 
     cur_program[states[cur_state - 1].line + hidden_lines] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line + hidden_lines]}
-    </div><div style="display: block; float: right;">${expandCommand(states[cur_state])}</div>`;
+    </div><div id="expansion" style="display: block; float: right;">${expandCommand(states[cur_state])}</div>`;
 	$('#program').html(`
         <div class="row" id="program-title-row" style="padding-bottom: 1em">
             <div class="col-md-1 col-3" style="padding-right: 0" ><a href="/" id="go-back" style="">&larr;</a></div>
@@ -40,6 +40,7 @@ function show(direction) {
     ${cur_program.join('<br>')}`);
     $('#results').html(formatData(states[cur_state]));
     
+    $('#expansion').addClass('animated bounceIn');
     $('#changed').addClass('animated shake');
     $('#changed-state').addClass('animated shake');
     $('#cur-line').addClass('animated flash');
@@ -163,8 +164,8 @@ function expandCommand(state) {
     let command = pure_text[states[cur_state - 1].line].split(/ |,|\(|\)/);
     if(!command[0].match(new RegExp(`^(${keywords})$`))) command.splice(0, 1);
     let t_label = command[1], s_label = command[2];
-    if(t_label.match(/^[0-9]+$/)) t_label = `REG[ ${t_label} ]`;
-    if(command[0].match(/R/) && s_label.match(/^[0-9]+$/)) s_label = `REG[ ${s_label} ]`;
+    if(t_label.match(/^[0-9]+$/)) t_label = `REG [ ${t_label} ]`;
+    if(command[0].match(/R/) && s_label.match(/^[0-9]+$/)) s_label = `REG [ ${s_label} ]`;
 
     //insert formatting
     t_label = `<span class="keyword">${t_label}</span>`;
@@ -180,40 +181,40 @@ function expandCommand(state) {
             break;
         case 'Command_Add_Memory':
         case 'Command_Add_Registers':
-            res = `${t_label} &larr; ${result} (${target} + ${source}) [${t_label} + ${s_label}]`;
+            res = `${t_label} &larr; ${result}<br>${result} = ${target} + ${source}<br>[ ${t_label} + ${s_label} ]`;
             break;
         case 'Command_Subtract_Memory':
         case 'Command_Subtract_Registers':
-            res = `${t_label} &larr; ${result} (${target} - ${source}) [${t_label} - ${s_label}]`;
+            res = `${t_label} &larr; ${result}<br>${result} = ${target} - ${source}<br>[ ${t_label} - ${s_label} ]`;
             break;
         case 'Command_Multiply_Registers':
         case 'Command_Multiply_Memory':
-            res = `${t_label} &larr; ${result} (${target} * ${source}) [${t_label} * ${s_label}]`;
+            res = `${t_label} &larr; ${result}<br>${result} = ${target} * ${source}<br>[ ${t_label} * ${s_label} ]`;
             break;
         case 'Command_Divide_Memory':
         case 'Command_Divide_Registers':
-            res = `${t_label} &larr; ${result} (${target} / ${source}) [${t_label} / ${s_label}]`;
+            res = `${t_label} &larr; ${result}<br>${result} = ${target} / ${source}<br>[ ${t_label} / ${s_label} ]`;
             break;
         case 'Command_Store':
             target = state.variables[target];
-            res = `${s_label} &larr; ${result} [${t_label}]`;
+            res = `${s_label} &larr; ${result}<br>[ ${t_label} ]`;
             break;
         case 'Command_Load':
         case 'Command_Load_Register':
-            res = `${t_label} &larr; ${result} [${s_label}]`;
+            res = `${t_label} &larr; ${result}<br>[ ${s_label} ]`;
             break;
         case 'Command_Load_Address':
-            res = `${t_label} &larr; ${result} (${s_label})`;
+            res = `${t_label} &larr; ${result}<br>[ ${s_label} ]`;
             break;
         case 'Command_Jump_Positive':
         case 'Command_Jump_Always':
         case 'Command_Jump_Zero':
         case 'Command_Jump_Negative':
-            res = `${source} &rarr; ${target} (${t_label})`;
+            res = `${source} &rarr; ${target}<br>[ ${t_label} ]`;
             break;
         case 'Command_Compare_Memory':
         case 'Command_Compare_Register':
-            res = `STATUS &larr; ${result} (${target} - ${source}) [${t_label} - ${s_label}]`;
+            res = `STATUS &larr; ${result}<br>${result} = ${target} - ${source}<br>[ ${t_label} - ${s_label} ]`;
             break;
     }
     return res;
