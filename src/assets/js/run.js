@@ -26,7 +26,7 @@ function show(direction) {
         else if(sans_html[i] == pure_text[states[cur_state - 1].line]) break;
     }
 
-    cur_program[states[cur_state - 1].line + hidden_lines] = `<div id="cur-line" style="display: inline">&rarr; ${cur_program[states[cur_state - 1].line + hidden_lines]}`;
+    cur_program[states[cur_state - 1].line + hidden_lines] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line + hidden_lines]}</div>`;
     //<div style="display: block; float: right;">test</div></div>`;
     $('#program').html(
         //handle strange mobile display
@@ -176,8 +176,8 @@ function formatData(data) {
                 if(!data.reg_init[ind]) return accumulator;
                 return accumulator +
                 `<tr${data.reg_init[ind] == 2 ? ' id="changed"' : ''}>
-                    <td><span class="number">${ind}</span></td>
-                    <td><b>${data.reg_init[ind] == 2 ? `<span class="number">${val}</span>` : `${val}`}</b></td>
+                    <td><span class="highlight">${ind}</span></td>
+                    <td><b>${data.reg_init[ind] == 2 ? `<span class="highlight">${val}</span>` : `${val}`}</b></td>
                 </tr>`
             }, '') + 
             `<tr>
@@ -203,9 +203,9 @@ function formatData(data) {
                 if(!data.mem_init[ind]) return accumulator;
                 return accumulator +
                 `<tr${data.mem_init[ind] == 2 ? ' id="changed"' : ''}>
-                    <td><span class="number">${ind*4}</span></td>
+                    <td><span class="highlight">${ind*4}</span></td>
                     <td><span class="keyword">${data.variables[ind]}</span></td>
-                    <td><b>${data.mem_init[ind] == 2 ? `<span class="number">${val}</span>` : `${val}`}</b></td>
+                    <td><b>${data.mem_init[ind] == 2 ? `<span class="highlight">${val}</span>` : `${val}`}</b></td>
                 </tr>`
             }, '')}
             </tfoot>

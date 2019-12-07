@@ -108,7 +108,7 @@ function formatInput(content) {
     //highlight values
     content = content.replace(/\([0-9]*⮓?[0-9]*\)/g, function(str) {
         str = str.substring(1, str.length - 1);
-        return `(<span class="number">${str}</span>)`;
+        return `(<span class="highlight">${str}</span>)`;
     });
 
     //find comments
