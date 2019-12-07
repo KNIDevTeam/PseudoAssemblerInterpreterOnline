@@ -162,6 +162,7 @@ function translate(state) {
     res.command_result = state.result;
     res.command_target = state.tar;
     res.command_source = state.source;
+    res.state_changed = state.state_changed;
     return res;
 }
 

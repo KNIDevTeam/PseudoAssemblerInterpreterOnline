@@ -20,6 +20,7 @@ function main_parse(lines)
 		for(let i = 0; i < 16; i++) this.value_defined_registers[i] = 0;
 		this.value_defined_registers[14] = 1;
 		this.value_defined_memory = [];
+		this.state_changed = false;
 
 	}
 	let program = [];
@@ -93,6 +94,7 @@ function main_execute(program, initial_state) {
 			if(stat.value_defined_registers[i] === 2) stat.value_defined_registers[i] = 1;
 		for(let i = 0; i < stat.value_defined_memory.length; i++)
 			if(stat.value_defined_memory[i] === 2) stat.value_defined_memory[i] = 1;
+			stat.state_changed = false;
 		try
 		{
 			stat.command = program[stat.line].constructor.name;

@@ -17,6 +17,7 @@ function Command_Arthmetic()
 		state.result = state.registers[this.register_left];
 		state.sign_flag = Math.sign(state.registers[this.register_left]);
 		state.value_defined_registers[this.register_left] = 2;
+		state.state_changed = true;
 		return state;
 	};
 }

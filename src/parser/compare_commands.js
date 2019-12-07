@@ -8,6 +8,7 @@ function Command_Compare_Memory(register_left, shift, base_register)
 		state.source = this.address;
 		state.tar = this.register_left;
 		state.result = state.sign_flag;
+		state.state_changed = true;
 		return state;
 	};
 }
@@ -22,6 +23,7 @@ function Command_Compare_Register(register_left, register_right)
 		state.source = this.register_right;
 		state.tar = this.register_left;
 		state.result = state.sign_flag;
+		state.state_changed = true;
 		return state;
 	};
 }
