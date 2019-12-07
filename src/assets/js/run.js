@@ -32,16 +32,11 @@ function show(direction) {
 
     cur_program[states[cur_state - 1].line + hidden_lines] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line + hidden_lines]}
     <div style="display: block; float: right;">${expandCommand(states[cur_state])}</div></div>`;
-    $('#program').html(
-        //handle strange mobile display
-        `${mobileBrowser ? 
-            `<a href="/" id="go-back" style="">&larr;</a><h11 style="line-height: 0.7">${lang.run.program}</h11>` :
-            
-            `<div class="row" style="padding-bottom: 1em">
-            <div class="col-1 col-12-xsmall style="padding-right: 0" ><a href="/" id="go-back" style="">&larr;</a></div>
-            <div class="col-11 col-12-xsmall" style="padding-left: 0"><h11 style="line-height: 0.7">${lang.run.program}</h11></div>
-            </div>`
-        }
+	$('#program').html(`
+        <div class="row" style="padding-bottom: 1em">
+            <div class="col-md-1 col-3" style="padding-right: 0" ><a href="/" id="go-back" style="">&larr;</a></div>
+            <div class="col-md-11 col-9" style="padding-left: 0"><h11 style="line-height: 0.7">${lang.run.program}</h11></div>
+            </div>
     ${cur_program.join('<br>')}`);
     $('#results').html(formatData(states[cur_state]));
     
