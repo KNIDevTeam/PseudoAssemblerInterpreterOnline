@@ -129,6 +129,26 @@ $('#run-button').on('click', function() {
     $('#program').addClass('animated fadeIn');
 });
 
+$('.copy').click(function() {
+	let key = $(this).attr('data-example');
+	const el = document.createElement('textarea');
+	el.value = lang['examples']['programs'][key]['code'];
+	document.body.appendChild(el);
+	el.select();
+
+	try {
+		copied = document.execCommand('copy');
+	} catch (ex) {
+		copied = false;  
+	}
+
+	if(copied) {
+		$(this).html('<i class="fa fa-check"></i>');   
+	}
+	
+	document.body.removeChild(el);
+});
+
 function expandCommand(state) {
     let res = "";
     let source = state.command_source;
