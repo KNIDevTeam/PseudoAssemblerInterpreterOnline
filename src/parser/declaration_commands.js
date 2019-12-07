@@ -5,6 +5,9 @@ function Command_Allocate_No_Value(size, rand, value)
 	this.execute = function(state)
 	{
 		state.memory_labels[state.lbls[state.line]] = state.memory.length;
+		state.source = state.lbls[state.line];
+		state.result = this.value;
+		state.tar = this.size;
 		for(let i = 0; i < this.size; i++)
 		{
 			if(i > 0) state.memory_labels[state.lbls[state.line] + "[" + i + "]"] = state.memory.length + i;
@@ -24,6 +27,9 @@ function Command_Allocate_Value(size, rand, value)
 	this.execute = function(state)
 	{
 		state.memory_labels[state.lbls[state.line]] = state.memory.length;
+		state.source = state.lbls[state.line];
+		state.result = this.value;
+		state.tar = this.size;
 		for(let i = 0; i < this.size; i++)
 		{
 			if(i > 0) state.memory_labels[state.lbls[state.line] + "[" + i + "]"] = state.memory.length + i;

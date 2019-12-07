@@ -4,6 +4,9 @@ function Command_Jump(target)
 	this.target = target;
 	this.execute = function(state)
 	{
+		state.source = state.line;
+		state.tar = this.address;
+		state.result = null;
 		if(this.condition(state.sign_flag)) state.line = this.address - 1;
 		return state;
 	};

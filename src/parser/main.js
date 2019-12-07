@@ -13,9 +13,14 @@ function main_parse(lines)
 		this.lbls = Object();
 		this.line_execution_count = {};
 		this.value_defined_registers = [];
+		this.source = 0;
+		this.tar = 0;
+		this.command = "NO";
+		this.result = 0;
 		for(let i = 0; i < 16; i++) this.value_defined_registers[i] = 0;
 		this.value_defined_registers[14] = 1;
 		this.value_defined_memory = [];
+
 	}
 	let program = [];
 	let factories = [];
@@ -90,6 +95,7 @@ function main_execute(program, initial_state) {
 			if(stat.value_defined_memory[i] === 2) stat.value_defined_memory[i] = 1;
 		try
 		{
+			stat.command = program[stat.line].constructor.name;
 			program[stat.line].translate_address(stat);
 			stat = program[stat.line].execute(stat);
 		}
