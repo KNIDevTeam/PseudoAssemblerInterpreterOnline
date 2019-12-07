@@ -194,12 +194,12 @@
 			},
 			"test2": {
 				"title": "Bubble sort",
-				"desc": "Program sorts an array of 5 random numbers with the bubble sort alghorithm",
+				"desc": "Program sorts an array of 5 random numbers with the bubble sort algorithm",
 				"code": "TAB\t\tDC\t5*INTEGER\nSIZE\t\tDC\tINTEGER(5)\nSTEP\t\tDC\tINTEGER(1)\nMEM_STEP\tDC\tINTEGER(4)\nZERO\t\tDC\tINTEGER(0)\nONE\t\tDC\tINTEGER(1)\n#Loading upper boundary for inside loop (size of array lowered by one)\n\t\tL\t1, SIZE\n\t\tS\t1, ONE\n#Setting inner loop iterator to zero\nOUT\t\tL\t2, ZERO\n#Calculating current address\nIN\t\tLR\t10, 2\n\t\tM\t10, MEM_STEP\n#Comparing current element with next\n\t\tL\t3, 0(10)\n\t\tC\t3, 4(10)\n\t\tJP\tSWAP\n\t\tJ\tNEXT_STEP_IN\n#Swapping elements\nSWAP\t\tL\t4, 4(10)\n\t\tST\t4, 0(10)\n\t\tST\t3, 4(10)\n#Incrementing inner loop iterator\nNEXT_STEP_IN\tA\t2, STEP\n\t\tCR\t2, 1\n\t\tJN\tIN\n#Decrementing upper boundary for inside loop\nNEXT_STEP_OUT\tS\t1, STEP\n\t\tC\t1, ONE\n\t\tJP\tOUT\n#Finishing program\n\t\tEND\tCR 1,1"
 			},
 			"test3": {
-				"title": "Fibbonacci numbers",
-				"desc": "Program calculates the first 10 Fibbonacci numbers",
+				"title": "Fibonacci numbers",
+				"desc": "Program calculates the first 10 Fibonacci numbers",
 				"code": "RES\t\tDS\t10*INTEGER\nN\t\tDC\tINTEGER(10)\nSTEP\t\tDC\tINTEGER(1)\nMEM_STEP\tDC\tINTEGER(4)\nZERO\t\tDC\tINTEGER(0)\nONE\t\tDC\tINTEGER(1)\n#Initializing the first two elements and saving them to array\n\t\tL\t1, ONE\n\t\tL\t2, ONE\n\t\tLA\t10, RES\n\t\tST\t1, 0(10)\n\t\tA\t10, MEM_STEP\n\t\tST\t2, 0(10)\n\t\tA\t10, MEM_STEP\n\t\tL\t3, ONE\n\t\tA\t3, STEP\n#Calculating the next element in register 4 \nLOOP\t\tSR\t4, 4\n\t\tAR\t4, 1\n\t\tAR\t4, 2\n\t\tLR\t1, 2\n\t\tLR\t2, 4\n#Saving result to array\n\t\tST\t2, 0(10)\n\t\tA\t10, MEM_STEP\n\t\tA\t3, STEP\n C 3, N\n\t\tJN\tLOOP\n#Finishing the program\nEND\t\tCR\t1, 1"
 			}
 		}
