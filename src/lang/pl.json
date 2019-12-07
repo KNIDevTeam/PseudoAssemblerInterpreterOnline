@@ -198,11 +198,16 @@
 				"code": "ROZMIAR\tDC\tINTEGER(10)\nJEDEN\tDC\tINTEGER(1)\nZERO\tDC\tINTEGER(0)\nCZTERY\tDC\tINTEGER(4)\nTABLICA\tDC\t10*INTEGER\nSUMA\tDS\tINTEGER\n#Inicjalizacja iteratora i pomocniczego rejestru, ładowanie adresu tablicy\n\tLA\t1, TABLICA\n\tL\t3, ZERO\n\tL\t4, ZERO\n#Główna pętla\nPETLA\tC\t3, ROZMIAR\n\tJZ\tKONIEC\n\tL\t2, 0(1)\n\tAR\t4, 2\n\tA\t1, CZTERY\n\tA\t3, JEDEN\n\tJ\tPETLA\n#Zapisanie wyniku w zmiennej SUMA\nKONIEC\tST\t4, SUMA\n"
 			},
 			"test2": {
+				"title": "Równanie kwadratowe",
+				"desc": "Program oblicza liczbę rozwiązań równania kwadratowego (ax<sup>2</sup> + bx + c = 0)",
+				"code": "WSP_A\t\t\tDS\tINTEGER\nWSP_B\t\t\tDS\tINTEGER\nWSP_C\t\t\tDS\tINTEGER\nWYNIK\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nJEDEN\t\t\tDC\tINTEGER(1)\nCZTERY\t\t\tDC\tINTEGER(4)\n\t\t\tL\t1, WSP_B\n\t\t\tMR\t1, 1\n\t\t\tL\t2, CZTERY\n\t\t\tM\t2, WSP_A\n\t\t\tM\t2, WSP_C\n\t\t\tSR\t1, 2\n\t\t\tJP\tDWA_ROZWIAZANIA\n\t\t\tJZ\tJEDNO_ROZWIAZANIE\n\t\t\t\tJN ZERO_ROZWIAZAN\nDWA_ROZWIAZANIA\t\tL\t3, JEDEN\n\t\t\tAR\t3, 3\n\t\t\tST\t3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nJEDNO_ROZWIAZANIE\tL\t3, JEDEN\n\t\t\t\tST 3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nZERO_ROZWIAZAN\t\tL\t3, ZERO\n\t\t\t\tST 3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nKONIEC_PROGRAMU\t\tC\t1, 1\n"
+				},
+			"test3": {
 				"title": "Sortowanie bąbelkowe",
 				"desc": "Program sortuje tablicę składającą się z 5 losowych wartości za pomocą algorytmu sortowania bąbelkowego.",
 				"code": "TABLICA\t\tDC\t5*INTEGER\nROZMIAR\t\tDC\tINTEGER(5)\nKROK\t\tDC\tINTEGER(1)\nCZTERY\tDC\tINTEGER(4)\nZERO\t\tDC\tINTEGER(0)\nJEDEN\t\tDC\tINTEGER(1)\n#Ładowanie górnego ograniczenia zewnętrznej pętli (tj. rozmiar tablicy zmniejszony o 1)\n\t\tL\t1, ROZMIAR\n\t\tS\t1, JEDEN\n#Ustawienie wartości iteratora zewnętrzej pętli na 0\nOUT\t\tL\t2, ZERO\n#Obliczenie aktualnego adresu\nIN\t\tLR\t10, 2\n\t\tM\t10, CZTERY\n#Porównanie obecnego elementu z następnym\n\t\tL\t3, 0(10)\n\t\tC\t3, 4(10)\n\t\tJP\tSWAP\n\t\tJ\tNAST_KROK_WEJ\n#Zamiana elementów\nSWAP\t\tL\t4, 4(10)\n\t\tST\t4, 0(10)\n\t\tST\t3, 4(10)\n#Inkrementacja interatora zewnętrznej pętli\nNAST_KROK_WEJ\tA\t2, KROK\n\t\tCR\t2, 1\n\t\tJN\tIN\n#Dekrementacja górnego ograniczenia wewnętrznej pętli\nNAST_KROK_WYJ\tS\t1, KROK\n\t\tC\t1, JEDEN\n\t\tJP\tOUT\n#Koniec programu\n\t\tEND\tCR 1,1"
 			},
-			"test3": {
+			"test4": {
 				"title": "Ciąg Fibonacciego",
 				"desc": "Program oblicza 10 pierwszych wyrazów ciągu Fibonacciego.",
 				"code": "WYNIK\t\tDS\t10*INTEGER\nN\t\tDC\tINTEGER(10)\nKROK\t\tDC\tINTEGER(1)\nCZTERY\t\tDC\tINTEGER(4)\nZERO\t\tDC\tINTEGER(0)\nJEDEN\t\tDC\tINTEGER(1)\n#Inicjalizacja dwóch pierwszych elementów i zapisywanie ich w tablicy\n\t\tL\t1, JEDEN\n\t\tL\t2, JEDEN\n\t\tLA\t10, WYNIK\n\t\tST\t1, 0(10)\n\t\tA\t10, CZTERY\n\t\tST\t2, 0(10)\n\t\tA\t10, CZTERY\n\t\tL\t3, JEDEN\n\t\tA\t3, KROK\n#Obliczenie następnego elementu w rejestrze 4. \nLOOP\t\tSR\t4, 4\n\t\tAR\t4, 1\n\t\tAR\t4, 2\n\t\tLR\t1, 2\n\t\tLR\t2, 4\n#Zapisywanie wyniku w tablicy\n\t\tST\t2, 0(10)\n\t\tA\t10, CZTERY\n\t\tA\t3, KROK\n C 3, N\n\t\tJN\tLOOP\n#Koniec programu\nEND\t\tCR\t1, 1"			}
