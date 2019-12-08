@@ -1,7 +1,7 @@
 var cur_state = 1;
 var states;
 var program;
-var pure_text, sans_html;
+var pure_text;
 var mobileBrowser = mobileCheck();
 
 //update tables
@@ -15,22 +15,9 @@ function show(direction) {
         spawnCharacters("run2", {x: canvas.width / pixel_ratio, y: button_y, w: 0}, '#00f4a4');
         animating = 1, requestAnimationFrame(draw);
     }
-
-    cur_state = Math.min(states.length-1, Math.max(1, cur_state));
     let cur_program = JSON.parse(JSON.stringify(program));
-    
-    let hidden_lines = 0;
-    //handle comment spaghetti
-    let duplicate_lines = 0;
-    for(let i = 0; i <= states[cur_state - 1].line; i++)
-        if(pure_text[i] == pure_text[states[cur_state - 1].line]) duplicate_lines++;
-    for(let i = 0; i < sans_html.length; i++) {
-        if(sans_html[i][0] == '#') hidden_lines++;
-        else if(sans_html[i] == pure_text[states[cur_state - 1].line]) duplicate_lines--;
-        if(!duplicate_lines) break;
-    }
 
-    cur_program[states[cur_state - 1].line + hidden_lines] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line + hidden_lines]}
+    cur_program[states[cur_state - 1].line] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line]}
     </div><div id="expansion" style="display: block; float: right;">${expandCommand(states[cur_state])}</div>`;
 	$('#program').html(`
         <div class="row" id="program-title-row" style="padding-bottom: 1em">
@@ -50,11 +37,15 @@ function show(direction) {
 
 $('#prev').on('click', function() {
     cur_state--;
+    cur_state = Math.min(states.length-1, Math.max(1, cur_state));
+    while(pure_text[states[cur_state - 1].line][0] == '#' && cur_state > 0) cur_state--;
     show();
 });
 
 $('#next').on('click', function() {
     cur_state++;
+    cur_state = Math.min(states.length-1, Math.max(1, cur_state));
+    while(pure_text[states[cur_state - 1].line][0] == '#' && cur_state < pure_text.length) cur_state++;
     show("next");
 });
 
@@ -64,9 +55,7 @@ $('#run-button').on('click', function() {
     $('#input').html(formatInput($('#input').html()));
 
     //check for errors
-    let preformat = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '');
-    pure_text = preformat.replace(/^#.*$/gm, '').replace(/^\n/gm, '').split('\n');
-    sans_html = preformat.split('\n');
+    pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '').replace(/^\n/gm, '').split('\n');
 
     try {
         states = emulate(pure_text);
@@ -75,22 +64,10 @@ $('#run-button').on('click', function() {
 
         //add error messages
         err.forEach(function(err, ind) {
-            let hidden_lines = 0, duplicate_lines = 0;
-            if(err.line != -1) {
-                //handle comment spaghetti
-                for(let i = 0; i <= err.line; i++)
-                    if(pure_text[i] == pure_text[err.line]) duplicate_lines++;
-                for(let i = 0; i < sans_html.length; i++) {
-                    if(sans_html[i][0] == '#') hidden_lines++;
-                    else if(sans_html[i] == pure_text[err.line]) duplicate_lines--;
-                    if(!duplicate_lines) break;
-                }
-            }
-
             let temp = $('#input').html().split('<br>');
             if(err.line == -1) temp.splice(0, 0, ''), err.line = 0;
             
-            temp[err.line + hidden_lines] = `<div id="error-${ind}" style="float: left">${temp[err.line + hidden_lines]}&nbsp; <span class="error">${err.message}</span></div>`;
+            temp[err.line] = `<div id="error-${ind}" style="float: left">${temp[err.line]}&nbsp; <span class="error">${err.message}</span></div>`;
             temp = temp.join('<br>');
             $('#input').html(temp);
 
@@ -170,7 +147,9 @@ function expandCommand(state) {
     //insert formatting
     t_label = `<span class="keyword">${t_label}</span>`;
     s_label = `<span class="keyword">${s_label}</span>`;
+    let s_value = source;
     source = `<span class="highlight">${source}</span>`
+    let t_value = target;
     target = `<span class="highlight">${target}</span>`
     result = `<span class="highlight">${result}</span>`
 
@@ -210,6 +189,8 @@ function expandCommand(state) {
         case 'Command_Jump_Always':
         case 'Command_Jump_Zero':
         case 'Command_Jump_Negative':
+            source = `<span class="highlight">${s_value+1}</span>`;
+            target = `<span class="highlight">${t_value+1}</span>`;
             res = `${source} &rarr; ${target}<br>[ ${t_label} ]`;
             break;
         case 'Command_Compare_Memory':

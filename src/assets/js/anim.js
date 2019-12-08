@@ -80,7 +80,7 @@ function draw() {
                 ctx.fillText(
                     particle.char, 
                     Math.round(particle.x), 
-                    Math.round(particle.y - (particle.spawner == "logo-id" || particle.spawner == "run1" ? window.scrollY - particle.initScroll : 0))
+                    Math.round(particle.y - (particle.spawner.match(/logo-id|run1|error/) ? window.scrollY - particle.initScroll : 0))
                 );
             }
             particles[id] = particle;

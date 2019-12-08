@@ -168,7 +168,7 @@ function Factory_Comment(name, command_constructor)
     };
     this.build = function(line)
     {
-        if(line === "")
+        if(line[0] === "#")
         {
             return [new this.comm(), ""];
         }
