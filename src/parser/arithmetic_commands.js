@@ -6,18 +6,19 @@ function Command_Arthmetic()
 		state.tar = state.registers[this.register_left];
 		if(this.type === "memory")
 		{
-			state.registers[this.register_left] = this.make_calculation(state.registers[this.register_left], state.memory[this.address]);
 			state.source = state.memory[this.address];
+			state.registers[this.register_left] = this.make_calculation(state.registers[this.register_left], state.memory[this.address]);
 		}
 		if(this.type === "register")
 		{
-			state.registers[this.register_left] = this.make_calculation(state.registers[this.register_left], state.registers[this.register_right]);
 			state.source = state.registers[this.register_right];
+			state.registers[this.register_left] = this.make_calculation(state.registers[this.register_left], state.registers[this.register_right]);
 		}
 		state.result = state.registers[this.register_left];
 		state.sign_flag = Math.sign(state.registers[this.register_left]);
 		state.value_defined_registers[this.register_left] = 2;
 		state.state_changed = true;
+		console.log(state.tar, state.source, state.result, this.address, state.line);
 		return state;
 	};
 }
