@@ -21,9 +21,9 @@ function show(direction) {
     </div><div id="expansion" style="display: block; float: right;">${expandCommand(states[cur_state])}</div>`;
 	$('#program').html(`
         <div class="row" id="program-title-row" style="padding-bottom: 1em">
-            <div class="col-md-1 col-3" style="padding-right: 0" ><a href="/" id="go-back" style="">&larr;</a></div>
+            <div class="col-md-1 col-3" style="padding-right: 0"><a href="/" id="go-back" style="">&larr;</a></div>
             <div class="col-md-11 col-9" style="padding-left: 0"><h11 style="line-height: 0.7">${lang.run.program}</h11></div>
-            </div>
+        </div>
     ${cur_program.join('<br>')}`);
     $('#results').html(formatData(states[cur_state]));
     
@@ -45,7 +45,7 @@ $('#prev').on('click', function() {
 $('#next').on('click', function() {
     cur_state++;
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
-    while(pure_text[states[cur_state - 1].line][0] == '#' && cur_state < pure_text.length) cur_state++;
+    while(pure_text[states[cur_state - 1].line][0] == '#' && cur_state < states.length) cur_state++;
     show("next");
 });
 
@@ -56,6 +56,7 @@ $('#run-button').on('click', function() {
 
     //check for errors
 
+    //purge html, sanitise input
     pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '').replace(/^\n/gm, '').split('\n').filter(function(element) {
         return (element != null && element != "");
     });
@@ -141,7 +142,8 @@ function expandCommand(state) {
     let result = state.command_result;
     
     //get labels
-    let command = pure_text[states[cur_state - 1].line].split(/ |,|\(|\)/);
+    let command = pure_text[states[cur_state - 1].line].split(/ |,/);
+    if(command[1].match(/DS|DC/)) source = command[0];
     if(!command[0].match(new RegExp(`^(${keywords})$`))) command.splice(0, 1);
     let t_label = command[1], s_label = command[2];
     if(t_label.match(/^[0-9]+$/)) t_label = `REG [ ${t_label} ]`;
@@ -156,6 +158,7 @@ function expandCommand(state) {
     target = `<span class="highlight">${target}</span>`
     result = `<span class="highlight">${result}</span>`
 
+    let jump_condition = `STATUS = <span class="highlight">${states[cur_state - 1].status}</span>`, make_jump = (states[cur_state].line == t_value);
     switch(state.command) {
         case 'Command_Allocate_Value':
         case 'Command_Allocate_No_Value':
@@ -181,20 +184,27 @@ function expandCommand(state) {
             target = state.variables[target];
             res = `${s_label} &larr; ${result}<br>[ ${t_label} ]`;
             break;
-        case 'Command_Load':
         case 'Command_Load_Register':
             res = `${t_label} &larr; ${result}<br>[ ${s_label} ]`;
+            break;
+        case 'Command_Load':
+            let s_label2 = states[cur_state - 1].variables[source.replace(html_regexp, '') / 4];
+            s_label2 = `<span class="keyword">${s_label2}</span>`;
+            res = `${t_label} &larr; ${result}<br>[ ${s_label} = ${source} = ${s_label2} ]`;
             break;
         case 'Command_Load_Address':
             res = `${t_label} &larr; ${result}<br>[ ${s_label} ]`;
             break;
         case 'Command_Jump_Positive':
-        case 'Command_Jump_Always':
+            if(!make_jump) jump_condition = jump_condition + ' ≤ 0', make_jump = -1;
         case 'Command_Jump_Zero':
+            if(!make_jump) jump_condition = jump_condition + ' ≠ 0', make_jump = -1;
         case 'Command_Jump_Negative':
+            if(!make_jump) jump_condition = jump_condition + ' ≥ 0', make_jump = -1;
+        case 'Command_Jump_Always':
             source = `<span class="highlight">${s_value+1}</span>`;
             target = `<span class="highlight">${t_value+1}</span>`;
-            res = `${source} &rarr; ${target}<br>[ ${t_label} ]`;
+            res = `${jump_condition}<br>${make_jump == 1 ? `${source} &rarr; ${target}<br>[ ${t_label} ]` : ''}`;
             break;
         case 'Command_Compare_Memory':
         case 'Command_Compare_Register':

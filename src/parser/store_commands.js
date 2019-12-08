@@ -21,7 +21,7 @@ function Command_Load(register_left, shift, base_register)
 	{
 		state.registers[register_left] = state.memory[this.address];
 		state.tar = null;
-		state.source = this.address;
+		state.source = this.address * 4;
 		state.result = state.registers[this.register_left];
 		state.value_defined_registers[this.register_left] = 2;
 		return state;
