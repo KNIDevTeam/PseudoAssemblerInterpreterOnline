@@ -123,7 +123,7 @@ function formatInput(content) {
     //add line numbers
     let temp = content.split('\n').filter(function(element) {
         return (element != null && element != "");
-    });;
+    });
     let line_numbers = "";
     temp.forEach(function(line, ind) {
         line_numbers = line_numbers + `<span class="line-number" contenteditable="false">${ind + 1}</span><br>`;

@@ -55,7 +55,10 @@ $('#run-button').on('click', function() {
     $('#input').html(formatInput($('#input').html()));
 
     //check for errors
-    pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '').replace(/^\n/gm, '').split('\n');
+
+    pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '').replace(/^\n/gm, '').split('\n').filter(function(element) {
+        return (element != null && element != "");
+    });
 
     try {
         states = emulate(pure_text);
