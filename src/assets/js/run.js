@@ -142,7 +142,9 @@ function expandCommand(state) {
     let result = state.command_result;
     
     //get labels
-    let command = pure_text[states[cur_state - 1].line].split(/ |,/);
+    let command = pure_text[states[cur_state - 1].line].split(/ |,/).filter(function(element) {
+        return (element != null && element != "");
+    });
     if(command[1].match(/DS|DC/)) source = command[0];
     if(!command[0].match(new RegExp(`^(${keywords})$`))) command.splice(0, 1);
     let t_label = command[1], s_label = command[2];
