@@ -35,3 +35,11 @@ function Command_Register(register_left, register_right)
 	this.register_right = parseInt(register_right);
 }
 
+function Command_Comment()
+{
+	Command.call(this);
+	this.execute  = function(state)
+	{
+		return state;
+	}
+}

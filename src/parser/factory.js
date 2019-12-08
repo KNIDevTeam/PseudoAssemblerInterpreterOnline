@@ -157,3 +157,22 @@ function Factory_Allocation(name, command_constructor) {
 
     };
 }
+
+function Factory_Comment(name, command_constructor)
+{
+    this.name = name;
+    this.comm = command_constructor;
+
+    this.set_next = function (next_factory) {
+        this.next = next_factory;
+    };
+    this.build = function(line)
+    {
+        if(line === "")
+        {
+            return [new this.comm(), ""];
+        }
+        else return this.next.build(line);
+    };
+
+}
