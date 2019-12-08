@@ -8,6 +8,7 @@ function Factory(name, command_constructor) {
 
     this.build = function (line) {
         let opened = false;
+        line = line.split(/#/)[0];
         for(let i = 0; i < line.length; i++)
         {
             if(line[i] === "(") opened = true;
@@ -168,7 +169,7 @@ function Factory_Comment(name, command_constructor)
     };
     this.build = function(line)
     {
-        if(line[0] === "#")
+        if(line === "")
         {
             return [new this.comm(), ""];
         }
