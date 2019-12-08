@@ -112,11 +112,12 @@ function formatInput(content) {
     });
 
     //find comments
-    var comments = content.match(/^#.*$/gm);
+    var comments = content.match(/#.*$/gm);
+    console.log(comments);
     //purge html and insert new formatting
     if(comments) comments.forEach(function(comment) {
         var formatted = `<span class="comment">${comment.replace(html_regexp, '')}</span>`;
-        content = content.replace(new RegExp(`^${escapeRegExp(comment)}$`, 'm'), formatted);
+        content = content.replace(new RegExp(`${escapeRegExp(comment)}$`, 'm'), formatted);
     });
 
     //add line numbers
