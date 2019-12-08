@@ -18,7 +18,6 @@ function Command_Arthmetic()
 		state.sign_flag = Math.sign(state.registers[this.register_left]);
 		state.value_defined_registers[this.register_left] = 2;
 		state.state_changed = true;
-		console.log(state.tar, state.source, state.result, this.address, state.line);
 		return state;
 	};
 }

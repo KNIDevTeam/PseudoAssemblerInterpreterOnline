@@ -30,7 +30,6 @@ function Command_Memory(register_left, shift, base_register)
 		else throw `Missing label: '${this.shift}'`;
 		if(base >= state.memory.length) throw `Invalid address: '${base * 4}'`;
 		this.address = base;
-		console.log(this.address, state.line)
 	};
 	this.set_changes = function(state)
 	{
