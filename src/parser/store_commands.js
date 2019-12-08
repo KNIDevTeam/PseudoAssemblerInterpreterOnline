@@ -52,7 +52,7 @@ function Command_Load_Address(register_left, shift, base_register)
 		state.registers[this.register_left] = this.address * 4;
 		state.tar = this.register_left;
 		state.source = this.shift;
-		state.result = this.address;
+		state.result = this.address * 4;
 		state.value_defined_registers[this.register_left] = 2;
 		return state;
 	}
