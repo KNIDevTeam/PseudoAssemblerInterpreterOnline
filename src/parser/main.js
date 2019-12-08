@@ -51,7 +51,7 @@ function main_parse(lines) {
     for (let i = factories.length - 2; i >= 0; i--) {
         factories[i].set_next(factories[i + 1]);
     }
-    for (let i = 0; i < lines.length - 1; i++) {
+    for (let i = 0; i < lines.length; i++) {
         let res = [];
         try {
             res = factories[0].build(lines[i]);
