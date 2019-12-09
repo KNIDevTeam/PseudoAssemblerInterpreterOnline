@@ -145,11 +145,13 @@ function formatInput(content) {
 }
 
 (() => {
-    cookie = getCookie('input');
-    if (cookie != '' && cookie != '\n' && cookie != ' ')
-        $("#input").html(formatInput(cookie));
-    else
-        $("#input").html(formatInput(lang.index.exampleProgram));
+	if ($("#input").length) {
+		cookie = getCookie('input');
+		if (cookie != '' && cookie != '\n' && cookie != ' ')
+			$("#input").html(formatInput(cookie));
+		else
+			$("#input").html(formatInput(lang.index.exampleProgram));
+	}
 })();
 
 //place example program
