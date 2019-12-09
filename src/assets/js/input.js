@@ -34,9 +34,21 @@ $("#input").on('keyup paste contextmenu', function(e) {
 
 //breakpoints
 
-$('.line-number').mouseenter(function() {
-    console.log($(this));
-});
+function setBreakpoint(id) {
+    //set breakpoint
+    id = '#' + id;
+    if($(id).hasClass('active-breakpoint')) $(id).removeClass('active-breakpoint');
+    else $(id).addClass('active-breakpoint');
+
+    //add animation
+    $(id).addClass('animated wobble');
+    let node = document.querySelector(id);
+    node.addEventListener('animationend', function() {
+        $(id).removeClass('animated wobble');
+        node.removeEventListener('animationend', this);
+        if (typeof callback === 'function') callback()
+    });
+}
 
 
 function escapeRegExp(string) {
@@ -126,13 +138,19 @@ function formatInput(content) {
         content = content.replace(new RegExp(`${escapeRegExp(comment)}$`, 'm'), formatted);
     });
 
+    //find previous breakpoints
+    let breakpoints = [];
+    $('.line-number').each(function() {
+        if($(this).hasClass('active-breakpoint')) breakpoints.push(1);
+        else breakpoints.push(0);
+    });
     //add line numbers
     let temp = content.split('\n').filter(function(element) {
         return (element != null && element != "");
     });
     let line_numbers = "";
     temp.forEach(function(line, ind) {
-        line_numbers = line_numbers + `<div class="line-number" id="line-number-${ind}">${ind + 1}</div><br>`;
+        line_numbers = line_numbers + `<div class="line-number${breakpoints[ind] ? ' active-breakpoint' : ''}" id="line-number-${ind}" onclick=setBreakpoint("line-number-${ind}")>${ind + 1}</div><br>`;
     });
 
     //fix positions of elements

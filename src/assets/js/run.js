@@ -61,8 +61,14 @@ $('#run-button').on('click', function() {
         return (element != null && element != "");
     });
 
+    //get breakpoints
+    let breakpoints = [];
+    $('.active-breakpoint').each(function() {
+        breakpoints.push(Number(this.id.replace('line-number-', '')));
+    });
+
     try {
-        states = emulate(pure_text);
+        states = emulate(pure_text, breakpoints);
     } catch(err) {
         if(typeof(err) === 'string') err = [{message: err, line: -1}];
 
@@ -220,7 +226,7 @@ function expandCommand(state) {
 }
 
 //state generation
-function emulate(text) {
+function emulate(text, breakpoints) {
     let temp_states = [];
     let res = main_parse(text);
 
