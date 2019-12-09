@@ -27,8 +27,8 @@ function Command_Memory(register_left, shift, base_register)
 		let pattern = /^-*[0-9]*$/;
 		if(pattern.test(this.shift)) base += parseInt(this.shift) / 4;
 		else if(state.memory_labels[this.shift] !== undefined) base += state.memory_labels[this.shift];
-		else throw `Missing label: '${this.shift}'`;
-		if(base >= state.memory.length) throw `Invalid address: '${base * 4}'`;
+		else throw [`MISSING_LABEL`,`${this.shift}`];
+		if(base >= state.memory.length) throw [`INVALID_ADDRESS`, `${base * 4}`];
 		this.address = base;
 	};
 	this.set_changes = function(state)

@@ -73,7 +73,7 @@ function main_execute(program, initial_state) {
     for (stat.line = 0; stat.line < program.length; stat.line++) {
         if (stat.line_execution_count[stat.line] === undefined) stat.line_execution_count[stat.line] = 0;
         else stat.line_execution_count[stat.line]++;
-        if (stat.line_execution_count[stat.line] > timeout_threshold) throw "Infinite Loop Error";
+        if (stat.line_execution_count[stat.line] > timeout_threshold) throw ["INFINITE_LOOP"];
         states.push(JSON.parse(JSON.stringify(stat)));
         for (let i = 0; i < stat.value_defined_registers.length; i++)
             if (stat.value_defined_registers[i] === 2) stat.value_defined_registers[i] = 1;

@@ -181,6 +181,24 @@
 			"address": "Adres",
 			"var": "Zmienna",
 			"value": "Wartość"
+		},
+		"errors": {
+			"DIV_BY_0": "Dzielenie przez 0",
+			"MISSING_LABEL": "Nieistniejąca etykieta",
+			"INVALID_LABEL": "Nieprawidłowa etykieta",
+			"INVALID_ADDRESS": "Nieprawidłowy adres",
+			"OPEN_BRACES": "Nawiasy nie są zamknięte",
+			"LABEL_NUMBER": "Etykieta nie może rozpoczynać się cyfrą",
+			"LABEL_PUNCTUATION": "Etykieta nie może zawierać znaków punktuacji",
+			"INVALID_LEFT_REGISTER": "Lewy rejestr musi być liczbą całkowitą mniejszą od 15",
+			"INVALID_RIGHT_REGISTER": "Prawy rejestr musi być liczbą całkowitą mniejszą od 15",
+			"INVALID_ARG_NUMBER": "Nieprawidłowa liczba argumentów",
+			"INVALID_SHIFT": "Przesunięcie musi być wielokrotnością 4",
+			"INVALID_COMMAND": "Nieprawidłowy rozkaz",
+			"INVALID_VAR_TYPE": "Nieprawidłowy typ zmiennej",
+			"INVALID_ARRAY_SIZE": "Wielkość tablicy musi być liczbą całkowitą większą od 0",
+			"INVALID_VALUE": "Wartość musi być liczbą całkowitą większą od 0",
+			"INFINITE_LOOP": "Błąd nieskończonej pętli"
 		}
 	},	
 	"examples": {

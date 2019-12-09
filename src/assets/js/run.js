@@ -38,14 +38,14 @@ function show(direction) {
 $('#prev').on('click', function() {
     cur_state--;
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
-    while(pure_text[states[cur_state - 1].line][0] == '#' && cur_state > 0) cur_state--;
+    while(cur_state > 1 && pure_text[states[cur_state - 1].line][0] == '#' ) cur_state--;
     show();
 });
 
 $('#next').on('click', function() {
     cur_state++;
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
-    while(pure_text[states[cur_state - 1].line][0] == '#' && cur_state < states.length) cur_state++;
+    while(cur_state < states.length && pure_text[states[cur_state - 1].line][0] == '#') cur_state++;
     show("next");
 });
 
@@ -70,14 +70,14 @@ $('#run-button').on('click', function() {
     try {
         states = emulate(pure_text, breakpoints);
     } catch(err) {
-        if(typeof(err) === 'string') err = [{message: err, line: -1}];
+        if(!err[0].message) err = [{message: err[0], line: -1}];
 
         //add error messages
         err.forEach(function(err, ind) {
             let temp = $('#input').html().split('<br>');
             if(err.line == -1) temp.splice(0, 0, ''), err.line = 0;
             
-            temp[err.line] = `<div id="error-${ind}" style="float: left">${temp[err.line]}&nbsp; <span class="error">${err.message}</span></div>`;
+            temp[err.line] = `<div id="error-${ind}" style="float: left">${temp[err.line]}&nbsp; <span class="error">${lang.run.errors[err.message]}${err.arg ? err.arg : ''}</span></div>`;
             temp = temp.join('<br>');
             $('#input').html(temp);
 
@@ -233,7 +233,7 @@ function emulate(text, breakpoints) {
     if(res[1].length === 0) {
         let output = main_execute(res[0], res[2]);
         //throw errors if found
-        if(output[1]) throw [{ message: output[1], line: output[2] }];
+        if(output[1]) throw [{ message: output[1][0], arg: output[1][1], line: output[2] }];
 
         let states_parser = output[0];
         for(let i = 0; i < states_parser.length; i++) {
@@ -241,7 +241,7 @@ function emulate(text, breakpoints) {
         }
     } else {
         res[1].forEach(function(el, ind) {
-            res[1][ind] = {message: el[0], line: el[1]};
+            res[1][ind] = {message: el[0][0], line: el[1]};
         });
         throw res[1];
     }

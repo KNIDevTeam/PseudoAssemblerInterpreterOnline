@@ -14,7 +14,7 @@ function Factory(name, command_constructor) {
             if(line[i] === "(") opened = true;
             if(line[i] === ")") opened = false;
         }
-        if(opened) throw "Braces aren't closed";
+        if(opened) throw ["OPEN_BRACES"];
 
         let args = line.split(/ +|,|\(|\)|\t+|\*/);
         if (this.is_it_me(args))
@@ -30,9 +30,8 @@ function Factory(name, command_constructor) {
     };
     this.get_label = function (args) {
         args = this.clear_args(args);
-        if(/^\d/.exec(args[0])) throw "Label mustn't begin with a number";
-        if(/,/.exec(args[0])) throw "Label mustn't contain commas";
-        if(/\./.exec(args[0])) throw "Label mustn't contain periods";
+        if(/^\d/.exec(args[0])) throw ["LABEL_NUMBER"];
+        if(/,/.exec(args[0]) || /\./.exec(args[0])) throw ["LABEL_PUNCTUATION"];
 		return (args[0] === this.name ? "" : args[0]);
     };
     this.clear_args = function (args) {
@@ -51,9 +50,9 @@ function Factory_Registers(name, command_constructor) {
 
 
     this.check_coherency = function (args) {
-        if (!/^\d*$/.exec(args[1]) || parseInt(args[1]) > 15) throw "Left register must be a positive integer lower than 15";
-        if (!/^\d*$/.exec(args[2]) || parseInt(args[1]) > 15) throw "Right register must be positive integer lower than 15";
-        if (!(args.length === 3)) throw "Invalid number of arguments";
+        if (!/^\d*$/.exec(args[1]) || parseInt(args[1]) > 15) throw ["INVALID_LEFT_REGISTER"];
+        if (!/^\d*$/.exec(args[2]) || parseInt(args[1]) > 15) throw ["INVALID_RIGHT_REGISTER"];
+        if (!(args.length === 3)) throw ["INVALID_ARG_NUMBER"];
 
     };
 
@@ -74,11 +73,11 @@ function Factory_Memory(name, command_constructor) {
         return new this.comm(this.register_left, this.shift, this.base_register);
     };
     this.check_coherency = function (args) {
-        if (!/^\d*$/.exec(args[1]) || parseInt(args[1]) > 15) throw "Register number must be a positive integer lower than 15";
-        if (!/^-*\d*$/.exec(args[2]) && !/^\D/.exec(args[2])) throw "Label can't begin with a number";
-        if (args.length === 4 && !/^\d*$/.exec(args[3])) throw "Register number must be a positive integer";
-        if (/^-*\d*$/.exec(args[2]) && parseInt(args[2]) % 4 !== 0) throw "Shift must be a multiple of 4";
-        if (args.length !== 4 && args.length !== 3) throw "Invalid number of arguments";
+        if (!/^\d*$/.exec(args[1]) || parseInt(args[1]) > 15) throw ["INVALID_LEFT_REGISTER"];
+        if (!/^-*\d*$/.exec(args[2]) && !/^\D/.exec(args[2])) throw ["LABEL_NUMBER"];
+        if (args.length === 4 && !/^\d*$/.exec(args[3])) throw ["INVALID_RIGHT_REGISTER"];
+        if (/^-*\d*$/.exec(args[2]) && parseInt(args[2]) % 4 !== 0) throw ["INVALID_SHIFT"];
+        if (args.length !== 4 && args.length !== 3) throw ["INVALID_ARG_NUMBER"];
     };
     this.generate_args = function (args) {
         args = this.clear_args(args);
@@ -92,7 +91,7 @@ function Factory_Memory(name, command_constructor) {
 
 function End_Factory() {
     this.build = function(line) {
-        throw "Invalid command";
+        throw ["INVALID_COMMAND"];
     };
 }
 
@@ -103,8 +102,8 @@ function Factory_Jump(name, command_constructor) {
     };
 
     this.check_coherency = function (args) {
-        if (args.length !== 2) throw "Too many arguments";
-        if (/^\d/.exec(args[1])) throw "Label can't begin with a number";
+        if (args.length !== 2) throw ["INVALID_ARG_NUMBER"];
+        if (/^\d/.exec(args[1])) throw ["LABEL_NUMBER"];
     };
 
     this.generate_args = function (args) {
@@ -146,15 +145,15 @@ function Factory_Allocation(name, command_constructor) {
     };
 
     this.check_coherency = function (args, label) {
-        if(label === "") throw "Missing label";
+        if(label === "") throw ["MISSING_LABEL"];
         if(args.length < 2 || ((types.includes(args[1]) && (args.length !== 2 && args.length !== 3))))
-            throw `Invalid number of arguments: '${args.length}'`;
-        if(types.includes(args[2]) && (args.length !== 3 && args.length !== 4)) throw `Invalid number of arguments: '${args.length}}'`;
-        if(!types.includes(args[1]) && !types.includes(args[2])) throw "Invalid variable type";
-        if(types.includes(args[2]) && !/^\d*$/.exec(args[1])) throw "Size of array must be a positive integer";
+            throw ["INVALID_ARG_NUMBER"];
+        if(types.includes(args[2]) && (args.length !== 3 && args.length !== 4)) throw ["INVALID_ARG_NUMBER"];
+        if(!types.includes(args[1]) && !types.includes(args[2])) throw ["INVALID_VAR_TYPE"];
+        if(types.includes(args[2]) && !/^\d*$/.exec(args[1])) throw ["INVALID_ARRAY_SIZE"];
         if((types.includes(args[1]) && !/^-*\d*$/.exec(args[2])  && args.length === 3) ||
             (types.includes(args[2]) && !/^-*\d*$/.exec(args[3]) && args.length === 4))
-            throw "Value must be an integer";
+            throw ["INVALID_VALUE"];
 
     };
 }

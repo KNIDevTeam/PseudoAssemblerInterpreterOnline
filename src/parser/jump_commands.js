@@ -13,7 +13,7 @@ function Command_Jump(target)
 	this.translate_address = function(state)
 	{
 		if(state.lbls[this.target] !== undefined) this.address = state.lbls[this.target];
-		else throw "Invalid label";
+		else throw ["INVALID_LABEL"];
 	};
 }
 

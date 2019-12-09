@@ -181,6 +181,24 @@
 			"address": "Address",
 			"var": "Variable",
 			"value": "Value"
+		},
+		"errors": {
+			"DIV_BY_0": "Division by 0",
+			"MISSING_LABEL": "Missing label",
+			"INVALID_LABEL": "Invalid label",
+			"INVALID_ADDRESS": "Invalid address",
+			"OPEN_BRACES": "Braces aren't closed",
+			"LABEL_NUMBER": "Label mustn't begin with a number",
+			"LABEL_PUNCTUATION": "Label mustn't contain punctuation characters",
+			"INVALID_LEFT_REGISTER": "Left register must be a positive integer lower than 15",
+			"INVALID_RIGHT_REGISTER": "Right register must be positive integer lower than 15",
+			"INVALID_ARG_NUMBER": "Invalid number of arguments",
+			"INVALID_SHIFT": "Shift must be a multiple of 4",
+			"INVALID_COMMAND": "Invalid command",
+			"INVALID_VAR_TYPE": "Invalid variable type",
+			"INVALID_ARRAY_SIZE": "Size of array must be a positive integer",
+			"INVALID_VALUE": "Value must be a positive integer",
+			"INFINITE_LOOP": "Infinite loop error"
 		}
 	},
 	"examples": {
