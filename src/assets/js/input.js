@@ -131,8 +131,8 @@ function formatInput(content) {
     //fix positions of elements
     $('#line-number-container').html(line_numbers);
     let rect = document.getElementById('line-number-container').getBoundingClientRect();
-    $('#input').css('top', `${-rect.height}px`);
-    $('#program').css('top', `${-rect.height}px`);
+    $('#input').css('margin-top', `${-rect.height}px`);
+    $('#program').css('margin-top', `${-rect.height}px`);
 
     //restore markers
     if(markers) markers.forEach(function(span) {
