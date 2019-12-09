@@ -94,6 +94,9 @@ $('#run-button').on('click', function() {
 
     //skip to end if fastforwarded
     if(document.getElementById('fast-forward').checked) cur_state = states.length - 1;
+
+    //skip comments
+    while(pure_text[states[cur_state - 1].line][0] == '#' && cur_state < states.length) cur_state++;
     
     program = $('#input').html().split('<br>');
 

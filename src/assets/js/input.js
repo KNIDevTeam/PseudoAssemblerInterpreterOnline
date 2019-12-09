@@ -29,8 +29,15 @@ $("#input").on('keyup paste contextmenu', function(e) {
     rangeSelectionSaveRestore.restoreSelection(saved_sel);
 	
 	refreshTooltip();
-	$('#run').fadeIn();
+    $('#run').fadeIn();
 });
+
+//breakpoints
+
+$('.line-number').mouseenter(function() {
+    console.log($(this));
+});
+
 
 function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -125,7 +132,7 @@ function formatInput(content) {
     });
     let line_numbers = "";
     temp.forEach(function(line, ind) {
-        line_numbers = line_numbers + `<span class="line-number" contenteditable="false">${ind + 1}</span><br>`;
+        line_numbers = line_numbers + `<div class="line-number" id="line-number-${ind}">${ind + 1}</div><br>`;
     });
 
     //fix positions of elements
