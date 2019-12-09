@@ -33,9 +33,9 @@ $("#logo-id").on('mouseenter', function() {
     if(!animating) animating = 1, requestAnimationFrame(draw);
 });
 
-$("#run").on('mouseenter', function() {
+$("#run-button").on('mouseenter', function() {
     if(animating_button) return;
-    spawnCharacters("run", getPos(document.getElementById("run")), '#00f4a4');
+    spawnCharacters("run-button", getPos(document.getElementById("run-button")), '#00f4a4');
     animating_button = 1;
     if(!animating) animating = 1, requestAnimationFrame(draw);
 });

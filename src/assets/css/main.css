@@ -2274,6 +2274,8 @@ input, select, textarea {
 				text-align: center;
 				top: 0;
 				width: 2.25em;
+				z-index: 999;
+				background-color: #fff;
 			}
 
 		input[type="checkbox"]:checked + label:before,
@@ -2485,7 +2487,6 @@ input, select, textarea {
 		
 		margin: auto auto 0 auto;
 		width: 10em;
-		height: 100%;
 	}
 
 		input[type="submit"].icon:before,
@@ -3150,18 +3151,17 @@ input, select, textarea {
 /* Main */
 
 	#main {
-		padding: 0 0 18% 0 ;
+		padding: 0 0 18% 0;
 		background-color: white;
-		
 	}
 
-		@media screen and (max-width: 736px) {
+	@media screen and (max-width: 736px) {
 
-			#main {
-				padding: 0em 0 4em 0 ;
-			}
-
+		#main {
+			padding: 0em 0 4em 0 ;
 		}
+
+	}
 
 /* Footer */
 
@@ -3387,18 +3387,6 @@ input, select, textarea {
 	
 /* Buttons */
 
-	@media screen and (max-width: 1021px) {
-		#run {
-			width: 90%;
-		}	
-	}
-
-	@media screen and (min-width: 1022px) {
-		#run {
-			width: 50%;
-		}	
-	}
-	
 	#run, #prev-next {
 		position: fixed;
 		bottom: 40px;
@@ -3689,7 +3677,7 @@ canvas {
 		#fast-forward-col {
 			margin-top: 15px;
 			display: flex;
-			justify-content: center;
+			justify-content: flex-end;
 		}
 	}
 	
