@@ -94,18 +94,18 @@ function getCommandsDoc() {
 		let cmd_info = lang['docs']['commands']['content'][cmd_name];
 		html += `
 		<div class="card"> 
-			<div class="card-header" id="heading`+cmd_name+`"> 
+			<div class="card-header" id="heading${cmd_name}"> 
 				<h2 class="mb-0"> 
-					<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse`+cmd_name+`" aria-expanded="false" aria-controls="collapse`+cmd_name+`">`+cmd_name+`: `+cmd_info['short']+`</button> 
+					<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse${cmd_name}" aria-expanded="false" aria-controls="collapse${cmd_name}">${cmd_name}: ${cmd_info['short']}</button> 
 				</h2> 
 			</div> 
-			<div id="collapse`+cmd_name+`" class="collapse" aria-labelledby="heading`+cmd_name+`" data-parent="#accordionCommands"> 
+			<div id="collapse${cmd_name}" class="collapse" aria-labelledby="heading${cmd_name}" data-parent="#accordionCommands"> 
 				<div class="card-body">
-					<p>`+cmd_info['long']+`</p>
+					<p>${cmd_info['long']}</p>
 					<hr>
-					<p>`+cmd_info['params']+`</p>
+					<p>${cmd_info['params']}</p>
 					<hr>
-					<p>`+cmd_info['examples']+`</p>
+					<p>${cmd_info['examples']}</p>
 				</div>
 			</div> 
 		</div>`
