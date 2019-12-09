@@ -3489,6 +3489,7 @@ canvas {
 	left: -3em;
 	position: relative;
 	pointer-events: auto;
+	cursor: pointer;
 }
 
 .active-breakpoint {
