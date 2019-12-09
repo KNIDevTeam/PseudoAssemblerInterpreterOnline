@@ -260,6 +260,6 @@ $('.inactive').click(() => {
  */
 $('.example-button').click(function() {
 	let key = $(this).attr('data-example');
-	setCookie('input', lang['examples']['programs'][key]['code'], 15);
+	setCookie('input', "#" + lang['examples']['programs'][key]['title'] + "\n" + lang['examples']['programs'][key]['code'], 15);
 	window.location = "/";
 });
