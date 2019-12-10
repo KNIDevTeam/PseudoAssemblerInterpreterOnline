@@ -210,6 +210,7 @@
 		"siteTitle": "Intepreter - Examples",
 		"title": "Przykłady",
 		"nav": "Przykłady",
+		"button": "Uruchom",
 		"programs": {
 			"test": {
 				"title": "Suma",

@@ -223,7 +223,7 @@ function getExamples() {
 							<code><div class="code-inner">${code}</div> <div class="copy" data-example="${example_key}"><i class="fa fa-copy"></i> </div></code>
 						</pre>
 					</div>
-					<a href="#" class="example-button button" data-example="${example_key}"> Run </a>
+					<a href="#" class="example-button button" data-example="${example_key}"> ${lang.examples.button} </a>
 				</div>
 			</div>
 		</div>`;

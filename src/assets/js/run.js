@@ -292,6 +292,8 @@ function formatData(data) {
         </table>
     </div>`;
 
+	console.log(data);
+	
     var memory_html = `<div style="padding-bottom: 1em"><h11>` + lang.run.memory.header + `</h11></div>
     <div class="table-wrapper">
         <table class="default">
