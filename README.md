@@ -14,9 +14,9 @@ Made by students from Warsaw University of Technology - Faculty of Mathematics a
 Project is: _in_progress_.
 
 ## Contact
-Feel free to contact us!
-Group e-mail: contact@pseudoassembler.online 
-[@RazorMeister](http://razormeister.pl/) 
-[@lavar3l](https://github.com/lavar3l) 
-[@dvalim](https://dvalim.github.io/)
-[@witek0509x](https://github.com/witek0509x)
+**Feel free to contact us!**
+- Group e-mail: contact@pseudoassembler.online 
+- [@RazorMeister](http://razormeister.pl/) 
+- [@lavar3l](https://github.com/lavar3l) 
+- [@dvalim](https://dvalim.github.io/)
+- [@witek0509x](https://github.com/witek0509x)
