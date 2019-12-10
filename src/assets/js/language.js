@@ -6,7 +6,7 @@ let lang = {};
  * @param cname
  */
 function eraseCookie(cname) {
-	document.cookie = cname + "= ;-1;path=/";
+	document.cookie = cname + "= ;-1;path=/;domain=";
 }
 
 /**
@@ -17,11 +17,10 @@ function eraseCookie(cname) {
  * @param exdays
  */
 function setCookie(cname, cvalue, exdays) {
-	eraseCookie(cname);
 	cvalue = cvalue.replace(/(\r\n|\n|\r)/gm, "|n|");
 	cvalue = cvalue.replace(/(\t)/gm, " ");
-	let d = new Date();
-	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	let d = new Date;
+	d.setHours(d.getHours() + 24 * (exdays || 365));
 	let expires = "expires=" + d.toUTCString();
 	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
