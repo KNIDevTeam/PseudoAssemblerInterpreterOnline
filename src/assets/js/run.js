@@ -77,7 +77,7 @@ $('#run-button').on('click', function() {
             let temp = $('#input').html().split('<br>');
             if(err.line == -1) temp.splice(0, 0, ''), err.line = 0;
             
-            temp[err.line] = `<div id="error-${ind}" style="float: left">${temp[err.line]}&nbsp; <span class="error">${lang.run.errors[err.message]}${err.arg ? err.arg : ''}</span></div>`;
+            temp[err.line] = `<div id="error-${ind}" style="float: left">${temp[err.line]}&nbsp; <span class="error">${lang.run.errors[err.message]}${err.arg ? `: ${err.arg}` : ''}</span></div>`;
             temp = temp.join('<br>');
             $('#input').html(temp);
 

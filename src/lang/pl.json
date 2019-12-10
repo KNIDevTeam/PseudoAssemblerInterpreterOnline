@@ -190,8 +190,8 @@
 			"OPEN_BRACES": "Nawiasy nie są zamknięte",
 			"LABEL_NUMBER": "Etykieta nie może rozpoczynać się cyfrą",
 			"LABEL_PUNCTUATION": "Etykieta nie może zawierać znaków punktuacji",
-			"INVALID_LEFT_REGISTER": "Lewy rejestr musi być liczbą całkowitą mniejszą od 15",
-			"INVALID_RIGHT_REGISTER": "Prawy rejestr musi być liczbą całkowitą mniejszą od 15",
+			"INVALID_LEFT_REGISTER": "Lewy rejestr musi być liczbą naturalną mniejszą od 15",
+			"INVALID_RIGHT_REGISTER": "Prawy rejestr musi być liczbą naturalną mniejszą od 15",
 			"INVALID_ARG_NUMBER": "Nieprawidłowa liczba argumentów",
 			"INVALID_SHIFT": "Przesunięcie musi być wielokrotnością 4",
 			"INVALID_COMMAND": "Nieprawidłowy rozkaz",
@@ -220,7 +220,7 @@
 			"test2": {
 				"title": "Równanie kwadratowe",
 				"desc": "Program oblicza liczbę rozwiązań równania kwadratowego (ax<sup>2</sup> + bx + c = 0)",
-				"code": "WSP_A\t\t\tDC\tINTEGER\nWSP_B\t\t\tDC\tINTEGER\nWSP_C\t\t\tDC\tINTEGER\nWYNIK\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nJEDEN\t\t\tDC\tINTEGER(1)\nCZTERY\t\t\tDC\tINTEGER(4)\n#Przygotowanie rejestrów\n\t\t\tL\t1, WSP_B\n#Obliczenie wyróżnika\n\t\t\tMR\t1, 1\n\t\t\tL\t2, CZTERY\n\t\t\tM\t2, WSP_A\n\t\t\tM\t2, WSP_C\n\t\t\tSR\t1, 2\n#Ustalenie liczby rozwiązań\n\t\t\tJP\tDWA_ROZWIAZANIA\n\t\t\tJZ\tJEDNO_ROZWIAZANIE\n\t\t\t\tJN ZERO_ROZWIAZAN\nDWA_ROZWIAZANIA\t\tL\t3, JEDEN\n\t\t\tAR\t3, 3\n\t\t\tST\t3, WYNIK\n#Koniec programu\n\t\t\t\tJ KONIEC_PROGRAMU\nJEDNO_ROZWIAZANIE\tL\t3, JEDEN\n\t\t\t\tST 3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nZERO_ROZWIAZAN\t\tL\t3, ZERO\n\t\t\t\tST 3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nKONIEC_PROGRAMU\t\tC\t1, 1\n"
+				"code": "WSP_A\t\t\tDC\tINTEGER\nWSP_B\t\t\tDC\tINTEGER\nWSP_C\t\t\tDC\tINTEGER\nWYNIK\t\t\tDS\tINTEGER\nZERO\t\t\tDC\tINTEGER(0)\nJEDEN\t\t\tDC\tINTEGER(1)\nCZTERY\t\t\tDC\tINTEGER(4)\n#Przygotowanie rejestrów\n\t\t\tL\t1, WSP_B\n#Obliczenie wyróżnika\n\t\t\tMR\t1, 1\n\t\t\tL\t2, CZTERY\n\t\t\tM\t2, WSP_A\n\t\t\tM\t2, WSP_C\n\t\t\tSR\t1, 2\n#Ustalenie liczby rozwiązań\n\t\t\tJP\tDWA_ROZWIAZANIA\n\t\t\tJZ\tJEDNO_ROZWIAZANIE\n\t\t\t\tJN ZERO_ROZWIAZAN\nDWA_ROZWIAZANIA\t\tL\t3, JEDEN\n\t\t\tAR\t3, 3\n\t\t\tST\t3, WYNIK\n#Koniec programu\n\t\t\t\tJ KONIEC_PROGRAMU\nJEDNO_ROZWIAZANIE\tL\t3, JEDEN\n\t\t\t\tST 3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nZERO_ROZWIAZAN\t\tL\t3, ZERO\n\t\t\t\tST 3, WYNIK\n\t\t\t\tJ KONIEC_PROGRAMU\nKONIEC_PROGRAMU\t\tCR\t1, 1\n"
 				},
 			"test3": {
 				"title": "Sortowanie bąbelkowe",
