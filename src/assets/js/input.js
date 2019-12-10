@@ -27,6 +27,8 @@ $("#input").on('keyup paste contextmenu', function(e) {
     var saved_sel = rangeSelectionSaveRestore.saveSelection();
     $(this).html(formatInput($(this).html()));
     rangeSelectionSaveRestore.restoreSelection(saved_sel);
+
+    console.log($(this).html() + '.');
 	
 	refreshTooltip();
     $('#run').fadeIn();
@@ -62,21 +64,31 @@ function formatInput(content) {
         content = content.replace(marker, '⮓');
     });
 
+    console.log(content);
+
     //remove error messages
     content = content.replace(/<span class="error">[^>]*<\/span>/g, '');
 
     //shorten whitespace
     content = content.replace(/([^\S\n]|&nbsp;)+/g, ' ');
 
+    console.log(content);
+
     //make newlines consistent
     content = content.replace(/<br>|((?!^)<div>)|<p>/g, '\n').replace(/<div>|<\/div>|<\/p>/g, '').replace(/\n{2}/g, '\n');
     content = content.replace(/^\n/, '');
 
+    console.log(content);
+
     //purge html tags
     content = content.replace(html_regexp, '');
 
+    console.log(content);
+
     //remove whitespace from beginning of lines
     content = content.replace(/^ +/gm, '');
+
+    console.log(content);
     
     setCookie('input', content.replace(/⮓/g, ''), 5);
 
@@ -114,6 +126,8 @@ function formatInput(content) {
     });
     content = content.join('\n');
 
+    console.log(content);
+
     //highlight keywords
     content = content.replace(keyword_regexp, function(str) {
         var space = (str[0] == ' ' ? ' ' : '');
@@ -124,11 +138,15 @@ function formatInput(content) {
         return str;
     });
 
+    console.log(content);
+
     //highlight values
     content = content.replace(/\([0-9]*⮓?[0-9]*\)/g, function(str) {
         str = str.substring(1, str.length - 1);
         return `(<span class="highlight">${str}</span>)`;
     });
+
+    console.log(content);
 
     //find comments
     var comments = content.match(/#.*$/gm);
@@ -137,6 +155,8 @@ function formatInput(content) {
         var formatted = `<span class="comment">${comment.replace(html_regexp, '')}</span>`;
         content = content.replace(new RegExp(`${escapeRegExp(comment)}$`, 'm'), formatted);
     });
+
+    console.log(content);
 
     //find previous breakpoints
     let breakpoints = [];
@@ -158,6 +178,9 @@ function formatInput(content) {
     let rect = document.getElementById('line-number-container').getBoundingClientRect();
     $('#input').css('margin-top', `${-rect.height}px`);
     $('#program').css('margin-top', `${-rect.height}px`);
+
+    //fix strange chrome bug with space
+    if(content[content.length - 2] == ' ') content = content.slice(0, -2) + '&nbsp;' + content[content.length - 1];
 
     //restore markers
     if(markers) markers.forEach(function(span) {
