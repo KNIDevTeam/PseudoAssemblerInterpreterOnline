@@ -38,14 +38,14 @@ function show(direction) {
 $('#prev').on('click', function() {
     cur_state--;
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
-    while(cur_state > 1 && pure_text[states[cur_state - 1].line][0] == '#' ) cur_state--;
+    while(cur_state > 1 && (!states[cur_state - 1].visible || pure_text[states[cur_state - 1].line][0] == '#') ) cur_state--;
     show();
 });
 
 $('#next').on('click', function() {
     cur_state++;
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
-    while(cur_state < states.length && pure_text[states[cur_state - 1].line][0] == '#') cur_state++;
+    while(cur_state < states.length && (!states[cur_state - 1].visible || pure_text[states[cur_state - 1].line][0] == '#')) cur_state++;
     show("next");
 });
 
@@ -97,6 +97,22 @@ $('#run-button').on('click', function() {
 		refreshTooltip();
         return;
     }
+
+    //filter states by breakpoints
+    if(breakpoints.length) {
+        states.forEach(function(state, ind) {
+            if(breakpoints.includes(state.line)) states[ind].visible = 1;
+        });
+    } else {
+        states.forEach(function(state, ind) {
+            states[ind].visible = 1;
+        });
+    }
+
+    //make breakpoints not clickable
+    $('.line-number').each(function() {
+        this.onclick = null;
+    });
 
     //skip to end if fastforwarded
     if(document.getElementById('fast-forward').checked) cur_state = states.length - 1;
@@ -291,8 +307,6 @@ function formatData(data) {
             </tfoot>
         </table>
     </div>`;
-
-	console.log(data);
 	
     var memory_html = `<div style="padding-bottom: 1em"><h11>` + lang.run.memory.header + `</h11></div>
     <div class="table-wrapper">
