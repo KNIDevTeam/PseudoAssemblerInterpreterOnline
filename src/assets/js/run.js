@@ -66,6 +66,8 @@ $('#run-button').on('click', function() {
     $('.active-breakpoint').each(function() {
         breakpoints.push(Number(this.id.replace('line-number-', '')));
     });
+    //add last line
+    breakpoints.push(pure_text.length - 1);
 
     try {
         states = emulate(pure_text, breakpoints);
