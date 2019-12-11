@@ -182,8 +182,6 @@ function formatInput(content) {
 	}
 })();
 
-//place example program
-//$("#input").html(formatInput(lang.index.exampleProgram));
 refreshTooltip();
 $('#run').fadeIn();
 

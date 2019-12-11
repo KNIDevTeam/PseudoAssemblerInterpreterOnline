@@ -3723,3 +3723,13 @@ canvas {
 	.code:hover .copy {
 		display: flex;
 	}
+	
+/* Variables tabs */
+	.head {
+		cursor: pointer;
+		transition: all .3s ease-in-out;
+	}
+	
+	.head:hover {
+		background-color: #efefef;
+	}

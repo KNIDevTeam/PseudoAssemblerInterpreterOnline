@@ -31,8 +31,12 @@ function show(direction) {
     $('#changed').addClass('animated shake');
     $('#changed-state').addClass('animated shake');
     $('#cur-line').addClass('animated flash');
+	
 	checkVisibility();
 	refreshTooltip();
+	$('.head').each(function() {
+		setTab($(this).attr('class').split(' ')[1]);
+	});
 }
 
 $('#prev').on('click', function() {
@@ -66,8 +70,6 @@ $('#run-button').on('click', function() {
     $('.active-breakpoint').each(function() {
         breakpoints.push(Number(this.id.replace('line-number-', '')));
     });
-    //add last line
-    breakpoints.push(pure_text.length - 1);
 
     try {
         states = emulate(pure_text, breakpoints);
@@ -105,6 +107,7 @@ $('#run-button').on('click', function() {
         states.forEach(function(state, ind) {
             if(breakpoints.includes(state.line)) states[ind].visible = 1;
         });
+		states[states.length - 1].visible = 1;
     } else {
         states.forEach(function(state, ind) {
             states[ind].visible = 1;
@@ -310,6 +313,10 @@ function formatData(data) {
         </table>
     </div>`;
 	
+	let in_tab = false;
+	let tab_name = false;
+	let tab_index = 0;
+	
     var memory_html = `<div style="padding-bottom: 1em"><h11>` + lang.run.memory.header + `</h11></div>
     <div class="table-wrapper">
         <table class="default">
@@ -322,12 +329,27 @@ function formatData(data) {
             </thead>
             <tfoot>
             ${data.memory.reduce(function(accumulator, val, ind) {
-                if(!data.mem_init[ind]) return accumulator;
+                //if(!data.mem_init[ind]) return accumulator;
+				if (in_tab) 
+					tab_index++;
+				
+				if (in_tab && data.variables[ind] != tab_name + '[' + tab_index + ']') {
+					in_tab = false;
+					tab_index = 0;
+				} 
+				
+				if (!in_tab && ind != data.memory.length-1 && data.variables[ind] + '[1]' == data.variables[ind+1]) {
+					in_tab = true;
+					tab_name = data.variables[ind];
+				} else if (!in_tab) {
+					tab_index = 0;
+				}
+				
                 return accumulator +
-                `<tr${data.mem_init[ind] == 2 ? ' id="changed"' : ''}>
+                `<tr${data.mem_init[ind] == 2 ? ' id="changed"' : ''} ${in_tab ? (tab_index > 0 ? ` class="item-${tab_name}" style="display: none"` : ` class="head ${tab_name}"  onclick=toggleTab("${tab_name}")`) : ''}>
                     <td><span class="highlight">${ind*4}</span></td>
                     <td><span class="keyword">${data.variables[ind]}</span></td>
-                    <td><b>${data.mem_init[ind] == 2 ? `<span class="highlight">${val}</span>` : `${val}`}</b></td>
+                    <td><b class="value">${!data.mem_init[ind] ? `---` : (data.mem_init[ind] == 2 ? `<span class="highlight">${val}</span>` : `${val}`)}</b></td>
                 </tr>`
             }, '')}
             </tfoot>
@@ -339,6 +361,38 @@ function formatData(data) {
     <div class="col-md-8" id="memory">${memory_html}</div>
     </div>`;
 }
+
+function setTab(tab_name) {
+	let elements = $(`.item-${tab_name}`).length;
+	let changed = false;
+	
+	$(`.${tab_name} .keyword`).html(`${tab_name} [0 - ${elements}]`);
+	$(`.${tab_name} .value`).hide();
+	
+	$(`.item-${tab_name}`).each(function(index) {
+		if ($(this).is('#changed'))
+			changed = true;
+	});
+	
+	if (changed)
+		$('.' + tab_name).addClass('animated shake');
+};
+
+function toggleTab(tab_name) {
+	let elements = $(`.item-${tab_name}`).length;
+	
+	$(`.item-${tab_name}`).each(function(index) {
+		if ($(this).is(':visible')) {
+			$(this).fadeOut('fast');
+			$(`.${tab_name} .keyword`).html(`${tab_name} [0 - ${elements}]`);
+			$(`.${tab_name} .value`).hide();
+		} else {
+			$(this).fadeIn('fast');
+			$(`.${tab_name} .keyword`).html(tab_name);
+			$(`.${tab_name} .value`).show();
+		}
+	});
+};
 
 function checkVisibility() {
 	if (cur_state == 1) {
