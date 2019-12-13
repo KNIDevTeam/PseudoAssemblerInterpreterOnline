@@ -3,6 +3,7 @@ var states;
 var program;
 var pure_text;
 var mobileBrowser = mobileCheck();
+var simple_mode = 0;
 
 //update tables
 function show(direction) {
@@ -18,14 +19,24 @@ function show(direction) {
     let cur_program = JSON.parse(JSON.stringify(program));
 
     cur_program[states[cur_state - 1].line] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line]}
-    </div><div id="expansion" style="display: block; float: right;">${expandCommand(states[cur_state])}</div>`;
+    </div>${simple_mode ? '' : `<div id="expansion" style="display: block; float: right;">${expandCommand(states[cur_state])}</div>`}`;
 	$('#program').html(`
         <div class="row" id="program-title-row" style="padding-bottom: 1em">
-            <div class="col-md-1 col-3" style="padding-right: 0"><a href="/" id="go-back" style="">&larr;</a></div>
-            <div class="col-md-11 col-9" style="padding-left: 0"><h11 style="line-height: 0.7">${lang.run.program}</h11></div>
+            <div class="col-md-2 col-2" style="padding-right: 0"><a href="/" id="go-back" style="">&larr;</a></div>
+            <div class="col-md-10 col-10" style="padding-left: 0"><h11 style="line-height: 0.7">${lang.run.program}</h11></div>
         </div>
     ${cur_program.join('<br>')}`);
     $('#results').html(formatData(states[cur_state]));
+
+    //join divs if simple
+    if(simple_mode) {
+        $('#program').html(`
+            <div class="row">
+                <div class="col-md-4 col-4">${$('#program').html()}</div>
+                <div class="col-md-8 col-8">${$('#results').html()}</div>
+            </div>
+        `);
+    }
     
     $('#expansion').addClass('animated bounceIn');
     $('#changed').addClass('animated shake');
@@ -136,6 +147,9 @@ $('#run-button').on('click', function() {
     //skip to end if fastforwarded
     if(document.getElementById('fast-forward').checked) cur_state = states.length - 1;
 
+    //check for simple mode
+    if(document.getElementById('simple-mode').checked) simple_mode = 1;
+
     //skip invisible states
     while(cur_state < states.length && !states[cur_state - 1].visible) cur_state++;
     
@@ -149,6 +163,16 @@ $('#run-button').on('click', function() {
     $('#program').css('display', 'block');
     $('#prev').css('opacity', '0');
     $('#prev').css('visibility', 'hidden');
+
+    //simple mode
+    if(simple_mode) {
+        $('#header').css('padding', '0');
+        $('.inner').css('margin-left', '1em');
+        $('.inner').css('max-width', '85em');
+        $('#header .logo .symbol img').css('width', '4.5em');
+        $('#header .logo .symbol img').css('height', '4.5em');
+        $('#results').css('display', 'none');
+    }
 
     //show results
     show();
