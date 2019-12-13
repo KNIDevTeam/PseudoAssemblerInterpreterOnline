@@ -1,3 +1,4 @@
+/* Back to top script */
 if ($('#back-to-top').length) {
     var scrollTrigger = 100, // px
         backToTop = function () {

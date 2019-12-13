@@ -11,6 +11,7 @@ requirejs.config({
 	},
 });
 
+/* Require needed scripts */
 require(["pace"], (pace) => {
 	pace.start();
 	require(["jquery", "bootstrap", "cookies"], () => {
