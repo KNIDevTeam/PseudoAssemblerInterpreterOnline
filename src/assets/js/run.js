@@ -5,6 +5,13 @@ var pure_text;
 var mobileBrowser = mobileCheck();
 var simple_mode = 0;
 
+//remove simple mode if mobile
+if(mobileBrowser) {
+    $('#simple-mode-col').css('display', 'none');
+    $('#run-col').addClass('col-sm-5');
+    $('#fast-forward-col').addClass('col-sm-7');
+}
+
 //update tables
 function show(direction) {
     //animate
@@ -165,7 +172,7 @@ $('#run-button').on('click', function() {
     $('#prev').css('visibility', 'hidden');
 
     //simple mode
-    if(simple_mode) {
+    if(simple_mode && !mobileBrowser) {
         $('#header').css('padding', '0');
         $('.inner').css('margin-left', '1em');
         $('.inner').css('max-width', '85em');
