@@ -40,16 +40,26 @@ function show(direction) {
 }
 
 $('#prev').on('click', function() {
+    //save previous position
+    let prev_state = cur_state;
+    //try to go back
     cur_state--;
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
-    while(cur_state > 1 && (!states[cur_state - 1].visible || pure_text[states[cur_state - 1].line][0] == '#') ) cur_state--;
+    while(cur_state > 1 && !states[cur_state - 1].visible) cur_state--;
+    //revert if invalid
+    if(pure_text[states[cur_state - 1].line][0] == '#') cur_state = prev_state;
     show();
 });
 
 $('#next').on('click', function() {
+    //save previous position
+    let prev_state = cur_state;
+    //try to go forward
     cur_state++;
     cur_state = Math.min(states.length-1, Math.max(1, cur_state));
-    while(cur_state < states.length && (!states[cur_state - 1].visible || pure_text[states[cur_state - 1].line][0] == '#')) cur_state++;
+    while(cur_state < states.length - 1 && !states[cur_state - 1].visible) cur_state++;
+    //revert if invalid
+    if(pure_text[states[cur_state - 1].line][0] == '#') cur_state = prev_state;
     show("next");
 });
 
@@ -102,15 +112,19 @@ $('#run-button').on('click', function() {
         return;
     }
 
-    //filter states by breakpoints
+    //filter states by visibility
     if(breakpoints.length) {
         states.forEach(function(state, ind) {
-            if(breakpoints.includes(state.line)) states[ind].visible = 1;
+            if(breakpoints.includes(state.line) && pure_text[state.line][0] != '#') states[ind].visible = 1;
         });
-		states[states.length - 1].visible = 1;
+        for(let i = states.length - 1; i >= 0; i--)
+            if(pure_text[states[i].line][0] != '#') {
+                states[i].visible = 1;
+                break;
+            }
     } else {
         states.forEach(function(state, ind) {
-            states[ind].visible = 1;
+            if(pure_text[state.line][0] != '#') states[ind].visible = 1;
         });
     }
 
@@ -122,8 +136,8 @@ $('#run-button').on('click', function() {
     //skip to end if fastforwarded
     if(document.getElementById('fast-forward').checked) cur_state = states.length - 1;
 
-    //skip comments
-    while(pure_text[states[cur_state - 1].line][0] == '#' && cur_state < states.length) cur_state++;
+    //skip invisible states
+    while(cur_state < states.length && !states[cur_state - 1].visible) cur_state++;
     
     program = $('#input').html().split('<br>');
 
