@@ -3733,3 +3733,8 @@ canvas {
 	.head:hover {
 		background-color: #efefef;
 	}
+
+/* Fix table scroll bar */
+	table {
+		overflow: hidden;	
+	}
