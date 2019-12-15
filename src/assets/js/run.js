@@ -151,14 +151,20 @@ $('#run-button').on('click', function() {
         this.onclick = null;
     });
 
-    //skip to end if fastforwarded
-    if(document.getElementById('fast-forward').checked) cur_state = states.length - 1;
-
     //check for simple mode
     if(document.getElementById('simple-mode').checked) simple_mode = 1;
 
-    //skip invisible states
-    while(cur_state < states.length && !states[cur_state - 1].visible) cur_state++;
+    //skip to end if fastforwarded
+    if(document.getElementById('fast-forward').checked) {
+        for(let i = states.length - 1; i >= 0; i--)
+            if(states[i].visible) {
+                cur_state = i;
+                break;
+            }
+    } else {
+        //skip invisible states
+        while(cur_state < states.length && !states[cur_state - 1].visible) cur_state++;
+    }
     
     program = $('#input').html().split('<br>');
 
