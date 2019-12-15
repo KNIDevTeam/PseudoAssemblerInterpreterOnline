@@ -39,7 +39,7 @@ function show(direction) {
     if(simple_mode) {
         $('#program').html(`
             <div class="row">
-                <div class="col-md-4 col-4">${$('#program').html()}</div>
+                <div class="col-md-4 col-4" style="white-space: nowrap">${$('#program').html()}</div>
                 <div class="col-md-8 col-8">${$('#results').html()}</div>
             </div>
         `);
