@@ -1,16 +1,26 @@
+/* Setup global variables */
+
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+var particles = [];
+var animating = 0, animating_logo = 0, animating_button = 0;
+
+/* For screens with high dpi */
 
 var pixel_ratio = window.devicePixelRatio;
 prepareCanvas()
+
+/**
+ * Get center position of element.
+ * @returns {object} pos (x, y, w)
+ */
 
 function getPos( el ) {
     var rect = el.getBoundingClientRect();
     return {x: (rect.left + rect.right)/2 , y: (rect.top + rect.bottom)/2, w: (rect.right-rect.left)/2};
 }
 
-var particles = [];
-var animating = 0, animating_logo = 0, animating_button = 0;
+/* Setup canvas settings */
 
 function prepareCanvas() {
     canvas.style.width = window.innerWidth * 0.98 + "px";
@@ -26,6 +36,8 @@ function prepareCanvas() {
 
 $(window).resize(prepareCanvas());
 
+/* Animate on logo hover */
+
 $("#logo-id").on('mouseenter', function() {
     if(animating_logo) return;
     spawnCharacters("logo-id", getPos(document.getElementById("logo-id")), '#00f4a4');
@@ -33,12 +45,21 @@ $("#logo-id").on('mouseenter', function() {
     if(!animating) animating = 1, requestAnimationFrame(draw);
 });
 
+/* Animate on button hover */
+
 $("#run-button").on('mouseenter', function() {
     if(animating_button) return;
     spawnCharacters("run-button", getPos(document.getElementById("run-button")), '#00f4a4');
     animating_button = 1;
     if(!animating) animating = 1, requestAnimationFrame(draw);
 });
+
+/**
+ * Create particles around element
+ * @param {string} element
+ * @param {object} element_position (x, y, w)
+ * @param {string} color
+ */
 
 function spawnCharacters(el, el_pos, color) {
     for(var i = 3; i <= 10; i++) {
@@ -65,6 +86,8 @@ function spawnCharacters(el, el_pos, color) {
         }
 }
 
+/* Animate particles */
+
 function draw() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     
@@ -80,6 +103,7 @@ function draw() {
                 ctx.fillText(
                     particle.char, 
                     Math.round(particle.x), 
+                    //handle scrolling on some elements
                     Math.round(particle.y - (particle.spawner.match(/logo-id|run1|error/) ? window.scrollY - particle.initScroll : 0))
                 );
             }
@@ -88,5 +112,6 @@ function draw() {
     });
     
     if(offscreen < particles.length) requestAnimationFrame(draw);
+    //reset
     else particles = [], animating = animating_logo = animating_button = 0;
 }

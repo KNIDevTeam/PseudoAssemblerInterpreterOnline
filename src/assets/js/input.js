@@ -1,8 +1,12 @@
+/* Setup initial settings */
+
 $('body').attr("spellcheck", false);
 
 $('.editable').each(function() {
     this.contentEditable = true;
 });
+
+/* Setup global variables */
 
 var keywords = 'DS|DC|A|AR|S|SR|M|MR|D|DR|C|CR|L|LR|ST|LA|J|JN|JZ|JP';
 
@@ -12,11 +16,12 @@ var html_regexp = /<[^>]*>/g
 
 var placeholder = 0;
 
-//format input text
+/* Format input text */
 
-$("#input").on('keyup paste contextmenu', function(e) {
+$("#input").on('keyup paste contextmenu', function( e ) {
     key = e.which;
     if(key == null) $('#input').keyup({which: 13});
+    //return if nothing was changed
     if(!(key <= 13 || key == 32 || (key >= 48 && key <= 90) || (key >= 106 && key <= 111) || key >= 186)) return;
 	
 	hideTooltips();
@@ -32,9 +37,12 @@ $("#input").on('keyup paste contextmenu', function(e) {
     $('#run').fadeIn();
 });
 
-//breakpoints
+/**
+ * Set or remove breakpoint
+ * @param {string} breakpoint_id
+ */
 
-function setBreakpoint(id) {
+function setBreakpoint( id ) {
     //set breakpoint
     id = '#' + id;
     if($(id).hasClass('active-breakpoint')) $(id).removeClass('active-breakpoint');
@@ -50,22 +58,27 @@ function setBreakpoint(id) {
     });
 }
 
-
-function escapeRegExp(string) {
+function escapeRegExp( string ) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function formatInput(content) {
-    //replace selection markers
+/**
+ * Format input in editor
+ * @param {string} inner_html
+ * @returns {string} formatted text
+ */
+
+function formatInput( content ) {
+    //replace selection markers with special character
     var markers = content.match(/<span id="selectionBoundary_[0-9]+_[0-9]+" style="line-height: 0; display: none;">⭾<\/span>/g);
-    if(markers) markers.forEach(function(marker) {
+    if(markers) markers.forEach(function( marker ) {
         content = content.replace(marker, '⮓');
     });
 
     //remove error messages
     content = content.replace(/<span class="error">[^>]*<\/span>/g, '');
 
-    //shorten whitespace
+    //shorten and streamline whitespace
     content = content.replace(/([^\S\n]|&nbsp;)+/g, ' ');
 
     //make newlines consistent
@@ -81,8 +94,8 @@ function formatInput(content) {
     setCookie('input', content.replace(/⮓/g, ''), 5);
 
     //check length of labels
-    var longest_label = content.replace(marker_and_html, '').split('\n').reduce(function(accumulator, current) {
-        var words = current.split(' ').filter(function(element) {
+    var longest_label = content.replace(marker_and_html, '').split('\n').reduce(function( accumulator, current ) {
+        var words = current.split(' ').filter(function( element ) {
             return (element != null && element != "");
         });
 
@@ -94,15 +107,15 @@ function formatInput(content) {
 
     //insert new label formatting
     content = content.split('\n');
-    content.forEach(function(current, index) {
-        var words = current.split(' ').filter(function(element) {
+    content.forEach(function( current, index ) {
+        var words = current.split(' ').filter(function( element ) {
             return (element != null && element != "");
         });
         var temp = current.replace(marker_and_html, '').split(' ').filter(function(element) {
             return (element != null && element != "");
         });
 
-        if(!temp.length ) return;
+        if(!temp.length) return;
 
         //ignore comments
         if(temp[0].length >= 1 && temp[0][0] == '#') return;
@@ -115,7 +128,7 @@ function formatInput(content) {
     content = content.join('\n');
 
     //highlight keywords
-    content = content.replace(keyword_regexp, function(str) {
+    content = content.replace(keyword_regexp, function( str ) {
         var space = (str[0] == ' ' ? ' ' : '');
         str = str.substring(space.length, str.length - 1);
         var cmd = str.replace(marker_and_html, '');
@@ -125,15 +138,15 @@ function formatInput(content) {
     });
 
     //highlight values
-    content = content.replace(/\([0-9]*⮓?[0-9]*\)/g, function(str) {
+    content = content.replace(/\([0-9]*⮓?[0-9]*\)/g, function( str ) {
         str = str.substring(1, str.length - 1);
         return `(<span class="highlight">${str}</span>)`;
     });
 
     //find comments
     var comments = content.match(/#.*$/gm);
-    //purge html and insert new formatting
-    if(comments) comments.forEach(function(comment) {
+    //purge html from comments and insert new formatting
+    if(comments) comments.forEach(function( comment ) {
         var formatted = `<span class="comment">${comment.replace(html_regexp, '')}</span>`;
         content = content.replace(new RegExp(`${escapeRegExp(comment)}$`, 'm'), formatted);
     });
@@ -145,11 +158,11 @@ function formatInput(content) {
         else breakpoints.push(0);
     });
     //add line numbers
-    let temp = content.split('\n').filter(function(element) {
+    let temp = content.split('\n').filter(function( element ) {
         return (element != null && element != "");
     });
     let line_numbers = "";
-    temp.forEach(function(line, ind) {
+    temp.forEach(function( line, ind ) {
         line_numbers = line_numbers + `<div class="line-number${breakpoints[ind] ? ' active-breakpoint' : ''}" id="line-number-${ind}" onclick=setBreakpoint("line-number-${ind}")>${ind + 1}</div><br>`;
     });
 
@@ -163,7 +176,7 @@ function formatInput(content) {
     if(content[content.length - 2] == ' ') content = content.slice(0, -2) + '&nbsp;' + content[content.length - 1];
 
     //restore markers
-    if(markers) markers.forEach(function(span) {
+    if(markers) markers.forEach(function( span ) {
         content = content.replace(/⮓/, span);
     });
 

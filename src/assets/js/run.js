@@ -1,3 +1,5 @@
+/* Setup global variables */
+
 var cur_state = 1;
 var states;
 var program;
@@ -5,15 +7,18 @@ var pure_text;
 var mobileBrowser = mobileCheck();
 var simple_mode = 0;
 
-//remove simple mode if mobile
+/* remove simple mode if mobile */
 if(mobileBrowser) {
     $('#simple-mode-col').css('display', 'none');
     $('#run-col').addClass('col-sm-5');
     $('#fast-forward-col').addClass('col-sm-7');
 }
 
-//update tables
-function show(direction) {
+/**
+ * Update html
+ * @param {string} direction (null/next)
+ */
+function show( direction ) {
     //animate
     if(!animating && !mobileBrowser) {
         let logo_y = getPos(document.getElementById("logo-id")).y;
@@ -23,10 +28,14 @@ function show(direction) {
         spawnCharacters("run2", {x: canvas.width / pixel_ratio, y: button_y, w: 0}, '#00f4a4');
         animating = 1, requestAnimationFrame(draw);
     }
+    //copy program content
     let cur_program = JSON.parse(JSON.stringify(program));
 
+    //highlight current line and expand command
     cur_program[states[cur_state - 1].line] = `<div id="cur-line" style="display: inline" class="highlight">&rarr; ${cur_program[states[cur_state - 1].line]}
     </div>${simple_mode ? '' : `<div id="expansion" style="display: block; float: right;">${expandCommand(states[cur_state])}</div>`}`;
+
+    //add title
 	$('#program').html(`
         <div class="row" id="program-title-row" style="padding-bottom: 1em">
             <div class="col-md-2 col-2" style="padding-right: 0"><a href="/" id="go-back" style="">&larr;</a></div>
@@ -45,6 +54,7 @@ function show(direction) {
         `);
     }
     
+    //add animations
     $('#expansion').addClass('animated bounceIn');
     $('#changed').addClass('animated shake');
     $('#changed-state').addClass('animated shake');
@@ -57,6 +67,7 @@ function show(direction) {
 	});
 }
 
+/* Go to previous state */
 $('#prev').on('click', function() {
     //save previous position
     let prev_state = cur_state;
@@ -69,6 +80,7 @@ $('#prev').on('click', function() {
     show();
 });
 
+/* Go to next state */
 $('#next').on('click', function() {
     //save previous position
     let prev_state = cur_state;
@@ -81,12 +93,12 @@ $('#next').on('click', function() {
     show("next");
 });
 
-//initialise
+/* Initialise */
 $('#run-button').on('click', function() {
     //format just in case
     $('#input').html(formatInput($('#input').html()));
 
-    //check for errors
+    //checking for errors
 
     //purge html, sanitise input
     pure_text = $('#input').html().replace(/<br>/g, '\n').replace(/<[^>]*>|⭾/g, '').replace(/^ +/gm, '').replace(/^\n/gm, '').split('\n').filter(function(element) {
@@ -105,7 +117,7 @@ $('#run-button').on('click', function() {
         if(!err[0].message) err = [{message: err[0], line: -1}];
 
         //add error messages
-        err.forEach(function(err, ind) {
+        err.forEach(function( err, ind ) {
             let temp = $('#input').html().split('<br>');
             if(err.line == -1) temp.splice(0, 0, ''), err.line = 0;
             
@@ -132,7 +144,7 @@ $('#run-button').on('click', function() {
 
     //filter states by visibility
     if(breakpoints.length) {
-        states.forEach(function(state, ind) {
+        states.forEach(function( state, ind ) {
             if(breakpoints.includes(state.line) && pure_text[state.line][0] != '#') states[ind].visible = 1;
         });
         for(let i = states.length - 1; i >= 0; i--)
@@ -141,7 +153,7 @@ $('#run-button').on('click', function() {
                 break;
             }
     } else {
-        states.forEach(function(state, ind) {
+        states.forEach(function( state, ind ) {
             if(pure_text[state.line][0] != '#') states[ind].visible = 1;
         });
     }
@@ -216,7 +228,12 @@ $('.copy').click(function() {
 	document.body.removeChild(el);
 });
 
-function expandCommand(state) {
+/**
+ * Expand command into its basic elements
+ * @param {object} state
+ * @returns {string} expansion
+ */
+function expandCommand( state ) {
     let res = "";
     let source = state.command_source;
     let target = state.command_target;
@@ -297,11 +314,17 @@ function expandCommand(state) {
     return res;
 }
 
-//state generation
-function emulate(text, breakpoints) {
+/**
+ * Generate states
+ * @param {string} program_text
+ * @param {array} breakpoints
+ * @returns {object} states
+ */
+function emulate( text, breakpoints ) {
     let temp_states = [];
     let res = main_parse(text);
 
+    //no fatal errors
     if(res[1].length === 0) {
         let output = main_execute(res[0], res[2]);
         //throw errors if found
@@ -312,6 +335,7 @@ function emulate(text, breakpoints) {
             temp_states.push(translate(states_parser[i]));
         }
     } else {
+        //fatal errors found
         res[1].forEach(function(el, ind) {
             res[1][ind] = {message: el[0][0], line: el[1]};
         });
@@ -320,7 +344,12 @@ function emulate(text, breakpoints) {
     return temp_states;
 }
 
-function translate(state) {
+/**
+ * Translate internal state
+ * @param {object} internal_state
+ * @returns {object} translated_state
+ */
+function translate( state ) {
     let res = {};
     res.registry = state.registers;
     res.status = state.sign_flag;
@@ -337,7 +366,13 @@ function translate(state) {
     return res;
 }
 
-function formatData(data) {
+/**
+ * Format state data into tables
+ * @param {object} data (state)
+ * @returns {string} formatted_text
+ */
+function formatData( data ) {
+    //create registry table
     var registry_html = `<div style="padding-bottom: 1em"><h11>` + lang.run.registers.header + `</h11></div>
     <div class="table-wrapper">
         <table class="default">
@@ -349,13 +384,16 @@ function formatData(data) {
             </thead>
             <tfoot>
             ${data.registry.reduce(function(accumulator, val, ind) {
+                //skip uninitialised registers
                 if(!data.reg_init[ind]) return accumulator;
+
                 return accumulator +
                 `<tr${data.reg_init[ind] == 2 ? ' id="changed"' : ''}>
                     <td><span class="highlight">${ind}</span></td>
                     <td><b>${data.reg_init[ind] == 2 ? `<span class="highlight">${val}</span>` : `${val}`}</b></td>
                 </tr>`
             }, '') + 
+            //status register
             `<tr${data.state_changed ? ' id="changed-state"' : ''}>
                 <td>` + lang.run.registers.state + `</td>
                 <td><span class="keyword">${data.status}</span></td>
@@ -367,7 +405,8 @@ function formatData(data) {
 	let in_tab = false;
 	let tab_name = false;
 	let tab_index = 0;
-	
+    
+    //memory table
     var memory_html = `<div style="padding-bottom: 1em"><h11>` + lang.run.memory.header + `</h11></div>
     <div class="table-wrapper">
         <table class="default">
@@ -413,7 +452,7 @@ function formatData(data) {
     </div>`;
 }
 
-function setTab(tab_name) {
+function setTab( tab_name ) {
 	let elements = $(`.item-${tab_name}`).length;
 	let changed = false;
 	
@@ -429,7 +468,7 @@ function setTab(tab_name) {
 		$('.' + tab_name).addClass('animated shake');
 };
 
-function toggleTab(tab_name) {
+function toggleTab( tab_name ) {
 	let elements = $(`.item-${tab_name}`).length;
 	
 	$(`.item-${tab_name}`).each(function(index) {
@@ -445,6 +484,7 @@ function toggleTab(tab_name) {
 	});
 };
 
+/* Change visibility of buttons */
 function checkVisibility() {
 	if (cur_state == 1) {
 		$('#prev').css('opacity', '0');
@@ -464,7 +504,7 @@ function checkVisibility() {
 	}
 }
 
-//from detectmobilebrowsers.com
+/* from detectmobilebrowsers.com */
 function mobileCheck() {
     var check = false;
     (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
