@@ -9,7 +9,6 @@
 	window.location.href = "errors/IE.html";
 }*/
 
-
 window.Pace.on('done', () => {
 	$('#wrapper').addClass('animated fadeIn');
 });
@@ -39,24 +38,6 @@ window.cookieconsent.initialise({
 
 	var	$window = $(window),
 		$body = $('body');
-
-	// Breakpoints.
-		 /* breakpoints({
-			xlarge:   [ '1281px',  '1680px' ],
-			large:    [ '981px',   '1280px' ],
-			medium:   [ '737px',   '980px'  ],
-			small:    [ '481px',   '736px'  ],
-			xsmall:   [ '361px',   '480px'  ],
-			xxsmall:  [ null,      '360px'  ]
-		});  */
-
-	// Play initial animations on page load.
-		/* $window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		}); */
-
 	// Touch?
 		if (browser.mobile)
 			$body.addClass('is-touch');
@@ -69,7 +50,6 @@ window.cookieconsent.initialise({
 		$menu._locked = false;
 
 		$menu._lock = function() {
-
 			if ($menu._locked)
 				return false;
 
@@ -84,21 +64,18 @@ window.cookieconsent.initialise({
 		};
 
 		$menu._show = function() {
-
 			if ($menu._lock())
 				$body.addClass('is-menu-visible');
 
 		};
 
 		$menu._hide = function() {
-
 			if ($menu._lock())
 				$body.removeClass('is-menu-visible');
 
 		};
 
 		$menu._toggle = function() {
-
 			if ($menu._lock())
 				$body.toggleClass('is-menu-visible');
 
@@ -110,7 +87,6 @@ window.cookieconsent.initialise({
 				event.stopPropagation();
 			})
 			.on('click', 'a', function(event) {
-
 				var href = $(this).attr('href');
 
 				event.preventDefault();
@@ -132,7 +108,6 @@ window.cookieconsent.initialise({
 
 		$body
 			.on('click', 'a[href="#menu"]', function(event) {
-
 				event.stopPropagation();
 				event.preventDefault();
 
@@ -141,13 +116,11 @@ window.cookieconsent.initialise({
 
 			})
 			.on('click', function(event) {
-
 				// Hide.
 					$menu._hide();
 
 			})
 			.on('keydown', function(event) {
-
 				// Hide on escape.
 					if (event.keyCode == 27)
 						$menu._hide();
@@ -157,7 +130,11 @@ window.cookieconsent.initialise({
 			
 })(jQuery);
 
-/* Check if is IE */
+/**
+ * Check if browser is IE.
+ *
+ * @returns {boolean}
+ */
 function isIE() {
     var ua = window.navigator.userAgent;
     var ie = ua.search(/(MSIE|Trident|Edge)/);

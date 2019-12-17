@@ -1,27 +1,28 @@
 /* Setup global variables */
-
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var particles = [];
 var animating = 0, animating_logo = 0, animating_button = 0;
 
 /* For screens with high dpi */
-
 var pixel_ratio = window.devicePixelRatio;
 prepareCanvas()
 
 /**
  * Get center position of element.
+ *
+ * @param el
+ *
  * @returns {object} pos (x, y, w)
  */
-
-function getPos( el ) {
+function getPos(el) {
     var rect = el.getBoundingClientRect();
     return {x: (rect.left + rect.right)/2 , y: (rect.top + rect.bottom)/2, w: (rect.right-rect.left)/2};
 }
 
-/* Setup canvas settings */
-
+/**
+ * Setup canvas settings.
+ */
 function prepareCanvas() {
     canvas.style.width = window.innerWidth * 0.98 + "px";
     canvas.style.height = window.innerHeight + "px";
@@ -37,7 +38,6 @@ function prepareCanvas() {
 $(window).resize(prepareCanvas());
 
 /* Animate on logo hover */
-
 $("#logo-id").on('mouseenter', function() {
     if(animating_logo) return;
     spawnCharacters("logo-id", getPos(document.getElementById("logo-id")), '#00f4a4');
@@ -46,7 +46,6 @@ $("#logo-id").on('mouseenter', function() {
 });
 
 /* Animate on button hover */
-
 $("#run-button").on('mouseenter', function() {
     if(animating_button) return;
     spawnCharacters("run-button", getPos(document.getElementById("run-button")), '#00f4a4');
@@ -55,12 +54,12 @@ $("#run-button").on('mouseenter', function() {
 });
 
 /**
- * Create particles around element
+ * Create particles around element.
+ *
  * @param {string} element
  * @param {object} element_position (x, y, w)
  * @param {string} color
  */
-
 function spawnCharacters(el, el_pos, color) {
     for(var i = 3; i <= 10; i++) {
         particles.push({
@@ -86,8 +85,9 @@ function spawnCharacters(el, el_pos, color) {
         }
 }
 
-/* Animate particles */
-
+/**
+ * Animate particles.
+ */
 function draw() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     

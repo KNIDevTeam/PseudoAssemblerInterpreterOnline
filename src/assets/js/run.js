@@ -1,5 +1,4 @@
 /* Setup global variables */
-
 var cur_state = 1;
 var states;
 var program;
@@ -15,7 +14,8 @@ if(mobileBrowser) {
 }
 
 /**
- * Update html
+ * Update html.
+ *
  * @param {string} direction (null/next)
  */
 function show( direction ) {
@@ -229,8 +229,10 @@ $('.copy').click(function() {
 });
 
 /**
- * Expand command into its basic elements
+ * Expand command into its basic elements.
+ *
  * @param {object} state
+ *
  * @returns {string} expansion
  */
 function expandCommand( state ) {
@@ -315,9 +317,11 @@ function expandCommand( state ) {
 }
 
 /**
- * Generate states
+ * Generate states.
+ *
  * @param {string} program_text
  * @param {array} breakpoints
+ *
  * @returns {object} states
  */
 function emulate( text, breakpoints ) {
@@ -345,8 +349,10 @@ function emulate( text, breakpoints ) {
 }
 
 /**
- * Translate internal state
+ * Translate internal state.
+ *
  * @param {object} internal_state
+ *
  * @returns {object} translated_state
  */
 function translate( state ) {
@@ -367,8 +373,10 @@ function translate( state ) {
 }
 
 /**
- * Format state data into tables
+ * Format state data into tables.
+ *
  * @param {object} data (state)
+ *
  * @returns {string} formatted_text
  */
 function formatData( data ) {
@@ -452,6 +460,11 @@ function formatData( data ) {
     </div>`;
 }
 
+/**
+ * Set tab from array vars.
+ *
+ * @param {string}tab_name
+ */
 function setTab( tab_name ) {
 	let elements = $(`.item-${tab_name}`).length;
 	let changed = false;
@@ -468,6 +481,11 @@ function setTab( tab_name ) {
 		$('.' + tab_name).addClass('animated shake');
 };
 
+/**
+ * Toggle tab form array vars.
+ *
+ * @param {string}tab_name
+ */
 function toggleTab( tab_name ) {
 	let elements = $(`.item-${tab_name}`).length;
 	

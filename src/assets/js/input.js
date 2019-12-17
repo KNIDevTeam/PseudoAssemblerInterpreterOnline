@@ -1,5 +1,4 @@
 /* Setup initial settings */
-
 $('body').attr("spellcheck", false);
 
 $('.editable').each(function() {
@@ -7,7 +6,6 @@ $('.editable').each(function() {
 });
 
 /* Setup global variables */
-
 var keywords = 'DS|DC|A|AR|S|SR|M|MR|D|DR|C|CR|L|LR|ST|LA|J|JN|JZ|JP';
 
 var keyword_regexp = new RegExp(`(^| |⮓)(${keywords}) `, 'gm');
@@ -17,7 +15,6 @@ var html_regexp = /<[^>]*>/g
 var placeholder = 0;
 
 /* Format input text */
-
 $("#input").on('keyup paste contextmenu', function( e ) {
     key = e.which;
     if(key == null) $('#input').keyup({which: 13});
@@ -38,10 +35,10 @@ $("#input").on('keyup paste contextmenu', function( e ) {
 });
 
 /**
- * Set or remove breakpoint
+ * Set or remove breakpoint.
+ *
  * @param {string} breakpoint_id
  */
-
 function setBreakpoint( id ) {
     //set breakpoint
     id = '#' + id;
@@ -58,16 +55,24 @@ function setBreakpoint( id ) {
     });
 }
 
+/**
+ * Escape regex.
+ *
+ * @param string
+ *
+ * @returns escapedString
+ */
 function escapeRegExp( string ) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 /**
- * Format input in editor
+ * Format input in editor.
+ *
  * @param {string} inner_html
+ *
  * @returns {string} formatted text
  */
-
 function formatInput( content ) {
     //replace selection markers with special character
     var markers = content.match(/<span id="selectionBoundary_[0-9]+_[0-9]+" style="line-height: 0; display: none;">⭾<\/span>/g);
