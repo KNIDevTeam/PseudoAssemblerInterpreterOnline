@@ -5,6 +5,7 @@ var program;
 var pure_text;
 var mobileBrowser = mobileCheck();
 var simple_mode = 0;
+var tab_state = 0;
 
 /* remove simple mode if mobile */
 if(mobileBrowser) {
@@ -469,16 +470,24 @@ function setTab( tab_name ) {
 	let elements = $(`.item-${tab_name}`).length;
 	let changed = false;
 	
-	$(`.${tab_name} .keyword`).html(`${tab_name} [0 - ${elements}]`);
-	$(`.${tab_name} .value`).hide();
-	
-	$(`.item-${tab_name}`).each(function(index) {
-		if ($(this).is('#changed'))
-			changed = true;
-	});
-	
-	if (changed)
-		$('.' + tab_name).addClass('animated shake');
+	if (tab_state == 1) {
+		$(`.${tab_name} .keyword`).html(tab_name);
+		$(`.${tab_name} .value`).show();
+		$(`.item-${tab_name}`).each(function(index) {
+			$(this).fadeIn('fast');
+		});
+	} else {
+		$(`.${tab_name} .keyword`).html(`${tab_name} [0 - ${elements}]`);
+		$(`.${tab_name} .value`).hide();
+		
+		$(`.item-${tab_name}`).each(function(index) {
+			if ($(this).is('#changed'))
+				changed = true;
+		});
+		
+		if (changed)
+			$('.' + tab_name).addClass('animated shake');
+	}
 };
 
 /**
@@ -491,10 +500,12 @@ function toggleTab( tab_name ) {
 	
 	$(`.item-${tab_name}`).each(function(index) {
 		if ($(this).is(':visible')) {
+			tab_state = 0;
 			$(this).fadeOut('fast');
 			$(`.${tab_name} .keyword`).html(`${tab_name} [0 - ${elements}]`);
 			$(`.${tab_name} .value`).hide();
 		} else {
+			tab_state = 1;
 			$(this).fadeIn('fast');
 			$(`.${tab_name} .keyword`).html(tab_name);
 			$(`.${tab_name} .value`).show();
