@@ -445,7 +445,7 @@ function formatData( data ) {
 				}
 				
                 return accumulator +
-                `<tr${data.mem_init[ind] == 2 ? ' id="changed"' : ''} ${in_tab ? (tab_index > 0 ? ` class="item-${tab_name}" style="display: none"` : ` class="head ${tab_name}"  onclick=toggleTab("${tab_name}")`) : ''}>
+                `<tr${data.mem_init[ind] == 2 ? ' id="changed"' : ''} ${in_tab ? (tab_index > 0 ? ` class="item-${tab_name}" ` + (!tab_state ? `style="display: none"` : ``) : ` class="head ${tab_name}"  onclick=toggleTab("${tab_name}")`) : ''}>
                     <td><span class="highlight">${ind*4}</span></td>
                     <td><span class="keyword">${data.variables[ind]}</span></td>
                     <td><b class="value">${!data.mem_init[ind] ? `---` : (data.mem_init[ind] == 2 ? `<span class="highlight">${val}</span>` : `${val}`)}</b></td>

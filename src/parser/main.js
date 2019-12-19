@@ -91,6 +91,6 @@ function main_execute(program, initial_state) {
     }
     stat.line = stat.line - 1;
     states.push(JSON.parse(JSON.stringify(stat)));
-    console.log(states);
+
     return [states, null, null];
 }
