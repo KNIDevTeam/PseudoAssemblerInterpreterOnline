@@ -17,7 +17,7 @@
         "nav": "Dokumentacja",
 		"general": {
 			"header": "Wstęp",
-			"content": "Pseudoassembler jest językiem niezwykle potężnym. Biegłe posługiwanie się nim w swoich programach jest sztuką, którą posiadło niewielu. Mamy nadzieję, że poniższa dokumentacja pozwoli Ci nie tylko docenić niezwykły kunszt programowania w językach niskopoziomowych, ale również polubić pseudoassemblera (na naszym przykładzie - to możliwe)!"
+			"content": "Pseudoassembler jest językiem, który daje wyjątkowe możliwości. Biegłe posługiwanie się nim wymaga dobrej znajomości rozkazów oraz zasad działania komputera. Mamy nadzieję, że poniższa dokumentacja pozwoli Ci nie tylko docenić niezwykły kunszt programowania w językach niskopoziomowych, ale również polubić pseudoassemblera."
 		},
 		"memory": {
 			"header": "Adresacja pamięci",

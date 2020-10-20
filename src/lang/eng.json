@@ -17,7 +17,7 @@
         "nav": "Documentation",
 		"general": {
 			"header": "General info",
-			"content": "Pseudoassembler is a programming language of great power. Proficient usage of this tool is an art that very few ever possessed. We hope that the following documentation will allow you not only to master but also come to like pseudoassembler (it's possible – believe us)!"
+			"content": "Pseudoassembler is a programming language of great power. Proficient usage of this tool is an art that requires a good knowledge of commands and awareness of computer operating principles. We hope that the following documentation will allow you not only to master but also come to like pseudoassembler."
 		},
 		"memory": {
 			"header": "Memory addressing",
